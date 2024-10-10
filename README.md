@@ -1,4 +1,4 @@
-# Let's enjoy brainfuck.
+# はじめまして
 
 ---
 
