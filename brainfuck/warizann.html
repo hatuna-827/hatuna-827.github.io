@@ -1,0 +1,57 @@
+<h1>Let's enjoy brainfuck.</h1>
+<hr />
+<h2>今回はbrainfuckで割り算をするプログラムの解説などをしたいと思います。</h2>
+<p>↓割り算をするコード</p>
+<pre><code>,&gt;++++++[&lt;--------&gt;-]&gt;&gt;&gt;,&gt;++++++[&lt;--------&gt;-]&gt;,&gt;++++++[&lt;--------&gt;-]&lt;[&lt;[-]&lt;&lt;&lt;&lt;&lt;[&gt;&gt;&gt;&gt;[&lt;&lt;&lt;+&gt;-&gt;+&gt;-]&lt;[&gt;+&lt;-]&gt;&gt;+&lt;&lt;&lt;&lt;[&lt;[-&gt;&gt;+&gt;]&gt;&gt;&gt;[&lt;&lt;&lt;]&lt;&lt;-]&lt;]&gt;&gt;[&gt;&gt;[&lt;&lt;+&gt;+&gt;-]&lt;[&gt;+&lt;-]&gt;&gt;-&lt;&lt;]&gt;[&lt;]&lt;[&lt;&lt;++++++++++&gt;&gt;-]&gt;&gt;&gt;&gt;&gt;++++++[&lt;&lt;++++++++&gt;&gt;-]&lt;&lt;.&gt;-]
+</code></pre>
+<p>入力は</p>
+<ul>
+<li>割られる数</li>
+<li><ul>
+<li>割る数</li></ul></li>
+<li><ul>
+<li>表示する桁数</li></ul></li>
+</ul>
+<p>です。</p>
+<p>私は、実行環境を作るのが面倒なため、<a href="https://kachikachi.net/brainfuck/">こちら</a> のサイトを使っています。</p>
+<hr />
+<h2>やっていること</h2>
+<pre><code>,&gt;++++++[&lt;--------&gt;-]&gt;&gt;&gt;,&gt;++++++[&lt;--------&gt;-]&gt;,&gt;++++++[&lt;--------&gt;-]
+&lt;[
+    &lt;[-]
+    &lt;&lt;&lt;&lt;&lt;[
+        &gt;&gt;&gt;&gt;[&lt;&lt;&lt;+&gt;-&gt;+&gt;-]
+        &lt;[&gt;+&lt;-]
+        &gt;&gt;+
+        &lt;&lt;&lt;&lt;[&lt;[-&gt;&gt;+&gt;]&gt;&gt;&gt;[&lt;&lt;&lt;]&lt;&lt;-]
+        &lt;
+    ]
+    &gt;&gt;[&gt;&gt;[&lt;&lt;+&gt;+&gt;-]&lt;[&gt;+&lt;-]&gt;&gt;-&lt;&lt;]&gt;[&lt;]
+    &lt;[&lt;&lt;++++++++++&gt;&gt;-]
+    &gt;&gt;&gt;&gt;&gt;++++++[&lt;&lt;++++++++&gt;&gt;-]&lt;&lt;.
+    &gt;-
+]
+</code></pre>
+<p>ポインタの左から順に　ABCDEFG　としています。</p>
+<pre><code>input 
+G[
+    Fのリセット
+    A[
+        EをBと-Cにコピー
+        F+=1
+        A-Bをする、うまく引けた場合C+=1
+    ]
+    C[
+        F-=1
+        C+=E
+    ]Dで終了
+    Cの10倍をAに代入
+    Fのprint
+    G-=1
+]
+</code></pre>
+<hr />
+<p>参考など</p>
+<blockquote>
+  <p><a href="https://kachikachi.net/brainfuck/">kachikachi.net/brainfuck </a></p>
+</blockquote>
