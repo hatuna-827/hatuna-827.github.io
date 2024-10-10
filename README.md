@@ -1,5 +1,7 @@
 # Let's enjoy brainfuck.
 
+---
+
 ## 自己紹介
 
 こんにちは。
@@ -7,6 +9,8 @@
 hatuna-827です。
 
 brainfuckとpythonができます。
+
+---
 
 ## さて、
 
@@ -25,5 +29,9 @@ brainfuckとpythonができます。
 です。
 
 私は、実行環境を作るのが面倒なため、[こちら](https://kachikachi.net/brainfuck/) のサイトを使っています。
+
+---
+
+参考など
 
 > [kachikachi.net/brainfuck ](https://kachikachi.net/brainfuck/)
