@@ -1,11 +1,2 @@
-# はじめまして
-
----
-
-## 自己紹介
-
-こんにちは。
-
-**hatuna-827**です。
-
-brainfuckとpythonができます。
+# hatuna-827
+[hatuna-827.github.io](hatuna-827.github.io)
