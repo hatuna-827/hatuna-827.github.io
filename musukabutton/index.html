@@ -7,39 +7,43 @@
 	</head>
 	<style type="text/css">
 		body {
-			font-size:0px;
-			margin:0px;
-			padding: 0px;
-			font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
-			font-size: 0px;
+			font-size:0;
+			margin:0;
+			padding: 0;
+			font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+			font-size: 0;
 			background-color: #fff;
 			text-align: center;
 		}
 		h1 {
-			margin:3vh 0px;
-			font-size: 7vh;
+			margin: 3vh 0px 0px 0px;
+			font-size: min(8vw,80px,8vh);
+		}
+		h2 {
+			margin: 0;
+			font-size: min(50px,5vw);
 		}
 		button {
-			margin:3vh 0px;
-			font-size: 2vw;
-			font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+			margin:3vh 0;
+			font-size: min(10vw,10vh);
+			font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
 			text-align: center;
-			width: 20vw;
-			height: 140px;
+			width: min(20vw,20vh);
+			height: min(20vw,20vh);
 			background: #fff;
 			border: 2px solid #000;
-			border-radius:7.5vw;
+			border-radius:min(20vw,20vh);
 		}
 		button:active {
 			background: #eee;
 		}
+		body.nosc {
+			overflow: hidden;
+		}
 		.中 {
-			margin:3vh 12vw;
+			margin:0 8vw;
 		}
 		#バルス {
-			font-size: 3vw;
-		}
-		#バルス:active {
 			background-color: #00afcc;
 		}
 		#popup {
@@ -49,50 +53,58 @@
 			left: 0;
 			width: 100vw;
 			height: 100vh;
-			background-color: #ffffff;
+			background-color: #fff;
 			justify-content: center;
 			align-items: center;
+			text-align: center;
 			z-index: 1001;
+		}
+		#QR {
+			width: min(40vw,40vh);
+			height: min(40vw,40vh);
+		}
+		#引用 {
+			font-size: min(5vh,5vw);
 		}
 	</style>
 	<body>
 		<div id="popup" onclick="hidePopup()">
-			<h1>ニコニ・コモンズ</h1>
-			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyCAYAAADoJFEJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACP8SURBVHhe7dRRjiQ5DkTBvv+lZy9gWHiBhMRQ0oD36ZBC1Z3//ltrrfVp+0O+1loftz/ka631cftDvtZaH7c/5Gut9XH7Q77WWh+3P+RrrfVx+0O+1loftz/ka631cftDvtZaH7c/5Gut9XH7Q77WWh+3P+RrrfVx+0O+1loftz/ka631cftDvtZaH7c/5Gut9XH7Q77WWh+3P+RrrfVx+0O+1loftz/ka631cftDvtZaH7c/5Gut9XH7Q77WWh+3P+RrrfVx+0O+1loftz/ka631cftDvtZaH7c/5Gut9XH7Q77WWh+3P+RrrfVx+0O+1loftz/ka631cftDvtZaH7c/5Gut9XH7Q77WWh+3P+RrrfVx+0O+1loftz/ka631cftDvtZaHzf+h/zfv38bukV3OVFKW3WL7lKpm87Yxv9M7g/5V7tFdzlRSlt1i+5SqZvO2Mb/TO4P+Ve7RXc5UUpbdYvuUqmbztjG/0zuD/lXu0V3OVFKW3WL7lKpm87Yxv9M7g/5V7tFdzlRSlt1i+5SqZvO2Mb/TO4P+Ve7RXc5UUpbdYvuUqmbztjG/0zuD/lXu0V3OVFKW3WL7lKpm87Yxv9M7g/5V7tFdzlRSlt1i+5SqZvO2Mb/TO4P+Ve7RXc5UUpbdYvuUqmbztjG/0zuD/lXu0V3OVFKW3WL7lKpm87Yxv9MvvND/gp9m0ppWymlrUppq27RXSaV0la9Qt+mpht/Qz2qeoW+TaW0rZTSVqW0VbfoLpNKaateoW9T042/oR5VvULfplLaVkppq1Laqlt0l0mltFWv0Lep6cbfUI+qXqFvUyltK6W0VSlt1S26y6RS2qpX6NvUdONvqEdVr9C3qZS2lVLaqpS26hbdZVIpbdUr9G1quvE31KOqV+jbVErbSiltVUpbdYvuMqmUtuoV+jY13fgb6lHVK/RtKqVtpZS2KqWtukV3mVRKW/UKfZuabvwN9ajqFfo2ldK2UkpbldJW3aK7TCqlrXqFvk1NN/6GelT1Cn2bSmlbKaWtSmmrbtFdJpXSVr1C36amG39DPap6hb5NpbStlNJWpbRVt+guk0ppq16hb1PTjb+hHlWltD1RSlv1Cn2b6qYzVDedoVLaqpS2KqXtiVLaqunG31CPqlLaniilrXqFvk110xmqm85QKW1VSluV0vZEKW3VdONvqEdVKW1PlNJWvULfprrpDNVNZ6iUtiqlrUppe6KUtmq68TfUo6qUtidKaateoW9T3XSG6qYzVEpbldJWpbQ9UUpbNd34G+pRVUrbE6W0Va/Qt6luOkN10xkqpa1KaatS2p4opa2abvwN9agqpe2JUtqqV+jbVDedobrpDJXSVqW0VSltT5TSVk03/oZ6VJXS9kQpbdUr9G2qm85Q3XSGSmmrUtqqlLYnSmmrpht/Qz2qSml7opS26hX6NtVNZ6huOkOltFUpbVVK2xOltFXTjb+hHlWltD1RSlv1Cn2b6qYzVDedoVLaqpS2KqXtiVLaqunG31CPqlLaniilrXqFvk110xmqm85QKW1VSluV0vZEKW3VdONvqEdVKW1PlNJWddMZKqXtibrpDJXSVt2iu6iUtidKaaumG39DPapKaXuilLaqm85QKW1P1E1nqJS26hbdRaW0PVFKWzXd+BvqUVVK2xOltFXddIZKaXuibjpDpbRVt+guKqXtiVLaqunG31CPqlLaniilreqmM1RK2xN10xkqpa26RXdRKW1PlNJWTTf+hnpUldL2RCltVTedoVLanqibzlApbdUtuotKaXuilLZquvE31KOqlLYnSmmruukMldL2RN10hkppq27RXVRK2xOltFXTjb+hHlWltD1RSlvVTWeolLYn6qYzVEpbdYvuolLaniilrZpu/A31qCql7YlS2qpuOkOltD1RN52hUtqqW3QXldL2RClt1XTjb6hHVSltT5TSVnXTGSql7Ym66QyV0lbdoruolLYnSmmrpht/Qz2qSml7opS2qpvOUCltT9RNZ6iUtuoW3UWltD1RSls13fgb6lFVStsTpbRVKW1P1E1nqG46Q6W0rdRNZ6iUtidKaaumG39DPapKaXuilLYqpe2JuukM1U1nqJS2lbrpDJXS9kQpbdV042+oR1UpbU+U0laltD1RN52huukMldK2UjedoVLaniilrZpu/A31qCql7YlS2qqUtifqpjNUN52hUtpW6qYzVErbE6W0VdONv6EeVaW0PVFKW5XS9kTddIbqpjNUSttK3XSGSml7opS2arrxN9SjqpS2J0ppq1Lanqib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tieabv4NQ3p8ldJWddMZKqWtukV3USltJ3WL7qJS2lZKaXui6ebfMKTHVyltVTedoVLaqlt0F5XSdlK36C4qpW2llLYnmm7+DUN6fJXSttIyvdWJUtqeKKWtSmmrUtqqbjpDveKZL9EfSaW0rbRMb3WilLYnSmmrUtqqlLaqm85Qr3jmS/RHUiltKy3TW50ope2JUtqqlLYqpa3qpjPUK575Ev2RVErbSsv0VidKaXuilLYqpa1Kaau66Qz1ime+RH8kldK20jK91YlS2p4opa1KaatS2qpuOkO94pkv0R9JpbSttExvdaKUtidKaatS2qqUtqqbzlCveOZL9EdSKW0rLdNbnSil7YlS2qqUtiqlreqmM9QrnvkS/ZFUSttKy/RWJ0ppe6KUtiqlrUppq7rpDPWKZ75EfySV0rbSMr3ViVLaniilrUppq1Laqm46Q73imS/RH0mltK20TG91opS2J0ppq1LaqpS2qpvOUK8Y/yV6/BOltN3yuumMSiltX66bzlApbStNN/6GetQTpbTd8rrpjEopbV+um85QKW0rTTf+hnrUE6W03fK66YxKKW1frpvOUCltK003/oZ61BOltN3yuumMSiltX66bzlApbStNN/6GetQTpbTd8rrpjEopbV+um85QKW0rTTf+hnrUE6W03fK66YxKKW1frpvOUCltK003/oZ61BOltN3yuumMSiltX66bzlApbStNN/6GetQTpbTd8rrpjEopbV+um85QKW0rTTf+hnrUE6W03fK66YxKKW1frpvOUCltK003/oZ61BOltN3yuumMSiltX66bzlApbStNN/+GIT2+SmmrbtFdVErbE3XTGZWm051P1E1nqG46Q003/4YhPb5Kaatu0V1UStsTddMZlabTnU/UTWeobjpDTTf/hiE9vkppq27RXVRK2xN10xmVptOdT9RNZ6huOkNNN/+GIT2+SmmrbtFdVErbE3XTGZWm051P1E1nqG46Q003/4YhPb5Kaatu0V1UStsTddMZlabTnU/UTWeobjpDTTf/hiE9vkppq27RXVRK2xN10xmVptOdT9RNZ6huOkNNN/+GIT2+SmmrbtFdVErbE3XTGZWm051P1E1nqG46Q003/4YhPb5Kaatu0V1UStsTddMZlabTnU/UTWeobjpDTTf/hiE9vkppq27RXVRK2xN10xmVptOdT9RNZ6huOkNNN/+GIT2+SmmrbtFdVErbE3XTGZWm051P1E1nqG46Q003/4bN9EdSt+gulVLaqpS2KqWtukV3UbfoLiql7YlS2laabv4Nm+mPpG7RXSqltFUpbVVKW3WL7qJu0V1UStsTpbStNN38GzbTH0ndortUSmmrUtqqlLbqFt1F3aK7qJS2J0ppW2m6+Tdspj+SukV3qZTSVqW0VSlt1S26i7pFd1EpbU+U0rbSdPNv2Ex/JHWL7lIppa1KaatS2qpbdBd1i+6iUtqeKKVtpenm37CZ/kjqFt2lUkpbldJWpbRVt+gu6hbdRaW0PVFK20rTzb9hM/2R1C26S6WUtiqlrUppq27RXdQtuotKaXuilLaVppt/w2b6I6lbdJdKKW1VSluV0lbdoruoW3QXldL2RCltK003/4bN9EdSt+gulVLaqpS2KqWtukV3UbfoLiql7YlS2laabv4Nm+mPpG7RXSqltFUpbVVKW3WL7qJu0V1UStsTpbStNN34G+pRX66bzjhRSlvVTWeolLbqFt2lUkrbSilt1SvGf4ke/+W66YwTpbRV3XSGSmmrbtFdKqW0rZTSVr1i/Jfo8V+um844UUpb1U1nqJS26hbdpVJK20opbdUrxn+JHv/luumME6W0Vd10hkppq27RXSqltK2U0la9YvyX6PFfrpvOOFFKW9VNZ6iUtuoW3aVSSttKKW3VK8Z/iR7/5brpjBOltFXddIZKaatu0V0qpbStlNJWvWL8l+jxX66bzjhRSlvVTWeolLbqFt2lUkrbSilt1SvGf4ke/+W66YwTpbRV3XSGSmmrbtFdKqW0rZTSVr1i/Jfo8V+um844UUpb1U1nqJS26hbdpVJK20opbdUrxn+JHv/luumME6W0Vd10hkppq27RXSqltK2U0la9YvyX6PEnldL2RCltVUpbNZ3uXKmbzjhRN52hUtpWmm78DfWok0ppe6KUtiqlrZpOd67UTWecqJvOUCltK003/oZ61EmltD1RSluV0lZNpztX6qYzTtRNZ6iUtpWmG39DPeqkUtqeKKWtSmmrptOdK3XTGSfqpjNUSttK042/oR51UiltT5TSVqW0VdPpzpW66YwTddMZKqVtpenG31CPOqmUtidKaatS2qrpdOdK3XTGibrpDJXSttJ042+oR51UStsTpbRVKW3VdLpzpW4640TddIZKaVtpuvE31KNOKqXtiVLaqpS2ajrduVI3nXGibjpDpbStNN34G+pRJ5XS9kQpbVVKWzWd7lypm844UTedoVLaVppu/A31qJNKaXuilLYqpa2aTneu1E1nnKibzlApbStNN/+Gl+iPqVLaqlt0l0rddIZKaVvpFt1FpbRV3XRGpZS2arr5N7xEf0yV0lbdortU6qYzVErbSrfoLiqlreqmMyqltFXTzb/hJfpjqpS26hbdpVI3naFS2la6RXdRKW1VN51RKaWtmm7+DS/RH1OltFW36C6VuukMldK20i26i0ppq7rpjEopbdV08294if6YKqWtukV3qdRNZ6iUtpVu0V1USlvVTWdUSmmrppt/w0v0x1QpbdUtukulbjpDpbStdIvuolLaqm46o1JKWzXd/Bteoj+mSmmrbtFdKnXTGSqlbaVbdBeV0lZ10xmVUtqq6ebf8BL9MVVKW3WL7lKpm85QKW0r3aK7qJS2qpvOqJTSVk03/4aX6I+pUtqqW3SXSt10hkppW+kW3UWltFXddEallLZquvk3vER/TJXSVt2iu1TqpjNUSttKt+guKqWt6qYzKqW0VdONv6EeVaW0VSltVUrbl+umM77YLbpLpVt0l0rTjb+hHlWltFUpbVVK25frpjO+2C26S6VbdJdK042/oR5VpbRVKW1VStuX66YzvtgtukulW3SXStONv6EeVaW0VSltVUrbl+umM77YLbpLpVt0l0rTjb+hHlWltFUpbVVK25frpjO+2C26S6VbdJdK042/oR5VpbRVKW1VStuX66YzvtgtukulW3SXStONv6EeVaW0VSltVUrbl+umM77YLbpLpVt0l0rTjb+hHlWltFUpbVVK25frpjO+2C26S6VbdJdK042/oR5VpbRVKW1VStuX66YzvtgtukulW3SXStONv6EeVaW0VSltVUrbl+umM77YLbpLpVt0l0rTzb9hSI+vUtqe6Bbd5eVS2lZKaau66QyV0rZSSlv1ime+RH8kldL2RLfoLi+X0rZSSlvVTWeolLaVUtqqVzzzJfojqZS2J7pFd3m5lLaVUtqqbjpDpbStlNJWveKZL9EfSaW0PdEtusvLpbStlNJWddMZKqVtpZS26hXPfIn+SCql7Ylu0V1eLqVtpZS2qpvOUCltK6W0Va945kv0R1IpbU90i+7yciltK6W0Vd10hkppWymlrXrF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">
+			<h2>ニコニ・コモンズ</h2>
+			<img id="QR" src="https://hatuna-827.github.io/musukabutton/QRcode.png">
 		</div>
 		<h1>ムスカボタン</h1>
-		<button onclick="sannhunn()">３分間待ってやる</button>
-		<button onclick="barusu()" class="中" id="バルス">バルス</button>
-		<button onclick="saikou()" style="font-size: 1.442vw;">最高のショーだと思わんかね</button>
+		<button onclick="sannhunn()">サ</button>
+		<button onclick="barusu()" class="中" id="バルス">バ</button>
+		<button onclick="saikou()">シ</button>
 		<br>
-		<button onclick="hitoga()">人がゴミのようだ</button>
-		<button onclick="sine()" class="中">死ねエエエッッ！！</button>
-		<button onclick="mega()">目があああ！！</button>
+		<button onclick="hitoga()">ヒ</button>
+		<button onclick="sine()" class="中">シ</button>
+		<button onclick="mega()">メ</button>
 		<br>
-		<button onclick="syutten()">提供:ニコニ・<br>コモンズ</button>
+		<button onclick="syutten()" id="引用">引用</button>
 	<script>
 	function sannhunn() {
-		const myaudio = new Audio('３分間待ってやる.mp3');
+		const myaudio = new Audio('https://hatuna-827.github.io/musukabutton/3min.mp3');
 		myaudio.play();
 	}
 	function barusu() {
-		const myaudio = new Audio('バルス.mp3');
+		const myaudio = new Audio('https://hatuna-827.github.io/musukabutton/barusu.mp3');
 		myaudio.play();
 	}
 	function saikou() {
-		const myaudio = new Audio('最高のショーだと思わんかね.mp3');
+		const myaudio = new Audio('https://hatuna-827.github.io/musukabutton/syo.mp3');
 		myaudio.play();
 	}
 	function hitoga() {
-		const myaudio = new Audio('人がゴミのようだ.mp3');
+		const myaudio = new Audio('https://hatuna-827.github.io/musukabutton/gomi.mp3');
 		myaudio.play();
 	}
 	function sine() {
-		const myaudio = new Audio('死ねｪｪｪッッ！！.mp3');
+		const myaudio = new Audio('https://hatuna-827.github.io/musukabutton/shine.mp3');
 		myaudio.play();
 	}
 	function mega() {
-		const myaudio = new Audio('目があああ！！.mp3');
+		const myaudio = new Audio('https://hatuna-827.github.io/musukabutton/mega.mp3');
 		myaudio.play();
 	}
 	function syutten() {
