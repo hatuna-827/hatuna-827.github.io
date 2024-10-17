@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>brainfuck_割り算 | hatuna-827</title>
+		<title>brainfuck_素因数分解 | hatuna-827</title>
 	</head>
 	<style type="text/css">
 		body {
@@ -81,58 +81,60 @@
         <div style="background-color: #B2E9B2; width: 100%; height: min(90px,15vw); text-align: center;"><a style="font-size: min(50px,10vw); color: #000000; text-decoration: none;" href="https://hatuna-827.github.io/">hatuna-827</a></div>
         <div id="main">
         <h1>Let’s enjoy brainfuck.</h1>
-        <h2>~割り算編~</h2>
+        <h2>~素因数分解編~</h2>
         <h2>コード紹介</h2>
-        <p>今回はbrainfuckで割り算をするプログラムの紹介をしたいと思います。</p>
-        <p>↓割り算をするコード</p>
+        <p>今回はbrainfuckで素因数分解をするプログラムの紹介をしたいと思います。</p>
+        <p>↓素因数分解をするコード</p>
         <div id="button"><button id="button1" onclick="copy('1')">copy</button></div>
-        <pre id="code1" class="nobr">,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]<[<[-]<<<<<[>>>>[<<<+>->+>-]<[>+<-]>>+<<<<[<[->>+>]>>>[<<<]<<-]<]>>[>>[<<+>+>-]<[>+<-]>>-<<]>[<]<[<<++++++++++>>-]>>>>>++++++[<<++++++++>>-]<<.>-]</pre>
-        <p>入力は、</p>
+        <pre id="code1" class="nobr">,>++++++++[<-------->-]
+++
+<-[
+    +
+	[>>>+<+<<-]>>>[<<<+>>>-]
+	<[
+        >>>>>+
+		<<<<<<[>>>>+<+<+<<-]>>[<<+>>-]
+		>[
+            <<[->>>-<<]>[<]>-
+		]<<
+	]
+	>>>[
+        <<<<+>>>>>>[-]<<[-]>
+	]>>
+	[
+        <<<<<<<[-]>>>>>>>[<<<<<<<+>>>>>>>-]
+		<<<<<++++++++[<++++++++>-]<.>++++++++[<-------->-]>>>>>>
+	]
+	<<<<<<<<-
+]</pre>
+        <p>入力は</p>
         <ul>
-            <li>割られる数</li>
-            <li>割る数</li>
-            <li>出力する桁数</li>
+            <li>素因数分解したい数字("A"が1)</li>
         </ul>
         <p>です。</p>
-        <p>私は、実行環境を作るのが面倒なため、<a href="https://kachikachi.net/brainfuck">こちら</a>のサイトを使っています。</p>
-        <h2>やっていること</h2>
-        <div id="button"><button id="button2" onclick="copy('2')">copy</button></div>
-        <pre id="code2">,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]
-<[
-    <[-]
-    <<<<<[
-        >>>>[<<<+>->+>-]
-        <[>+<-]
-        >>+
-        <<<<[<[->>+>]>>>[<<<]<<-]
-        <
-    ]
-    >>[>>[<<+>+>-]<[>+<-]>>-<<]>[<]
-    <[<<++++++++++>>-]
-    >>>>>++++++[<<++++++++>>-]<<.
-    >-
+        <h2>改行したバージョン</h2>
+        <div id="button"><button id="button1" onclick="copy('1')">copy</button></div>
+<pre id="code1">,>++++++++[<-------->-]
+++
+<-[
+    +
+	[>>>+<+<<-]>>>[<<<+>>>-]
+	<[
+        >>>>>+
+		<<<<<<[>>>>+<+<+<<-]>>[<<+>>-]
+		>[
+            <<[->>>-<<]>[<]>-
+		]<<
+	]
+	>>>[
+        <<<<+>>>>>>[-]<<[-]>
+	]>>
+	[
+        <<<<<<<[-]>>>>>>>[<<<<<<<+>>>>>>>-]
+		<<<<<++++++++[<++++++++>-]<.>++++++++[<-------->-]>>>>>>
+	]
+	<<<<<<<<-
 ]</pre>
-        <p>ポインタの左から順に ABCDEFG としています。</p>
-<div id="button"><button id="button3" onclick="copy('3')">copy</button></div>
-<pre id="code3">input
-G[
-    Fのリセット
-    A[
-        EをBと-Cにコピー
-        F+=1
-        A-Bをする、うまく引けた場合C+=1
-    ]
-    C[
-        F-=1
-        C+=E
-    ]Dで終了
-    Cの10倍をAに代入
-    Fのprint
-    G-=1
-]
-</pre>
-        <p>参考・リンクなど</p>
-        <p><a href="https://kachikachi.net/brainfuck">kachikachi.net/brainfuck</a></p>
         </div>
         <script>
             function copy(target_id){
