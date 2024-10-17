@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TEMP | hatuna-827</title>
+	</head>
+	<style type="text/css">
+		body {
+			margin: 0px;
+			font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+			font-size: 0px;
+			background-color: #f8f7f2;
+		}
+        h1 {
+            margin: 30px 0px;
+            line-height: 50px;
+            color: #000000;
+            font-size: 45px;
+            text-align: left;
+        }
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #709170;
+        }
+        a:active {
+            color: #709170;
+        }
+        ul {
+            margin: 10px 30px;
+            line-height: 40px;
+            color: #000000;
+            font-size: 25px;
+            text-align: left;
+        }
+        #main {
+            margin: 50px;
+        }
+	</style>
+	<body>
+        <div style="background-color: #B2E9B2; width: 100%; height: min(90px,15vw); text-align: center;"><a style="font-size: min(50px,10vw); color: #000000; text-decoration: none;" href="https://hatuna-827.github.io/">hatuna-827</a></div>
+        <div id="main">
+        <h1>作ったサイト(リンク集)</h1>
+        <ul>
+            <li><a href="https://hatuna-827.github.io">HOME</a></li>
+            <li><a href="https://hatuna-827.github.io/404.html">404 not found</a></li>
+            <li><a href="https://hatuna-827.github.io/brainfuck/warizann">brainfack ~割り算編~</a></li>
+            <li><a href="https://hatuna-827.github.io/brainfuck/soinnsuubunnkai">brainfuck ~素因数分解編~</a></li>
+            <li><a href="https://hatuna-827.github.io/musukabutton">ムスカボタン</a></li>
+        </ul>
+        </div>
+        <script>
+            function copy(target_id){
+                var target = document.getElementById("code"+target_id);
+                navigator.clipboard.writeText(target.textContent);
+                let text = document.getElementById("button"+target_id).textContent;
+                document.getElementById("button"+target_id).textContent = 'copied!';
+            }
+        </script>
+    </body>
+</html>
