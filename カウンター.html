@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>カウンター</title>
+	</head>
+	<style type="text/css">
+		body {
+			font-size:0px;
+			margin:0px;
+			padding: 0px;
+			font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+			font-size: 0px;
+			background-color: #fff;
+			text-align: center;
+		}
+		h1 {
+		font-size: 70px;
+		}
+		button {
+			margin: 30px 200px 30px 200px;
+			font-size: 60px;
+			font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+			text-align: center;
+			width: 15vw;
+			height: 15vw;
+			background: #fff;
+			border: 2px solid #000;
+			border-radius:7.5vw;
+		}
+		button:active {
+			background: #eee;
+		}
+	</style>
+	<body>
+		<h1 style="margin: 160px 0px 0px 0px;">カウンター</h1>
+		<h1 id="num"></h1>
+		<button onclick="mainasu()">―</button>
+		<button onclick="purasu()">＋</button>
+	<script>
+	var elm = document.getElementById('num');
+	var kaunta =0;
+	elm.textContent = kaunta;
+	elm.style.background = '#ffcccc';
+	function mainasu(){
+		kaunta -=1;
+		var elm = document.getElementById('num');
+		elm.textContent = kaunta;
+	}
+	function purasu(){
+		kaunta +=1;
+		var elm = document.getElementById('num');
+		elm.textContent = kaunta;
+	}
+	</script>
+	</body>
+</html>
