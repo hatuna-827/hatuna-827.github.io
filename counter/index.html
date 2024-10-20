@@ -3,56 +3,88 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>カウンター</title>
+		<title>カウンター | hatuna-827</title>
 	</head>
 	<style type="text/css">
+        ::selection {
+            background-color: #007e00;
+            color: #fff;
+        }
 		body {
-			font-size:0px;
-			margin:0px;
-			padding: 0px;
-			font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+			margin: 0px;
+			font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
 			font-size: 0px;
-			background-color: #fff;
-			text-align: center;
+			background-color: #f8f7f2;
 		}
-		h1 {
-		font-size: 70px;
-		}
-		button {
-			margin: 30px 200px 30px 200px;
-			font-size: 60px;
+        h1 {
+            margin: 100px 0px 0px 0px;
+            line-height: min(120px,20vw);
+            color: #fff;
+            font-size: min(100px,20vw);
+            background-color: #488e48;
+        }
+        .button {
+			margin: 30px 12vw 30px 12vw;
+			font-size: 6vw;
 			font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
 			text-align: center;
-			width: 15vw;
-			height: 15vw;
-			background: #fff;
+			width: 12vw;
+			height: 12vw;
+			background: #f8f7f2;
 			border: 2px solid #000;
 			border-radius:7.5vw;
 		}
-		button:active {
-			background: #eee;
-		}
+        .setbutton {
+            font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+            color: #709170;
+            font-size: min(3vw,30px);
+            margin: 0px 20px;
+            border: 1px #709170 solid;
+            width: auto;
+			height: 4vw;
+            background: #f8f7f2;
+        }
+        #main {
+            margin: 50px;
+            text-align: center;
+        }
+        #inputnum {
+            font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+            color: #709170;
+            font-size: min(3vw,30px);
+            margin: 0px;
+            border: 1px #709170 solid;
+            width: 10vw;
+			height: 4vw;
+            background: #f8f7f2;
+            outline: none;
+            text-align: center;
+        }
+        ::placeholder {
+            color: #709170;
+        }
 	</style>
 	<body>
-		<h1 style="margin: 160px 0px 0px 0px;">カウンター</h1>
-		<h1 id="num"></h1>
-		<button onclick="mainasu()">―</button>
-		<button onclick="purasu()">＋</button>
-	<script>
-	var elm = document.getElementById('num');
-	var kaunta =0;
-	elm.textContent = kaunta;
-	elm.style.background = '#ffcccc';
-	function mainasu(){
-		kaunta -=1;
-		var elm = document.getElementById('num');
-		elm.textContent = kaunta;
-	}
-	function purasu(){
-		kaunta +=1;
-		var elm = document.getElementById('num');
-		elm.textContent = kaunta;
-	}
-	</script>
-	</body>
+        <div style="background-color: #B2E9B2; width: 100%; height: min(90px,15vw); text-align: center;"><a style="font-size: min(50px,10vw); color: #000000; text-decoration: none;" href="https://hatuna-827.github.io/">hatuna-827</a></div>
+        <div id="main">
+        <h1 id="num"></h1>
+        <button class="button" onclick="set(kaunta-1)">―</button>
+		<button class="button" onclick="set(kaunta+1)">＋</button><br>
+        <div style="margin: 60px 0px 0px 0px; text-align: left"><button class="setbutton" onclick="set(0)">リセット</button></div>
+        <div style="margin: -4vw 0px 0px 0px; text-align: right;"><input type="number" id="inputnum" placeholder="セット"><button class="setbutton" onclick="setinput()">送信</button></div>
+        </div>
+        <script>
+            let kaunta;
+            set(0)
+            function set(num){
+                kaunta =num;
+                document.getElementById('num').textContent = kaunta;
+            }
+            function setinput(){
+                kaunta =Math.floor(document.getElementById('inputnum').value);
+                document.getElementById('num').textContent = kaunta;
+                document.getElementById('inputnum').value=kaunta;
+            }
+        </script>
+    </body>
 </html>
