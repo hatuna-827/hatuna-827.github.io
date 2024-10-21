@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>brainfuck_概要 | hatuna-827</title>
+	</head>
+	<style type="text/css">
+        ::selection {
+            background-color: #007e00;
+            color: #fff;
+        }
+		body {
+			margin: 0px;
+			font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+			font-size: 0px;
+			background-color: #f8f7f2;
+		}
+        h1 {
+            margin: 30px 0px;
+            line-height: 50px;
+            color: #000000;
+            font-size: 45px;
+            text-align: left;
+        }
+        h2 {
+            margin: 30px;
+            line-height: 40px;
+            color: #000000;
+            font-size: 30px;
+            text-align: left;
+        }
+        p {
+            margin: 0px 30px;
+            line-height: 50px;
+            color: #000000;
+            font-size: 20px;
+            text-align: left;
+        }
+        button {
+            font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+            width: 90px;
+            height: 30px;
+            margin: -15px 30px;
+            line-height: 0px;
+            color: #000000;
+            font-size: 17px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            border: 0px;
+            background-color: #E5E5E5;
+        }
+        pre {
+            font-family:  monospace, monospace;
+            margin: 0px 30px 10px 30px;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            overflow: auto;
+            line-height: 25px;
+            color: #000000;
+            font-size: 15px;
+            text-align: left;
+            background-color: #DDD;
+        }
+        a {
+            color: #709170;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        img {
+            margin: 20px 30px;
+            color: #000000;
+            text-align: left;
+            font-size: 15px;
+            height: min(6vw,50px);
+        }
+        hr {
+            margin: 30px;
+        }
+        #button {
+            text-align: right;
+        }
+        #main {
+            margin: 50px;
+        }
+        .nobr {
+            white-space: nowrap;
+        }
+	</style>
+	<body>
+        <div style="background-color: #B2E9B2; width: 100%; height: min(90px,15vw); text-align: center;"><a style="font-size: min(50px,10vw); color: #000000; text-decoration: none;" href="https://hatuna-827.github.io/">hatuna-827</a></div>
+        <div id="main">
+        <h1>Let’s enjoy brainfuck.</h1>
+        <h2>~概要編~</h2>
+        <p>brainfuckというプログラミング言語をご存知ですか？</p>
+        <p>今回は、brainfuckの使い方や簡単なコードの紹介をしようと思います。</p>
+        <h2>コードの書き方</h2>
+        <p>brainfuckの最も興味深い点は、使う文字がたったの8種類しかないことです。</p>
+        <p>コードとして認識されるのは以下の8種類だけで、それ以外の文字はすべてコメントとして扱われます。</p>
+        <div id="button"><button id="button1" onclick="copy('1')">copy</button></div>
+        <pre id="code1">
++   …ポインタのメモリに1を足す
+-   …ポインタのメモリから1を引く
+>   …ポインタを右に1つずらす
+<   …ポインタを左に1つずらす
+[   …ポインタのメモリが0なら対応する"]"に飛ぶ
+]   …ポインタのメモリが0ではないなら対応する"["に飛ぶ
+.   …<メモリの数>番目のアスキーコードを出力する
+,   …入力された1文字のアスキーコードをメモリに上書きする
+</pre>
+        <p>それぞれの文字の使い方を詳しく見てみましょう。</p>
+        <h2>それぞれ文字の説明</h2>
+        <p>brainfuckではメモリが横に並んでいて最初は一番左のメモリにポインタがあるイメージです。</p>
+        <img src="img/img1.bmp" alt="メモリのイメージ">
+        <p>">"を実行するとポインタが今いるメモリの1つ右のメモリに移動します。</p>
+        <img src="img/img2.bmp" alt="メモリのイメージ">
+        <p>同様に、"<"を実行するとポインタが今いるメモリの1つ左のメモリに移動します。</p>
+        <p>もし、ポインタが一番左(初期位置)にあるときに"<"をすると、エラーになるようです。</p>
+        <img src="img/img1.bmp" alt="メモリのイメージ">
+        <p>"+"や"-"でメモリのに1を足したり引いたりします。</p>
+        <p>もし、メモリが0のとき、"-"をすると、メモリは255になります。</p>
+        <p>逆に、メモリが255のとき、"+"をすると、メモリは0になります。</p>
+        <img src="img/img3.bmp" alt="メモリのイメージ">
+        <p>","は入力された文字のアスキーコードをメモリに上書きします。</p>
+        <p>例えば、"@(アスキーコードは64)"が入力された場合,メモリには64が保存されます。</p>
+        <img src="img/img4.bmp" alt="メモリのイメージ">
+        <p>メモリに、どんな数字が入っていても上書きされてしまうため、注意が必要です。</p>
+        <h2>実際にコードのを書いてみよう</h2>
+        <p>試しに、"@(アスキーコードは64)"と出力するコードを書いてみましょう。</p>
+        <p>メモリを64にして出力すればいいのですが...</p>
+        <div id="button"><button id="button2" onclick="copy('2')">copy</button></div>
+        <pre id="code2" class="nobr">++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.</pre>
+        <p>これだと、とても長いですよね。</p>
+        <p>そこで"["と"]"を使うことで掛け算を行いコードを短くします。</p>
+        <p>"[ ]"はメモリが0になるまで、かっこの中身を繰り返すイメージです。</p>
+        <p>64は8×8なので、メモリを8にし、そのメモリが0になるまで右のメモリに8を足し続ければいいのです。</p>
+        <div id="button"><button id="button3" onclick="copy('3')">copy</button></div>
+        <pre id="code3" class="nobr">++++++++[>++++++++<-]>.</pre>
+        <h2>コード紹介</h2>
+        <p>最後に、文字を表示する簡単なコードを紹介したいと思います。</p>
+        <div id="button"><button id="button4" onclick="copy('4')">copy</button></div>
+        <pre id="code4">HELLO WORLD!
+++++++++++++[>++++++>+++>+++++++<<<-]>.---.+++++++..+++.>----.>+++.<+<.+++.------.--------.>.
+
+Yes
++++++++++[>++++++++++<-]>-.>+++[<++++>-]<.>++[<+++++++>-]<.
+
+No
++++++++++++[>+++++++>++++++++++<<-]>+.>+.
+</pre>
+        <p>ぜひ、brainfuckで遊んでみてください。</p>
+        <hr>
+        <p>↓おすすめのサイト↓</p>
+        <p><a href="http://www3.nit.ac.jp/~tamura/ex2/ascii.html">アスキーコード表</a></p>
+        <p><a href="https://atcoder.jp/contests/practice/custom_test">コードの実行</a>(言語をbrainfuckに設定)</p>
+        </div>
+        <script>
+            function copy(target_id){
+                var target = document.getElementById("code"+target_id);
+                navigator.clipboard.writeText(target.textContent);
+                let text = document.getElementById("button"+target_id).textContent;
+                document.getElementById("button"+target_id).textContent = 'copied!';
+            }
+        </script>
+    </body>
+</html>
