@@ -32,30 +32,39 @@
 			height: 12vw;
 			background: #f8f7f2;
 			border: 2px solid #000;
-			border-radius:7.5vw;
+			border-radius:6vw;
 		}
         .setbutton {
             font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
             color: #709170;
-            font-size: min(3vw,30px);
-            margin: 0px 20px;
+            font-size: 30px;
+            margin: 0px;
             border: 1px #709170 solid;
             width: auto;
-			height: 4vw;
+			height: 50px;
             background: #f8f7f2;
+            line-height: 50px;
         }
         #main {
             margin: 50px;
             text-align: center;
         }
+        #set {
+            margin: -50px 0px 0px 0px;
+            text-align: right;
+        }
+        #reset {
+            margin: 60px 0px 0px 0px;
+            text-align: left;
+        }
         #inputnum {
             font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
             color: #709170;
-            font-size: min(3vw,30px);
-            margin: 0px;
+            font-size: 30px;
+            margin: 0px 10px;
             border: 1px #709170 solid;
-            width: 10vw;
-			height: 4vw;
+            width: 120px;
+			height: 50px;
             background: #f8f7f2;
             outline: none;
             text-align: center;
@@ -63,15 +72,50 @@
         ::placeholder {
             color: #709170;
         }
+        @media screen and (max-width:480px) {
+            .button {
+                font-size: 50px;
+                margin: 10px 0px;
+                width: 100px;
+                height: 100px;
+                border-radius:50px;
+            }
+            h1 {
+                margin: 50px 0px;
+            }
+            #set {
+                margin: 20px 0px -20px 0px;
+                text-align: center;
+            }
+            #reset {
+                margin: 30px 0px;
+                text-align: center;
+            }
+            .setbutton{
+                font-size: 30px;
+                height: 50px;
+                width: 220px;
+                margin: 0px;
+            }
+            #inputnum {
+                margin: 20px 0px;
+                font-size: 30px;
+                height: 50px;
+                width: 220px;
+            }
+            #mai {
+                margin-right: 20px;
+            }
+        }
 	</style>
 	<body>
         <div style="background-color: #B2E9B2; width: 100%; height: min(90px,15vw); text-align: center;"><a style="font-size: min(50px,10vw); color: #000000; text-decoration: none;" href="https://hatuna-827.github.io/">hatuna-827</a></div>
         <div id="main">
         <h1 id="num"></h1>
-        <button class="button" onclick="set(kaunta-1)">―</button>
-		<button class="button" onclick="set(kaunta+1)">＋</button><br>
-        <div style="margin: 60px 0px 0px 0px; text-align: left"><button class="setbutton" onclick="set(0)">リセット</button></div>
-        <div style="margin: -4vw 0px 0px 0px; text-align: right;"><input type="number" id="inputnum" placeholder="セット"><button class="setbutton" onclick="setinput()">送信</button></div>
+        <button class="button" id="mai" onclick="set(kaunta-1)">―</button>
+		<button class="button" id="pura" onclick="set(kaunta+1)">＋</button>
+        <div id="reset"><button class="setbutton" onclick="set(0)">リセット</button></div>
+        <div id="set"><input type="number" id="inputnum" placeholder="セット"><button class="setbutton" onclick="setinput()">送信</button></div>
         </div>
         <script>
             let kaunta;
