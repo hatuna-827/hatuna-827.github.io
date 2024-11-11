@@ -16,6 +16,10 @@ function reset(){
     turn="〇"
     game=0
 }
+function draw(){
+    document.getElementById('ifdraw').textContent="draw!"
+    document.getElementById('winner').textContent="-"
+}
 function win() {
     game=1
     document.getElementById('winner').textContent=turn
@@ -32,6 +36,7 @@ function win() {
 }
 function hidepop() {
     document.getElementById('pop').style.display='none'
+    document.getElementById('ifdraw').textContent="winner!"
     reset()
 }
 function push(num){
@@ -42,11 +47,12 @@ function push(num){
         const interval = setInterval(function() {
             document.getElementById(num).style.color="rgba(0,0,0,"+a+")"
             a+=0.1
-            if (a==1) {
+            if (a>=1) {
                 clearInterval(interval)
             }
         },20)
         date.splice(num-1,1,turn)
+        if (! date.includes("")){win();draw()}
         if (date[0]==date[1] & date[1]==date[2] & date[2]!=""){win()}
         if (date[3]==date[4] & date[4]==date[5] & date[5]!=""){win()}
         if (date[6]==date[7] & date[7]==date[8] & date[8]!=""){win()}
