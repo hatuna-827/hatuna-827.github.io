@@ -1,0 +1,113 @@
+::selection {
+    background-color: #007e00;
+    color: #fff;
+}
+body {
+    margin: 0px;
+    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    font-size: 0px;
+    background-color: #f8f7f2;
+}
+#main {
+    margin: 100px 0px 20px 0px;
+    text-align: center;
+}
+button {
+    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    width: 100px;
+    height: 100px;
+    margin: 0px;
+    padding: 21px 0px;
+    line-height: 0px;
+    color: #ff86c2;
+    font-size: 80px;
+    text-align: center;
+    border-radius: 0px;
+    border: 1px solid black;
+    background-color: #f8f7f2;
+}
+.setbutton {
+    margin: 35px 0px 0px 0px;
+    padding: 0px;
+    color: #000000;
+    width: 300px;
+    height: 60px;
+    font-size: 25px;
+    line-height: 25px;
+    background-color: #B2E9B2;
+    border: 0px;
+    border-radius: 10px;
+}
+#random {
+    text-align: left;
+    margin: -300px 0px 0px 0px;
+    padding-left: max(calc(25vw - 225px),calc(50vw - 500px));
+    width: auto;
+}
+#save_load {
+    text-align: right;
+    margin: -285px 0px 0px 0px;
+    padding-right: max(calc(25vw - 225px),calc(50vw - 500px));
+    width: auto;
+}
+#pop {
+    display: none;
+    position: fixed;
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+#poptext {
+    width: 500px;
+    height: 300px;
+    background-color: #ffffff;
+    margin: 0px;
+    text-align: center;
+    border-radius: 30px;
+}
+p {
+    margin: 125px 0px;
+    color: #007e00;
+    font-size: 50px;
+    line-height: 50px;
+}
+@media screen and (max-width:900px) {
+    button {
+        width: 30vw;
+        height: 30vw;
+        padding: calc(6vw + 1px) 0px;
+        font-size: 24vw;
+    }
+    #main {
+        margin: 40px 0px;
+    }
+    .setbutton {
+        margin: 20px 0px 0px 0px;
+        width: 46vw;
+        font-size: 4vw;
+        line-height: 7vw;
+        height: auto;
+    }
+    #random {
+        margin: 0px;
+        padding-left: 2vw;
+    }
+    #save_load {
+        margin: calc(-60px - 21vw) 0px 0px 0px;
+        padding-right: 2vw;
+    }
+    #poptext {
+        width: 50vw;
+        height: 30vw;
+        border-radius: 3vw;
+    }
+    p {
+        font-size: 5vw;
+        line-height: 5vw;
+        margin: 12.5vw 0px;
+    }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./lights_out.css">
+		<title>ライツアウト | hatuna-827</title>
+	</head>
+	<body>
+        <div id="pop" onclick="hidepop()"><div id="poptext" onclick="hidepop()"><p>最短クリア！</p></div></div>
+        <div style="background-color: #B2E9B2; width: 100%; height: min(90px,15vw); text-align: center;"><a style="font-size: min(50px,10vw); color: #000000; text-decoration: none;" href="https://hatuna-827.github.io/">hatuna-827</a></div>
+        <div id="main">
+            <button id="0" onclick="push(0,0)"></button><button id="1" onclick="push(0,1)"></button><button id="2" onclick="push(0,2)"></button><br>
+            <button id="3" onclick="push(1,0)"></button><button id="4" onclick="push(1,1)"></button><button id="5" onclick="push(1,2)"></button><br>
+            <button id="6" onclick="push(2,0)"></button><button id="7" onclick="push(2,1)"></button><button id="8" onclick="push(2,2)"></button><br>
+            <div id="random"><button class="setbutton" onclick="load(random_point,1)">最初から解き直す</button><br><button class="setbutton" onclick="random()">ランダムな問題を生成</button><br><button class="setbutton" id="answerbutton" onclick="answer()">答えを表示</button></div>
+            <div id="save_load"><button class="setbutton" onclick="save()">現在の状態を保存</button><br><button class="setbutton" onclick="load(save_point,0)">保存した状態に復元</button><br><button class="setbutton" onclick="reset()">リセット</button></div>
+        </div>
+        <script src="./lights_out.js"></script>
+    </body>
+</html>
