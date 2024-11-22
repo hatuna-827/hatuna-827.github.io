@@ -67,7 +67,7 @@ img {
     margin: 20px 30px;
     color: #000000;
     font-size: 15px;
-    height: 100px;
+    max-height: 50vh;
 }
 hr {
     margin: 20px;
@@ -121,7 +121,6 @@ hr {
     img {
         margin: 10px 20px;
         font-size: 10px;
-        height: 100px;
     }
     hr {
         margin: 10px;
