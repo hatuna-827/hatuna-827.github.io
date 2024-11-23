@@ -64,17 +64,6 @@ G[
         <p>参考・リンクなど</p>
         <p><a href="https://kachikachi.net/brainfuck">kachikachi.net/brainfuck</a></p>
         </div>
-        <script>
-            function copy(target_id){
-                var target = document.getElementById("code"+target_id);
-                navigator.clipboard.writeText(target.textContent);
-                let text = document.getElementById("button"+target_id).textContent;
-                document.getElementById("button"+target_id).textContent = 'copied!';
-            }
-        </script>
+        <script src="https://hatuna-827.github.io/hatuna-827.js"></script>
     </body>
 </html>
-<!--
-<div id="button"><button id="button1" onclick="copy('1')">copy</button></div>
-<pre id="code1" class="nobr"></pre>
--->
