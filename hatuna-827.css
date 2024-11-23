@@ -147,4 +147,10 @@ hr {
     #main {
         margin: 30px;
     }
+    #tag {
+        margin: 0px 20px 10px 20px;
+        padding: 10px;
+        line-height: 15px;
+        font-size: 12px;
+    }
 }
