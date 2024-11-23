@@ -78,6 +78,25 @@ hr {
 #main {
     margin: 50px;
 }
+#tag {
+    margin: 0px 30px 10px 30px;
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    overflow: auto;
+    line-height: 25px;
+    color: #000000;
+    font-size: 15px;
+    background-color: #DDD;
+    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    a {
+        color: #000000;
+    }
+    a::selection,a:hover {
+        text-decoration: underline .5px;
+        text-underline-offset: 3px;
+    }
+}
 .nobr {
     white-space: nowrap;
 }
