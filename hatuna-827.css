@@ -20,11 +20,22 @@ h2 {
     color: #000000;
     font-size: 30px;
 }
+a {
+    margin: 0px 30px;
+    line-height: 50px;
+    color: #709170;
+    text-decoration: none;
+    font-size: 20px;
+}
 p {
     margin: 0px 30px;
     line-height: 50px;
     color: #000000;
     font-size: 20px;
+    a {
+        margin: 0px;
+        color: #709170;
+    }
 }
 button {
     font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
@@ -58,16 +69,12 @@ ul {
     color: #000000;
     font-size: 20px;
 }
-a {
-    color: #709170;
-    text-decoration: none;
-    font-size: 20px;
-}
 img {
     margin: 20px 30px;
     color: #000000;
     font-size: 15px;
     max-height: 50vh;
+    max-width: calc(100% - 30px);
 }
 hr {
     margin: 20px;
@@ -79,7 +86,7 @@ hr {
     margin: 50px;
 }
 #tag {
-    margin: 0px 30px 10px 30px;
+    margin: 10px 30px 10px 30px;
     padding: 15px;
     border-radius: 5px;
     white-space: pre-wrap;
@@ -111,10 +118,18 @@ hr {
         line-height: 20px;
         font-size: 20px;
     }
+    a {
+        margin: 0px 20px;
+        line-height: 30px;
+        font-size: 15px;
+    }
     p {
         margin: 0px 20px;
         line-height: 30px;
         font-size: 15px;
+        a {
+            margin: 0px;
+        }
     }
     button {
         width: 60px;
@@ -134,12 +149,10 @@ hr {
         line-height: 20px;
         font-size: 15px;
     }
-    a {
-        font-size: 15px;
-    }
     img {
         margin: 10px 20px;
         font-size: 10px;
+        max-width: calc(100% - 20px);
     }
     hr {
         margin: 10px;
@@ -148,7 +161,7 @@ hr {
         margin: 30px;
     }
     #tag {
-        margin: 0px 20px 10px 20px;
+        margin: 10px 20px 10px 20px;
         padding: 10px;
         line-height: 15px;
         font-size: 12px;
