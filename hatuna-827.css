@@ -87,16 +87,16 @@ hr {
 }
 #tag {
     margin: 10px 30px 10px 30px;
-    padding: 15px;
+    padding: 20px 15px;
     border-radius: 5px;
     white-space: pre-wrap;
     overflow: auto;
-    line-height: 25px;
-    color: #000000;
-    font-size: 15px;
     background-color: #DDD;
-    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
     a {
+        line-height: 30px;
+        color: #000000;
+        font-size: 20px;
+        font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
         color: #000000;
     }
     a::selection,a:hover {
@@ -176,7 +176,10 @@ hr {
     #tag {
         margin: 10px 20px 10px 20px;
         padding: 10px;
-        line-height: 15px;
-        font-size: 12px;
+        a {
+            margin: 0px 10px;
+            line-height: 20px;
+            font-size: 15px;
+        }
     }
 }
