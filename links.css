@@ -32,16 +32,20 @@ ul {
 #main {
     margin: 50px;
 }
-#homebar {
-    background-color: #B2E9B2;
-    width: 100%;
-    height: min(90px,15vw);
-    text-align: center;
-    a {
-        margin: 0px;
-        font-size: min(50px,10vw);
-        color: #000000;
-        text-decoration: none;
-        line-height: min(90px,15vw);
+
+@media screen and (max-width:480px) {
+    #main {
+        margin: 20px;
+    }
+    h1 {
+        font-size: 30px;
+        line-height: 40px;
+        margin: 20px 0px;
+    }
+    ul {
+        margin: 10px 20px;
+        padding: 0px 20px;
+        font-size: 20px;
+        line-height: 25px;
     }
 }
