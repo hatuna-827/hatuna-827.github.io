@@ -1,3 +1,14 @@
+::selection {
+    background-color: #007e00;
+    color: #fff;
+}
+body {
+    margin: 0px;
+    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    font-size: 0px;
+    background-color: #f8f7f2;
+    text-align: center;
+}
 h1 {
     margin: 30px 0px;
     line-height: 50px;
