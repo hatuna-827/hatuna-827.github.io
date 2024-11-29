@@ -1,0 +1,59 @@
+h1 {
+    margin: 30px 0px;
+    line-height: 50px;
+    color: #000000;
+    font-size: min(70px,40vw);
+    text-align: center;
+}
+h2 {
+    margin: 20px 0px;
+    line-height: 40px;
+    color: #000000;
+    font-size: 30px;
+    text-align: center;
+}
+h3 {
+    margin: 15px;
+    line-height: 40px;
+    color: #000000;
+    font-size: 20px;
+    text-align: center;
+}
+p {
+    margin: 0px 30px;
+    line-height: 50px;
+    color: #000000;
+    font-size: 15px;
+    text-align: center;
+}
+button {
+    padding: 0px;
+    margin: 20px 7vw -5px 7vw;
+    color: #000000;
+    width: 20vw;
+    height: 7vw;
+    background-color: #c1ecc1;
+    border-radius: 0px;
+    border: 0px;
+    font-size: min(20px,2.5vw);
+}
+#main {
+    color: #000000;
+    margin: 3vw;
+    text-align: center;
+}
+@media screen and (max-width:480px) {
+    p {
+        line-height: 30px;
+    }
+    button {
+        font-size: 15px;
+        line-height: 30px;
+        width: 50vw;
+        height: auto;
+        margin: 20px 20px -5px 20px;
+    }
+    hr {
+        margin: 7px;
+    }
+}
