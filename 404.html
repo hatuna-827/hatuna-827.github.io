@@ -3,21 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://hatuna-827.github.io/hatuna-827.css">
 		<link rel="shortcut icon" type="image/x-icon" href="https://hatuna-827.github.io/hatuna-827.ico">
 		<title>404 | hatuna-827</title>
 	</head>
 	<style type="text/css">
-        ::selection {
-            background-color: #007e00;
-            color: #fff;
-        }
-		body {
-			margin: 0px;
-			font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
-			font-size: 0px;
-			background-color: #f8f7f2;
-            text-align: center;
-		}
         h1 {
             margin: 30px 0px;
             line-height: 50px;
@@ -47,7 +37,7 @@
             text-align: center;
         }
         button {
-            font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+            padding: 0px;
             margin: 20px 7vw -5px 7vw;
             color: #000000;
             width: 20vw;
@@ -55,27 +45,31 @@
             background-color: #c1ecc1;
             border-radius: 0px;
             border: 0px;
-            border-color: #000000;
             font-size: min(20px,2.5vw);
         }
         #main {
             color: #000000;
             margin: 3vw;
+            text-align: center;
         }
         @media screen and (max-width:480px) {
             p {
                 line-height: 30px;
             }
             button {
-                font-size: 20px;
+                font-size: 15px;
+                line-height: 30px;
                 width: 50vw;
                 height: auto;
                 margin: 20px 20px -5px 20px;
             }
+            hr {
+                margin: 7px;
+            }
         }
 	</style>
 	<body>
-        <div style="background-color: #B2E9B2; width: 100%; height: min(90px,15vw); text-align: center;"><a style="font-size: min(50px,10vw); color: #000000; text-decoration: none; margin: 0px; line-height: min(90px,15vw);" href="https://hatuna-827.github.io/">hatuna-827</a></div>
+        <div id="homebar"></div>
         <div id="main">
         <h1>404</h1>
         <h2>file not found</h2>
@@ -87,6 +81,7 @@
         <p>・アクセスしようとしたファイルが存在しない(ファイルの設置箇所を誤っている)。</p>
         <p>・URLアドレスが間違っている。</p>
         <button onclick="history.back()">戻る</button><button onclick="location.href='https://hatuna-827.github.io/'">ホームページ</button>
+        <script src="https://hatuna-827.github.io/hatuna-827.js"></script>
         </div>
     </body>
 </html>

@@ -1,3 +1,5 @@
+document.getElementById('homebar').innerHTML="<a href='https://hatuna-827.github.io/'>hatuna-827</a>";
+
 function copy(target_id){
     var target = document.getElementById("code"+target_id);
     navigator.clipboard.writeText(target.textContent);
