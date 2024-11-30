@@ -27,6 +27,15 @@ a {
     text-decoration: none;
     font-size: 20px;
 }
+code {
+    margin: 0px 30px;
+    padding: 5px 10px;
+    line-height: 50px;
+    font-size: 15px;
+    background-color: #E6E6E6;
+    font-family:  monospace, monospace;
+    border-radius: 5px;
+}
 p {
     margin: 0px 30px;
     line-height: 50px;
@@ -35,6 +44,9 @@ p {
     a {
         margin: 0px;
         color: #709170;
+    }
+    code {
+        margin: 0px 3px;
     }
 }
 button {
