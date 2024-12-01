@@ -80,6 +80,13 @@ ul {
     line-height: 30px;
     color: #000000;
     font-size: 20px;
+    a {
+        margin: 0px;
+        color: #709170;
+    }
+    code {
+        margin: 0px 3px;
+    }
 }
 img {
     margin: 20px 30px;
