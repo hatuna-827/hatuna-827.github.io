@@ -52,15 +52,15 @@ function push(num){
             }
         },20)
         date.splice(num-1,1,turn)
+        if (date[0]==date[1] & date[1]==date[2] & date[2]!=""){win();exit()}
+        if (date[3]==date[4] & date[4]==date[5] & date[5]!=""){win();exit()}
+        if (date[6]==date[7] & date[7]==date[8] & date[8]!=""){win();exit()}
+        if (date[0]==date[3] & date[3]==date[6] & date[6]!=""){win();exit()}
+        if (date[1]==date[4] & date[4]==date[7] & date[7]!=""){win();exit()}
+        if (date[2]==date[5] & date[5]==date[8] & date[8]!=""){win();exit()}
+        if (date[0]==date[4] & date[4]==date[8] & date[8]!=""){win();exit()}
+        if (date[2]==date[4] & date[4]==date[6] & date[6]!=""){win();exit()}
         if (! date.includes("")){win();draw()}
-        if (date[0]==date[1] & date[1]==date[2] & date[2]!=""){win()}
-        if (date[3]==date[4] & date[4]==date[5] & date[5]!=""){win()}
-        if (date[6]==date[7] & date[7]==date[8] & date[8]!=""){win()}
-        if (date[0]==date[3] & date[3]==date[6] & date[6]!=""){win()}
-        if (date[1]==date[4] & date[4]==date[7] & date[7]!=""){win()}
-        if (date[2]==date[5] & date[5]==date[8] & date[8]!=""){win()}
-        if (date[0]==date[4] & date[4]==date[8] & date[8]!=""){win()}
-        if (date[2]==date[4] & date[4]==date[6] & date[6]!=""){win()}
         if (turn=="〇"){turn="×"} else {turn="〇"}
     }
 }
