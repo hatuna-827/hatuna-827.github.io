@@ -9,14 +9,14 @@ body {
     background-color: #f8f7f2;
 }
 #homebar {
-    background-color: #B2E9B2;
+    background-color: #ed6464;/* background-color: #B2E9B2; */
     width: 100%;
     height: min(90px,15vw);
     text-align: center;
     a {
         margin: 0px;
         font-size: min(50px,10vw);
-        color: #000000;
+        color: #ffffff;/* color: #000000; */
         text-decoration: none;
         line-height: min(90px,15vw);
     }
