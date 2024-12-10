@@ -7,15 +7,12 @@ h1 {
     color: #000000;
     font-size: 80px;
 }
-h2 {
-    font-size: 5px;
-    line-height: 0px;
-    background-color: #f8f7f2;
-    color: #f8f7f2;
+p {
+    margin: 15px 0px;
+    font-size: 15px;
 }
-h2::selection {
-    background-color: #f8f7f2;
-    color: #f8f7f2;
+h2 {
+    font-size: 0px;
 }
 button {
     margin: 20px;
@@ -56,5 +53,8 @@ img,img::selection {
     }
     #main {
         margin: 30px;
+    }
+    p {
+        margin: 5px 0px;
     }
 }
