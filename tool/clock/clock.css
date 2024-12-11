@@ -1,0 +1,85 @@
+#main {
+    margin: 50px;
+    text-align: center;
+}
+#clock {
+    box-shadow: inset 5px 5px #DDDDDD, inset -5px -5px #FFFFFF, 10px 10px 3px #DDDDDD;
+    text-align: center;
+    background-color: #F8F7F2;
+    border: 10px solid #709170;
+    border-radius: 180px;
+    height: 350px;
+    width: 350px;
+    margin: 0px calc(50% - 180px);
+}
+#s_hour,#s_minute,#s_second {
+    background-color: rgba(0,0,0,.2);
+    position: absolute;
+    transform-origin: bottom;
+    border-radius: 7.5px;
+}
+#hour,#minute,#second,#center {
+    background-color: #3f4e3f;
+    position: absolute;
+    transform-origin: bottom;
+    border-radius: 7.5px;
+}
+#hour,#s_hour {
+    margin-top: 95px;
+    margin-left: 170px;
+    width: 10px;
+    height: 80px;
+}
+#minute,#s_minute {
+    margin-top: 45px;
+    margin-left: 172.5px;
+    width: 5px;
+    height: 130px;
+}
+#second,#s_second {
+    margin-top: 25px;
+    margin-left: 173.5px;
+    width: 3px;
+    height: 150px;
+}
+#second {
+    background-color: #709170;
+}
+#s_hour {
+    margin-top: 100px;
+    margin-left: 175px;
+}
+#s_minute {
+    margin-top: 50px;
+    margin-left: 177.5px;
+}
+#s_second {
+    margin-top: 30px;
+    margin-left: 178.5px;
+}
+#center {
+    margin-top: 167.5px;
+    margin-left: 167.5px;
+    width: 15px;
+    height: 15px;
+}
+.scalebox {
+    margin-top: 15px;
+    margin-left: 173.5px;
+    position: absolute;
+    transform-origin: bottom;
+    height: 160px;
+    width: 2px;
+}
+.clear {
+    background: transparent;
+    width: 2px;
+    height: 150px;
+}
+.scale {
+    background-color: #709170;
+    width: 2px;
+    height: 10px;
+}
+@media screen and (max-width:480px) {
+}
