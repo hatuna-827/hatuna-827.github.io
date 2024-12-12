@@ -53,12 +53,11 @@
     margin-left: 178.5px;
 }
 #s_center {
-    background-color: #C6C6C2;
     margin-top: 172.5px;
     margin-left: 171.5px;
 }
-#s_hour,#s_minute,#s_second {
-    background-color: rgba(0,0,0,.2);
+#s_hour,#s_minute,#s_second,#s_center {
+    background-color: #C6C6C2;
 }
 #s_hour,#s_minute,#s_second,#s_center,#hour,#minute,#second,#center {
     position: absolute;
@@ -80,6 +79,7 @@
 }
 .scale {
     background-color: #709170;
+    border-radius: 1px;
     width: 2px;
     height: 10px;
 }
