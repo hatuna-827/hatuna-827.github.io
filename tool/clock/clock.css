@@ -63,6 +63,16 @@
     width: 15px;
     height: 15px;
 }
+#s_center {
+    background-color: #C6C6C2;
+    position: absolute;
+    transform-origin: bottom;
+    border-radius: 7.5px;
+    margin-top: 172.5px;
+    margin-left: 171.5px;
+    width: 15px;
+    height: 15px;
+}
 .scalebox {
     margin-top: 15px;
     margin-left: 173.5px;
