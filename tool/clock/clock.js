@@ -3,7 +3,7 @@ for ( let i=11; i>-1; i--){
     document.getElementById("scale"+i).style.transform=`rotate(${30*i}deg)`
 }
 function tick(){
-    const now = new Date(Date.now()-3000);
+    const now = new Date(Date.now()-3500);
     const h=now.getHours()
     const m=now.getMinutes()
     const s=now.getSeconds()
