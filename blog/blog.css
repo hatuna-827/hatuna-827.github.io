@@ -135,11 +135,19 @@ hr {
         line-height: 30px;
         font-size: 15px;
     }
+    code {
+        margin: 0px 20px;
+        line-height: 30px;
+        font-size: 10px;
+    }
     p {
         margin: 0px 20px;
         line-height: 30px;
         font-size: 15px;
         a {
+            margin: 0px;
+        }
+        code {
             margin: 0px;
         }
     }
