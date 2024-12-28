@@ -83,7 +83,7 @@ img {
     color: #000000;
     font-size: 15px;
     max-height: 50vh;
-    max-width: calc(100% - 30px);
+    max-width: calc(100% - 60px);
 }
 hr {
     margin: 20px;
@@ -172,7 +172,7 @@ hr {
     img {
         margin: 10px 20px;
         font-size: 10px;
-        max-width: calc(100% - 20px);
+        max-width: calc(100% - 40px);
     }
     hr {
         margin: 10px;
