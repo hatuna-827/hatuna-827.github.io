@@ -3,15 +3,10 @@ let date
 let game
 reset()
 function reset(){
-    document.getElementById(1).textContent=""
-    document.getElementById(2).textContent=""
-    document.getElementById(3).textContent=""
-    document.getElementById(4).textContent=""
-    document.getElementById(5).textContent=""
-    document.getElementById(6).textContent=""
-    document.getElementById(7).textContent=""
-    document.getElementById(8).textContent=""
-    document.getElementById(9).textContent=""
+    for (i=1;i<=9;i++){
+        document.getElementById(i).style.color="#f8f7f2"
+        document.getElementById(i).textContent="・"
+    }
     date=["","","","","","","","",""]
     turn="〇"
     game=0
@@ -40,9 +35,8 @@ function hidepop() {
     reset()
 }
 function push(num){
-    if (document.getElementById(num).textContent=="" & game==0) {
+    if (document.getElementById(num).textContent=="・" & game==0) {
         document.getElementById(num).textContent=turn
-        document.getElementById(num).style.color="#f8f7f2"
         let a=0
         const interval = setInterval(function() {
             document.getElementById(num).style.color="rgba(0,0,0,"+a+")"
