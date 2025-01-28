@@ -3,7 +3,7 @@ for ( let i=11; i>-1; i--){
     document.getElementById("scale"+i).style.transform=`rotate(${30*i}deg)`
 }
 function tick(){
-    const now = new Date(Date.now()-3350);
+    const now = new Date(Date.now()-pm);
     const h=now.getHours()
     const m=now.getMinutes()
     const s=now.getSeconds()
@@ -21,4 +21,8 @@ function init(){
     tick()
     setInterval(() => { tick() }, 100)
 }
+function offset(num){
+    pm=num
+}
+offset(3350)
 init()
