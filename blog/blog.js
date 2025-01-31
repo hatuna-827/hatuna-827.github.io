@@ -7,17 +7,17 @@ for (i=0;i<tag_target.length;i++){
 }
 document.getElementById('tag').insertAdjacentHTML('beforebegin','<h2>目次<h2>')
 let code_target=document.getElementsByTagName('pre')
-for(let i=0;i<=code_target.length;i++){
+for(let i=0;i<code_target.length;i++){
     code_target[i].setAttribute('id','code'+i)
     document.getElementById('code'+i).insertAdjacentHTML('beforebegin','<div id="button"><button id="button'+i+'" onclick="copy('+i+')">copy</button></div>')
 }
-var img = document.getElementsByTagName('img')
+var img=document.getElementsByTagName('img')
 for(let i=0;i<img.length;i++){
     img[i].setAttribute('alt','画像の読み込みに失敗しました。')
 }
 })
 function copy(target_id){
-    var target = document.getElementById('code'+target_id)
+    var target=document.getElementById('code'+target_id)
     navigator.clipboard.writeText(target.textContent)
     document.getElementById('button'+target_id).textContent = 'copied!'
     setTimeout(function() {
