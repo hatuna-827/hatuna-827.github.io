@@ -17,6 +17,7 @@ function draw(){
 }
 function win() {
     game=1
+    setTimeout(function() {
     document.getElementById('winner').textContent=turn
     document.getElementById('pop').style.opacity=0
     document.getElementById('pop').style.display="flex"
@@ -28,6 +29,7 @@ function win() {
             clearInterval(interval_)
         }
     },10)
+    }, 300);
 }
 function hidepop() {
     document.getElementById('pop').style.display='none'
