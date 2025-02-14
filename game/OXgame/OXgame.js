@@ -1,13 +1,14 @@
 let turn
-let date
+let data
 let game
 reset()
 function reset(){
     for (i=1;i<=9;i++){
-        document.getElementById(i).style.color="#f8f7f2"
-        document.getElementById(i).textContent="・"
+        let target=document.getElementById(i)
+        target.textContent="・"
+        target.classList.remove('button-display')
     }
-    date=["","","","","","","","",""]
+    data=["","","","","","","","",""]
     turn="〇"
     game=0
 }
@@ -18,18 +19,8 @@ function draw(){
 function win() {
     game=1
     document.getElementById('winner').textContent=turn
-    document.getElementById('pop').style.opacity=0
-    setTimeout(function() {
     document.getElementById('pop').style.display="flex"
-    let a=0
-    const interval_ = setInterval(function() {
-        a+=0.02
-        document.getElementById('pop').style.opacity=a
-        if (a>=1) {
-            clearInterval(interval_)
-        }
-    },10)
-    }, 300);
+    document.getElementById('pop').classList.add('pop-display')
 }
 function hidepop() {
     document.getElementById('pop').style.display='none'
@@ -39,24 +30,17 @@ function hidepop() {
 function push(num){
     if (document.getElementById(num).textContent=="・" & game==0) {
         document.getElementById(num).textContent=turn
-        let a=0
-        const interval = setInterval(function() {
-            document.getElementById(num).style.color="rgba(0,0,0,"+a+")"
-            a+=0.1
-            if (a>=1) {
-                clearInterval(interval)
-            }
-        },20)
-        date.splice(num-1,1,turn)
-        if (date[0]==date[1] & date[1]==date[2] & date[2]!=""){win();exit()}
-        if (date[3]==date[4] & date[4]==date[5] & date[5]!=""){win();exit()}
-        if (date[6]==date[7] & date[7]==date[8] & date[8]!=""){win();exit()}
-        if (date[0]==date[3] & date[3]==date[6] & date[6]!=""){win();exit()}
-        if (date[1]==date[4] & date[4]==date[7] & date[7]!=""){win();exit()}
-        if (date[2]==date[5] & date[5]==date[8] & date[8]!=""){win();exit()}
-        if (date[0]==date[4] & date[4]==date[8] & date[8]!=""){win();exit()}
-        if (date[2]==date[4] & date[4]==date[6] & date[6]!=""){win();exit()}
-        if (! date.includes("")){win();draw()}
+        document.getElementById(num).classList.add('button-display')
+        data.splice(num-1,1,turn)
+        if (! data.includes("")){win();draw()}
+        if (data[0]==data[1] & data[1]==data[2] & data[2]!=""){win()}
+        else if (data[3]==data[4] & data[4]==data[5] & data[5]!=""){win()}
+        else if (data[6]==data[7] & data[7]==data[8] & data[8]!=""){win()}
+        else if (data[0]==data[3] & data[3]==data[6] & data[6]!=""){win()}
+        else if (data[1]==data[4] & data[4]==data[7] & data[7]!=""){win()}
+        else if (data[2]==data[5] & data[5]==data[8] & data[8]!=""){win()}
+        else if (data[0]==data[4] & data[4]==data[8] & data[8]!=""){win()}
+        else if (data[2]==data[4] & data[4]==data[6] & data[6]!=""){win()}
         if (turn=="〇"){turn="×"} else {turn="〇"}
     }
 }
