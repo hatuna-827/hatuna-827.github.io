@@ -17,9 +17,9 @@ function draw(){
 }
 function win() {
     game=1
-    setTimeout(function() {
     document.getElementById('winner').textContent=turn
     document.getElementById('pop').style.opacity=0
+    setTimeout(function() {
     document.getElementById('pop').style.display="flex"
     let a=0
     const interval_ = setInterval(function() {
