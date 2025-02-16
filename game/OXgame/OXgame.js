@@ -32,7 +32,6 @@ function push(num){
         document.getElementById(num).textContent=turn
         document.getElementById(num).classList.add('button-display')
         data.splice(num-1,1,turn)
-        if (! data.includes("")){win();draw()}
         if (data[0]==data[1] & data[1]==data[2] & data[2]!=""){win()}
         else if (data[3]==data[4] & data[4]==data[5] & data[5]!=""){win()}
         else if (data[6]==data[7] & data[7]==data[8] & data[8]!=""){win()}
@@ -41,6 +40,7 @@ function push(num){
         else if (data[2]==data[5] & data[5]==data[8] & data[8]!=""){win()}
         else if (data[0]==data[4] & data[4]==data[8] & data[8]!=""){win()}
         else if (data[2]==data[4] & data[4]==data[6] & data[6]!=""){win()}
+        else if (! data.includes("")){win();draw()}
         if (turn=="〇"){turn="×"} else {turn="〇"}
     }
 }
