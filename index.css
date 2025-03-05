@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+body {
+    margin: 0px;
+    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    font-size: 0px;
+    background-color: #f8f7f2;
+    user-select: none;
+}
+#fadein {
+    position: absolute;
+    top: -100vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: #709170;
+    animation: fadein 1s 1.5s forwards;
+}
+#load {
+    opacity: 0;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: calc(50vh - 60px);
+    left: calc(50vw - 60px);
+    border-top: 10px solid #f8f7f2;
+    border-right: 10px solid #709170;
+    border-radius: 100px;
+    animation: op 1s 3s forwards, load 1s 3s infinite;
+}
+#main {
+    margin: 80px 100px;
+    text-align: center;
+    border: 5px dashed #709170;
+    border-radius: 10vh;
+    animation: blur 1s;
+}
+img {
+    height: 160px;
+    image-rendering: pixelated;
+    border: 1px solid #000;
+    border-radius: 80px;
+    position: absolute;
+    display: none;
+}
+h1 {
+    color: #709170;
+    text-shadow: 5px 5px #89b76c;
+    font-size: 100px;
+    line-height: 0;
+    margin: calc(50vh - 85px) 0px;
+}
+@keyframes blur {
+    from{filter:blur(100px);}
+    to{filter:blur(0px);}
+}
+@keyframes fadein {
+    from{top: -100vh;}
+    to{top: 0;}
+}
+@keyframes op {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+@keyframes load {
+    0%{transform: rotate(45deg);}
+    100%{transform: rotate(405deg);}
+}
