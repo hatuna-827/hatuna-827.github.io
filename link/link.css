@@ -1,29 +1,81 @@
+@media screen and (min-width:650px) {
+#main {
+    margin: 50px;
+    text-align: center;
+}
 h1 {
     margin: 30px 0px;
     line-height: 50px;
     color: #000000;
     font-size: 45px;
-    text-align: left;
 }
 a {
-    color: #000000;
-    text-decoration: none;
+    margin: 0px;
+    div {
+        box-sizing: border-box;
+        margin: 20px;
+        padding: 70px 0px;
+        background-color: #ccc;
+        height: 200px;
+        width: 330px;
+        display: inline-block;
+        border-radius: 30px;
+        p {
+            color: #000000;
+            text-decoration: none;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 60px;
+            font-size: 30px;
+            margin: 0px;
+        }
+        span {
+            display: block;
+            font-size: 20px;
+            line-height: 0px;
+        }
+    }
 }
-a:hover,a:active {
-    color: #709170;
-    text-decoration: underline;
+#topic{a{div{
+    width: calc((100vw - 220px) / 3);
+    max-width: 330px;
+    padding: 75px 0px;
+    p{
+        line-height: 50px;
+        font-size: 40px;
+    }
+}}}
+@media screen and (max-width:840px) {
+    #main {
+        text-align: left;
+    }
+    a {
+        div {
+            margin: 10px;
+            padding: 25px;
+            height: 50px;
+            width: 100%;
+            min-width: 480px;
+            p {
+                line-height: 0px;
+            }
+            span {
+                display: inline-block;
+            }
+        }
+    }
+    #topic{a{div{
+        width: 100%;
+        max-width: none;
+        padding: 25px;
+        p{
+            line-height: 0px;
+            font-size: 30px;
+        }
+    }}}
 }
-ul {
-    margin: 10px 30px;
-    line-height: 40px;
-    color: #000000;
-    font-size: 25px;
-    text-align: left;
 }
-#main {
-    margin: 50px;
-}
-@media screen and (max-width:480px) {
+@media screen and (max-width:650px) {
     #main {
         margin: 20px;
     }
@@ -32,10 +84,23 @@ ul {
         line-height: 40px;
         margin: 20px 0px;
     }
-    ul {
-        margin: 10px 20px;
-        padding: 0px 20px;
-        font-size: 20px;
-        line-height: 25px;
+    a {
+        text-decoration: none;
+        div {
+            p {
+            margin: 10px 30px;
+            font-size: 20px;
+            line-height: 25px;
+            color: #000;
+            }
+            span {
+                padding: 0px 30px;
+                display: block;
+                font-size: 15px;
+            }
+            p::before {
+                content: "・";
+            }
+        }
     }
 }
