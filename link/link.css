@@ -12,6 +12,7 @@ h1 {
 a {
     margin: 0px;
     div {
+        transition: all 0.2s;
         box-sizing: border-box;
         margin: 20px;
         padding: 70px 0px;
@@ -36,8 +37,13 @@ a {
         }
     }
 }
+a:hover{div{
+    background-color: #cdc;
+    box-shadow: 5px 5px 5px #aaa;
+    transition: all 0.2s;
+}}
 #topic{a{div{
-    width: calc((100vw - 220px) / 3);
+    width: calc((100% - 220px) / 3);
     max-width: 330px;
     padding: 75px 0px;
     p{
