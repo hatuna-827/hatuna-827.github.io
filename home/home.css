@@ -4,12 +4,6 @@ h1 {
     color: #000000;
     font-size: 50px;
 }
-p {
-    margin: 0px 40px;
-    line-height: 50px;
-    color: #000000;
-    font-size: 25px;
-}
 hr {
     margin: 20px 0px;
 }
@@ -22,6 +16,15 @@ a {
 }
 a:hover {
     text-decoration: underline;
+}
+p {
+    margin: 0px 40px;
+    line-height: 50px;
+    color: #000000;
+    font-size: 25px;
+    a {
+        margin: 0px;
+    }
 }
 #main {
     margin: 50px;
