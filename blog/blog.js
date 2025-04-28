@@ -15,6 +15,10 @@ var img=document.getElementsByTagName('img')
 for(let i=0;i<img.length;i++){
     img[i].setAttribute('alt','画像の読み込みに失敗しました。')
 }
+var link=document.getElementsByTagName('a')
+for(let i=0;i<link.length;i++){
+    link[i].setAttribute('target','_blank')
+}
 })
 function copy(target_id){
     var target=document.getElementById('code'+target_id)
