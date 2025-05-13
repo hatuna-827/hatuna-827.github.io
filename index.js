@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
-        window.location="https://hatuna-827.github.io/link"
+        window.location="/link"
     }, 5000);
 })
