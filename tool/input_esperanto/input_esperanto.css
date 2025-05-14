@@ -6,16 +6,16 @@
     height: calc(100vh - min(90px, 15vw) - 102px);
     padding: 0px;
     margin: 0px;
-    border: 1px solid #000;
+    border: 1px solid var(--black-color);
     border-radius: 0px;
     resize: none;
-    background-color: #fdfcf8;
+    background-color: var(--white-color);
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
 }
 #in::selection {
-    background-color: #afd8af;
-    color: #000;
+    background-color: var(--light-green-color);
+    color: var(--black-color);
 }
 :focus {
     outline: none;

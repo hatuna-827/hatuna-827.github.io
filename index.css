@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 body {
     margin: 0px;
     font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
     font-size: 0px;
-    background-color: #f8f7f2;
+    background-color: var(--main-bg-color);
     user-select: none;
 }
 #fadein {
@@ -11,7 +10,7 @@ body {
     top: -100vh;
     height: 100vh;
     width: 100vw;
-    background-color: #709170;
+    background-color: var(--main-color);
     animation: fadein 1s 1.5s forwards;
 }
 #load {
@@ -21,29 +20,29 @@ body {
     width: 100px;
     top: calc(50vh - 60px);
     left: calc(50vw - 60px);
-    border-top: 10px solid #f8f7f2;
-    border-right: 10px solid #709170;
+    border-top: 10px solid var(--main-bg-color);
+    border-right: 10px solid var(--main-color);
     border-radius: 100px;
     animation: op 1s 3s forwards, load 1s 3s infinite;
 }
 #main {
     margin: 80px 100px;
     text-align: center;
-    border: 5px dashed #709170;
+    border: 5px dashed var(--main-color);
     border-radius: 10vh;
     animation: blur 1s;
 }
 img {
     height: 160px;
     image-rendering: pixelated;
-    border: 1px solid #000;
+    border: 1px solid var(--black-color);
     border-radius: 80px;
     position: absolute;
     display: none;
 }
 h1 {
-    color: #709170;
-    text-shadow: 5px 5px #89b76c;
+    color: var(--main-color);
+    text-shadow: 5px 5px var(--leaf-green-color);
     font-size: 100px;
     line-height: 0;
     margin: calc(50vh - 85px) 0px;

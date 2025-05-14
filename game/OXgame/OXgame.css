@@ -1,6 +1,6 @@
 @keyframes button-on {
-    0% {color: #f8f7f2;}
-    100% {color: #000;}
+    0% {color: var(--main-bg-color);}
+    100% {color: var(--black-color);}
 }
 @keyframes pop-on {
     0% {opacity: 0;}
@@ -17,11 +17,11 @@ button {
     margin: 0px;
     padding: 0px;
     line-height: 0px;
-    color: #f8f7f2;
+    color: var(--main-bg-color);
     font-size: 80px;
     text-align: center;
-    border: 1px solid black;
-    background-color: #f8f7f2;
+    border: 1px solid var(--black-color);
+    background-color: var(--main-bg-color);
     user-select: none;
 }
 .button-display {
@@ -32,10 +32,10 @@ button {
     margin-top: 40px;
     width: 200px;
     height: auto;
-    color: #000;
+    color: var(--black-color);
     font-size: 30px;
     line-height: 20px;
-    background-color: #B2E9B2;
+    background-color: var(--main-light-color);
     border: 0px;
     border-radius: 10px;
     padding: 25px 0px;
@@ -57,14 +57,14 @@ button {
 #poptext {
     width: 400px;
     height: 400px;
-    background-color: #ffffff;
+    background-color: var(--white-color);
     margin: 0px;
     text-align: center;
     border-radius: 30px;
 }
 p {
     font-size: 50px;
-    color: #007e00;
+    color: var(--main-dark-color);
     margin: 20px 0px 0px 0px;
     line-height: 50px;
 }

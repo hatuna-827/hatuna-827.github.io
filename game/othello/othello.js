@@ -78,10 +78,10 @@ function out(){
     for (y=0;y<8;y++){
         for (x=0;x<8;x++){
             if (data[y][x]==-1){
-                document.getElementById(y*8+x).style.color="#fff"
+                document.getElementById(y*8+x).style.color="var(--white-color)"
             }
             if (data[y][x]==1){
-                document.getElementById(y*8+x).style.color="#000"
+                document.getElementById(y*8+x).style.color="var(--black-color)"
             }
         }
     }
@@ -101,13 +101,13 @@ function out(){
         }
     }
     if (siro==0 || kuro==0){
-        if (siro==0){popmain.style.color="#000"}
-        if (kuro==0){popmain.style.color="#fff"}
+        if (siro==0){popmain.style.color="var(--black-color)"}
+        if (kuro==0){popmain.style.color="var(--white-color)"}
         pop.style.display="flex"
     }
     if (siro+kuro==64){
-        popmain.style.color="#000"
-        if (kuro<siro){popmain.style.color="#fff"}
+        popmain.style.color="var(--black-color)"
+        if (kuro<siro){popmain.style.color="var(--white-color)"}
         if (kuro==siro){
             popmain.textContent="-"
             mini.textContent="draw!"

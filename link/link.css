@@ -6,7 +6,7 @@
 h1 {
     margin: 30px 0px;
     line-height: 50px;
-    color: #000000;
+    color: var(--black-color);
     font-size: 45px;
 }
 a {
@@ -16,13 +16,13 @@ a {
         box-sizing: border-box;
         margin: 20px;
         padding: 70px 0px;
-        background-color: #ccc;
+        background-color: var(--grey-c-color);
         height: 200px;
         width: 330px;
         display: inline-block;
         border-radius: 30px;
         p {
-            color: #000000;
+            color: var(--black-color);
             text-decoration: none;
             display: inline-block;
             vertical-align: middle;
@@ -38,8 +38,8 @@ a {
     }
 }
 a:hover{div{
-    background-color: #cdc;
-    box-shadow: 5px 5px 5px #aaa;
+    background-color: var(--grey-green-color);
+    box-shadow: 5px 5px 5px var(--grey-a-color);
     transition: all 0.2s;
 }}
 #topic{a{div{
@@ -97,7 +97,7 @@ a:hover{div{
             margin: 10px 30px;
             font-size: 20px;
             line-height: 25px;
-            color: #000;
+            color: var(--black-color);
             }
             span {
                 padding: 0px 30px;

@@ -1,15 +1,40 @@
+:root {
+    /* main */
+    /* grey */
+    /* green */
+    /* any color */
+    --main-color: #709170;
+    --main-light-color: #B2E9B2;
+    --main-dark-color: #007e00;
+    --main-bg-color: #f8f7f2;
+    --grey-e5-color: #E5E5E5;
+    --grey-d-color: #ddd;
+    --grey-c-color: #ccc;
+    --grey-a-color: #aaa;
+    --grey-green-color: #cdc;
+    --light-green-color: #afd8af;
+    --leaf-green-color: #89b76c;
+    --dark-green-color: #3f4e3f;
+    --black-color: #000000;
+    --white-color: #ffffff;
+    --red-color: #ff0000;
+    --pink-color: #ff86c2;
+    /* fonts */
+    --main-font: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    --code-font: monospace;
+}
 ::selection {
-    background-color: #007e00;
-    color: #fff;
+    background-color: var(--main-dark-color);
+    color: var(--white-color);
 }
 body {
     margin: 0px;
-    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    font-family: var(--main-font);
     font-size: 0px;
-    background-color: #f8f7f2;
+    background-color: var(--main-bg-color);
 }
 #homebar {
-    background-color: #B2E9B2;
+    background-color: var(--main-light-color);
     width: 100%;
     height: min(90px,15vw);
     text-align: center;
@@ -17,8 +42,11 @@ body {
     a {
         margin: 0px;
         font-size: min(50px,10vw);
-        color: #000000;
+        color: var(--black-color);
         text-decoration: none;
         line-height: min(90px,15vw);
     }
+}
+button,input,textarea {
+    font-family: inherit;
 }

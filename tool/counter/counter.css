@@ -1,9 +1,9 @@
 h1 {
     margin: 100px 0px 0px 0px;
     line-height: min(120px,20vw);
-    color: #fff;
+    color: var(--white-color);
     font-size: min(100px,20vw);
-    background-color: #488e48;
+    background-color: var(--leaf-green-color);
 }
 .button {
     margin: 30px 12vw 30px 12vw;
@@ -12,19 +12,19 @@ h1 {
     text-align: center;
     width: 12vw;
     height: 12vw;
-    background: #f8f7f2;
-    border: 2px solid #000;
+    background: var(--main-bg-color);
+    border: 2px solid var(--black-color);
     border-radius:6vw;
 }
 .setbutton {
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
-    color: #709170;
+    color: var(--main-color);
     font-size: 30px;
     margin: 0px;
-    border: 1px #709170 solid;
+    border: 1px var(--main-color) solid;
     width: auto;
     height: 50px;
-    background: #f8f7f2;
+    background: var(--main-bg-color);
     line-height: 50px;
 }
 #main {
@@ -41,18 +41,18 @@ h1 {
 }
 #inputnum {
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
-    color: #709170;
+    color: var(--main-color);
     font-size: 30px;
     margin: 0px 10px;
-    border: 1px #709170 solid;
+    border: 1px var(--main-color) solid;
     width: 120px;
     height: 50px;
-    background: #f8f7f2;
+    background: var(--main-bg-color);
     outline: none;
     text-align: center;
 }
 ::placeholder {
-    color: #709170;
+    color: var(--main-color);
 }
 @media screen and (max-width:480px) {
     .button {

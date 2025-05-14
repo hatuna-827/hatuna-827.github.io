@@ -15,9 +15,9 @@ function out(){
     for (let x=0;x<3;x++) {
         for (let y=0;y<3;y++) {
             if (date[x][y]==0){
-                document.getElementById(x*3+y).style.backgroundColor="#f8f7f2"
+                document.getElementById(x*3+y).style.backgroundColor="var(--main-bg-color)"
             } else {
-                document.getElementById(x*3+y).style.backgroundColor="#B2E9B2"
+                document.getElementById(x*3+y).style.backgroundColor="var(--main-light-color)"
             }
         }
     }

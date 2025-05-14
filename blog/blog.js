@@ -16,7 +16,7 @@ for(let i=0;i<img.length;i++){
     img[i].setAttribute('alt','画像の読み込みに失敗しました。')
 }
 var link=document.getElementsByTagName('a')
-for(let i=0;i<link.length;i++){
+for(let i=1;i<link.length;i++){
     link[i].setAttribute('target','_blank')
 }
 })
