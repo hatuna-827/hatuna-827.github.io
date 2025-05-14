@@ -1,20 +1,20 @@
 :root {
     /* main */
-    /* grey */
-    /* green */
-    /* any color */
     --main-color: #709170;
     --main-light-color: #B2E9B2;
     --main-dark-color: #007e00;
     --main-bg-color: #f8f7f2;
+    /* grey */
     --grey-e5-color: #E5E5E5;
     --grey-d-color: #ddd;
     --grey-c-color: #ccc;
     --grey-a-color: #aaa;
+    /* green */
     --grey-green-color: #cdc;
     --light-green-color: #afd8af;
     --leaf-green-color: #89b76c;
     --dark-green-color: #3f4e3f;
+    /* any color */
     --black-color: #000000;
     --white-color: #ffffff;
     --red-color: #ff0000;
