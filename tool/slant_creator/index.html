@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+        <link rel="stylesheet" href="slant_creator.css">
+        <link rel="stylesheet" href="/hatuna-827.css">
+		<title>ごきげんななめ作問ツール | hatuna-827</title>
+	</head>
+	<body>
+        <div id="homebar"></div>
+        <div id="main">
+        <div id="menu_space">
+        <button id="add_button" class="menu_button"><img class="setting_image" src="add.png"></button>
+        <!-- <button id="setting_button" class="menu_button"><img class="setting_image" src="setting.png"></button>
+        <button id="list_button" class="menu_button"><img class="setting_image" src="list.png"></button> -->
+        <div id="add" class="menu">
+            正方形:<input id="square" type="checkbox" checked="checked"><br>
+            サイズ:<input id="height" type="number" placeholder="縦" value="10" min="1" step="1">✕<input id="width" type="number" placeholder="横" value="10" min="1" step="1" disabled>
+            <button id="create_new">新規作成</button>
+        </div>
+        <!-- <div id="settings" class="menu">
+            自動保存:<input id="auto_save" type="checkbox" checked="checked"><br>
+            ルール違反を警告:<input id="rule" type="checkbox" checked="checked">
+        </div>
+        <div id="list" class="menu">
+            <div id="list_null">保存されているデータはありません</div>
+        </div> -->
+        </div>
+        <div id="work_space">
+        <div id="work_buttons">
+            <button id="popup_button" class="work_button"><img id="popup_arrow1" src="arrow.png"><img id="popup_arrow2" src="arrow.png"></button>
+            <button id="save_button" class="work_button"><img class="setting_image" src="save.png"></button>
+            <button id="close_button" class="work_button"><img id="close_button_image" class="setting_image" src="add.png"></button>
+        </div>
+        <div id="create_space">
+            <div id="big_box"></div>
+            <div id="big_maru"></div>
+        </div>
+        </div>
+        <script src="slant_creator.js"></script>
+        <script src="/hatuna-827.js"></script>
+    </body>
+</html>
