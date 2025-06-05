@@ -49,11 +49,16 @@ height.addEventListener('input', function () {
     }
 })
 create_new.addEventListener('click', function () {
+    if (!(height.value % 1 == 0 && height.value != 0 && width.value % 1 == 0 && width.value != 0)) {
+        console.log("入力に誤りがあります。")
+        return
+    }
     create_now_data()
     hidemenu()
     clear_create_space()
     create_box()
     create_maru()
+    if (rule.checked) { rule_true() }
     work_space.style.display = "block"
     create_space.scrollLeft = big_maru.offsetWidth / 2 - create_space.offsetWidth / 2 + 1000
     create_space.scrollTop = big_maru.offsetHeight / 2 - create_space.offsetHeight / 2 + 1000
@@ -69,11 +74,7 @@ create_new.addEventListener('click', function () {
 // })
 rule.addEventListener('click', function () {
     if (rule.checked) {
-        for (let x = 0; x < (now_data[0][0]); x++) {
-            for (let y = 0; y < (now_data[0][1]); y++) {
-                check_maru(x, y)
-            }
-        }
+        rule_true()
     } else {
         for (let x = 0; x < (now_data[0][0]); x++) {
             for (let y = 0; y < (now_data[0][1]); y++) {
@@ -133,15 +134,15 @@ function f_popup() {
 // create_new
 function create_now_data() {
     now_data = [[width.value * 1, height.value * 1], [], []]
-    for (let x = 0; x < (width.value); x++) {
+    for (let x = 0; x < (now_data[0][0]); x++) {
         now_data[1].push([])
-        for (let y = 0; y < (height.value); y++) {
+        for (let y = 0; y < (now_data[0][1]); y++) {
             now_data[1][x].push(0)
         }
     }
-    for (let x = 0; x < (width.value * 1 + 1); x++) {
+    for (let x = 0; x < (now_data[0][0] + 1); x++) {
         now_data[2].push([])
-        for (let y = 0; y < (height.value * 1 + 1); y++) {
+        for (let y = 0; y < (now_data[0][1] + 1); y++) {
             now_data[2][x].push("")
         }
     }
@@ -151,9 +152,16 @@ function clear_create_space() {
     big_maru.innerHTML = ""
 }
 function create_box() {
-    for (let y = 0; y < height.value; y++) {
-        for (let x = 0; x < width.value; x++) {
-            big_box.insertAdjacentHTML('beforeend', '<div class="box" id="box_' + x + ',' + y + '" onclick="push_box(' + x + ',' + y + ')"></div>')
+    for (let y = 0; y < now_data[0][1]; y++) {
+        for (let x = 0; x < now_data[0][0]; x++) {
+            let new_box = document.createElement("div")
+            new_box.classList.add("box")
+            new_box.id = 'box_' + x + ',' + y
+            new_box.setAttribute('onclick', 'push_box(' + x + ',' + y + ')')
+            if (now_data[1][x][y] == 1) { new_box.classList.add("f") }
+            if (now_data[1][x][y] == -1) { new_box.classList.add("b") }
+            big_box.insertAdjacentElement('beforeend', new_box)
+            // big_box.insertAdjacentHTML('beforeend', '<div class="box" id="box_' + x + ',' + y + '" onclick="push_box(' + x + ',' + y + ')"></div>')
         }
         big_box.insertAdjacentHTML('beforeend', '<br>')
     }
@@ -163,7 +171,16 @@ function create_box() {
 function create_maru() {
     for (let y = 0; y <= height.value; y++) {
         for (let x = 0; x <= width.value; x++) {
-            big_maru.insertAdjacentHTML('beforeend', '<div class="maru" id="maru_' + x + ',' + y + '" onclick="push_maru(' + x + ',' + y + ')"></div>')
+            let new_maru = document.createElement("div")
+            new_maru.classList.add("maru")
+            new_maru.id = 'maru_' + x + ',' + y
+            new_maru.setAttribute('onclick', 'push_maru(' + x + ',' + y + ')')
+            new_maru.textContent = now_data[2][x][y]
+            if (new_maru.textContent != "") {
+                new_maru.classList.add("disp")
+            }
+            big_maru.insertAdjacentElement('beforeend', new_maru)
+            // big_maru.insertAdjacentHTML('beforeend', '<div class="maru" id="maru_' + x + ',' + y + '" onclick="push_maru(' + x + ',' + y + ')"></div>')
         }
         big_maru.insertAdjacentHTML('beforeend', '<br>')
     }
@@ -217,6 +234,13 @@ function push_maru(x, y) {
     now_data[2][x][y] = next_num
     if (rule.checked) { check_maru(x, y) }
 }
+function rule_true() {
+    for (let x = 0; x <= (now_data[0][0]); x++) {
+        for (let y = 0; y <= (now_data[0][1]); y++) {
+            check_maru(x, y)
+        }
+    }
+}
 function check_maru(x, y) {
     let link_box = [0, 0]
     let link_wall = [true, true, true, true]
@@ -243,15 +267,18 @@ function check_maru(x, y) {
     }
     targetmaru.classList.remove("red")
     if (now_data[2][x][y] < link_box[0]) { targetmaru.classList.add("red") }
-    if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
-    if (!link_wall[0] || !link_wall[1] || !link_wall[2] || !link_wall[3]) {
+    if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
+        if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
+    } else {
         if (link_wall[0] && link_wall[1] && link_wall[2] || link_wall[0] && link_wall[1] && link_wall[3] || link_wall[0] && link_wall[2] && link_wall[3] || link_wall[1] && link_wall[2] && link_wall[3]) {
+            if (now_data[2][x][y] > 2 - link_box[1]) { targetmaru.classList.add("red") }
             if (now_data[2][x][y] > 2) { targetmaru.classList.add("red") }
         } else {
+            if (now_data[2][x][y] > 1 - link_box[1]) { targetmaru.classList.add("red") }
             if (now_data[2][x][y] > 1) { targetmaru.classList.add("red") }
         }
     }
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
-add_button.click()
-create_new.click()
+// add_button.click()
+// create_new.click()
