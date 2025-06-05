@@ -152,27 +152,28 @@ button, input {
         display: inline-block;
         position: relative;
     }
-    .box.b::before {
+    .box.b::before,.box.f::before {
         position: absolute;
         top: 0;
-        left: 0;
         transform-origin: top left;
-        transform: rotate(-45deg) translateX(-.5px);
         width: 1px;
         height: 43px;
         background-color: var(--black-color);
         content: '';
     }
+    .box.b::before {
+        left: 0;
+        transform: rotate(-45deg) translateX(-.5px);
+    }
     .box.f::before {
-        position: absolute;
-        top: 0;
         right: 0;
-        transform-origin: top left;
         transform: rotate(45deg) translateY(-1px) translateX(.5px);
-        width: 1px;
-        height: 43px;
-        background-color: var(--black-color);
-        content: '';
+    }
+    .box.green::before {
+        background-color: var(--main-dark-color);
+    }
+    .box.red::before {
+        background-color: var(--red-color);
     }
     #big_maru {
         position: static;
