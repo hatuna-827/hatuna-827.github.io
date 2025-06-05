@@ -200,4 +200,7 @@ button, input {
     .maru.disp {
         opacity: 0.9999999;
     }
+    .maru.red {
+        color: var(--red-color);
+    }
 }

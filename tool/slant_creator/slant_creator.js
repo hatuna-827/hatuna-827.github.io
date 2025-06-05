@@ -17,6 +17,7 @@ let height = document.getElementById("height")
 let width = document.getElementById("width")
 let create_new = document.getElementById("create_new")
 let auto_save = document.getElementById("auto_save")
+let auto_fill = document.getElementById("auto_fill")
 let rule = document.getElementById("rule")
 let list_null = document.getElementById("list_null")
 let work_space = document.getElementById("work_space")
@@ -31,7 +32,7 @@ let big_maru = document.getElementById("big_maru")
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
 // menu
 add_button.addEventListener('click', { menu_id: add, handleEvent: displaymenu })
-// setting_button.addEventListener('click', { menu_id: settings, handleEvent: displaymenu })
+setting_button.addEventListener('click', { menu_id: settings, handleEvent: displaymenu })
 // list_button.addEventListener('click', { menu_id: list, handleEvent: displaymenu })
 // add
 square.addEventListener('click', function () {
@@ -59,11 +60,26 @@ create_new.addEventListener('click', function () {
     f_popup()
 })
 // settings
-auto_save.addEventListener('click', function () {
-    if (auto_save.checked) {
-        save_button.style.display = "none"
+// auto_save.addEventListener('click', function () {
+//     if (auto_save.checked) {
+//         save_button.style.display = "none"
+//     } else {
+//         save_button.style.display = "block"
+//     }
+// })
+rule.addEventListener('click', function () {
+    if (rule.checked) {
+        for (let x = 0; x < (now_data[0][0]); x++) {
+            for (let y = 0; y < (now_data[0][1]); y++) {
+                check_maru(x, y)
+            }
+        }
     } else {
-        save_button.style.display = "block"
+        for (let x = 0; x < (now_data[0][0]); x++) {
+            for (let y = 0; y < (now_data[0][1]); y++) {
+                document.getElementById('maru_' + x + ',' + y).classList.remove("red")
+            }
+        }
     }
 })
 // list
@@ -175,7 +191,12 @@ function push_box(x, y) {
     if (if_shift) {
         c_list.add("green")
     }
-    check_box(x, y)
+    if (rule.checked) {
+        check_maru(x, y)
+        check_maru(x + 1, y)
+        check_maru(x, y + 1)
+        check_maru(x + 1, y + 1)
+    }
 }
 function push_maru(x, y) {
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
@@ -194,13 +215,7 @@ function push_maru(x, y) {
     }
     targetmaru.innerText = next_num
     now_data[2][x][y] = next_num
-    check_maru(x, y)
-}
-function check_box(x, y) {
-    check_maru(x, y)
-    check_maru(x + 1, y)
-    check_maru(x, y + 1)
-    check_maru(x + 1, y + 1)
+    if (rule.checked) { check_maru(x, y) }
 }
 function check_maru(x, y) {
     let link_box = [0, 0]
@@ -226,17 +241,17 @@ function check_maru(x, y) {
         if (now_data[1][x - 1][y - 1] == -1) { link_box[0]++ }
         if (now_data[1][x - 1][y - 1] == 1) { link_box[1]++ }
     }
-    targetmaru.style.color = "var(--black-color)"
-    if (now_data[2][x][y] < link_box[0]) { targetmaru.style.color = "var(--red-color)" }
-    if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.style.color = "var(--red-color)" }
+    targetmaru.classList.remove("red")
+    if (now_data[2][x][y] < link_box[0]) { targetmaru.classList.add("red") }
+    if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
     if (!link_wall[0] || !link_wall[1] || !link_wall[2] || !link_wall[3]) {
         if (link_wall[0] && link_wall[1] && link_wall[2] || link_wall[0] && link_wall[1] && link_wall[3] || link_wall[0] && link_wall[2] && link_wall[3] || link_wall[1] && link_wall[2] && link_wall[3]) {
-            if (now_data[2][x][y] > 2) { targetmaru.style.color = "var(--red-color)" }
+            if (now_data[2][x][y] > 2) { targetmaru.classList.add("red") }
         } else {
-            if (now_data[2][x][y] > 1) { targetmaru.style.color = "var(--red-color)" }
+            if (now_data[2][x][y] > 1) { targetmaru.classList.add("red") }
         }
     }
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
-// add_button.click()
-// create_new.click()
+add_button.click()
+create_new.click()
