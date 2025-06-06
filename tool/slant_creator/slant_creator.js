@@ -326,7 +326,7 @@ function check_box(x, y) {
             let n_x = P[0] + 1
             let n_y = P[1] + 1
             if (now_data[1][P[0]][P[1]] == -1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root)
+                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
             }
         }
         if (link_wall[0] && link_wall[1]) {
@@ -334,7 +334,7 @@ function check_box(x, y) {
             let n_x = P[0] + 1
             let n_y = P[1] - 1
             if (now_data[1][P[0]][P[1] - 1] == 1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root)
+                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
             }
         }
         if (link_wall[2] && link_wall[3]) {
@@ -342,7 +342,7 @@ function check_box(x, y) {
             let n_x = P[0] - 1
             let n_y = P[1] + 1
             if (now_data[1][P[0] - 1][P[1]] == 1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root)
+                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
             }
         }
         if (link_wall[0] && link_wall[3]) {
@@ -350,7 +350,7 @@ function check_box(x, y) {
             let n_x = P[0] - 1
             let n_y = P[1] - 1
             if (now_data[1][P[0] - 1][P[1] - 1] == -1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root)
+                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
             }
         }
         queue.shift()
@@ -360,7 +360,7 @@ function check_box(x, y) {
 function check_link_wall(x, y) {
     return [y != 0, x != now_data[0][0], y != now_data[0][1], x != 0]
 }
-function loop_check(n_x, n_y, loop_goal, P, queue, root) {
+function loop_check(n_x, n_y, loop_goal, P, queue, root, now_data) {
     root[n_x][n_y] = root[P[0]][P[1]] + 1
     if (n_x == loop_goal[0] && n_y == loop_goal[1]) {
         console.log("ループ発見")
@@ -372,13 +372,13 @@ function loop_check(n_x, n_y, loop_goal, P, queue, root) {
             if (link_wall[1] && link_wall[2] && only) {
                 // 右下
                 let n_P = [l_P[0] + 1, n_y = l_P[1] + 1]
-                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
+                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1 && now_data[1][l_P[0]][l_P[1]] == -1) {
                     red_box(l_P[0], l_P[1])
                     only = false
                     l_P = n_P
                 }
             }
-            if (link_wall[0] && link_wall[1] && only) {
+            if (link_wall[0] && link_wall[1] && only && now_data[1][l_P[0]][l_P[1] - 1] == 1) {
                 // 右上
                 let n_P = [l_P[0] + 1, n_y = l_P[1] - 1]
                 if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
@@ -387,7 +387,7 @@ function loop_check(n_x, n_y, loop_goal, P, queue, root) {
                     l_P = n_P
                 }
             }
-            if (link_wall[2] && link_wall[3] && only) {
+            if (link_wall[2] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1]] == 1) {
                 // 左下
                 let n_P = [l_P[0] - 1, n_y = l_P[1] + 1]
                 if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
@@ -396,7 +396,7 @@ function loop_check(n_x, n_y, loop_goal, P, queue, root) {
                     l_P = n_P
                 }
             }
-            if (link_wall[0] && link_wall[3] && only) {
+            if (link_wall[0] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1] - 1] == -1) {
                 // 左上
                 let n_P = [l_P[0] - 1, n_y = l_P[1] - 1]
                 if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
@@ -416,5 +416,5 @@ function red_box(x, y) {
     document.getElementById('box_' + x + ',' + y).classList.add("red")
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
-// add_button.click()
-// create_new.click()
+add_button.click()
+create_new.click()
