@@ -202,5 +202,6 @@ button, input {
     }
     .maru.red {
         color: var(--red-color);
+        background-color: var(--pastel-pink-color);
     }
 }
