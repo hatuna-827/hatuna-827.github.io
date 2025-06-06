@@ -363,10 +363,10 @@ function check_link_wall(x, y) {
 function loop_check(n_x, n_y, loop_goal, P, queue, root, now_data) {
     root[n_x][n_y] = root[P[0]][P[1]] + 1
     if (n_x == loop_goal[0] && n_y == loop_goal[1]) {
-        console.log("ループ発見")
+        // console.log("ループ発見")
         let l_P = [n_x, n_y]
         while (root[l_P[0]][l_P[1]] != 1) {
-            console.log("色塗り中", l_P, root[l_P[0]][l_P[1]])
+            // console.log("色塗り中", l_P, root[l_P[0]][l_P[1]])
             let link_wall = check_link_wall(l_P[0], l_P[1])
             let only = true
             if (link_wall[1] && link_wall[2] && only) {
@@ -416,5 +416,5 @@ function red_box(x, y) {
     document.getElementById('box_' + x + ',' + y).classList.add("red")
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
-add_button.click()
-create_new.click()
+// add_button.click()
+// create_new.click()
