@@ -194,8 +194,13 @@ button, input {
         line-height: 20px;
         vertical-align: middle;
     }
-    .maru:hover {
-        opacity: .3;
+    #big_maru:not(.play_mode){
+        .maru:hover {
+            opacity: .3;
+        }
+        .maru.disp {
+            opacity: 0.9999999;
+        }
     }
     .maru.disp {
         opacity: 0.9999999;

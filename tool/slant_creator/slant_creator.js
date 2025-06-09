@@ -19,6 +19,7 @@ let create_new = document.getElementById("create_new")
 let auto_save = document.getElementById("auto_save")
 let auto_fill = document.getElementById("auto_fill")
 let rule = document.getElementById("rule")
+let play_mode = document.getElementById("play_mode")
 let list_null = document.getElementById("list_null")
 let work_space = document.getElementById("work_space")
 let popup_button = document.getElementById("popup_button")
@@ -90,6 +91,13 @@ rule.addEventListener('click', function () {
                 document.getElementById('box_' + x + ',' + y).classList.remove("red")
             }
         }
+    }
+})
+play_mode.addEventListener('click', function () {
+    if (play_mode.checked) {
+        big_maru.classList.add("play_mode")
+    } else {
+        big_maru.classList.remove("play_mode")
     }
 })
 // list
@@ -224,6 +232,7 @@ function push_box(x, y) {
     }
 }
 function push_maru(x, y) {
+    if (play_mode.checked) { return }
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.add("disp")
     let next_num
