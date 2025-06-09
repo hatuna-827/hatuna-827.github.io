@@ -274,6 +274,7 @@ function check_maru(x, y) {
     if (now_data[2][x][y] < link_box[0]) { targetmaru.classList.add("red") }
     if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
         if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
+        if (now_data[2][x][y] == 0) { targetmaru.classList.add("red") }
     } else {
         if (link_wall[0] && link_wall[1] && link_wall[2] || link_wall[0] && link_wall[1] && link_wall[3] || link_wall[0] && link_wall[2] && link_wall[3] || link_wall[1] && link_wall[2] && link_wall[3]) {
             if (now_data[2][x][y] > 2 - link_box[1]) { targetmaru.classList.add("red") }
