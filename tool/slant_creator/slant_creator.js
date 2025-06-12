@@ -50,7 +50,7 @@ height.addEventListener('input', function () {
     }
 })
 create_new.addEventListener('click', function () {
-    if (!(height.value % 1 == 0 && height.value != 0 && width.value % 1 == 0 && width.value != 0)) {
+    if (!(height.value % 1 == 0 && height.value > 0 && width.value % 1 == 0 && width.value > 0)) {
         console.log("入力に誤りがあります。")
         return
     }
