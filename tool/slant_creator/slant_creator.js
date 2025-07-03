@@ -2,6 +2,7 @@
 let settings_display = "none"
 let popup = false
 let now_data = []
+let loop_checked = []
 let if_shift = false
 // element
 let homebar = document.getElementById("homebar")
@@ -285,7 +286,10 @@ function check_maru(x, y) {
         if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
         if (now_data[2][x][y] == 0) { targetmaru.classList.add("red") }
     } else {
-        if (link_wall[0] && link_wall[1] && link_wall[2] || link_wall[0] && link_wall[1] && link_wall[3] || link_wall[0] && link_wall[2] && link_wall[3] || link_wall[1] && link_wall[2] && link_wall[3]) {
+        if (link_wall[0] && link_wall[1] && link_wall[2] ||
+            link_wall[0] && link_wall[1] && link_wall[3] ||
+            link_wall[0] && link_wall[2] && link_wall[3] ||
+            link_wall[1] && link_wall[2] && link_wall[3]) {
             if (now_data[2][x][y] > 2 - link_box[1]) { targetmaru.classList.add("red") }
             if (now_data[2][x][y] > 2) { targetmaru.classList.add("red") }
         } else {
@@ -295,6 +299,13 @@ function check_maru(x, y) {
     }
 }
 function all_check_box() {
+    loop_checked = []
+    for (let x = 0; x < (now_data[0][0]); x++) {
+        loop_checked.push([])
+        for (let y = 0; y < (now_data[0][1]); y++) {
+            loop_checked[x].push(0)
+        }
+    }
     for (let x = 0; x < (now_data[0][0]); x++) {
         for (let y = 0; y < (now_data[0][1]); y++) {
             document.getElementById('box_' + x + ',' + y).classList.remove("red")
@@ -302,7 +313,9 @@ function all_check_box() {
     }
     for (let x = 0; x < (now_data[0][0]); x++) {
         for (let y = 0; y < (now_data[0][1]); y++) {
-            check_box(x, y)
+            if (loop_checked[x][y] == 0) {
+                check_box(x, y)
+            }
         }
     }
 }
@@ -424,6 +437,7 @@ function loop_check(n_x, n_y, loop_goal, P, queue, root, now_data) {
 }
 function red_box(x, y) {
     document.getElementById('box_' + x + ',' + y).classList.add("red")
+    loop_checked[x][y]=1
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
 // add_button.click()
