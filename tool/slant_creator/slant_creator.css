@@ -205,6 +205,9 @@ button, input {
     .maru.disp {
         opacity: 0.9999999;
     }
+    .maru.gray {
+        background-color: var(--grey-c-color);
+    }
     .maru.red {
         color: var(--red-color);
         background-color: var(--pastel-pink-color);

@@ -19,6 +19,7 @@ let width = document.getElementById("width")
 let create_new = document.getElementById("create_new")
 let auto_save = document.getElementById("auto_save")
 let auto_fill = document.getElementById("auto_fill")
+let gray_out = document.getElementById("gray_out")
 let rule = document.getElementById("rule")
 let play_mode = document.getElementById("play_mode")
 let list_null = document.getElementById("list_null")
@@ -60,10 +61,6 @@ create_new.addEventListener('click', function () {
     clear_create_space()
     create_box()
     create_maru()
-    if (rule.checked) {
-        all_check_maru()
-        all_check_box()
-    }
     work_space.style.display = "block"
     create_space.scrollLeft = big_maru.offsetWidth / 2 - create_space.offsetWidth / 2 + 1000
     create_space.scrollTop = big_maru.offsetHeight / 2 - create_space.offsetHeight / 2 + 1000
@@ -77,6 +74,27 @@ create_new.addEventListener('click', function () {
 //         save_button.style.display = "block"
 //     }
 // })
+// auto_fill.addEventListener('click', function () {
+//     if (auto_fill.checked) {
+//         let checkSaveFlg = window.confirm('現在の斜線情報がすべて失われますよろしいですか？');
+//         if (checkSaveFlg) {
+//             auto_fill_box()
+//         } else {
+//             auto_fill.checked = false
+//         }
+//     }
+// })
+gray_out.addEventListener('clock', function () {
+    if (gray_out.checked) {
+        all_check_gray()
+    } else {
+        for (let x = 0; x < (now_data[0][0]); x++) {
+            for (let y = 0; y < (now_data[0][1]); y++) {
+                document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
+            }
+        }
+    }
+})
 rule.addEventListener('click', function () {
     if (rule.checked) {
         all_check_maru()
@@ -229,7 +247,13 @@ function push_box(x, y) {
         check_maru(x + 1, y)
         check_maru(x, y + 1)
         check_maru(x + 1, y + 1)
-        if (rule.checked) { all_check_box() }
+        all_check_box()
+    }
+    if (gray_out.checked) {
+        check_gray(x, y)
+        check_gray(x + 1, y)
+        check_gray(x, y + 1)
+        check_gray(x + 1, y + 1)
     }
 }
 function push_maru(x, y) {
@@ -251,6 +275,37 @@ function push_maru(x, y) {
     targetmaru.innerText = next_num
     now_data[2][x][y] = next_num
     if (rule.checked) { check_maru(x, y) }
+    if (gray_out.checked) { check_gray(x, y) }
+}
+function all_check_gray() {
+    for (let x = 0; x <= (now_data[0][0]); x++) {
+        for (let y = 0; y <= (now_data[0][1]); y++) {
+            check_gray(x, y)
+        }
+    }
+}
+function check_gray(x, y) {
+    let targetmaru = document.getElementById('maru_' + x + ',' + y)
+    targetmaru.classList.remove("gray")
+    if (targetmaru.innerText == "") { return }
+    let link_box = check_link_box(x, y)
+    let link_wall = check_link_wall(x,y)
+    // 接続
+    if (now_data[2][x][y] == link_box[0]) { targetmaru.classList.add("gray") }
+    // 未接続
+    if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
+        // 壁0
+        if (now_data[2][x][y] == 4 - link_box[1]) { targetmaru.classList.add("gray") }
+    } else if (link_wall[0] && link_wall[1] && link_wall[2] ||
+        link_wall[0] && link_wall[1] && link_wall[3] ||
+        link_wall[0] && link_wall[2] && link_wall[3] ||
+        link_wall[1] && link_wall[2] && link_wall[3]) {
+        // 壁1
+        if (now_data[2][x][y] == 2 - link_box[1]) { targetmaru.classList.add("gray") }
+    } else {
+        // 壁2
+        if (now_data[2][x][y] == 1 - link_box[1]) { targetmaru.classList.add("gray") }
+    }
 }
 function all_check_maru() {
     for (let x = 0; x <= (now_data[0][0]); x++) {
@@ -260,11 +315,34 @@ function all_check_maru() {
     }
 }
 function check_maru(x, y) {
-    let link_box = [0, 0]
-    let link_wall = check_link_wall(x, y)
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.remove("red")
     if (targetmaru.innerText == "") { return }
+    let link_box = check_link_box(x, y)
+    let link_wall = check_link_wall(x, y)
+    // 超過
+    if (now_data[2][x][y] < link_box[0]) { targetmaru.classList.add("red") }
+    // 不足
+    if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
+        // 壁0
+        if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
+        if (now_data[2][x][y] == 0) { targetmaru.classList.add("red") }
+    } else if (link_wall[0] && link_wall[1] && link_wall[2] ||
+        link_wall[0] && link_wall[1] && link_wall[3] ||
+        link_wall[0] && link_wall[2] && link_wall[3] ||
+        link_wall[1] && link_wall[2] && link_wall[3]) {
+        // 壁1
+        if (now_data[2][x][y] > 2 - link_box[1]) { targetmaru.classList.add("red") }
+        if (now_data[2][x][y] > 2) { targetmaru.classList.add("red") }
+    } else {
+        // 壁2
+        if (now_data[2][x][y] > 1 - link_box[1]) { targetmaru.classList.add("red") }
+        if (now_data[2][x][y] > 1) { targetmaru.classList.add("red") }
+    }
+}
+function check_link_box(x, y) {
+    let link_box = [0, 0]
+    let link_wall = check_link_wall(x, y)
     if (link_wall[1] && link_wall[2]) {
         if (now_data[1][x][y] == -1) { link_box[0]++ }
         if (now_data[1][x][y] == 1) { link_box[1]++ }
@@ -281,22 +359,7 @@ function check_maru(x, y) {
         if (now_data[1][x - 1][y - 1] == -1) { link_box[0]++ }
         if (now_data[1][x - 1][y - 1] == 1) { link_box[1]++ }
     }
-    if (now_data[2][x][y] < link_box[0]) { targetmaru.classList.add("red") }
-    if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
-        if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
-        if (now_data[2][x][y] == 0) { targetmaru.classList.add("red") }
-    } else {
-        if (link_wall[0] && link_wall[1] && link_wall[2] ||
-            link_wall[0] && link_wall[1] && link_wall[3] ||
-            link_wall[0] && link_wall[2] && link_wall[3] ||
-            link_wall[1] && link_wall[2] && link_wall[3]) {
-            if (now_data[2][x][y] > 2 - link_box[1]) { targetmaru.classList.add("red") }
-            if (now_data[2][x][y] > 2) { targetmaru.classList.add("red") }
-        } else {
-            if (now_data[2][x][y] > 1 - link_box[1]) { targetmaru.classList.add("red") }
-            if (now_data[2][x][y] > 1) { targetmaru.classList.add("red") }
-        }
-    }
+    return link_box
 }
 function all_check_box() {
     loop_checked = []
@@ -381,6 +444,7 @@ function check_box(x, y) {
     now_data[1][x][y] *= -1
 }
 function check_link_wall(x, y) {
+    // (x,y)の丸について↑→↓←の順で壁がなければTrue
     return [y != 0, x != now_data[0][0], y != now_data[0][1], x != 0]
 }
 function loop_check(n_x, n_y, loop_goal, P, queue, root, now_data) {
@@ -392,10 +456,10 @@ function loop_check(n_x, n_y, loop_goal, P, queue, root, now_data) {
             // console.log("色塗り中", l_P, root[l_P[0]][l_P[1]])
             let link_wall = check_link_wall(l_P[0], l_P[1])
             let only = true
-            if (link_wall[1] && link_wall[2] && only) {
+            if (link_wall[1] && link_wall[2] && only && now_data[1][l_P[0]][l_P[1]] == -1) {
                 // 右下
                 let n_P = [l_P[0] + 1, n_y = l_P[1] + 1]
-                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1 && now_data[1][l_P[0]][l_P[1]] == -1) {
+                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
                     red_box(l_P[0], l_P[1])
                     only = false
                     l_P = n_P
@@ -437,8 +501,10 @@ function loop_check(n_x, n_y, loop_goal, P, queue, root, now_data) {
 }
 function red_box(x, y) {
     document.getElementById('box_' + x + ',' + y).classList.add("red")
-    loop_checked[x][y]=1
+    loop_checked[x][y] = 1
 }
+// function auto_fill_box() {
+// }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
 // add_button.click()
 // create_new.click()
