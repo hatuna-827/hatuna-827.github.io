@@ -3,6 +3,8 @@ let settings_display = "none"
 let popup = false
 let now_data = []
 let loop_checked = []
+let root = []
+let loop_goal = []
 let if_shift = false
 // element
 let homebar = document.getElementById("homebar")
@@ -58,7 +60,6 @@ create_new.addEventListener('click', function () {
     }
     create_now_data()
     hidemenu()
-    clear_create_space()
     create_box()
     create_maru()
     work_space.style.display = "block"
@@ -76,7 +77,7 @@ create_new.addEventListener('click', function () {
 // })
 // auto_fill.addEventListener('click', function () {
 //     if (auto_fill.checked) {
-//         let checkSaveFlg = window.confirm('現在の斜線情報がすべて失われますよろしいですか？');
+//         let checkSaveFlg = window.confirm('現在の斜線情報がすべて失われますよろしいですか？')
 //         if (checkSaveFlg) {
 //             auto_fill_box()
 //         } else {
@@ -88,8 +89,8 @@ gray_out.addEventListener('clock', function () {
     if (gray_out.checked) {
         all_check_gray()
     } else {
-        for (let x = 0; x < (now_data[0][0]); x++) {
-            for (let y = 0; y < (now_data[0][1]); y++) {
+        for (let x = 0; x < now_data[0][0]; x++) {
+            for (let y = 0; y < now_data[0][1]; y++) {
                 document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
             }
         }
@@ -100,13 +101,13 @@ rule.addEventListener('click', function () {
         all_check_maru()
         all_check_box()
     } else {
-        for (let x = 0; x < (now_data[0][0]); x++) {
-            for (let y = 0; y < (now_data[0][1]); y++) {
+        for (let x = 0; x <= now_data[0][0]; x++) {
+            for (let y = 0; y <= now_data[0][1]; y++) {
                 document.getElementById('maru_' + x + ',' + y).classList.remove("red")
             }
         }
-        for (let x = 0; x < (now_data[0][0]); x++) {
-            for (let y = 0; y < (now_data[0][1]); y++) {
+        for (let x = 0; x < now_data[0][0]; x++) {
+            for (let y = 0; y < now_data[0][1]; y++) {
                 document.getElementById('box_' + x + ',' + y).classList.remove("red")
             }
         }
@@ -170,24 +171,21 @@ function f_popup() {
 // create_new
 function create_now_data() {
     now_data = [[width.value * 1, height.value * 1], [], []]
-    for (let x = 0; x < (now_data[0][0]); x++) {
+    for (let x = 0; x < now_data[0][0]; x++) {
         now_data[1].push([])
-        for (let y = 0; y < (now_data[0][1]); y++) {
+        for (let y = 0; y < now_data[0][1]; y++) {
             now_data[1][x].push(0)
         }
     }
-    for (let x = 0; x < (now_data[0][0] + 1); x++) {
+    for (let x = 0; x <= now_data[0][0]; x++) {
         now_data[2].push([])
-        for (let y = 0; y < (now_data[0][1] + 1); y++) {
+        for (let y = 0; y <= now_data[0][1]; y++) {
             now_data[2][x].push("")
         }
     }
 }
-function clear_create_space() {
-    big_box.innerHTML = ""
-    big_maru.innerHTML = ""
-}
 function create_box() {
+    big_box.innerHTML = ""
     for (let y = 0; y < now_data[0][1]; y++) {
         for (let x = 0; x < now_data[0][0]; x++) {
             let new_box = document.createElement("div")
@@ -204,6 +202,7 @@ function create_box() {
     big_box.style.width = (31 + 1 / 3) * width.value + "px"
 }
 function create_maru() {
+    big_maru.innerHTML = ""
     for (let y = 0; y <= height.value; y++) {
         for (let x = 0; x <= width.value; x++) {
             let new_maru = document.createElement("div")
@@ -223,6 +222,7 @@ function create_maru() {
     big_maru.style.marginTop = (-31 - 1 / 3) * height.value - 1031 - 1 / 3 + "px"
 }
 function push_box(x, y) {
+    // if (auto_fill.checked) { return }
     let targetbox = document.getElementById('box_' + x + ',' + y)
     let c_list = targetbox.classList
     if (c_list.contains("b")) {
@@ -276,10 +276,11 @@ function push_maru(x, y) {
     now_data[2][x][y] = next_num
     if (rule.checked) { check_maru(x, y) }
     if (gray_out.checked) { check_gray(x, y) }
+    // if (auto_fill.checked) { auto_fill_box() }
 }
 function all_check_gray() {
-    for (let x = 0; x <= (now_data[0][0]); x++) {
-        for (let y = 0; y <= (now_data[0][1]); y++) {
+    for (let x = 0; x <= now_data[0][0]; x++) {
+        for (let y = 0; y <= now_data[0][1]; y++) {
             check_gray(x, y)
         }
     }
@@ -288,8 +289,8 @@ function check_gray(x, y) {
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.remove("gray")
     if (targetmaru.innerText == "") { return }
-    let link_box = check_link_box(x, y)
-    let link_wall = check_link_wall(x,y)
+    let link_box = check_link_box(x, y, now_data[0], now_data[1])
+    let link_wall = check_link_wall(x, y, now_data[0])
     // 接続
     if (now_data[2][x][y] == link_box[0]) { targetmaru.classList.add("gray") }
     // 未接続
@@ -308,8 +309,8 @@ function check_gray(x, y) {
     }
 }
 function all_check_maru() {
-    for (let x = 0; x <= (now_data[0][0]); x++) {
-        for (let y = 0; y <= (now_data[0][1]); y++) {
+    for (let x = 0; x <= now_data[0][0]; x++) {
+        for (let y = 0; y <= now_data[0][1]; y++) {
             check_maru(x, y)
         }
     }
@@ -318,193 +319,232 @@ function check_maru(x, y) {
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.remove("red")
     if (targetmaru.innerText == "") { return }
-    let link_box = check_link_box(x, y)
-    let link_wall = check_link_wall(x, y)
+    if (check_maru_data(x, y, now_data[0], now_data[1], now_data[2])) { targetmaru.classList.add("red") }
+}
+function check_maru_data(x, y, size, box_data, maru_data) {
+    let link_box = check_link_box(x, y, size, box_data)
+    let link_wall = check_link_wall(x, y, size)
     // 超過
-    if (now_data[2][x][y] < link_box[0]) { targetmaru.classList.add("red") }
+    if (maru_data[x][y] < link_box[0]) { return true }
     // 不足
     if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
         // 壁0
-        if (now_data[2][x][y] > 4 - link_box[1]) { targetmaru.classList.add("red") }
-        if (now_data[2][x][y] == 0) { targetmaru.classList.add("red") }
+        if (maru_data[x][y] > 4 - link_box[1]) { return true }
+        if (maru_data[x][y] == 0) { return true }
     } else if (link_wall[0] && link_wall[1] && link_wall[2] ||
         link_wall[0] && link_wall[1] && link_wall[3] ||
         link_wall[0] && link_wall[2] && link_wall[3] ||
         link_wall[1] && link_wall[2] && link_wall[3]) {
         // 壁1
-        if (now_data[2][x][y] > 2 - link_box[1]) { targetmaru.classList.add("red") }
-        if (now_data[2][x][y] > 2) { targetmaru.classList.add("red") }
+        if (maru_data[x][y] > 2 - link_box[1]) { return true }
+        if (maru_data[x][y] > 2) { return true }
     } else {
         // 壁2
-        if (now_data[2][x][y] > 1 - link_box[1]) { targetmaru.classList.add("red") }
-        if (now_data[2][x][y] > 1) { targetmaru.classList.add("red") }
+        if (maru_data[x][y] > 1 - link_box[1]) { return true }
+        if (maru_data[x][y] > 1) { return true }
     }
+    return false
 }
-function check_link_box(x, y) {
+function check_link_box(x, y, size, box_data) {
     let link_box = [0, 0]
-    let link_wall = check_link_wall(x, y)
+    let link_wall = check_link_wall(x, y, size)
     if (link_wall[1] && link_wall[2]) {
-        if (now_data[1][x][y] == -1) { link_box[0]++ }
-        if (now_data[1][x][y] == 1) { link_box[1]++ }
+        if (box_data[x][y] == -1) { link_box[0]++ }
+        if (box_data[x][y] == 1) { link_box[1]++ }
     }
     if (link_wall[0] && link_wall[1]) {
-        if (now_data[1][x][y - 1] == 1) { link_box[0]++ }
-        if (now_data[1][x][y - 1] == -1) { link_box[1]++ }
+        if (box_data[x][y - 1] == 1) { link_box[0]++ }
+        if (box_data[x][y - 1] == -1) { link_box[1]++ }
     }
     if (link_wall[2] && link_wall[3]) {
-        if (now_data[1][x - 1][y] == 1) { link_box[0]++ }
-        if (now_data[1][x - 1][y] == -1) { link_box[1]++ }
+        if (box_data[x - 1][y] == 1) { link_box[0]++ }
+        if (box_data[x - 1][y] == -1) { link_box[1]++ }
     }
     if (link_wall[0] && link_wall[3]) {
-        if (now_data[1][x - 1][y - 1] == -1) { link_box[0]++ }
-        if (now_data[1][x - 1][y - 1] == 1) { link_box[1]++ }
+        if (box_data[x - 1][y - 1] == -1) { link_box[0]++ }
+        if (box_data[x - 1][y - 1] == 1) { link_box[1]++ }
     }
     return link_box
 }
 function all_check_box() {
     loop_checked = []
-    for (let x = 0; x < (now_data[0][0]); x++) {
+    for (let x = 0; x < now_data[0][0]; x++) {
         loop_checked.push([])
-        for (let y = 0; y < (now_data[0][1]); y++) {
+        for (let y = 0; y < now_data[0][1]; y++) {
             loop_checked[x].push(0)
         }
     }
-    for (let x = 0; x < (now_data[0][0]); x++) {
-        for (let y = 0; y < (now_data[0][1]); y++) {
+    for (let x = 0; x < now_data[0][0]; x++) {
+        for (let y = 0; y < now_data[0][1]; y++) {
             document.getElementById('box_' + x + ',' + y).classList.remove("red")
         }
     }
-    for (let x = 0; x < (now_data[0][0]); x++) {
-        for (let y = 0; y < (now_data[0][1]); y++) {
+    for (let x = 0; x < now_data[0][0]; x++) {
+        for (let y = 0; y < now_data[0][1]; y++) {
             if (loop_checked[x][y] == 0) {
-                check_box(x, y)
+                if (check_box_data(x, y, now_data[0], now_data[1])) {
+                    loop_red_box()
+                }
             }
         }
     }
 }
-function check_box(x, y) {
-    if (now_data[1][x][y] == 0) { return }
+function check_box_data(x, y, size, box_data) {
+    if (box_data[x][y] == 0) { return false }
     let queue = []
-    let loop_goal = []
-    let root = []
-    for (let x = 0; x < (now_data[0][0] + 1); x++) {
+    root = []
+    for (let x = 0; x <= size[0]; x++) {
         root.push([])
-        for (let y = 0; y < (now_data[0][1] + 1); y++) {
+        for (let y = 0; y <= size[1]; y++) {
             root[x].push(0)
         }
     }
-    if (now_data[1][x][y] == 1) {
+    if (box_data[x][y] == 1) {
         queue.push([x + 1, y])
         root[x + 1][y] = 1
         loop_goal = [x, y + 1]
     }
-    if (now_data[1][x][y] == -1) {
+    if (box_data[x][y] == -1) {
         queue.push([x, y])
         root[x][y] = 1
         loop_goal = [x + 1, y + 1]
     }
-    now_data[1][x][y] *= -1
+    box_data[x][y] *= -1
     while (queue.length != 0) {
-        let P = [queue[0][0], queue[0][1]]
-        let link_wall = check_link_wall(P[0], P[1])
+        let P = queue[0]
+        let link_wall = check_link_wall(P[0], P[1], size)
         if (link_wall[1] && link_wall[2]) {
             // 右下
             let n_x = P[0] + 1
             let n_y = P[1] + 1
-            if (now_data[1][P[0]][P[1]] == -1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
+            if (box_data[P[0]][P[1]] == -1 && root[n_x][n_y] == 0) {
+                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
         if (link_wall[0] && link_wall[1]) {
             // 右上
             let n_x = P[0] + 1
             let n_y = P[1] - 1
-            if (now_data[1][P[0]][P[1] - 1] == 1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
+            if (box_data[P[0]][P[1] - 1] == 1 && root[n_x][n_y] == 0) {
+                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
         if (link_wall[2] && link_wall[3]) {
             // 左下
             let n_x = P[0] - 1
             let n_y = P[1] + 1
-            if (now_data[1][P[0] - 1][P[1]] == 1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
+            if (box_data[P[0] - 1][P[1]] == 1 && root[n_x][n_y] == 0) {
+                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
         if (link_wall[0] && link_wall[3]) {
             // 左上
             let n_x = P[0] - 1
             let n_y = P[1] - 1
-            if (now_data[1][P[0] - 1][P[1] - 1] == -1 && root[n_x][n_y] == 0) {
-                loop_check(n_x, n_y, loop_goal, P, queue, root, now_data)
+            if (box_data[P[0] - 1][P[1] - 1] == -1 && root[n_x][n_y] == 0) {
+                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
         queue.shift()
     }
-    now_data[1][x][y] *= -1
+    box_data[x][y] *= -1
+    return false
 }
-function check_link_wall(x, y) {
-    // (x,y)の丸について↑→↓←の順で壁がなければTrue
-    return [y != 0, x != now_data[0][0], y != now_data[0][1], x != 0]
-}
-function loop_check(n_x, n_y, loop_goal, P, queue, root, now_data) {
+function loop_check(n_x, n_y, P, queue) {
     root[n_x][n_y] = root[P[0]][P[1]] + 1
-    if (n_x == loop_goal[0] && n_y == loop_goal[1]) {
-        // console.log("ループ発見")
-        let l_P = [n_x, n_y]
-        while (root[l_P[0]][l_P[1]] != 1) {
-            // console.log("色塗り中", l_P, root[l_P[0]][l_P[1]])
-            let link_wall = check_link_wall(l_P[0], l_P[1])
-            let only = true
-            if (link_wall[1] && link_wall[2] && only && now_data[1][l_P[0]][l_P[1]] == -1) {
-                // 右下
-                let n_P = [l_P[0] + 1, n_y = l_P[1] + 1]
-                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                    red_box(l_P[0], l_P[1])
-                    only = false
-                    l_P = n_P
-                }
-            }
-            if (link_wall[0] && link_wall[1] && only && now_data[1][l_P[0]][l_P[1] - 1] == 1) {
-                // 右上
-                let n_P = [l_P[0] + 1, n_y = l_P[1] - 1]
-                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                    red_box(l_P[0], l_P[1] - 1)
-                    only = false
-                    l_P = n_P
-                }
-            }
-            if (link_wall[2] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1]] == 1) {
-                // 左下
-                let n_P = [l_P[0] - 1, n_y = l_P[1] + 1]
-                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                    red_box(l_P[0] - 1, l_P[1])
-                    only = false
-                    l_P = n_P
-                }
-            }
-            if (link_wall[0] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1] - 1] == -1) {
-                // 左上
-                let n_P = [l_P[0] - 1, n_y = l_P[1] - 1]
-                if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                    red_box(l_P[0] - 1, l_P[1] - 1)
-                    only = false
-                    l_P = n_P
-                }
+    queue.push([n_x, n_y])
+    if (n_x == loop_goal[0] && n_y == loop_goal[1]) { return true }
+    return false
+}
+function loop_red_box() {
+    // console.log("ループ発見", loop_goal, root)
+    let l_P = loop_goal
+    let only
+    while (root[l_P[0]][l_P[1]] != 1) {
+        // console.log("色塗り中", l_P, root[l_P[0]][l_P[1]], root)
+        let link_wall = check_link_wall(l_P[0], l_P[1], now_data[0])
+        only = true
+        if (link_wall[1] && link_wall[2] && only && now_data[1][l_P[0]][l_P[1]] == -1) {
+            // 右下
+            let n_P = [l_P[0] + 1, l_P[1] + 1]
+            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
+                red_box(l_P[0], l_P[1])
+                only = false
+                l_P = n_P
             }
         }
-        red_box((l_P[0] + loop_goal[0]) / 2 - 0.5, (l_P[1] + loop_goal[1]) / 2 - 0.5)
-        root[loop_goal[0]][loop_goal[1]] = 0
-        return
+        if (link_wall[0] && link_wall[1] && only && now_data[1][l_P[0]][l_P[1] - 1] == 1) {
+            // 右上
+            let n_P = [l_P[0] + 1, l_P[1] - 1]
+            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
+                red_box(l_P[0], l_P[1] - 1)
+                only = false
+                l_P = n_P
+            }
+        }
+        if (link_wall[2] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1]] == 1) {
+            // 左下
+            let n_P = [l_P[0] - 1, l_P[1] + 1]
+            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
+                red_box(l_P[0] - 1, l_P[1])
+                only = false
+                l_P = n_P
+            }
+        }
+        if (link_wall[0] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1] - 1] == -1) {
+            // 左上
+            let n_P = [l_P[0] - 1, l_P[1] - 1]
+            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
+                red_box(l_P[0] - 1, l_P[1] - 1)
+                only = false
+                l_P = n_P
+            }
+        }
     }
-    queue.push([n_x, n_y])
+    red_box((l_P[0] + loop_goal[0]) / 2 - 0.5, (l_P[1] + loop_goal[1]) / 2 - 0.5)
 }
 function red_box(x, y) {
+    // console.log("red_box", x, y)
     document.getElementById('box_' + x + ',' + y).classList.add("red")
     loop_checked[x][y] = 1
 }
-// function auto_fill_box() {
-// }
+function check_link_wall(x, y, size) {
+    // (x,y)の丸について↑→↓←の順で壁がなければTrue
+    return [y != 0, x != size[0], y != size[1], x != 0]
+}
+function auto_fill_box() {
+    now_data[1] = f_auto_fill_data(now_data[0], now_data[2])
+    create_box()
+}
+function f_auto_fill_data(size, maru_data) {
+    let auto_fill_data = [[], []]
+    for (let x = 0; x < size[0]; x++) {
+        auto_fill_data[0].push([])
+        for (let y = 0; y < size[1]; y++) {
+            auto_fill_data[0][x].push(0)
+        }
+    }
+    auto_fill_data[1] = maru_data
+    console.log("今から考える", auto_fill_data)
+    auto_fill_DFS(size, auto_fill_data, 0)
+    return auto_fill_data[0]
+    // return [[0, 1], [-1, 1]]
+}
+function auto_fill_DFS(size, tmp_data, node) {
+    if (tmp_data[0] == [[1, 1], [1, 1]]) {
+        console.log("XXXXXXXXX")
+        return 0
+    }
+    if ((tmp_data[0].length * tmp_data[0][0].length) == node) {
+        console.log("One answer", tmp_data)
+        return 0
+    }
+    tmp_data[0][(node - node % size[1]) / size[1]][node % size[1]] = -1
+    auto_fill_DFS(size, tmp_data, node + 1)
+    tmp_data[0][(node - node % size[1]) / size[1]][node % size[1]] = 1
+    auto_fill_DFS(size, tmp_data, node + 1)
+    tmp_data[0][(node - node % size[1]) / size[1]][node % size[1]] = 0
+}
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
 // add_button.click()
 // create_new.click()
