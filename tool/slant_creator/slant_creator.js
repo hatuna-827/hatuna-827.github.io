@@ -60,10 +60,10 @@ create_new.addEventListener('click', function () {
         console.log("入力に誤りがあります。")
         return
     }
-    auto_fill.checked=false
-    gray_out.checked=false
-    rule.checked=true
-    play_mode.checked=false
+    auto_fill.checked = false
+    gray_out.checked = false
+    rule.checked = true
+    play_mode.checked = false
     create_now_data()
     hidemenu()
     create_box()
@@ -577,13 +577,17 @@ function auto_fill_DFS(size, tmp_data, node) {
         check_maru_data(x + 1, y, size, tmp_data[0], tmp_data[1]) ||
         check_maru_data(x, y + 1, size, tmp_data[0], tmp_data[1]) ||
         check_maru_data(x + 1, y + 1, size, tmp_data[0], tmp_data[1]))) {
-        // if (x != 0) {
-        //     if (tmp_data[0][x - 1][y] == -1) {
-        if (!check_box_data(x, y, size, tmp_data[0])) {
+        if (x != 0) {
+            if (tmp_data[0][x - 1][y] == -1) {
+                if (!check_box_data(x, y, size, tmp_data[0])) {
+                    auto_fill_DFS(size, tmp_data, node + 1)
+                }
+            } else {
+                auto_fill_DFS(size, tmp_data, node + 1)
+            }
+        } else {
             auto_fill_DFS(size, tmp_data, node + 1)
         }
-        //     }
-        // }
     }
     tmp_data[0][x][y] = 0
 }
