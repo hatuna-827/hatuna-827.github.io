@@ -553,8 +553,8 @@ function f_auto_fill_data(size, maru_data) {
 }
 function auto_fill_DFS(size, tmp_data, node) {
     // console.log("DFS", size, tmp_data, node)
-    let x = node % size[1]
-    let y = Math.floor(node / size[1])
+    let x = node % size[0]
+    let y = Math.floor(node / size[0])
     if (size[0] * size[1] == node) {
         // console.log("One answer", tmp_data)
         auto_fill_count += 1
