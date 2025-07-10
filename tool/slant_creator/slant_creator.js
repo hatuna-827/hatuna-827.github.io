@@ -5,6 +5,8 @@ let now_data = []
 let loop_checked = []
 let root = []
 let loop_goal = []
+let auto_fill_ans = []
+let auto_fill_count = 0
 let if_shift = false
 // element
 let homebar = document.getElementById("homebar")
@@ -58,6 +60,10 @@ create_new.addEventListener('click', function () {
         console.log("入力に誤りがあります。")
         return
     }
+    auto_fill.checked=false
+    gray_out.checked=false
+    rule.checked=true
+    play_mode.checked=false
     create_now_data()
     hidemenu()
     create_box()
@@ -75,22 +81,27 @@ create_new.addEventListener('click', function () {
 //         save_button.style.display = "block"
 //     }
 // })
-// auto_fill.addEventListener('click', function () {
-//     if (auto_fill.checked) {
-//         let checkSaveFlg = window.confirm('現在の斜線情報がすべて失われますよろしいですか？')
-//         if (checkSaveFlg) {
-//             auto_fill_box()
-//         } else {
-//             auto_fill.checked = false
-//         }
-//     }
-// })
-gray_out.addEventListener('clock', function () {
+auto_fill.addEventListener('click', function () {
+    if (auto_fill.checked) {
+        if (now_data[0][0] * now_data[0][1] > 20) {
+            alert("処理量の問題により大きさは20マスまでです。")
+            auto_fill.checked = false
+        } else {
+            let checkSaveFlg = window.confirm('現在の斜線情報がすべて失われます。よろしいですか？')
+            if (checkSaveFlg) {
+                auto_fill_box()
+            } else {
+                auto_fill.checked = false
+            }
+        }
+    }
+})
+gray_out.addEventListener('click', function () {
     if (gray_out.checked) {
         all_check_gray()
     } else {
-        for (let x = 0; x < now_data[0][0]; x++) {
-            for (let y = 0; y < now_data[0][1]; y++) {
+        for (let x = 0; x <= now_data[0][0]; x++) {
+            for (let y = 0; y <= now_data[0][1]; y++) {
                 document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
             }
         }
@@ -222,7 +233,7 @@ function create_maru() {
     big_maru.style.marginTop = (-31 - 1 / 3) * height.value - 1031 - 1 / 3 + "px"
 }
 function push_box(x, y) {
-    // if (auto_fill.checked) { return }
+    if (auto_fill.checked) { return }
     let targetbox = document.getElementById('box_' + x + ',' + y)
     let c_list = targetbox.classList
     if (c_list.contains("b")) {
@@ -274,9 +285,9 @@ function push_maru(x, y) {
     }
     targetmaru.innerText = next_num
     now_data[2][x][y] = next_num
-    if (rule.checked) { check_maru(x, y) }
+    if (auto_fill.checked) { auto_fill_box() }
     if (gray_out.checked) { check_gray(x, y) }
-    // if (auto_fill.checked) { auto_fill_box() }
+    if (rule.checked) { check_maru(x, y) }
 }
 function all_check_gray() {
     for (let x = 0; x <= now_data[0][0]; x++) {
@@ -318,10 +329,10 @@ function all_check_maru() {
 function check_maru(x, y) {
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.remove("red")
-    if (targetmaru.innerText == "") { return }
     if (check_maru_data(x, y, now_data[0], now_data[1], now_data[2])) { targetmaru.classList.add("red") }
 }
 function check_maru_data(x, y, size, box_data, maru_data) {
+    if (maru_data[x][y] === "") { return false }
     let link_box = check_link_box(x, y, size, box_data)
     let link_wall = check_link_wall(x, y, size)
     // 超過
@@ -515,35 +526,66 @@ function check_link_wall(x, y, size) {
 function auto_fill_box() {
     now_data[1] = f_auto_fill_data(now_data[0], now_data[2])
     create_box()
+    if (gray_out.checked) { all_check_gray() }
+    if (rule.checked) { all_check_maru() }
 }
 function f_auto_fill_data(size, maru_data) {
     let auto_fill_data = [[], []]
+    auto_fill_ans = []
+    auto_fill_count = 0
     for (let x = 0; x < size[0]; x++) {
         auto_fill_data[0].push([])
+        auto_fill_ans.push([])
         for (let y = 0; y < size[1]; y++) {
             auto_fill_data[0][x].push(0)
+            auto_fill_ans[x].push(0)
         }
     }
     auto_fill_data[1] = maru_data
-    console.log("今から考える", auto_fill_data)
+    // console.log("今から考える", auto_fill_data)
     auto_fill_DFS(size, auto_fill_data, 0)
-    return auto_fill_data[0]
-    // return [[0, 1], [-1, 1]]
+    for (let x = 0; x < size[0]; x++) {
+        for (let y = 0; y < size[1]; y++) {
+            auto_fill_ans[x][y] = Math.trunc(auto_fill_ans[x][y] / auto_fill_count)
+        }
+    }
+    return auto_fill_ans
 }
 function auto_fill_DFS(size, tmp_data, node) {
-    if (tmp_data[0] == [[1, 1], [1, 1]]) {
-        console.log("XXXXXXXXX")
-        return 0
+    // console.log("DFS", size, tmp_data, node)
+    let x = node % size[1]
+    let y = Math.floor(node / size[1])
+    if (size[0] * size[1] == node) {
+        // console.log("One answer", tmp_data)
+        auto_fill_count += 1
+        for (let x = 0; x < size[0]; x++) {
+            for (let y = 0; y < size[1]; y++) {
+                auto_fill_ans[x][y] += tmp_data[0][x][y]
+            }
+        }
+        return
     }
-    if ((tmp_data[0].length * tmp_data[0][0].length) == node) {
-        console.log("One answer", tmp_data)
-        return 0
+    tmp_data[0][x][y] = -1
+    if (!(check_maru_data(x, y, size, tmp_data[0], tmp_data[1]) ||
+        check_maru_data(x + 1, y, size, tmp_data[0], tmp_data[1]) ||
+        check_maru_data(x, y + 1, size, tmp_data[0], tmp_data[1]) ||
+        check_maru_data(x + 1, y + 1, size, tmp_data[0], tmp_data[1]))) {
+        auto_fill_DFS(size, tmp_data, node + 1)
     }
-    tmp_data[0][(node - node % size[1]) / size[1]][node % size[1]] = -1
-    auto_fill_DFS(size, tmp_data, node + 1)
-    tmp_data[0][(node - node % size[1]) / size[1]][node % size[1]] = 1
-    auto_fill_DFS(size, tmp_data, node + 1)
-    tmp_data[0][(node - node % size[1]) / size[1]][node % size[1]] = 0
+    tmp_data[0][x][y] = 1
+    if (!(check_maru_data(x, y, size, tmp_data[0], tmp_data[1]) ||
+        check_maru_data(x + 1, y, size, tmp_data[0], tmp_data[1]) ||
+        check_maru_data(x, y + 1, size, tmp_data[0], tmp_data[1]) ||
+        check_maru_data(x + 1, y + 1, size, tmp_data[0], tmp_data[1]))) {
+        // if (x != 0) {
+        //     if (tmp_data[0][x - 1][y] == -1) {
+        if (!check_box_data(x, y, size, tmp_data[0])) {
+            auto_fill_DFS(size, tmp_data, node + 1)
+        }
+        //     }
+        // }
+    }
+    tmp_data[0][x][y] = 0
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
 // add_button.click()
