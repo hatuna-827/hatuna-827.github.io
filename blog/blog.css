@@ -82,7 +82,11 @@ img {
     color: var(--black-color);
     font-size: 15px;
     max-height: 50vh;
-    max-width: calc(100% - 60px);
+    width: calc(100% - 60px);
+    object-fit: contain;
+}
+.pixel {
+    image-rendering: pixelated;
 }
 hr {
     margin: 20px;
