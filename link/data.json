@@ -1,0 +1,130 @@
+{
+    "links":[
+        {
+            "url": "/link",
+            "title": "LINK",
+            "subtitle":"すべてのサイト一覧",
+            "tag":["blog","game","tool"],
+            "img":""
+        },
+        {
+            "url": "/home",
+            "title": "HOME",
+            "subtitle":"自己紹介",
+            "tag":["all"],
+            "img":""
+        },
+        {
+            "url": "/404.html",
+            "title": "404",
+            "subtitle":"not found",
+            "tag":["all"],
+            "img":""
+        },
+        {
+            "url": "/blog/graphing_art",
+            "title": "グラフアート",
+            "subtitle":"グラフアート、はじめました。",
+            "tag":["all","blog"],
+            "img":""
+        },
+        {
+            "url": "/blog/vscode/change_design",
+            "title": "VScodeをデザイン",
+            "subtitle":"デザインを変更しよう！",
+            "tag":["all","blog"],
+            "img":""
+        },
+        {
+            "url": "/blog/esperanto/about",
+            "title": "エスペラント語",
+            "subtitle":"~概要編~",
+            "tag":["all","blog"],
+            "img":""
+        },
+        {
+            "url": "/blog/brainfuck/about",
+            "title": "brainfuck",
+            "subtitle":"~概要編~",
+            "tag":["all","blog"],
+            "img":""
+        },
+        {
+            "url": "/blog/brainfuck/warizann",
+            "title": "brainfuck",
+            "subtitle":"~割り算編~",
+            "tag":["all","blog"],
+            "img":""
+        },
+        {
+            "url": "/blog/brainfuck/soinnsuubunnkai",
+            "title": "brainfuck",
+            "subtitle":"~素因数分解編~",
+            "tag":["all","blog"],
+            "img":""
+        },
+        {
+            "url": "/tool/counter",
+            "title": "カウンター",
+            "subtitle":"",
+            "tag":["all","tool"],
+            "img":""
+        },
+        {
+            "url": "/tool/clock",
+            "title": "時計",
+            "subtitle":"",
+            "tag":["all","tool"],
+            "img":""
+        },
+        {
+            "url": "/tool/word_counter",
+            "title": "単語カウンター",
+            "subtitle":"",
+            "tag":["all","tool"],
+            "img":""
+        },
+        {
+            "url": "/tool/input_esperanto",
+            "title": "エスペラント語入力",
+            "subtitle":"",
+            "tag":["all","tool"],
+            "img":""
+        },
+        {
+            "url": "/tool/slant_creator/",
+            "title": "ごきげんななめ",
+            "subtitle":"作問ツール",
+            "tag":["all","tool"],
+            "img":""
+        },
+        {
+            "url": "/musukabutton",
+            "title": "ムスカボタン",
+            "subtitle":"",
+            "tag":["all","tool"],
+            "img":""
+        },
+        {
+            "url": "/game/OXgame",
+            "title": "〇×ゲーム",
+            "subtitle":"",
+            "tag":["all","game"],
+            "img":""
+        },
+        {
+            "url": "/game/lights_out",
+            "title": "ライツアウト",
+            "subtitle":"",
+            "tag":["all","game"],
+            "img":""
+        },
+        {
+            "url": "/game/othello",
+            "title": "オセロ",
+            "subtitle":"",
+            "tag":["all","game"],
+            "img":""
+        }
+    ]
+}
