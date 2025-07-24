@@ -1,10 +1,10 @@
 "use strict"
 let settings_display = "none"
 let popup = false
-let now_data = []
+let now_data = {}
 let loop_checked = []
 let root = []
-let loop_goal = []
+let loop_goal = {}
 let auto_fill_ans = []
 let auto_fill_count = 0
 let if_shift = false
@@ -83,7 +83,7 @@ create_new.addEventListener('click', function () {
 // })
 auto_fill.addEventListener('click', function () {
     if (auto_fill.checked) {
-        if (now_data[0][0] * now_data[0][1] > 20) {
+        if (now_data.size.x * now_data.size.y > 20) {
             alert("処理量の問題により大きさは20マスまでです。")
             auto_fill.checked = false
         } else {
@@ -100,8 +100,8 @@ gray_out.addEventListener('click', function () {
     if (gray_out.checked) {
         all_check_gray()
     } else {
-        for (let x = 0; x <= now_data[0][0]; x++) {
-            for (let y = 0; y <= now_data[0][1]; y++) {
+        for (let x = 0; x <= now_data.size.x; x++) {
+            for (let y = 0; y <= now_data.size.y; y++) {
                 document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
             }
         }
@@ -112,13 +112,13 @@ rule.addEventListener('click', function () {
         all_check_maru()
         all_check_box()
     } else {
-        for (let x = 0; x <= now_data[0][0]; x++) {
-            for (let y = 0; y <= now_data[0][1]; y++) {
+        for (let x = 0; x <= now_data.size.x; x++) {
+            for (let y = 0; y <= now_data.size.y; y++) {
                 document.getElementById('maru_' + x + ',' + y).classList.remove("red")
             }
         }
-        for (let x = 0; x < now_data[0][0]; x++) {
-            for (let y = 0; y < now_data[0][1]; y++) {
+        for (let x = 0; x < now_data.size.x; x++) {
+            for (let y = 0; y < now_data.size.y; y++) {
                 document.getElementById('box_' + x + ',' + y).classList.remove("red")
             }
         }
@@ -181,46 +181,46 @@ function f_popup() {
 }
 // create_new
 function create_now_data() {
-    now_data = [[width.value * 1, height.value * 1], [], []]
-    for (let x = 0; x < now_data[0][0]; x++) {
-        now_data[1].push([])
-        for (let y = 0; y < now_data[0][1]; y++) {
-            now_data[1][x].push(0)
+    now_data = { size: { x: width.value * 1, y: height.value * 1 }, box: [], maru: [] }
+    for (let x = 0; x < now_data.size.x; x++) {
+        now_data.box.push([])
+        for (let y = 0; y < now_data.size.y; y++) {
+            now_data.box[x].push(0)
         }
     }
-    for (let x = 0; x <= now_data[0][0]; x++) {
-        now_data[2].push([])
-        for (let y = 0; y <= now_data[0][1]; y++) {
-            now_data[2][x].push("")
+    for (let x = 0; x <= now_data.size.x; x++) {
+        now_data.maru.push([])
+        for (let y = 0; y <= now_data.size.y; y++) {
+            now_data.maru[x].push("")
         }
     }
 }
 function create_box() {
     big_box.innerHTML = ""
-    for (let y = 0; y < now_data[0][1]; y++) {
-        for (let x = 0; x < now_data[0][0]; x++) {
+    for (let y = 0; y < now_data.size.y; y++) {
+        for (let x = 0; x < now_data.size.x; x++) {
             let new_box = document.createElement("div")
             new_box.classList.add("box")
             new_box.id = 'box_' + x + ',' + y
             new_box.setAttribute('onclick', 'push_box(' + x + ',' + y + ')')
-            if (now_data[1][x][y] == 1) { new_box.classList.add("f") }
-            if (now_data[1][x][y] == -1) { new_box.classList.add("b") }
+            if (now_data.box[x][y] == 1) { new_box.classList.add("f") }
+            if (now_data.box[x][y] == -1) { new_box.classList.add("b") }
             big_box.insertAdjacentElement('beforeend', new_box)
         }
         big_box.insertAdjacentHTML('beforeend', '<br>')
     }
-    big_box.style.height = (31 + 1 / 3) * height.value + "px"
-    big_box.style.width = (31 + 1 / 3) * width.value + "px"
+    big_box.style.height = (31 + 1 / 3) * now_data.size.y + "px"
+    big_box.style.width = (31 + 1 / 3) * now_data.size.x + "px"
 }
 function create_maru() {
     big_maru.innerHTML = ""
-    for (let y = 0; y <= height.value; y++) {
-        for (let x = 0; x <= width.value; x++) {
+    for (let y = 0; y <= now_data.size.y; y++) {
+        for (let x = 0; x <= now_data.size.x; x++) {
             let new_maru = document.createElement("div")
             new_maru.classList.add("maru")
             new_maru.id = 'maru_' + x + ',' + y
             new_maru.setAttribute('onclick', 'push_maru(' + x + ',' + y + ')')
-            new_maru.textContent = now_data[2][x][y]
+            new_maru.textContent = now_data.maru[x][y]
             if (new_maru.textContent != "") {
                 new_maru.classList.add("disp")
             }
@@ -228,26 +228,26 @@ function create_maru() {
         }
         big_maru.insertAdjacentHTML('beforeend', '<br>')
     }
-    big_maru.style.height = (31 + 1 / 3) * height.value + 31 + 1 / 3 + "px"
-    big_maru.style.width = (31 + 1 / 3) * width.value + 31 + 1 / 3 + "px"
-    big_maru.style.marginTop = (-31 - 1 / 3) * height.value - 1031 - 1 / 3 + "px"
+    big_maru.style.height = (31 + 1 / 3) * now_data.size.y + 31 + 1 / 3 + "px"
+    big_maru.style.width = (31 + 1 / 3) * now_data.size.x + 31 + 1 / 3 + "px"
+    big_maru.style.marginTop = (-31 - 1 / 3) * now_data.size.y - 1031 - 1 / 3 + "px"
 }
 function push_box(x, y) {
     if (auto_fill.checked) { return }
     let targetbox = document.getElementById('box_' + x + ',' + y)
     let c_list = targetbox.classList
-    if (c_list.contains("b")) {
+    if (now_data.box[x][y] == -1) {
         c_list.remove("b")
         c_list.add("f")
-        now_data[1][x][y] = 1
+        now_data.box[x][y] = 1
     }
-    else if (c_list.contains("f")) {
+    else if (now_data.box[x][y] == 1) {
         c_list.remove("f")
-        now_data[1][x][y] = 0
+        now_data.box[x][y] = 0
     }
     else {
         c_list.add("b")
-        now_data[1][x][y] = -1
+        now_data.box[x][y] = -1
     }
     c_list.remove("green")
     if (if_shift) {
@@ -272,26 +272,25 @@ function push_maru(x, y) {
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.add("disp")
     let next_num
-    if (targetmaru.innerText == "") {
+    if (now_data.maru[x][y] === "") {
         next_num = 1
     } else {
-        let targetmaru_num = targetmaru.innerText * 1
-        if (targetmaru_num == 0) {
+        if (now_data.maru[x][y] == 0) {
             next_num = ""
             targetmaru.classList.remove("disp")
         }
-        else if (targetmaru_num < 4) { next_num = targetmaru_num + 1 }
-        else if (targetmaru_num == 4) { next_num = 0 }
+        else if (now_data.maru[x][y] < 4) { next_num = now_data.maru[x][y] + 1 }
+        else if (now_data.maru[x][y] == 4) { next_num = 0 }
     }
     targetmaru.innerText = next_num
-    now_data[2][x][y] = next_num
+    now_data.maru[x][y] = next_num
     if (auto_fill.checked) { auto_fill_box() }
     if (gray_out.checked) { check_gray(x, y) }
     if (rule.checked) { check_maru(x, y) }
 }
 function all_check_gray() {
-    for (let x = 0; x <= now_data[0][0]; x++) {
-        for (let y = 0; y <= now_data[0][1]; y++) {
+    for (let x = 0; x <= now_data.size.x; x++) {
+        for (let y = 0; y <= now_data.size.y; y++) {
             check_gray(x, y)
         }
     }
@@ -300,28 +299,28 @@ function check_gray(x, y) {
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.remove("gray")
     if (targetmaru.innerText == "") { return }
-    let link_box = check_link_box(x, y, now_data[0], now_data[1])
-    let link_wall = check_link_wall(x, y, now_data[0])
+    let link_box = check_link_box(x, y, now_data.size, now_data.box)
+    let link_wall = check_link_wall(x, y, now_data.size)
     // 接続
-    if (now_data[2][x][y] == link_box[0]) { targetmaru.classList.add("gray") }
+    if (now_data.maru[x][y] == link_box.true) { targetmaru.classList.add("gray") }
     // 未接続
-    if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
+    if (link_wall.up && link_wall.right && link_wall.down && link_wall.left) {
         // 壁0
-        if (now_data[2][x][y] == 4 - link_box[1]) { targetmaru.classList.add("gray") }
-    } else if (link_wall[0] && link_wall[1] && link_wall[2] ||
-        link_wall[0] && link_wall[1] && link_wall[3] ||
-        link_wall[0] && link_wall[2] && link_wall[3] ||
-        link_wall[1] && link_wall[2] && link_wall[3]) {
+        if (now_data.maru[x][y] == 4 - link_box.false) { targetmaru.classList.add("gray") }
+    } else if (link_wall.up && link_wall.right && link_wall.down ||
+        link_wall.up && link_wall.right && link_wall.left ||
+        link_wall.up && link_wall.down && link_wall.left ||
+        link_wall.right && link_wall.down && link_wall.left) {
         // 壁1
-        if (now_data[2][x][y] == 2 - link_box[1]) { targetmaru.classList.add("gray") }
+        if (now_data.maru[x][y] == 2 - link_box.false) { targetmaru.classList.add("gray") }
     } else {
         // 壁2
-        if (now_data[2][x][y] == 1 - link_box[1]) { targetmaru.classList.add("gray") }
+        if (now_data.maru[x][y] == 1 - link_box.false) { targetmaru.classList.add("gray") }
     }
 }
 function all_check_maru() {
-    for (let x = 0; x <= now_data[0][0]; x++) {
-        for (let y = 0; y <= now_data[0][1]; y++) {
+    for (let x = 0; x <= now_data.size.x; x++) {
+        for (let y = 0; y <= now_data.size.y; y++) {
             check_maru(x, y)
         }
     }
@@ -329,71 +328,71 @@ function all_check_maru() {
 function check_maru(x, y) {
     let targetmaru = document.getElementById('maru_' + x + ',' + y)
     targetmaru.classList.remove("red")
-    if (check_maru_data(x, y, now_data[0], now_data[1], now_data[2])) { targetmaru.classList.add("red") }
+    if (check_maru_data(x, y, now_data.size, now_data.box, now_data.maru)) { targetmaru.classList.add("red") }
 }
 function check_maru_data(x, y, size, box_data, maru_data) {
     if (maru_data[x][y] === "") { return false }
     let link_box = check_link_box(x, y, size, box_data)
     let link_wall = check_link_wall(x, y, size)
     // 超過
-    if (maru_data[x][y] < link_box[0]) { return true }
+    if (maru_data[x][y] < link_box.true) { return true }
     // 不足
-    if (link_wall[0] && link_wall[1] && link_wall[2] && link_wall[3]) {
+    if (link_wall.up && link_wall.right && link_wall.down && link_wall.left) {
         // 壁0
-        if (maru_data[x][y] > 4 - link_box[1]) { return true }
+        if (maru_data[x][y] > 4 - link_box.false) { return true }
         if (maru_data[x][y] == 0) { return true }
-    } else if (link_wall[0] && link_wall[1] && link_wall[2] ||
-        link_wall[0] && link_wall[1] && link_wall[3] ||
-        link_wall[0] && link_wall[2] && link_wall[3] ||
-        link_wall[1] && link_wall[2] && link_wall[3]) {
+    } else if (link_wall.up && link_wall.right && link_wall.down ||
+        link_wall.up && link_wall.right && link_wall.left ||
+        link_wall.up && link_wall.down && link_wall.left ||
+        link_wall.right && link_wall.down && link_wall.left) {
         // 壁1
-        if (maru_data[x][y] > 2 - link_box[1]) { return true }
+        if (maru_data[x][y] > 2 - link_box.false) { return true }
         if (maru_data[x][y] > 2) { return true }
     } else {
         // 壁2
-        if (maru_data[x][y] > 1 - link_box[1]) { return true }
+        if (maru_data[x][y] > 1 - link_box.false) { return true }
         if (maru_data[x][y] > 1) { return true }
     }
     return false
 }
 function check_link_box(x, y, size, box_data) {
-    let link_box = [0, 0]
+    let link_box = { true: 0, false: 0 }
     let link_wall = check_link_wall(x, y, size)
-    if (link_wall[1] && link_wall[2]) {
-        if (box_data[x][y] == -1) { link_box[0]++ }
-        if (box_data[x][y] == 1) { link_box[1]++ }
+    if (link_wall.right && link_wall.down) {
+        if (box_data[x][y] == -1) { link_box.true++ }
+        if (box_data[x][y] == 1) { link_box.false++ }
     }
-    if (link_wall[0] && link_wall[1]) {
-        if (box_data[x][y - 1] == 1) { link_box[0]++ }
-        if (box_data[x][y - 1] == -1) { link_box[1]++ }
+    if (link_wall.up && link_wall.right) {
+        if (box_data[x][y - 1] == 1) { link_box.true++ }
+        if (box_data[x][y - 1] == -1) { link_box.false++ }
     }
-    if (link_wall[2] && link_wall[3]) {
-        if (box_data[x - 1][y] == 1) { link_box[0]++ }
-        if (box_data[x - 1][y] == -1) { link_box[1]++ }
+    if (link_wall.down && link_wall.left) {
+        if (box_data[x - 1][y] == 1) { link_box.true++ }
+        if (box_data[x - 1][y] == -1) { link_box.false++ }
     }
-    if (link_wall[0] && link_wall[3]) {
-        if (box_data[x - 1][y - 1] == -1) { link_box[0]++ }
-        if (box_data[x - 1][y - 1] == 1) { link_box[1]++ }
+    if (link_wall.up && link_wall.left) {
+        if (box_data[x - 1][y - 1] == -1) { link_box.true++ }
+        if (box_data[x - 1][y - 1] == 1) { link_box.false++ }
     }
     return link_box
 }
 function all_check_box() {
     loop_checked = []
-    for (let x = 0; x < now_data[0][0]; x++) {
+    for (let x = 0; x < now_data.size.x; x++) {
         loop_checked.push([])
-        for (let y = 0; y < now_data[0][1]; y++) {
+        for (let y = 0; y < now_data.size.y; y++) {
             loop_checked[x].push(0)
         }
     }
-    for (let x = 0; x < now_data[0][0]; x++) {
-        for (let y = 0; y < now_data[0][1]; y++) {
+    for (let x = 0; x < now_data.size.x; x++) {
+        for (let y = 0; y < now_data.size.y; y++) {
             document.getElementById('box_' + x + ',' + y).classList.remove("red")
         }
     }
-    for (let x = 0; x < now_data[0][0]; x++) {
-        for (let y = 0; y < now_data[0][1]; y++) {
+    for (let x = 0; x < now_data.size.x; x++) {
+        for (let y = 0; y < now_data.size.y; y++) {
             if (loop_checked[x][y] == 0) {
-                if (check_box_data(x, y, now_data[0], now_data[1])) {
+                if (check_box_data(x, y, now_data.size, now_data.box)) {
                     loop_red_box()
                 }
             }
@@ -404,56 +403,53 @@ function check_box_data(x, y, size, box_data) {
     if (box_data[x][y] == 0) { return false }
     let queue = []
     root = []
-    for (let x = 0; x <= size[0]; x++) {
+    for (let x = 0; x <= size.x; x++) {
         root.push([])
-        for (let y = 0; y <= size[1]; y++) {
+        for (let y = 0; y <= size.y; y++) {
             root[x].push(0)
         }
     }
     if (box_data[x][y] == 1) {
-        queue.push([x + 1, y])
+        queue.push({ x: x + 1, y: y })
         root[x + 1][y] = 1
-        loop_goal = [x, y + 1]
+        loop_goal = { x: x, y: y + 1 }
     }
     if (box_data[x][y] == -1) {
-        queue.push([x, y])
+        queue.push({ x: x, y: y })
         root[x][y] = 1
-        loop_goal = [x + 1, y + 1]
+        loop_goal = { x: x + 1, y: y + 1 }
     }
     box_data[x][y] *= -1
     while (queue.length != 0) {
         let P = queue[0]
-        let link_wall = check_link_wall(P[0], P[1], size)
-        if (link_wall[1] && link_wall[2]) {
+        // console.log(queue, P)
+        let link_wall = check_link_wall(P.x, P.y, size)
+        if (link_wall.right && link_wall.down) {
             // 右下
-            let n_x = P[0] + 1
-            let n_y = P[1] + 1
-            if (box_data[P[0]][P[1]] == -1 && root[n_x][n_y] == 0) {
-                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
+            let n = { x: P.x + 1, y: P.y + 1 }
+            if (box_data[P.x][P.y] == -1 && root[n.x][n.y] == 0) {
+                if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
-        if (link_wall[0] && link_wall[1]) {
+        if (link_wall.up && link_wall.right) {
             // 右上
-            let n_x = P[0] + 1
-            let n_y = P[1] - 1
-            if (box_data[P[0]][P[1] - 1] == 1 && root[n_x][n_y] == 0) {
-                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
+            let n = { x: P.x + 1, y: P.y - 1 }
+            if (box_data[P.x][P.y - 1] == 1 && root[n.x][n.y] == 0) {
+                if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
-        if (link_wall[2] && link_wall[3]) {
+        if (link_wall.down && link_wall.left) {
             // 左下
-            let n_x = P[0] - 1
-            let n_y = P[1] + 1
-            if (box_data[P[0] - 1][P[1]] == 1 && root[n_x][n_y] == 0) {
-                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
+            let n = { x: P.x - 1, y: P.y + 1 }
+            if (box_data[P.x - 1][P.y] == 1 && root[n.x][n.y] == 0) {
+                if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
-        if (link_wall[0] && link_wall[3]) {
+        if (link_wall.up && link_wall.left) {
             // 左上
-            let n_x = P[0] - 1
-            let n_y = P[1] - 1
-            if (box_data[P[0] - 1][P[1] - 1] == -1 && root[n_x][n_y] == 0) {
-                if (loop_check(n_x, n_y, P, queue)) { box_data[x][y] *= -1; return true }
+            let n = { x: P.x - 1, y: P.y - 1 }
+            if (box_data[P.x - 1][P.y - 1] == -1 && root[n.x][n.y] == 0) {
+                if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
             }
         }
         queue.shift()
@@ -461,58 +457,60 @@ function check_box_data(x, y, size, box_data) {
     box_data[x][y] *= -1
     return false
 }
-function loop_check(n_x, n_y, P, queue) {
-    root[n_x][n_y] = root[P[0]][P[1]] + 1
-    queue.push([n_x, n_y])
-    if (n_x == loop_goal[0] && n_y == loop_goal[1]) { return true }
+function loop_check(n, P, queue) {
+    root[n.x][n.y] = root[P.x][P.y] + 1
+    queue.push(n)
+    if (n.x == loop_goal.x && n.y == loop_goal.y) { return true }
     return false
 }
 function loop_red_box() {
     // console.log("ループ発見", loop_goal, root)
     let l_P = loop_goal
     let only
-    while (root[l_P[0]][l_P[1]] != 1) {
-        // console.log("色塗り中", l_P, root[l_P[0]][l_P[1]], root)
-        let link_wall = check_link_wall(l_P[0], l_P[1], now_data[0])
+    let count = 0
+    while (root[l_P.x][l_P.y] != 1) {
+        count++; if (count == 10) { exit() }
+        // console.log("色塗り中", l_P, root[l_P.x][l_P.y])
+        let link_wall = check_link_wall(l_P.x, l_P.y, now_data.size)
         only = true
-        if (link_wall[1] && link_wall[2] && only && now_data[1][l_P[0]][l_P[1]] == -1) {
-            // 右下
-            let n_P = [l_P[0] + 1, l_P[1] + 1]
-            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                red_box(l_P[0], l_P[1])
+        if (link_wall.right && link_wall.down && only) {
+            // console.log("右下")
+            let n_P = { x: l_P.x + 1, y: l_P.y + 1 }
+            if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
+                red_box(l_P.x, l_P.y)
                 only = false
                 l_P = n_P
             }
         }
-        if (link_wall[0] && link_wall[1] && only && now_data[1][l_P[0]][l_P[1] - 1] == 1) {
-            // 右上
-            let n_P = [l_P[0] + 1, l_P[1] - 1]
-            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                red_box(l_P[0], l_P[1] - 1)
+        if (link_wall.up && link_wall.right && only) {
+            // console.log("右上")
+            let n_P = { x: l_P.x + 1, y: l_P.y - 1 }
+            if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
+                red_box(l_P.x, l_P.y - 1)
                 only = false
                 l_P = n_P
             }
         }
-        if (link_wall[2] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1]] == 1) {
-            // 左下
-            let n_P = [l_P[0] - 1, l_P[1] + 1]
-            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                red_box(l_P[0] - 1, l_P[1])
+        if (link_wall.down && link_wall.left && only) {
+            // console.log("左下")
+            let n_P = { x: l_P.x - 1, y: l_P.y + 1 }
+            if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
+                red_box(l_P.x - 1, l_P.y)
                 only = false
                 l_P = n_P
             }
         }
-        if (link_wall[0] && link_wall[3] && only && now_data[1][l_P[0] - 1][l_P[1] - 1] == -1) {
-            // 左上
-            let n_P = [l_P[0] - 1, l_P[1] - 1]
-            if (root[l_P[0]][l_P[1]] - root[n_P[0]][n_P[1]] == 1) {
-                red_box(l_P[0] - 1, l_P[1] - 1)
+        if (link_wall.up && link_wall.left && only) {
+            // console.log("左上")
+            let n_P = { x: l_P.x - 1, y: l_P.y - 1 }
+            if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
+                red_box(l_P.x - 1, l_P.y - 1)
                 only = false
                 l_P = n_P
             }
         }
     }
-    red_box((l_P[0] + loop_goal[0]) / 2 - 0.5, (l_P[1] + loop_goal[1]) / 2 - 0.5)
+    red_box((l_P.x + loop_goal.x) / 2 - 0.5, (l_P.y + loop_goal.y) / 2 - 0.5)
 }
 function red_box(x, y) {
     // console.log("red_box", x, y)
@@ -521,31 +519,37 @@ function red_box(x, y) {
 }
 function check_link_wall(x, y, size) {
     // (x,y)の丸について↑→↓←の順で壁がなければTrue
-    return [y != 0, x != size[0], y != size[1], x != 0]
+    return {
+        up: y != 0,
+        right: x != size.x,
+        down: y != size.y,
+        left: x != 0
+    }
 }
 function auto_fill_box() {
-    now_data[1] = f_auto_fill_data(now_data[0], now_data[2])
+    now_data.box = f_auto_fill_data(now_data.size, now_data.maru)
     create_box()
     if (gray_out.checked) { all_check_gray() }
     if (rule.checked) { all_check_maru() }
 }
 function f_auto_fill_data(size, maru_data) {
-    let auto_fill_data = [[], []]
+    let auto_fill_data = { box: [], maru: [] }
     auto_fill_ans = []
     auto_fill_count = 0
-    for (let x = 0; x < size[0]; x++) {
-        auto_fill_data[0].push([])
+    for (let x = 0; x < size.x; x++) {
+        auto_fill_data.box.push([])
         auto_fill_ans.push([])
-        for (let y = 0; y < size[1]; y++) {
-            auto_fill_data[0][x].push(0)
+        for (let y = 0; y < size.y; y++) {
+            auto_fill_data.box[x].push(0)
             auto_fill_ans[x].push(0)
         }
     }
-    auto_fill_data[1] = maru_data
+    auto_fill_data.maru = maru_data
     // console.log("今から考える", auto_fill_data)
     auto_fill_DFS(size, auto_fill_data, 0)
-    for (let x = 0; x < size[0]; x++) {
-        for (let y = 0; y < size[1]; y++) {
+    // if (auto_fill_count == 0) { alert("答えが存在しません。") }
+    for (let x = 0; x < size.x; x++) {
+        for (let y = 0; y < size.y; y++) {
             auto_fill_ans[x][y] = Math.trunc(auto_fill_ans[x][y] / auto_fill_count)
         }
     }
@@ -553,33 +557,33 @@ function f_auto_fill_data(size, maru_data) {
 }
 function auto_fill_DFS(size, tmp_data, node) {
     // console.log("DFS", size, tmp_data, node)
-    let x = node % size[0]
-    let y = Math.floor(node / size[0])
-    if (size[0] * size[1] == node) {
+    let x = node % size.x
+    let y = Math.floor(node / size.x)
+    if (size.x * size.y == node) {
         // console.log("One answer", tmp_data)
-        auto_fill_count += 1
-        for (let x = 0; x < size[0]; x++) {
-            for (let y = 0; y < size[1]; y++) {
-                auto_fill_ans[x][y] += tmp_data[0][x][y]
+        auto_fill_count++
+        for (let x = 0; x < size.x; x++) {
+            for (let y = 0; y < size.y; y++) {
+                auto_fill_ans[x][y] += tmp_data.box[x][y]
             }
         }
         return
     }
-    tmp_data[0][x][y] = -1
-    if (!(check_maru_data(x, y, size, tmp_data[0], tmp_data[1]) ||
-        check_maru_data(x + 1, y, size, tmp_data[0], tmp_data[1]) ||
-        check_maru_data(x, y + 1, size, tmp_data[0], tmp_data[1]) ||
-        check_maru_data(x + 1, y + 1, size, tmp_data[0], tmp_data[1]))) {
+    tmp_data.box[x][y] = -1
+    if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
+        check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
+        check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
+        check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
         auto_fill_DFS(size, tmp_data, node + 1)
     }
-    tmp_data[0][x][y] = 1
-    if (!(check_maru_data(x, y, size, tmp_data[0], tmp_data[1]) ||
-        check_maru_data(x + 1, y, size, tmp_data[0], tmp_data[1]) ||
-        check_maru_data(x, y + 1, size, tmp_data[0], tmp_data[1]) ||
-        check_maru_data(x + 1, y + 1, size, tmp_data[0], tmp_data[1]))) {
+    tmp_data.box[x][y] = 1
+    if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
+        check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
+        check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
+        check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
         if (x != 0) {
-            if (tmp_data[0][x - 1][y] == -1) {
-                if (!check_box_data(x, y, size, tmp_data[0])) {
+            if (tmp_data.box[x - 1][y] == -1) {
+                if (!check_box_data(x, y, size, tmp_data.box)) {
                     auto_fill_DFS(size, tmp_data, node + 1)
                 }
             } else {
@@ -589,7 +593,7 @@ function auto_fill_DFS(size, tmp_data, node) {
             auto_fill_DFS(size, tmp_data, node + 1)
         }
     }
-    tmp_data[0][x][y] = 0
+    tmp_data.box[x][y] = 0
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
 // add_button.click()
