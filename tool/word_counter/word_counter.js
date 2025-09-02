@@ -9,5 +9,5 @@ function word_count() {
     } else {
         words = 0
     }
-    document.getElementById('out').textContent=words+"単語 , "+id_in.value.length+"文字"
+    document.getElementById('out').textContent = words + "単語 , " + id_in.value.length + "文字"
 }

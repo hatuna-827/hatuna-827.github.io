@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="hatuna-827">
-        <link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
-        <link rel="stylesheet" href="/blog/blog.css">
-        <link rel="stylesheet" href="/hatuna-827.css">
-        <title>brainfuck_割り算 | hatuna-827</title>
-    </head>
-    <body>
-        <div id="homebar"></div>
-        <div id="main">
-        <h1>Let’s enjoy brainfuck.  ~割り算編~</h1>
+
+<head>
+    <script src="/hatuna-827.js"></script>
+    <link rel="stylesheet" href="/blog/blog.css">
+    <title>brainfuck_割り算 | hatuna-827</title>
+</head>
+
+<body>
+    <div id="homebar"></div>
+    <div id="main">
+        <h1>Let’s enjoy brainfuck. ~割り算編~</h1>
         <h2>コード紹介</h2>
         <p>今回はbrainfuckで割り算をするプログラムの紹介をしたいと思います。</p>
         <p>↓割り算をするコード</p>
-        <pre class="nobr">,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]<[<[-]<<<<<[>>>>[<<<+>->+>-]<[>+<-]>>+<<<<[<[->>+>]>>>[<<<]<<-]<]>>[>>[<<+>+>-]<[>+<-]>>-<<]>[<]<[<<++++++++++>>-]>>>>>++++++[<<++++++++>>-]<<.>-]</pre>
+        <pre
+            class="nobr">,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]<[<[-]<<<<<[>>>>[<<<+>->+>-]<[>+<-]>>+<<<<[<[->>+>]>>>[<<<]<<-]<]>>[>>[<<+>+>-]<[>+<-]>>-<<]>[<]<[<<++++++++++>>-]>>>>>++++++[<<++++++++>>-]<<.>-]</pre>
         <p>入力は、</p>
         <ul>
             <li>割られる数</li>
@@ -42,7 +41,7 @@
     >-
 ]</pre>
         <p>ポインタの左から順に ABCDEFG としています。</p>
-<pre>input
+        <pre>input
 G[
     Fのリセット
     A[
@@ -61,8 +60,8 @@ G[
 </pre>
         <p>参考・リンクなど</p>
         <p><a href="https://kachikachi.net/brainfuck">kachikachi.net/brainfuck</a></p>
-        </div>
-        <script src="/blog/blog.js"></script>
-        <script src="/hatuna-827.js"></script>
-    </body>
+    </div>
+    <script src="/blog/blog.js"></script>
+</body>
+
 </html>

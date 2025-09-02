@@ -1,0 +1,23 @@
+{
+    "short_name": "hatuna-827",
+    "name": "hatuna-827's website",
+    "description": "hatuna-827 | blog,game,tool...",
+    "scope": "https://hatuna-827.github.io",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#B2E9B2",
+    "background_color": "#F8F7F2",
+    "icons": [
+        {
+            "src": "hatuna-827.ico",
+            "sizes": "256x256 128x128 64x64 48x48 32x32 16x16"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "hatuna-827.ico",
+            "sizes": "256x256",
+            "label": "hatuna-827"
+        }
+    ]
+}

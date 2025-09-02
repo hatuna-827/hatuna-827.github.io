@@ -1,11 +1,13 @@
 #main {
     margin: 50px;
 }
+
 #out {
     margin: 25px 0px;
     font-size: 25px;
     line-height: 30px;
 }
+
 #in {
     width: 100%;
     height: calc(100vh - min(90px, 15vw) - 177px);
@@ -18,22 +20,27 @@
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
 }
+
 #in::selection {
     background-color: var(--light-green-color);
     color: var(--black-color);
 }
+
 #kome {
     margin: 5px 0px;
     font-size: 15px;
     line-height: 15px;
 }
+
 :focus {
     outline: none;
 }
+
 @media screen and (max-width:480px) {
     #main {
         margin: 20px;
     }
+
     #in {
         height: calc(100vh - min(90px, 15vw) - 122px);
     }

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 目次の追加
     let tag = document.createElement("div")
     tag.id = "tag"
-    document.querySelector("h1").insertAdjacentElement("afterend",tag)
+    document.querySelector("h1").insertAdjacentElement("afterend", tag)
     var tag_target = document.getElementsByTagName('h2')
     for (i = 0; i < tag_target.length; i++) {
         let tag_text = tag_target[i].innerText.replace(/"/g, "'")

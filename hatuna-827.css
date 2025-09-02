@@ -21,33 +21,40 @@
     --pink-color: #ff86c2;
     --pastel-pink-color: #f6bdc0;
     /* fonts */
-    --main-font: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    --main-font: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
     --code-font: monospace;
 }
+
 ::selection {
     background-color: var(--main-dark-color);
     color: var(--white-color);
 }
+
 body {
     margin: 0px;
     font-family: var(--main-font);
     font-size: 0px;
     background-color: var(--main-bg-color);
 }
+
 #homebar {
     background-color: var(--main-light-color);
     width: 100%;
-    height: min(90px,15vw);
+    height: min(90px, 15vw);
     text-align: center;
     user-select: none;
+
     a {
         margin: 0px;
-        font-size: min(50px,10vw);
+        font-size: min(50px, 10vw);
         color: var(--black-color);
         text-decoration: none;
-        line-height: min(90px,15vw);
+        line-height: min(90px, 15vw);
     }
 }
-button,input,textarea {
+
+button,
+input,
+textarea {
     font-family: inherit;
 }

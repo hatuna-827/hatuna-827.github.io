@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     setTimeout(() => {
-        window.location="/link"
+        window.location = "/link"
     }, 5000);
 })

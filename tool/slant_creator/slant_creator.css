@@ -1,29 +1,35 @@
 body {
     user-select: none;
 }
-button, input {
+
+button,
+input {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
 }
+
 #main {
     margin: 50px;
     text-align: center;
 }
+
 .menu_button {
     margin: 0px 15px;
     height: 60px;
     width: 60px;
     background-color: var(--main-color);
-    border:none;
+    border: none;
     text-align: center;
     padding: 0px;
     border-radius: 10px;
 }
+
 .setting_image {
     height: 50px;
-    margin:5px 0px;
+    margin: 5px 0px;
 }
+
 .menu {
     background-color: var(--grey-d-color);
     width: 700px;
@@ -35,6 +41,7 @@ button, input {
     display: none;
     font-size: 25px;
     line-height: 40px;
+
     input[type=checkbox] {
         margin: 0px 10px;
         box-sizing: border-box;
@@ -48,8 +55,9 @@ button, input {
         position: relative;
         -webkit-appearance: none;
         -moz-appearance: none;
-            appearance: none;
+        appearance: none;
     }
+
     input[type=checkbox]:checked:before {
         position: absolute;
         top: 2px;
@@ -57,10 +65,11 @@ button, input {
         transform: rotate(50deg);
         width: 8px;
         height: 16px;
-        border-right:  2px solid var(--black-color);
+        border-right: 2px solid var(--black-color);
         border-bottom: 2px solid var(--black-color);
         content: '';
     }
+
     input[type=number] {
         margin: 0px 10px;
         height: 30px;
@@ -72,12 +81,15 @@ button, input {
         text-align: center;
         vertical-align: 1px;
     }
+
     input[type=number]:disabled {
         border: 1px solid var(--grey-d-color);
     }
+
     input[type=number]:invalid {
         border: 1px solid var(--red-color);
     }
+
     button {
         margin: 50px 250px 10px 250px;
         height: 50px;
@@ -88,49 +100,59 @@ button, input {
         border-radius: 10px;
     }
 }
+
 #list_null {
     font-size: 20px;
     text-align: center;
     display: none;
 }
+
 #list_null:only-child {
     display: block;
 }
+
 #work_space {
     display: none;
 }
+
 #work_buttons {
     position: absolute;
     height: calc(100vh - 100px);
     width: 60px;
     left: 15px;
 }
+
 #popup_arrow1 {
     position: absolute;
     height: 25px;
     margin: 30px 25px 5px 0px;
     transform: rotate(180deg);
 }
+
 #popup_arrow2 {
     height: 25px;
     margin: 5px 0px 30px 25px;
 }
+
 #save_button {
     display: none;
 }
+
 #close_button_image {
     transform: rotate(45deg);
 }
+
 .work_button {
     margin: 15px 0px;
     height: 60px;
     width: 60px;
     background-color: var(--main-color);
-    border:none;
+    border: none;
     text-align: center;
     padding: 0px;
     border-radius: 10px;
 }
+
 #create_space {
     margin: 50px 0px 0px 40px;
     height: calc(100vh - 100px);
@@ -141,10 +163,12 @@ button, input {
     overflow: scroll;
     text-align: center;
     align-items: center;
+
     #big_box {
         margin: calc(1015px + 2px / 3);
         border: .5px solid var(--black-color);
     }
+
     .box {
         height: 30px;
         width: 30px;
@@ -152,7 +176,9 @@ button, input {
         display: inline-block;
         position: relative;
     }
-    .box.b::before,.box.f::before {
+
+    .box.b::before,
+    .box.f::before {
         position: absolute;
         top: 0;
         transform-origin: top left;
@@ -161,25 +187,31 @@ button, input {
         background-color: var(--black-color);
         content: '';
     }
+
     .box.b::before {
         left: 0;
         transform: rotate(-45deg) translateX(-.5px);
     }
+
     .box.f::before {
         right: 0;
         transform: rotate(45deg) translateY(-1px) translateX(.5px);
     }
+
     .box.green::before {
         background-color: var(--main-dark-color);
     }
+
     .box.red::before {
         background-color: var(--red-color);
     }
+
     #big_maru {
         position: static;
         margin: 0px 1000px;
         visibility: hidden;
     }
+
     .maru {
         visibility: visible;
         height: 20px;
@@ -194,20 +226,25 @@ button, input {
         line-height: 20px;
         vertical-align: middle;
     }
-    #big_maru:not(.play_mode){
+
+    #big_maru:not(.play_mode) {
         .maru:hover {
             opacity: .3;
         }
+
         .maru.disp {
             opacity: 0.9999999;
         }
     }
+
     .maru.disp {
         opacity: 0.9999999;
     }
+
     .maru.gray {
         background-color: var(--grey-c-color);
     }
+
     .maru.red {
         color: var(--red-color);
         background-color: var(--pastel-pink-color);

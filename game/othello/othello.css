@@ -1,5 +1,5 @@
 button {
-    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    font-family: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
     width: 80px;
     height: 80px;
     margin: -0.75px;
@@ -13,8 +13,9 @@ button {
     background-color: var(--leaf-green-color);
     user-select: none;
 }
+
 .but {
-    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    font-family: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
     width: 150px;
     height: 50px;
     margin: 10px;
@@ -26,14 +27,17 @@ button {
     background-color: var(--main-light-color);
 
 }
-br{
+
+br {
     user-select: none;
 }
+
 #main {
     margin: 30px 0px 30px 0px;
     text-align: center;
     white-space: nowrap;
 }
+
 #pop {
     display: none;
     position: fixed;
@@ -45,6 +49,7 @@ br{
     align-items: center;
     z-index: 1001;
 }
+
 #poptext {
     width: 400px;
     height: 400px;
@@ -53,31 +58,37 @@ br{
     text-align: center;
     border-radius: 30px;
 }
+
 #popmain {
     font-size: 150px;
     margin: 90px 0px 0px 0px;
     line-height: 150px;
     -webkit-text-stroke: var(--black-color) 3px;
 }
+
 #mini {
     font-size: 50px;
     margin: 20px 0px 0px 0px;
     line-height: 50px;
 }
+
 @media screen and (max-width:480px) {
     #main {
         margin: 40px 0px;
     }
+
     #poptext {
         width: 50vw;
         height: 50vw;
         border-radius: 4vw;
     }
+
     #popmain {
         font-size: 21vw;
         margin: 10vw 0px 0px 0px;
         line-height: 21vw;
     }
+
     #mini {
         font-size: 7vw;
         margin: 2vw 0px 0px 0px;

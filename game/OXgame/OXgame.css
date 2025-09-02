@@ -1,17 +1,30 @@
 @keyframes button-on {
-    0% {color: var(--main-bg-color);}
-    100% {color: var(--black-color);}
+    0% {
+        color: var(--main-bg-color);
+    }
+
+    100% {
+        color: var(--black-color);
+    }
 }
+
 @keyframes pop-on {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
+
 #main {
     margin: 70px 0px 50px 0px;
     text-align: center;
 }
+
 button {
-    font-family: '游明朝','Yu Mincho','YuMincho','Hiragino Mincho Pro',serif;
+    font-family: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
     width: 100px;
     height: 100px;
     margin: 0px;
@@ -24,10 +37,12 @@ button {
     background-color: var(--main-bg-color);
     user-select: none;
 }
+
 .button-display {
     animation: .2s button-on;
     animation-fill-mode: forwards;
 }
+
 #reset {
     margin-top: 40px;
     width: 200px;
@@ -40,6 +55,7 @@ button {
     border-radius: 10px;
     padding: 25px 0px;
 }
+
 #pop {
     display: none;
     position: fixed;
@@ -51,9 +67,11 @@ button {
     align-items: center;
     z-index: 1001;
 }
+
 .pop-display {
     animation: .5s pop-on;
 }
+
 #poptext {
     width: 400px;
     height: 400px;
@@ -62,17 +80,20 @@ button {
     text-align: center;
     border-radius: 30px;
 }
+
 p {
     font-size: 50px;
     color: var(--main-dark-color);
     margin: 20px 0px 0px 0px;
     line-height: 50px;
 }
+
 #winner {
     font-size: 150px;
     margin: 90px 0px 0px 0px;
     line-height: 150px;
 }
+
 @media screen and (max-width:480px) {
     button {
         width: 30vw;
@@ -80,23 +101,28 @@ p {
         padding: calc(6vw + 1px) 0px;
         font-size: 24vw;
     }
+
     #main {
         margin: 40px 0px;
     }
+
     #reset {
         margin: 40px 10px 10px 10px;
         max-width: 200px;
     }
+
     #poptext {
         width: 50vw;
         height: 50vw;
         border-radius: 4vw;
     }
+
     p {
         font-size: 7vw;
         margin: 2vw 0px 0px 0px;
         line-height: 7vw;
     }
+
     #winner {
         font-size: 21vw;
         margin: 10vw 0px 0px 0px;
