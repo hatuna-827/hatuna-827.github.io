@@ -1,11 +1,5 @@
-// async function a() {
-//     var a = await dialog()
-//     var b = await dialog({ title: "注意", content: "入力に誤りがあります。", button: ["a", "b", "c", "d", "e", "f", "g"] })
-//     console.log("a", a)
-//     console.log("b", b)
-// }
-// a()
 "use strict"
+import dialog from "/dialog.js"
 let settings_display = "none"
 let popup = false
 let now_data = {}
