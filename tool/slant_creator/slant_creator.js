@@ -1,3 +1,10 @@
+// async function a() {
+//     var a = await dialog()
+//     var b = await dialog({ title: "注意", content: "入力に誤りがあります。", button: ["a", "b", "c", "d", "e", "f", "g"] })
+//     console.log("a", a)
+//     console.log("b", b)
+// }
+// a()
 "use strict"
 let settings_display = "none"
 let popup = false
@@ -55,9 +62,9 @@ height.addEventListener('input', function () {
         width.value = height.value
     }
 })
-create_new.addEventListener('click', function () {
+create_new.addEventListener('click', async function () {
     if (!(height.value % 1 == 0 && height.value > 0 && width.value % 1 == 0 && width.value > 0)) {
-        console.log("入力に誤りがあります。")
+        await dialog({ content: "入力内容に誤りがあります。" })
         return
     }
     auto_fill.checked = false
@@ -81,14 +88,14 @@ create_new.addEventListener('click', function () {
 //         save_button.style.display = "block"
 //     }
 // })
-auto_fill.addEventListener('click', function () {
+auto_fill.addEventListener('click', async function () {
     if (auto_fill.checked) {
         if (now_data.size.x * now_data.size.y > 20) {
-            alert("処理量の問題により大きさは20マスまでです。")
+            await dialog({ content: "処理量の問題により大きさは20マスまでです。" })
             auto_fill.checked = false
         } else {
-            let checkSaveFlg = window.confirm('現在の斜線情報がすべて失われます。よろしいですか？')
-            if (checkSaveFlg) {
+            let checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
+            if (checkSaveFlg == 0) {
                 auto_fill_box()
             } else {
                 auto_fill.checked = false
