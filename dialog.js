@@ -48,7 +48,7 @@ export default async function dialog({
         const _text = document.createElement('div')
         const _reply_button = document.createElement('div')
         _bg.style = "display: flex;position: fixed;margin: 0px;width: 100vw;height: 100vh;background-color: rgba(0, 0, 0, 0.4);justify-content: center;align-items: center;z-index: 1001;"
-        _content.style = "font-family: "+font+";padding: 0px 0px 20px;max-height: 80vh;max-width: 80vw;min-width: 600px;font-size: 30px;line-height: 40px;text-align: center;border-radius: 30px;background-color: " + bg_color + ";overflow: auto;scrollbar-width: none;"
+        _content.style = "font-family: " + font + ";padding: 0px 0px 20px;max-height: 80vh;max-width: 80vw;min-width: 600px;font-size: 30px;line-height: 40px;text-align: center;border-radius: 30px;background-color: " + bg_color + ";overflow: auto;scrollbar-width: none;"
         _title.style = "margin: 0px;height: 70px;max-width: 80vw;min-width: 600px;font-size: 40px;line-height: 70px;color: " + title_color + ";text-align: center;border-radius: 30px 30px 0px 0px;background-color: " + main_color + ";"
         _text.style = "max-height: calc(80vh - 220px);padding: 30px 30px 10px;overflow: auto;scrollbar-color: " + main_color + " " + bg_color + ";color: " + text_color + ";"
         if (button.length == 0) {

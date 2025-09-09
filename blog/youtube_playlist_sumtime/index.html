@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <script src="/hatuna-827.js"></script>
+    <link rel="stylesheet" href="/blog/blog.css">
+    <title>Youtubeプレイリストの合計時間 | hatuna-827</title>
+</head>
+
+<body>
+    <div id="homebar"></div>
+    <div id="main">
+        <h1>Youtubeプレイリストの合計時間を計算する</h1>
+        <h2>コード紹介</h2>
+        <pre>
+let sumtime = [0, 0, 0];
+document.querySelectorAll('.playlist-items .yt-badge-shape__text').forEach(shape => {
+    let time = shape.innerText;
+    time.split(":").forEach((time_split, i) => {
+        sumtime[i] += Number(time_split);
+    });
+});
+sumtime[0] += Math.floor(sumtime[1] / 60);
+sumtime[1] %= 60;
+sumtime[2] += Math.floor(sumtime[0] / 60);
+sumtime[0] %= 60;
+console.log(`${sumtime[2]}時間${sumtime[0]}分${sumtime[1]}秒`);
+</pre>
+        <h2>使い方</h2>
+        <p>Youtubeの再生リストを開き、コンソール画面で実行することでその再生リストの合計時間を計算できます。</p>
+        <p>コンソール画面は、
+        <ul>
+            <li><code>Ctrl</code> + <code>Shift</code> + <code>J</code>(Windows・Linux)</li>
+            <li><code>Command</code> + <code>Option</code> + <code>J</code>(macOS)</li>
+        </ul>
+        <p>を同時に押すことで開くことができます。</p>
+    </div>
+    <script src="/blog/blog.js"></script>
+</body>
+
+</html>
