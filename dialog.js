@@ -4,10 +4,10 @@ export default async function dialog({
     title = "",
     content = "",
     button = [],
-    main_color = "#89b76c",
-    bg_color = "#f8f7f2",
-    title_color = "#ffffff",
-    text_color = "#000000",
+    main_color = "var(--dialog-main,#89b76c)",
+    bg_color = "var(--dialog-bg,#f8f7f2)",
+    title_color = "var(--dialog-title,#ffffff)",
+    text_color = "var(--dialog-text,#000000)",
     font = "'游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif"
 } = {
         title: "引数一覧",

@@ -3,7 +3,7 @@ document.querySelector('head').insertAdjacentHTML('afterbegin', '\
     <meta charset="UTF-8" />\
     <meta name="viewport" content="width=device-width, initial-scale=1" />\
     <meta name="author" content="hatuna-827" />\
-    <meta name="theme-color" content="#B2E9B2" />\
+    <meta name="theme-color" content="#709170" />\
     <link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico" />\
     <link rel="apple-touch-icon" href="/hatuna-827.png" />\
     <link rel="stylesheet" href="/hatuna-827.css" />\

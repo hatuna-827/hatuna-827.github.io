@@ -203,7 +203,8 @@ function create_box() {
             let new_box = document.createElement("div")
             new_box.classList.add("box")
             new_box.id = 'box_' + x + ',' + y
-            new_box.setAttribute('onclick', 'push_box(' + x + ',' + y + ')')
+            new_box.addEventListener('click', function () { push_box(x, y) })
+            // new_box.setAttribute('onclick', 'push_box(' + x + ',' + y + ')')
             if (now_data.box[x][y] == 1) { new_box.classList.add("f") }
             if (now_data.box[x][y] == -1) { new_box.classList.add("b") }
             big_box.insertAdjacentElement('beforeend', new_box)
@@ -220,7 +221,8 @@ function create_maru() {
             let new_maru = document.createElement("div")
             new_maru.classList.add("maru")
             new_maru.id = 'maru_' + x + ',' + y
-            new_maru.setAttribute('onclick', 'push_maru(' + x + ',' + y + ')')
+            new_maru.addEventListener('click', function () { push_maru(x, y) })
+            // new_maru.setAttribute('onclick', 'push_maru(' + x + ',' + y + ')')
             new_maru.textContent = now_data.maru[x][y]
             if (new_maru.textContent != "") {
                 new_maru.classList.add("disp")

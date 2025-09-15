@@ -78,10 +78,10 @@ function out() {
     for (y = 0; y < 8; y++) {
         for (x = 0; x < 8; x++) {
             if (data[y][x] == -1) {
-                document.getElementById(y * 8 + x).style.color = "var(--white-color)"
+                document.getElementById(y * 8 + x).style.color = "#fff"
             }
             if (data[y][x] == 1) {
-                document.getElementById(y * 8 + x).style.color = "var(--black-color)"
+                document.getElementById(y * 8 + x).style.color = "#000"
             }
         }
     }
