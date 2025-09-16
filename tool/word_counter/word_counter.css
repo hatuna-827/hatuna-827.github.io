@@ -4,30 +4,33 @@
 
 #out {
     margin: 25px 0px;
+    color: var(--black-color);
     font-size: 25px;
     line-height: 30px;
 }
 
 #in {
-    width: 100%;
-    height: calc(100vh - min(90px, 15vw) - 177px);
-    padding: 0px;
+    width: calc(100% - 20px);
+    height: calc(100vh - min(90px, 15vw) - 197px);
+    padding: 10px;
     margin: 0px;
     border: 1px solid var(--black-color);
     border-radius: 0px;
     resize: none;
-    background-color: var(--white-color);
-    font-size: 18px;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--main-bg-color);
+    color: var(--black-color);
+    font-size: 20px;
+    font-family: var(--code-font);
 }
 
 #in::selection {
-    background-color: var(--light-green-color);
+    background-color: var(--leaf-green-color);
     color: var(--black-color);
 }
 
 #kome {
     margin: 5px 0px;
+    color: var(--black-color);
     font-size: 15px;
     line-height: 15px;
 }

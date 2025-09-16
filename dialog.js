@@ -8,7 +8,7 @@ export default async function dialog({
     bg_color = "var(--dialog-bg,#f8f7f2)",
     title_color = "var(--dialog-title,#ffffff)",
     text_color = "var(--dialog-text,#000000)",
-    font = "'游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif"
+    font = "var(--dialog-font,'游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif)"
 } = {
         title: "引数一覧",
         content: "\

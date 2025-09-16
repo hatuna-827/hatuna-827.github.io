@@ -1,28 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 :root {
-    /* main */
-    --main-color: #709170;
-    --main-light-color: #B2E9B2;
-    --main-dark-color: #007e00;
-    --main-bg-color: #f8f7f2;
-    /* grey */
-    --grey-e5-color: #E5E5E5;
-    --grey-d-color: #ddd;
-    --grey-c-color: #ccc;
-    --grey-a-color: #aaa;
-    /* green */
-    --grey-green-color: #cdc;
-    --light-green-color: #afd8af;
-    --leaf-green-color: #89b76c;
-    --dark-green-color: #3f4e3f;
-    /* any color */
-    --black-color: #000000;
-    --white-color: #ffffff;
-    --red-color: #ff0000;
-    --pink-color: #ff86c2;
-    --pastel-pink-color: #f6bdc0;
     /* fonts */
     --main-font: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
-    --code-font: monospace;
+    --code-font: 'Ubuntu mono', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* main */
+        --main-color: #709170;
+        --main-light-color: #565;
+        --main-dark-color: #007e00;
+        --main-bg-color: #383732;
+        /* grey */
+        --grey-e5-color: #666;
+        --grey-d-color: #555;
+        --grey-c-color: #444;
+        --grey-a-color: #333;
+        /* green */
+        --grey-green-color: #454;
+        --light-green-color: #afd8af;
+        --leaf-green-color: #587a4c;
+        --dark-green-color: #3f4e3f;
+        /* any color */
+        --black-color: #ffffff;
+        --white-color: #000000;
+        --red-color: #b20024;
+        --pink-color: #b3000d;
+        --pastel-pink-color: #ff7d79;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        /* main */
+        --main-color: #709170;
+        --main-light-color: #B2E9B2;
+        --main-dark-color: #007e00;
+        --main-bg-color: #f8f7f2;
+        /* grey */
+        --grey-e5-color: #E5E5E5;
+        --grey-d-color: #ddd;
+        --grey-c-color: #ccc;
+        --grey-a-color: #aaa;
+        /* green */
+        --grey-green-color: #cdc;
+        --light-green-color: #afd8af;
+        --leaf-green-color: #89b76c;
+        --dark-green-color: #3f4e3f;
+        /* any color */
+        --black-color: #000000;
+        --white-color: #ffffff;
+        --red-color: #ff0000;
+        --pink-color: #ff86c2;
+        --pastel-pink-color: #f6bdc0;
+    }
 }
 
 ::selection {
@@ -35,6 +68,7 @@ body {
     font-family: var(--main-font);
     font-size: 0px;
     background-color: var(--main-bg-color);
+    scrollbar-color: var(--leaf-green-color) var(--white-color);
 }
 
 #homebar {

@@ -31,16 +31,17 @@ input {
 }
 
 .menu {
-    background-color: var(--grey-d-color);
-    width: 700px;
-    max-height: 350px;
+    display: none;
     margin: 50px calc(50vw - 450px);
     padding: 30px 50px;
+    max-height: 350px;
+    width: 700px;
     border-radius: 30px;
-    text-align: left;
-    display: none;
+    background-color: var(--grey-d-color);
+    color: var(--black-color);
     font-size: 25px;
     line-height: 40px;
+    text-align: left;
 
     input[type=checkbox] {
         margin: 0px 10px;
@@ -74,9 +75,10 @@ input {
         margin: 0px 10px;
         height: 30px;
         width: 100px;
+        border: 1px solid var(--black-color);
         background-color: var(--white-color);
         border-radius: 3px;
-        border: 1px solid var(--black-color);
+        color: var(--black-color);
         font-size: 20px;
         text-align: center;
         vertical-align: 1px;
@@ -213,15 +215,16 @@ input {
     }
 
     .maru {
+        display: inline-block;
         visibility: visible;
+        opacity: 0;
+        margin: 5px;
         height: 20px;
         width: 20px;
         border: .5px solid var(--black-color);
         border-radius: 20px;
-        display: inline-block;
-        margin: 5px;
         background-color: var(--white-color);
-        opacity: 0;
+        color: var(--black-color);
         font-size: 17px;
         line-height: 20px;
         vertical-align: middle;

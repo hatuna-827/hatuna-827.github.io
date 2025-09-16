@@ -24,7 +24,7 @@
 }
 
 button {
-    font-family: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
+    font-family: var(--main-font);
     width: 100px;
     height: 100px;
     margin: 0px;
@@ -75,7 +75,7 @@ button {
 #poptext {
     width: 400px;
     height: 400px;
-    background-color: var(--white-color);
+    background-color: var(--main-bg-color);
     margin: 0px;
     text-align: center;
     border-radius: 30px;

@@ -35,7 +35,7 @@ p {
 }
 
 button {
-    font-family: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
+    font-family: var(--main-font);
     padding: 0px;
     margin: 20px 7vw -5px 7vw;
     color: var(--black-color);
