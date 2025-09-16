@@ -9,7 +9,7 @@ h1 {
 .button {
     margin: 30px 12vw 30px 12vw;
     font-size: 6vw;
-    font-family: '游明朝', 'Yu Mincho', YuMincho, 'Hiragino Mincho Pro', serif;
+    font-family: var(--main-font);
     text-align: center;
     width: 12vw;
     height: 12vw;
@@ -20,7 +20,7 @@ h1 {
 }
 
 .setbutton {
-    font-family: '游明朝', 'Yu Mincho', YuMincho, 'Hiragino Mincho Pro', serif;
+    font-family: var(--main-font);
     color: var(--main-color);
     font-size: 30px;
     margin: 0px;
@@ -47,7 +47,7 @@ h1 {
 }
 
 #inputnum {
-    font-family: '游明朝', 'Yu Mincho', YuMincho, 'Hiragino Mincho Pro', serif;
+    font-family: var(--main-font);
     color: var(--main-color);
     font-size: 30px;
     margin: 0px 10px;
