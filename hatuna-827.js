@@ -9,5 +9,7 @@ document.head.insertAdjacentHTML('afterbegin', '\
 	<link rel="stylesheet" href="/hatuna-827.css" />\
 	')
 window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('homebar').innerHTML = "<a href='/link' id='home_link'>hatuna-827</a>"
+	try {
+		document.getElementById('homebar').innerHTML = "<a href='/link' id='home_link'>hatuna-827</a>"
+	} catch { }
 })

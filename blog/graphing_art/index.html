@@ -3,6 +3,19 @@
 
 <head>
 	<!-- meta -->
+	<meta name="description" content="desmosを用い、一緒にグラフアートを始めましょう！">
+	<meta property="og:url" content="https://hatuna-827.github.io/blog/graphing_art/index.html">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="グラフアート、はじめました。">
+	<meta property="og:description" content="desmosを用い、一緒にグラフアートを始めましょう！">
+	<meta property="og:site_name" content="グラフアート | hatuna-827">
+	<meta property="og:image" content="/1200_630.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="twitter:domain" content="hatuna-827.github.io">
+	<meta property="twitter:url" content="https://hatuna-827.github.io/blog/graphing_art/index.html">
+	<meta name="twitter:title" content="グラフアート、はじめました。">
+	<meta name="twitter:description" content="desmosを用い、一緒にグラフアートを始めましょう！">
+	<meta name="twitter:image" content="/1200_630.png">
 	<!-- meta-end -->
 	<script src="/hatuna-827.js"></script>
 	<link rel="stylesheet" href="/blog/blog.css">
@@ -21,34 +34,34 @@
 		<p>グラフアートとは、グラフを使って絵や文字を描くものです。</p>
 		<p>例えば、下の式で半径が１の円を描くことができます。</p>
 		<pre class="nobr">x^{2}+y^{2}=1</pre>
-		<img src="img/img1.png" class="border">
+		<img src="./img/img1.png" class="border">
 		<h2>書き方</h2>
 		<p>等号を不等号にすることで、面を塗りつぶす事ができます。</p>
 		<pre class="nobr">x^{2}+y^{2}\le1</pre>
-		<img src="img/img2.png" class="border">
+		<img src="./img/img2.png" class="border">
 		<p>また、両辺の符号を全て逆にすると、塗られている部分も逆転します。</p>
-		<img src="img/img3.png" class="border">
+		<img src="./img/img3.png" class="border">
 		<p>これを書くときは、不等号の向きを＜に統一しましょう。</p>
 		<p>あとで、式を組み合わせるときに揃っているとき組み合わせやすいです。</p>
 		<p></p>ここに２つの円のグラフがあります。</p>
 		<pre class="nobr">x^{2}+\left(y-0.6\right)^{2}\le1</pre>
 		<pre class="nobr">x^{2}+\left(y+0.6\right)^{2}\le1</pre>
-		<img src="img/img4.png" class="border">
+		<img src="./img/img4.png" class="border">
 		<p>このグラフを合体させるために、min関数を使います。</p>
 		<p>min関数の中に、不等号をマイナスにして２つの式を入れます。</p>
 		<p>このとき、不等号の左辺の符号がすべて逆転することに注意してください。</p>
 		<pre class="nobr">\min\left(x^{2}+\left(y-0.6\right)^{2}-1,x^{2}+\left(y+0.6\right)^{2}-1\right)\le0</pre>
-		<img src="img/img5.png" class="border">
+		<img src="./img/img5.png" class="border">
 		<p>できました！</p>
 		<p>今度は、重なっている部分だけにしましょう。共通部分にはmax関数を使います。</p>
 		<p>min関数のときと同じように、不等号をマイナスにして２つの式を入れます。</p>
 		<pre class="nobr">\max\left(x^{2}+\left(y-0.6\right)^{2}-1,x^{2}+\left(y+0.6\right)^{2}-1\right)\le0</pre>
-		<img src="img/img6.png" class="border">
+		<img src="./img/img6.png" class="border">
 		<p>できました！</p>
 		<p>これらを組み合わせることで、数字の８のような形を作ってみました。</p>
 		<pre
 			class="nobr">\max\left(\min\left(x^{2}+\left(y-0.6\right)^{2}-1,x^{2}+\left(y+0.6\right)^{2}-1\right),-x^{2}-\left(y-0.6\right)^{2}+0.2,-x^{2}-\left(y+0.6\right)^{2}+0.2\right)\le0</pre>
-		<img src="img/img7.png" class="border">
+		<img src="./img/img7.png" class="border">
 		<h2>最後に、</h2>
 		<p>とても面白かったので、たくさん遊びたいです。</p>
 		<p>あなたもぜひやってみてください。</p>

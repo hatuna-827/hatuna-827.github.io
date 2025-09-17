@@ -81,12 +81,12 @@ export default async function dialog({
 }
 
 /*
-OO  OKOnly           [OK]
-OC  OKCancel         [OK][キャンセル]
-ARI AbortRetryIgnore [中止][再試行][無視]
-YNC YesNoCancel      [はい][いいえ][キャンセル]
-YN  YesNo            [はい][いいえ]
-RC  RetryCancel      [再試行][キャンセル]
+OO--OKOnly-----------[OK]
+OC--OKCancel---------[OK][キャンセル]
+ARI-AbortRetryIgnore-[中止][再試行][無視]
+YNC-YesNoCancel------[はい][いいえ][キャンセル]
+YN--YesNo------------[はい][いいえ]
+RC--RetryCancel------[再試行][キャンセル]
 */
 
 /*

@@ -3,6 +3,19 @@
 
 <head>
 	<!-- meta -->
+	<meta name="description" content="難解プログラミング言語Brainfuckの基礎を解説します。">
+	<meta property="og:url" content="https://hatuna-827.github.io/blog/brainfuck/about/index.html">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="brainfuck~概要編~">
+	<meta property="og:description" content="難解プログラミング言語Brainfuckの基礎を解説します。">
+	<meta property="og:site_name" content="brainfuck~概要編~ | hatuna-827">
+	<meta property="og:image" content="/1200_630.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="twitter:domain" content="hatuna-827.github.io">
+	<meta property="twitter:url" content="https://hatuna-827.github.io/blog/brainfuck/about/index.html">
+	<meta name="twitter:title" content="brainfuck~概要編~">
+	<meta name="twitter:description" content="難解プログラミング言語Brainfuckの基礎を解説します。">
+	<meta name="twitter:image" content="/1200_630.png">
 	<!-- meta-end -->
 	<script src="/hatuna-827.js"></script>
 	<link rel="stylesheet" href="/blog/blog.css">
@@ -31,19 +44,19 @@
 		<p>それぞれの文字の使い方を詳しく見てみましょう。</p>
 		<h2>それぞれ文字の説明</h2>
 		<p>brainfuckではメモリが横に並んでいて最初は一番左のメモリにポインタがあるイメージです。</p>
-		<img src="img/img1.bmp" class="pixel">
+		<img src="./img/img1.bmp" class="pixel">
 		<p><code>></code>を実行するとポインタが今いるメモリの1つ右のメモリに移動します。</p>
-		<img src="img/img2.bmp" class="pixel">
+		<img src="./img/img2.bmp" class="pixel">
 		<p>同様に、<code><</code>を実行するとポインタが今いるメモリの1つ左のメモリに移動します。</p>
 		<p>もし、ポインタが一番左(初期位置)にあるときに<code><</code>をすると、エラーになるようです。</p>
-		<img src="img/img1.bmp" class="pixel">
+		<img src="./img/img1.bmp" class="pixel">
 		<p><code>+</code>や<code>-</code>でメモリのに1を足したり引いたりします。</p>
 		<p>もし、メモリが0のとき、<code>-</code>をすると、メモリは255になります。</p>
 		<p>逆に、メモリが255のとき、<code>+</code>をすると、メモリは0になります。</p>
-		<img src="img/img3.bmp" class="pixel">
+		<img src="./img/img3.bmp" class="pixel">
 		<p><code>,</code>は入力された文字のアスキーコードをメモリに上書きします。</p>
 		<p>例えば、<code>@(アスキーコードは64)</code>が入力された場合,メモリには64が保存されます。</p>
-		<img src="img/img4.bmp" class="pixel">
+		<img src="./img/img4.bmp" class="pixel">
 		<p>メモリに、どんな数字が入っていても上書きされてしまうため、注意が必要です。</p>
 		<h2>実際にコードのを書いてみよう</h2>
 		<p>試しに、<code>@(アスキーコードは64)</code>と出力するコードを書いてみましょう。</p>
