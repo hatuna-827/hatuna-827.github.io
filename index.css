@@ -1,85 +1,85 @@
 body {
-    margin: 0px;
-    font-family: var(--main-font);
-    font-size: 0px;
-    background-color: var(--main-bg-color);
-    user-select: none;
+	margin: 0px;
+	font-family: var(--main-font);
+	font-size: 0px;
+	background-color: var(--main-bg-color);
+	user-select: none;
 }
 
 #fadein {
-    position: absolute;
-    top: -100vh;
-    height: 100vh;
-    width: 100vw;
-    background-color: var(--main-color);
-    animation: fadein 1s 1.5s forwards;
+	position: absolute;
+	top: -100vh;
+	height: 100vh;
+	width: 100vw;
+	background-color: var(--main-color);
+	animation: fadein 1s 1.5s forwards;
 }
 
 #load {
-    opacity: 0;
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    top: calc(50vh - 60px);
-    left: calc(50vw - 60px);
-    border-top: 10px solid var(--main-bg-color);
-    border-right: 10px solid var(--main-color);
-    border-radius: 100px;
-    animation: op 1s 3s forwards, load 1s 3s infinite;
+	opacity: 0;
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	top: calc(50vh - 60px);
+	left: calc(50vw - 60px);
+	border-top: 10px solid var(--main-bg-color);
+	border-right: 10px solid var(--main-color);
+	border-radius: 100px;
+	animation: op 1s 3s forwards, load 1s 3s infinite;
 }
 
 #main {
-    margin: 80px 100px;
-    text-align: center;
-    border: 5px dashed var(--main-color);
-    border-radius: 10vh;
-    animation: blur 1s;
+	margin: 80px 100px;
+	text-align: center;
+	border: 5px dashed var(--main-color);
+	border-radius: 10vh;
+	animation: blur 1s;
 }
 
 h1 {
-    color: var(--main-color);
-    text-shadow: 5px 5px var(--leaf-green-color);
-    font-size: 100px;
-    line-height: 0;
-    margin: calc(50vh - 85px) 0px;
+	color: var(--main-color);
+	text-shadow: 5px 5px var(--leaf-green-color);
+	font-size: 100px;
+	line-height: 0;
+	margin: calc(50vh - 85px) 0px;
 }
 
 @keyframes blur {
-    from {
-        filter: blur(100px);
-    }
+	from {
+		filter: blur(100px);
+	}
 
-    to {
-        filter: blur(0px);
-    }
+	to {
+		filter: blur(0px);
+	}
 }
 
 @keyframes fadein {
-    from {
-        top: -100vh;
-    }
+	from {
+		top: -100vh;
+	}
 
-    to {
-        top: 0;
-    }
+	to {
+		top: 0;
+	}
 }
 
 @keyframes op {
-    from {
-        opacity: 0;
-    }
+	from {
+		opacity: 0;
+	}
 
-    to {
-        opacity: 1;
-    }
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes load {
-    0% {
-        transform: rotate(45deg);
-    }
+	0% {
+		transform: rotate(45deg);
+	}
 
-    100% {
-        transform: rotate(405deg);
-    }
+	100% {
+		transform: rotate(405deg);
+	}
 }

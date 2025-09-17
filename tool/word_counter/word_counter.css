@@ -1,50 +1,50 @@
 #main {
-    margin: 50px;
+	margin: 50px;
 }
 
 #out {
-    margin: 25px 0px;
-    color: var(--black-color);
-    font-size: 25px;
-    line-height: 30px;
+	margin: 25px 0px;
+	color: var(--black-color);
+	font-size: 25px;
+	line-height: 30px;
 }
 
 #in {
-    width: calc(100% - 20px);
-    height: calc(100vh - min(90px, 15vw) - 197px);
-    padding: 10px;
-    margin: 0px;
-    border: 1px solid var(--black-color);
-    border-radius: 0px;
-    resize: none;
-    background-color: var(--main-bg-color);
-    color: var(--black-color);
-    font-size: 20px;
-    font-family: var(--code-font);
+	width: calc(100% - 20px);
+	height: calc(100vh - min(90px, 15vw) - 197px);
+	padding: 10px;
+	margin: 0px;
+	border: 1px solid var(--black-color);
+	border-radius: 0px;
+	resize: none;
+	background-color: var(--main-bg-color);
+	color: var(--black-color);
+	font-size: 20px;
+	font-family: var(--code-font);
 }
 
 #in::selection {
-    background-color: var(--leaf-green-color);
-    color: var(--black-color);
+	background-color: var(--leaf-green-color);
+	color: var(--black-color);
 }
 
 #kome {
-    margin: 5px 0px;
-    color: var(--black-color);
-    font-size: 15px;
-    line-height: 15px;
+	margin: 5px 0px;
+	color: var(--black-color);
+	font-size: 15px;
+	line-height: 15px;
 }
 
 :focus {
-    outline: none;
+	outline: none;
 }
 
 @media screen and (max-width:480px) {
-    #main {
-        margin: 20px;
-    }
+	#main {
+		margin: 20px;
+	}
 
-    #in {
-        height: calc(100vh - min(90px, 15vw) - 122px);
-    }
+	#in {
+		height: calc(100vh - min(90px, 15vw) - 122px);
+	}
 }

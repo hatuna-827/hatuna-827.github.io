@@ -1,231 +1,231 @@
 h1 {
-    margin: 30px 0px;
-    line-height: 50px;
-    color: var(--black-color);
-    font-size: 45px;
+	margin: 30px 0px;
+	line-height: 50px;
+	color: var(--black-color);
+	font-size: 45px;
 }
 
 h2 {
-    margin: 30px;
-    line-height: 40px;
-    color: var(--black-color);
-    font-size: 30px;
+	margin: 30px;
+	line-height: 40px;
+	color: var(--black-color);
+	font-size: 30px;
 }
 
 a {
-    margin: 0px 30px;
-    line-height: 50px;
-    color: var(--main-color);
-    text-decoration: none;
-    font-size: 20px;
+	margin: 0px 30px;
+	line-height: 50px;
+	color: var(--main-color);
+	text-decoration: none;
+	font-size: 20px;
 }
 
 code {
-    margin: 0px 30px;
-    padding: 5px 10px;
-    line-height: 50px;
-    font-size: 15px;
-    background-color: var(--grey-e5-color);
-    font-family: var(--code-font);
-    border-radius: 5px;
+	margin: 0px 30px;
+	padding: 5px 10px;
+	line-height: 50px;
+	font-size: 15px;
+	background-color: var(--grey-e5-color);
+	font-family: var(--code-font);
+	border-radius: 5px;
 }
 
 p {
-    margin: 0px 30px;
-    line-height: 50px;
-    color: var(--black-color);
-    font-size: 20px;
+	margin: 0px 30px;
+	line-height: 50px;
+	color: var(--black-color);
+	font-size: 20px;
 
-    a {
-        margin: 0px;
-        color: var(--main-color);
-    }
+	a {
+		margin: 0px;
+		color: var(--main-color);
+	}
 
-    code {
-        margin: 0px 3px;
-    }
+	code {
+		margin: 0px 3px;
+	}
 }
 
 button {
-    width: 90px;
-    height: 30px;
-    margin: -15px 30px;
-    line-height: 0px;
-    color: var(--black-color);
-    font-size: 17px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    border: 0px;
-    background-color: var(--grey-e5-color);
+	width: 90px;
+	height: 30px;
+	margin: -15px 30px;
+	line-height: 0px;
+	color: var(--black-color);
+	font-size: 17px;
+	text-align: center;
+	padding: 10px;
+	border-radius: 5px;
+	border: 0px;
+	background-color: var(--grey-e5-color);
 }
 
 pre {
-    font-family: var(--code-font);
-    margin: 0px 30px 10px 30px;
-    padding: 15px;
-    border-radius: 5px;
-    white-space: pre-wrap;
-    overflow: auto;
-    line-height: 25px;
-    color: var(--black-color);
-    font-size: 15px;
-    background-color: var(--grey-d-color);
+	font-family: var(--code-font);
+	margin: 0px 30px 10px 30px;
+	padding: 15px;
+	border-radius: 5px;
+	white-space: pre-wrap;
+	overflow: auto;
+	line-height: 25px;
+	color: var(--black-color);
+	font-size: 15px;
+	background-color: var(--grey-d-color);
 }
 
 ul {
-    margin: 10px 30px;
-    line-height: 30px;
-    color: var(--black-color);
-    font-size: 20px;
+	margin: 10px 30px;
+	line-height: 30px;
+	color: var(--black-color);
+	font-size: 20px;
 
-    a {
-        margin: 0px;
-        color: var(--main-color);
-    }
+	a {
+		margin: 0px;
+		color: var(--main-color);
+	}
 
-    code {
-        margin: 0px 3px;
-    }
+	code {
+		margin: 0px 3px;
+	}
 }
 
 img {
-    margin: 20px 30px;
-    color: var(--black-color);
-    font-size: 15px;
-    max-height: 50vh;
-    width: calc(100% - 60px);
-    object-fit: contain;
+	margin: 20px 30px;
+	color: var(--black-color);
+	font-size: 15px;
+	max-height: 50vh;
+	width: calc(100% - 60px);
+	object-fit: contain;
 }
 
 .pixel {
-    image-rendering: pixelated;
+	image-rendering: pixelated;
 }
 
 hr {
-    margin: 20px;
+	margin: 20px;
 }
 
 #button {
-    text-align: right;
+	text-align: right;
 }
 
 #main {
-    margin: 50px;
+	margin: 50px;
 }
 
 #tag {
-    margin: 10px 30px 10px 30px;
-    padding: 20px 15px;
-    border-radius: 5px;
-    white-space: pre-wrap;
-    overflow: auto;
-    background-color: var(--grey-d-color);
+	margin: 10px 30px 10px 30px;
+	padding: 20px 15px;
+	border-radius: 5px;
+	white-space: pre-wrap;
+	overflow: auto;
+	background-color: var(--grey-d-color);
 
-    a {
-        line-height: 30px;
-        color: var(--black-color);
-        font-size: 20px;
-        color: var(--black-color);
-    }
+	a {
+		line-height: 30px;
+		color: var(--black-color);
+		font-size: 20px;
+		color: var(--black-color);
+	}
 
-    a::selection,
-    a:hover {
-        text-decoration: underline .5px;
-        text-underline-offset: 3px;
-    }
+	a::selection,
+	a:hover {
+		text-decoration: underline .5px;
+		text-underline-offset: 3px;
+	}
 }
 
 .nobr {
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .border {
-    border: 1px var(--black-color) solid;
+	border: 1px var(--black-color) solid;
 }
 
 @media screen and (max-width:480px) {
-    h1 {
-        margin: 0px;
-        line-height: 30px;
-        font-size: 30px;
-    }
+	h1 {
+		margin: 0px;
+		line-height: 30px;
+		font-size: 30px;
+	}
 
-    h2 {
-        margin: 15px;
-        line-height: 20px;
-        font-size: 20px;
-    }
+	h2 {
+		margin: 15px;
+		line-height: 20px;
+		font-size: 20px;
+	}
 
-    a {
-        margin: 0px 20px;
-        line-height: 30px;
-        font-size: 15px;
-    }
+	a {
+		margin: 0px 20px;
+		line-height: 30px;
+		font-size: 15px;
+	}
 
-    code {
-        margin: 0px 20px;
-        line-height: 30px;
-        font-size: 10px;
-    }
+	code {
+		margin: 0px 20px;
+		line-height: 30px;
+		font-size: 10px;
+	}
 
-    p {
-        margin: 0px 20px;
-        line-height: 30px;
-        font-size: 15px;
+	p {
+		margin: 0px 20px;
+		line-height: 30px;
+		font-size: 15px;
 
-        a {
-            margin: 0px;
-        }
+		a {
+			margin: 0px;
+		}
 
-        code {
-            margin: 2px;
-        }
-    }
+		code {
+			margin: 2px;
+		}
+	}
 
-    button {
-        width: 60px;
-        height: 20px;
-        margin: 0px 20px -15px;
-        font-size: 11px;
-    }
+	button {
+		width: 60px;
+		height: 20px;
+		margin: 0px 20px -15px;
+		font-size: 11px;
+	}
 
-    pre {
-        margin: 0px 20px 10px 20px;
-        padding: 10px;
-        line-height: 15px;
-        font-size: 12px;
-    }
+	pre {
+		margin: 0px 20px 10px 20px;
+		padding: 10px;
+		line-height: 15px;
+		font-size: 12px;
+	}
 
-    ul {
-        padding-left: 25px;
-        margin: 5px 20px;
-        line-height: 20px;
-        font-size: 15px;
-    }
+	ul {
+		padding-left: 25px;
+		margin: 5px 20px;
+		line-height: 20px;
+		font-size: 15px;
+	}
 
-    img {
-        margin: 10px 20px;
-        font-size: 10px;
-        max-width: calc(100% - 40px);
-    }
+	img {
+		margin: 10px 20px;
+		font-size: 10px;
+		max-width: calc(100% - 40px);
+	}
 
-    hr {
-        margin: 10px;
-    }
+	hr {
+		margin: 10px;
+	}
 
-    #main {
-        margin: 30px;
-    }
+	#main {
+		margin: 30px;
+	}
 
-    #tag {
-        margin: 10px 20px 10px 20px;
-        padding: 10px;
+	#tag {
+		margin: 10px 20px 10px 20px;
+		padding: 10px;
 
-        a {
-            margin: 0px 10px;
-            line-height: 20px;
-            font-size: 15px;
-        }
-    }
+		a {
+			margin: 0px 10px;
+			line-height: 20px;
+			font-size: 15px;
+		}
+	}
 }

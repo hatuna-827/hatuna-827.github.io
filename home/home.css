@@ -1,60 +1,60 @@
 h1 {
-    margin: 30px 0px;
-    line-height: 50px;
-    color: var(--black-color);
-    font-size: 50px;
+	margin: 30px 0px;
+	line-height: 50px;
+	color: var(--black-color);
+	font-size: 50px;
 }
 
 hr {
-    margin: 20px 0px;
+	margin: 20px 0px;
 }
 
 a {
-    margin: 0px 40px;
-    line-height: 50px;
-    font-size: 25px;
-    color: var(--main-color);
-    text-decoration: none;
+	margin: 0px 40px;
+	line-height: 50px;
+	font-size: 25px;
+	color: var(--main-color);
+	text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 p {
-    margin: 0px 40px;
-    line-height: 50px;
-    color: var(--black-color);
-    font-size: 25px;
+	margin: 0px 40px;
+	line-height: 50px;
+	color: var(--black-color);
+	font-size: 25px;
 
-    a {
-        margin: 0px;
-    }
+	a {
+		margin: 0px;
+	}
 }
 
 #main {
-    margin: 50px;
+	margin: 50px;
 }
 
 @media screen and (max-width:480px) {
-    #main {
-        margin: 10px;
-    }
+	#main {
+		margin: 10px;
+	}
 
-    h1 {
-        font-size: 40px;
-        line-height: 40px;
-        margin: 20px 0px;
-    }
+	h1 {
+		font-size: 40px;
+		line-height: 40px;
+		margin: 20px 0px;
+	}
 
-    h2 {
-        font-size: 30px;
-        list-style: 40px;
-        margin: 10px 20px;
-    }
+	h2 {
+		font-size: 30px;
+		list-style: 40px;
+		margin: 10px 20px;
+	}
 
-    p {
-        font-size: 20px;
-        line-height: 25px;
-    }
+	p {
+		font-size: 20px;
+		line-height: 25px;
+	}
 }

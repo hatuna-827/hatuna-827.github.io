@@ -1,118 +1,118 @@
 #main {
-    margin: 100px 0px 20px 0px;
-    text-align: center;
+	margin: 100px 0px 20px 0px;
+	text-align: center;
 }
 
 button {
-    font-family: var(--main-font);
-    width: 100px;
-    height: 100px;
-    margin: 0px;
-    padding: 21px 0px;
-    line-height: 0px;
-    color: var(--pink-color);
-    font-size: 80px;
-    text-align: center;
-    border-radius: 0px;
-    border: 1px solid var(--black-color);
-    background-color: var(--main-bg-color);
-    vertical-align: middle;
+	font-family: var(--main-font);
+	width: 100px;
+	height: 100px;
+	margin: 0px;
+	padding: 21px 0px;
+	line-height: 0px;
+	color: var(--pink-color);
+	font-size: 80px;
+	text-align: center;
+	border-radius: 0px;
+	border: 1px solid var(--black-color);
+	background-color: var(--main-bg-color);
+	vertical-align: middle;
 }
 
 .setbutton {
-    margin: 35px 0px 0px 0px;
-    padding: 0px;
-    color: var(--black-color);
-    width: 300px;
-    height: 60px;
-    font-size: 25px;
-    line-height: 25px;
-    background-color: var(--main-light-color);
-    border: 0px;
-    border-radius: 10px;
+	margin: 35px 0px 0px 0px;
+	padding: 0px;
+	color: var(--black-color);
+	width: 300px;
+	height: 60px;
+	font-size: 25px;
+	line-height: 25px;
+	background-color: var(--main-light-color);
+	border: 0px;
+	border-radius: 10px;
 }
 
 #random {
-    text-align: left;
-    margin: -300px 0px 0px 0px;
-    padding-left: max(calc(25vw - 225px), calc(50vw - 500px));
-    width: auto;
+	text-align: left;
+	margin: -300px 0px 0px 0px;
+	padding-left: max(calc(25vw - 225px), calc(50vw - 500px));
+	width: auto;
 }
 
 #save_load {
-    text-align: right;
-    margin: -285px 0px 0px 0px;
-    padding-right: max(calc(25vw - 225px), calc(50vw - 500px));
-    width: auto;
+	text-align: right;
+	margin: -285px 0px 0px 0px;
+	padding-right: max(calc(25vw - 225px), calc(50vw - 500px));
+	width: auto;
 }
 
 #pop {
-    display: none;
-    position: fixed;
-    margin: 0px;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1001;
+	display: none;
+	position: fixed;
+	margin: 0px;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+	z-index: 1001;
 }
 
 #poptext {
-    width: 500px;
-    height: 300px;
-    background-color: var(--main-bg-color);
-    margin: 0px;
-    text-align: center;
-    border-radius: 30px;
+	width: 500px;
+	height: 300px;
+	background-color: var(--main-bg-color);
+	margin: 0px;
+	text-align: center;
+	border-radius: 30px;
 }
 
 p {
-    margin: 125px 0px;
-    color: var(--main-dark-color);
-    font-size: 50px;
-    line-height: 50px;
+	margin: 125px 0px;
+	color: var(--main-dark-color);
+	font-size: 50px;
+	line-height: 50px;
 }
 
 @media screen and (max-width:900px) {
-    button {
-        width: 30vw;
-        height: 30vw;
-        padding: calc(6vw + 1px) 0px;
-        font-size: 24vw;
-    }
+	button {
+		width: 30vw;
+		height: 30vw;
+		padding: calc(6vw + 1px) 0px;
+		font-size: 24vw;
+	}
 
-    #main {
-        margin: 40px 0px;
-    }
+	#main {
+		margin: 40px 0px;
+	}
 
-    .setbutton {
-        margin: 20px 0px 0px 0px;
-        width: 46vw;
-        font-size: 4vw;
-        line-height: 7vw;
-        height: auto;
-    }
+	.setbutton {
+		margin: 20px 0px 0px 0px;
+		width: 46vw;
+		font-size: 4vw;
+		line-height: 7vw;
+		height: auto;
+	}
 
-    #random {
-        margin: 0px;
-        padding-left: 2vw;
-    }
+	#random {
+		margin: 0px;
+		padding-left: 2vw;
+	}
 
-    #save_load {
-        margin: calc(-60px - 21vw) 0px 0px 0px;
-        padding-right: 2vw;
-    }
+	#save_load {
+		margin: calc(-60px - 21vw) 0px 0px 0px;
+		padding-right: 2vw;
+	}
 
-    #poptext {
-        width: 50vw;
-        height: 30vw;
-        border-radius: 3vw;
-    }
+	#poptext {
+		width: 50vw;
+		height: 30vw;
+		border-radius: 3vw;
+	}
 
-    p {
-        font-size: 5vw;
-        line-height: 5vw;
-        margin: 12.5vw 0px;
-    }
+	p {
+		font-size: 5vw;
+		line-height: 5vw;
+		margin: 12.5vw 0px;
+	}
 }

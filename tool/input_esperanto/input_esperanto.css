@@ -1,36 +1,36 @@
 #main {
-    margin: 50px;
+	margin: 50px;
 }
 
 #in {
-    width: calc(100% - 20px);
-    height: calc(100vh - min(90px, 15vw) - 122px);
-    padding: 10px;
-    margin: 0px;
-    border: 1px solid var(--black-color);
-    border-radius: 0px;
-    resize: none;
-    background-color: var(--main-bg-color);
-    color: var(--black-color);
-    font-size: 20px;
-    font-family: var(--code-font);
+	width: calc(100% - 20px);
+	height: calc(100vh - min(90px, 15vw) - 122px);
+	padding: 10px;
+	margin: 0px;
+	border: 1px solid var(--black-color);
+	border-radius: 0px;
+	resize: none;
+	background-color: var(--main-bg-color);
+	color: var(--black-color);
+	font-size: 20px;
+	font-family: var(--code-font);
 }
 
 #in::selection {
-    background-color: var(--leaf-green-color);
-    color: var(--black-color);
+	background-color: var(--leaf-green-color);
+	color: var(--black-color);
 }
 
 :focus {
-    outline: none;
+	outline: none;
 }
 
 @media screen and (max-width:480px) {
-    #main {
-        margin: 20px;
-    }
+	#main {
+		margin: 20px;
+	}
 
-    #in {
-        height: calc(100vh - min(90px, 15vw) - 42px);
-    }
+	#in {
+		height: calc(100vh - min(90px, 15vw) - 42px);
+	}
 }
