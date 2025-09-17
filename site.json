@@ -27,6 +27,39 @@
 			"image": ""
 		},
 		{
+			"url": "/link/blog/index.html",
+			"type": "website",
+			"name": "ブログ一覧",
+			"title": "Blog ブログ一覧",
+			"main_title": "Blog",
+			"sub_title": "ブログ一覧",
+			"description": "ブログへのリンク一覧",
+			"link_visible": [],
+			"image": ""
+		},
+		{
+			"url": "/link/game/index.html",
+			"type": "website",
+			"name": "ゲーム一覧",
+			"title": "Game ゲーム一覧",
+			"main_title": "Game",
+			"sub_title": "ゲーム一覧",
+			"description": "ゲームへのリンク一覧",
+			"link_visible": [],
+			"image": ""
+		},
+		{
+			"url": "/link/tool/index.html",
+			"type": "website",
+			"name": "ツール一覧",
+			"title": "Tool ツール一覧",
+			"main_title": "Tool",
+			"sub_title": "ツール一覧",
+			"description": "ツールへのリンク一覧",
+			"link_visible": [],
+			"image": ""
+		},
+		{
 			"url": "/home/index.html",
 			"type": "website",
 			"name": "",

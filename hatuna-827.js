@@ -1,13 +1,4 @@
 "use strict"
-document.head.insertAdjacentHTML('afterbegin', '\
-	<meta charset="UTF-8" />\
-	<meta name="viewport" content="width=device-width, initial-scale=1" />\
-	<meta name="author" content="hatuna-827" />\
-	<meta name="theme-color" content="#709170" />\
-	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico" />\
-	<link rel="apple-touch-icon" href="/hatuna-827.ico" />\
-	<link rel="stylesheet" href="/hatuna-827.css" />\
-	')
 window.addEventListener('DOMContentLoaded', () => {
 	try {
 		document.getElementById('homebar').innerHTML = "<a href='/link' id='home_link'>hatuna-827</a>"
