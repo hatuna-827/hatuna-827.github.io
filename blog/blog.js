@@ -1,12 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
-	var img = document.getElementsByTagName('img')
-	for (let i = 0; i < img.length; i++) {
-		img[i].setAttribute('alt', '画像の読み込みに失敗しました。')
-	}
-	var link = document.getElementsByTagName('a')
-	for (let i = 1; i < link.length; i++) {
-		link[i].setAttribute('target', '_blank')
-	}
+	document.querySelectorAll('img').forEach((img) => {
+		img.setAttribute('alt', '画像の読み込みに失敗しました。')
+		let imgbox=document.createElement('div')
+		imgbox.className="imgbox"
+		imgbox.appendChild(img.cloneNode(false))
+		img.insertAdjacentElement('afterend',imgbox)
+		img.remove()
+	})
+	document.querySelectorAll('a').forEach((link) => {
+		link.setAttribute('target', '_blank')
+	})
 	// 目次の追加
 	let tag = document.createElement("div")
 	tag.id = "tag"
@@ -19,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		let tag_br = document.createElement("br")
 		tag_hr.id = tag_text
 		tag_link.textContent = (i + 1) + '.' + tag_target[i].innerText
-		tag_link.setAttribute("href", "#" + tag_text)
+		tag_link.setAttribute('href', "#" + tag_text)
 		tag_target[i].insertAdjacentElement('beforebegin', tag_hr)
 		tag.insertAdjacentElement('beforeend', tag_link)
 		tag.insertAdjacentElement('beforeend', tag_br)
@@ -28,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	// コピーボタンの追加
 	let code_target = document.getElementsByTagName('pre')
 	for (let i = 0; i < code_target.length; i++) {
-		code_target[i].setAttribute('id', 'code' + i)
-		code_target[i].insertAdjacentHTML('beforebegin', '<div id="button"><button id="button' + i + '" onclick="copy(' + i + ')">copy</button></div>')
+		code_target[i].setAttribute('id', "code" + i)
+		code_target[i].insertAdjacentHTML('beforebegin', '<div class="button"><button id="button' + i + '" onclick="copy(' + i + ')">copy</button></div>')
 	}
 })
 function copy(target_id) {

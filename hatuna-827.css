@@ -87,6 +87,21 @@ body {
 	}
 }
 
+noscript {
+	background-color: var(--grey-green-color);
+	position: fixed;
+	display: flex;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	color: var(--black-color);
+	z-index: 1001;
+}
+
 button,
 input,
 textarea {

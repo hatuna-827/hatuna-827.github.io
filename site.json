@@ -8,7 +8,6 @@
 			"main_title": "hatuna-827",
 			"sub_title": "",
 			"description": "こんにちは、hatuna-827です。ブログなどを少しずつ更新していきます。",
-			"link_visible": [],
 			"image": ""
 		},
 		{
@@ -19,11 +18,6 @@
 			"main_title": "LINK",
 			"sub_title": "すべてのサイト一覧",
 			"description": "すべてのサイトへのリンク一覧",
-			"link_visible": [
-				"blog",
-				"game",
-				"tool"
-			],
 			"image": ""
 		},
 		{
@@ -34,7 +28,6 @@
 			"main_title": "Blog",
 			"sub_title": "ブログ一覧",
 			"description": "ブログへのリンク一覧",
-			"link_visible": [],
 			"image": ""
 		},
 		{
@@ -45,7 +38,6 @@
 			"main_title": "Game",
 			"sub_title": "ゲーム一覧",
 			"description": "ゲームへのリンク一覧",
-			"link_visible": [],
 			"image": ""
 		},
 		{
@@ -56,7 +48,6 @@
 			"main_title": "Tool",
 			"sub_title": "ツール一覧",
 			"description": "ツールへのリンク一覧",
-			"link_visible": [],
 			"image": ""
 		},
 		{
@@ -67,9 +58,6 @@
 			"main_title": "HOME",
 			"sub_title": "自己紹介",
 			"description": "こんにちは、hatuna-827です。ブログなどを少しずつ更新していきます。",
-			"link_visible": [
-				"all"
-			],
 			"image": ""
 		},
 		{
@@ -80,9 +68,6 @@
 			"main_title": "404",
 			"sub_title": "Not found",
 			"description": "404 page not found",
-			"link_visible": [
-				"all"
-			],
 			"image": ""
 		},
 		{
@@ -93,10 +78,6 @@
 			"main_title": "Youtubeプレイリスト",
 			"sub_title": "の合計時間を計算する",
 			"description": "Youtubeプレイリストの合計時間を計算するコードを書いたので紹介します。",
-			"link_visible": [
-				"all",
-				"blog"
-			],
 			"image": ""
 		},
 		{
@@ -107,10 +88,6 @@
 			"main_title": "グラフアート",
 			"sub_title": "グラフアート、はじめました。",
 			"description": "desmosを用い、一緒にグラフアートを始めましょう！",
-			"link_visible": [
-				"all",
-				"blog"
-			],
 			"image": ""
 		},
 		{
@@ -121,10 +98,6 @@
 			"main_title": "VScodeをデザイン",
 			"sub_title": "デザインを変更しよう！",
 			"description": "VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。",
-			"link_visible": [
-				"all",
-				"blog"
-			],
 			"image": ""
 		},
 		{
@@ -135,10 +108,6 @@
 			"main_title": "エスペラント語",
 			"sub_title": "~概要編~",
 			"description": "Simpla klarigo pri Esperanto.",
-			"link_visible": [
-				"all",
-				"blog"
-			],
 			"image": ""
 		},
 		{
@@ -149,10 +118,6 @@
 			"main_title": "brainfuck",
 			"sub_title": "~概要編~",
 			"description": "難解プログラミング言語Brainfuckの基礎を解説します。",
-			"link_visible": [
-				"all",
-				"blog"
-			],
 			"image": ""
 		},
 		{
@@ -163,10 +128,6 @@
 			"main_title": "brainfuck",
 			"sub_title": "~割り算編~",
 			"description": "Brainfuckで割り算をするコードの紹介です。",
-			"link_visible": [
-				"all",
-				"blog"
-			],
 			"image": ""
 		},
 		{
@@ -177,10 +138,6 @@
 			"main_title": "brainfuck",
 			"sub_title": "~素因数分解編~",
 			"description": "Brainfuckで素因数分解をするコードの紹介です。",
-			"link_visible": [
-				"all",
-				"blog"
-			],
 			"image": ""
 		},
 		{
@@ -191,10 +148,6 @@
 			"main_title": "カウンター",
 			"sub_title": "",
 			"description": "シンプルなカウンター",
-			"link_visible": [
-				"all",
-				"tool"
-			],
 			"image": ""
 		},
 		{
@@ -205,10 +158,6 @@
 			"main_title": "時計",
 			"sub_title": "",
 			"description": "デジタルのアナログ時計、わざと数秒ずれてたり、、",
-			"link_visible": [
-				"all",
-				"tool"
-			],
 			"image": ""
 		},
 		{
@@ -219,10 +168,6 @@
 			"main_title": "単語カウンター",
 			"sub_title": "",
 			"description": "単語カウンター※エスペラント語・英語のみ対応",
-			"link_visible": [
-				"all",
-				"tool"
-			],
 			"image": ""
 		},
 		{
@@ -233,10 +178,6 @@
 			"main_title": "エスペラント語入力",
 			"sub_title": "",
 			"description": "エスペラント語の入力を補助します。",
-			"link_visible": [
-				"all",
-				"tool"
-			],
 			"image": ""
 		},
 		{
@@ -247,10 +188,6 @@
 			"main_title": "ごきげんななめ",
 			"sub_title": "作問ツール",
 			"description": "ごきげんななめの作問を補助します。",
-			"link_visible": [
-				"all",
-				"tool"
-			],
 			"image": ""
 		},
 		{
@@ -261,10 +198,6 @@
 			"main_title": "〇×ゲーム",
 			"sub_title": "",
 			"description": "〇×ゲーム 自動勝負判定機能付き",
-			"link_visible": [
-				"all",
-				"game"
-			],
 			"image": ""
 		},
 		{
@@ -275,10 +208,6 @@
 			"main_title": "ライツアウト",
 			"sub_title": "",
 			"description": "ライツアウトの問題を自動生成など、トレーニングができます。",
-			"link_visible": [
-				"all",
-				"game"
-			],
 			"image": ""
 		},
 		{
@@ -289,10 +218,6 @@
 			"main_title": "オセロ",
 			"sub_title": "",
 			"description": "オセロ・リバーシ",
-			"link_visible": [
-				"all",
-				"game"
-			],
 			"image": ""
 		}
 	]

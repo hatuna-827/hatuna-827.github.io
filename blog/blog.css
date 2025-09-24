@@ -89,13 +89,24 @@ ul {
 	}
 }
 
-img {
+.imgbox {
 	margin: 20px 30px;
+	max-height: 50vh;
+	max-width: calc(100% - 60px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+img {
 	color: var(--black-color);
 	font-size: 15px;
 	max-height: 50vh;
-	width: calc(100% - 60px);
-	object-fit: contain;
+	max-width: calc(100% - 60px);
+}
+
+.border {
+	border: 1px var(--black-color) solid;
 }
 
 .pixel {
@@ -106,7 +117,7 @@ hr {
 	margin: 20px;
 }
 
-#button {
+.button {
 	text-align: right;
 }
 
@@ -140,9 +151,6 @@ hr {
 	white-space: nowrap;
 }
 
-.border {
-	border: 1px var(--black-color) solid;
-}
 
 @media screen and (max-width:480px) {
 	h1 {
