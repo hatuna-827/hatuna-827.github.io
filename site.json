@@ -75,9 +75,9 @@
 			"type": "article",
 			"name": "",
 			"title": "",
-			"main_title": "Youtubeプレイリスト",
-			"sub_title": "の合計時間を計算する",
-			"description": "Youtubeプレイリストの合計時間を計算するコードを書いたので紹介します。",
+			"main_title": "API不使用！非公開のプレイリスト対応！Youtubeプレイリスト",
+			"sub_title": "の合計時間の計算方法",
+			"description": "API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。",
 			"image": ""
 		},
 		{
@@ -207,7 +207,7 @@
 			"title": "",
 			"main_title": "ライツアウト",
 			"sub_title": "",
-			"description": "ライツアウトの問題を自動生成など、トレーニングができます。",
+			"description": "3×3 ライツアウトの問題を自動生成など、トレーニングができます。",
 			"image": ""
 		},
 		{
@@ -215,7 +215,7 @@
 			"type": "website",
 			"name": "",
 			"title": "",
-			"main_title": "オセロ",
+			"main_title": "オセロ・リバーシ",
 			"sub_title": "",
 			"description": "オセロ・リバーシ",
 			"image": ""
