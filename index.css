@@ -7,25 +7,25 @@ body {
 }
 
 #fadein {
-	position: absolute;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	top: -100vh;
+	left: 0px;
 	height: 100vh;
 	width: 100vw;
 	background-color: var(--main-color);
 	animation: fadein 1s 1.5s forwards;
 }
 
-#load {
+#link {
 	opacity: 0;
 	position: absolute;
-	height: 100px;
-	width: 100px;
-	top: calc(50vh - 60px);
-	left: calc(50vw - 60px);
-	border-top: 10px solid var(--main-bg-color);
-	border-right: 10px solid var(--main-color);
-	border-radius: 100px;
-	animation: op 1s 3s forwards, load 1s 3s infinite;
+	color: var(--white-color);
+	text-decoration: none;
+	font-size: 30px;
+	animation: op 1s 3s forwards;
 }
 
 #main {
@@ -71,15 +71,5 @@ h1 {
 
 	to {
 		opacity: 1;
-	}
-}
-
-@keyframes load {
-	0% {
-		transform: rotate(45deg);
-	}
-
-	100% {
-		transform: rotate(405deg);
 	}
 }
