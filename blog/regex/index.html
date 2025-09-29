@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<!-- Auto insert head -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="hatuna-827">
+	<meta name="description" content="VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。">
+	<meta property="og:url" content="https://hatuna-827.github.io/blog/regex/index.html">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="正規表現~概要編~">
+	<meta property="og:description" content="VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。">
+	<meta property="og:site_name" content="VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方 | hatuna-827">
+	<meta property="og:image" content="/1200_630.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:domain" content="hatuna-827.github.io">
+	<meta name="twitter:title" content="正規表現~概要編~">
+	<meta name="twitter:description" content="VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。">
+	<meta name="twitter:image" content="/1200_630.png">
+	<meta name="theme-color" content="#709170">
+	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+	<link rel="apple-touch-icon" href="/hatuna-827.ico">
+	<link rel="stylesheet" href="/blog/blog.css">
+	<link rel="stylesheet" href="/hatuna-827.css">
+	<script src="/hatuna-827.js"></script>
+	<title>VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方 | hatuna-827</title>
+	<!-- Auto insert head end -->
+</head>
+
+<body>
+	<!-- Auto insert body -->
+	<div id="homebar"></div>
+	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+	<!-- Auto insert body end -->
+	<div id="main">
+		<h1>VScodeでも使える正規表現</h1>
+		<h2>はじめに</h2>
+		<p>こんにちは、<a href="https://github.com/hatuna-827">hatuna-827</a>です。今回は「正規表現」について解説します。</p>
+		<p>記法の解説や便利な構文などを紹介します。</p>
+		<p>ただし、私の独断と偏見によってあまり使わないと判断したものは紹介・解説していません。</p>
+		<p>逆に言えば、よく使う重要なものだけが集まっていると言えますが、</p>
+		<p>もっと知りたいと思った方は他の詳しいサイトをご覧ください。</p>
+		<h2>正規表現とは?</h2>
+		<p>正規表現とは、一部が曖昧になっていたり複雑な条件だったりしても検索ができるような書き方のことです。</p>
+		<p>例えば、正規表現を用いることで、「◯◯で始まる」や「◯◯で終わる」を検索したり、</p>
+		<p>それらを組み合わせて「◯◯かつ◯◯」や「◯◯または◯◯」で検索したりできます。</p>
+		<p>とっても便利です。</p>
+		<h2>簡単な正規表現一覧</h2>
+		<p>ここで言う文字列とは、正規表現で検索する対象の文字列を指します。</p>
+		<p>それぞれ、単体で使った場合の意味です。他のものと組み合わせや<code>\</code>でエスケープをすることで意味が変わります。</p>
+		<p>単なる文字として扱いたい場合は、エスケープする必要があります。</p>
+		<pre>
+^   …  行頭に一致
+$   …  行末に一致
+.   …  任意の1文字に一致                       (改行など一部の文字を除く)
++   …  直前のパターンの1回以上の繰り返しに一致 {1,}と同じ
+*   …  直前のパターンの0回以上の繰り返しに一致 {0,}と同じ
+?   …  直前のパターンの0回か1回に一致          {0,1}と同じ
+|   …  or検索 左右いずれかの文字列に一致
+()  …  パターンのグループ化、キャプチャ<a target="_self" href="#キャプチャについて">(キャプチャについて)</a>
+{}  …  直前のパターンの繰り返し回数を指定
+[]  …  中身のいずれかの文字に一致
+\   …  エスケープ
+\d  …  すべての半角アラビア数字に一致 [0-9]と同じ
+\w  …  すべての半角英数字と_に一致    [a-zA-Z0-9_]と同じ
+\s  …  すべての空白文字に一致         [ \t\f\r\n\v]と同じ
+\n  …  改行に一致
+</pre>
+		<p>
+			<code>\d</code><code>\w</code><code>\s</code>の大文字バージョン<code>\D</code><code>\W</code><code>\S</code>はそれぞれ小文字バージョンの一致しない文字全てに一致します。
+		</p>
+		<p>
+			また、<code>\b</code>は単語の区切り位置を表し、<code>\bhoge\b</code>のように単語を挟むと単語単位で検索することができますが、VScodeではボタンで選択することができるので使わなくでもできます。
+		</p>
+		<h2>それぞれの解説・使用例・拡張的な使い方</h2>
+		<p><code>+</code><code>*</code><code>?</code><code>{}</code>など繰り返し系は基本的に最も長いものに一致しますが、</p>
+		<p>後ろに<code>?</code>をつけることで最も短いものに一致するようになります。</p>
+		<p><code>+</code><code>*</code><code>?</code>は直前のパターンが単一の文字か、グループかによって意味が変わります。</p>
+		<p>例えば<code>ab+</code>はaのあとにbが1回以上続くという意味なりますが、</p>
+		<p>()を使いグループ化することで、<code>(ab)+</code>は1回以上の<code>ab</code>の繰り返しという意味になります。</p>
+		<hr>
+		<code>^</code>
+		<p><code>^hoge</code>で行頭のhogeに一致します。</p>
+		<p><code>[]</code>の中とエスケープを除き<code>^</code>が行頭の位置を表します。</p>
+		<hr>
+		<code>$</code>
+		<p><code>hoge$</code>で行末のhogeに一致します。</p>
+		<p>エスケープと置換の参照を除き行末の位置を表します。</p>
+		<hr>
+		<code>.</code>
+		<p><code>a</code><code>あ</code><code>1</code><code> (スペース)</code>など任意の1文字に一致します。</p>
+		<p>ただし、改行などの文字には一致しません。</p>
+		<hr>
+		<code>+</code>
+		<p>直前のパターンの1回以上の繰り返しに一致します。</p>
+		<p>たとえば、<code>a+</code>は<code>a</code>や<code>aaa</code>に一致しますが、<code></code>(a 0回)には一致しません。</p>
+		<p>()を使いグループ化することで、<code>(ab)+</code>は1回以上の<code>ab</code>の繰り返しという意味になります。</p>
+		<p>後ろに<code>?</code>をつけると最短のものに一致します。</p>
+		<hr>
+		<code>*</code>
+		<p>直前のパターンの1回以上の繰り返しに一致します。(<code>+</code>の0回以上版)</p>
+		<p><code>a*</code>は<code>a</code>や<code>aaa</code><code></code>(a 0回)にも一致します。</p>
+		<p><code>+</code>と同様グループ化を使うことができます。</p>
+		<p>後ろに<code>?</code>をつけると最短のものに一致します。</p>
+		<p><code>.</code>と組み合わせ、<code>.*</code>とすると任意の長さの文字列に一致します。</p>
+		<hr>
+		<code>?</code>
+		<p>直前のパターンの0回か1回に一致します。</p>
+		<p><code>ab?c</code>は<code>abc</code>または<code>ac</code>に一致します。</p>
+		<p><code>+</code>と同様グループ化を使うことができます。</p>
+		<p>後ろに<code>?</code>をつけると最短のものに一致します。</p>
+		<hr>
+		<code>|</code>
+		<p>左右いずれかの文字列に一致します。</p>
+		<p><code>a|b</code>は<code>a</code>か<code>b</code>にのみ一致し、<code>ab|cd</code>は<code>ab</code>か<code>cd</code>にのみ一致します。</p>
+		<p>グループ化を使うことで、<code>a(b|c)d</code>は<code>abd</code>か<code>acd</code>にのみ一致します。</p>
+		<hr>
+		<code>()</code>
+		<p>パターンのグループ化させたり、キャプチャしたりできます。</p>
+		<p>グループ化で複数のパターンや文字を1つの塊として扱えます。</p>
+		<a target="_self" href="#キャプチャについて">キャプチャについて</a>
+		<hr>
+		<code>{}</code>
+		<p>直前のパターンの繰り返し回数を指定することができます。</p>
+		<p><code>{num}</code>でnum回ちょうどの繰り返し、</p>
+		<p><code>{min,max}</code>でmin回以上max回以下の繰り返しを表します。</p>
+		<p><code>max</code>は省略することができ、<code>{min,}</code>はmin回以上の繰り返しを表します。</p>
+		<p><code>min</code>は省略することができず、n回以下の繰り返しは<code>{0,n}</code>と書きます。</p>
+		<p>後ろに<code>?</code>をつけると最短のものに一致します。</p>
+		<hr>
+		<code>[]</code>
+		<p>中身のいずれかの文字に一致します。文字集合とも言います。</p>
+		<p><code>[abc]</code>で<code>a</code><code>b</code><code>c</code>にのみ一致します。</p>
+		<p><code>-</code>を用いることで範囲を表すことができ、<code>[a-z]</code>は半角小文字アルファベット1字に一致します。</p>
+		<p><code>[a-zA-Z]</code>のように複数の範囲を表すこともできます。(半角アルファベット1字に一致)</p>
+		<p>また、<code>^</code>を用いることで除外文字を指定でき、<code>[^abc]</code>は<code>a</code><code>b</code><code>c</code>以外の1字に一致します。</p>
+		<p>この2つを組み合わせ、<code>[^a-z]</code>で半角小文字アルファベット以外の1字に一致します。</p>
+		<p><code>[]</code>の中では<code>^</code>と<code>-</code>と<code>]</code>以外の文字はエスケープする必要はありません。</p>
+		<p>また、<code>[]</code>の中の先頭でなければ、<code>^</code>もエスケープする必要はありません。</p>
+		<hr>
+		<code>\</code>
+		<p>次の文字をエスケープします。</p>
+		<p><code>\</code>と一致させたいときは、<code>\\</code>です。</p>
+		<hr>
+		<code>\s</code>
+		<p>すべての空白文字に一致します。</p>
+		<p><code>.</code>は改行に一致しないため、改行を含む任意の文字列は<code>[\s\S]*</code>と書きますが、</p>
+		<p>VScodeでは、行単位で検索されるため、<code>[\s\S\n]*</code>のように明示的に改行を含める必要があります。</p>
+		<h2>キャプチャについて</h2>
+		<p>パターンを<code>()</code>で囲むと、その範囲に一致した文字列をキャプチャし、<code>\1</code>や<code>$1</code>で参照することができます。</p>
+		<p><code>()</code>の中身が<code>?:</code>で始まるものはキャプチャされません。<code>(?:hoge)</code></p>
+		<p>また、<code>?</code>で始める<a target="_self" href="#[肯否]定[先後]読み">先読み</a>などもキャプチャされません。</p>
+		<p><code>()</code>の組み合わせの<code>(</code>が出る順番でキャプチャされます。</p>
+		<p><code>(.)*</code>のようにキャプチャに繰り返しを使うと、繰り返しの最後の<code>()</code>がキャプチャされます。</p>
+		<p>例えば、<code>(.)*</code>は<code>abc</code>の<code>abc</code>に一致しますが、キャプチャされるのは<code>$1 = c</code>だけです。</p>
+		<p>検索のときは<code>\1</code>で参照し、置換は<code>$1</code>で参照します。</p>
+		<p><code>(.)hoge\1</code>は同じ文字に挟まれた<code>a</code>を表します。</p>
+		<p>どちらも、続く数字はキャプチャが存在する範囲でなるべく長く読まれます。</p>
+		<p><code>$0</code>は置換対象の文字列です。</p>
+		<h2>[肯否]定[先後]読み</h2>
+		<p>正規表現のように書いていますが、下の4つのことです。</p>
+		<ul>
+			<li>肯定後読み</li>
+			<li>否定後読み</li>
+			<li>肯定先読み</li>
+			<li>否定先読み</li>
+		</ul>
+		<p>先読み・後読みはif文のようなもので、もし直前・直後に指定したパターンがあるなら一致します。</p>
+		<ul>
+			<li>肯定後読み<code>bar(?=foo)</code></li>
+			<p>直後にfooがあるbarに一致します。</p>
+			<li>否定後読み<code>bar(?!foo)</code></li>
+			<p>直後にfooがないbarに一致します。</p>
+			<li>肯定前読み<code>(?&lt;=foo)bar</code></li>
+			<p>直前にfooがあるbarに一致します。</p>
+			<li>否定前読み<code>(?&lt;!foo)bar</code></li>
+			<p>直前にfooがないbarに一致します。</p>
+		</ul>
+		<p><code>bar(?=foo)</code>これでは直後にfooがないと一致しませんが、<code>bar(?=.*foo)</code>と書くことで以降にfooがあるbarに一致します。</p>
+		<h2>よく使える便利な構文</h2>
+		<ul>
+			<li><code>.*?</code></li>
+			<p>任意の改行を含まない文字列に一致します。</p>
+			<li><code>[\s\S\n]*</code></li>
+			<p>任意の改行を含む文字列に一致します。</p>
+			<p>しかし、これが複数回登場する場合長くなってしまうため、一度<code>\n</code>を<code>!改行!</code>などに置換し、</p>
+			<p><code>.*</code>を使って置換したあとにまた、<code>!改行!</code>を<code>\n</code>に置換すると分かりやすくなります。</p>
+			<li><code>^(?=foo)bar</code></li>
+			<p>fooを含む行のbarに一致します。</p>
+			<li><code>(?&lt;=foo).*?(?=foo)</code></li>
+			<p>fooに挟まれている文字列に一致します。</p>
+		</ul>
+		<h2>おわりに</h2>
+		<p>正規表現を使うことで複雑な置換を一発で行うことができます。</p>
+		<p>まあ、はじめから簡単な置換でできるように変数命名をするのが一番ですが、、</p>
+		<p>とっても便利なので、ぜひ使ってみてください。</p>
+		<p>ありがとうございました。 Dankon pro la legado.</p>
+	</div>
+	<script src="/blog/blog.js"></script>
+</body>
+
+</html>

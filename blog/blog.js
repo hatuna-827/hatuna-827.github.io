@@ -1,42 +1,44 @@
 document.addEventListener('DOMContentLoaded', function () {
 	document.querySelectorAll('img').forEach((img) => {
 		img.setAttribute('alt', '画像の読み込みに失敗しました。')
-		let imgbox=document.createElement('div')
-		imgbox.className="imgbox"
+		const imgbox = document.createElement('div')
+		imgbox.className = "imgbox"
 		imgbox.appendChild(img.cloneNode(false))
-		img.insertAdjacentElement('afterend',imgbox)
+		img.insertAdjacentElement('afterend', imgbox)
 		img.remove()
 	})
 	document.querySelectorAll('a').forEach((link) => {
-		link.setAttribute('target', '_blank')
+		if (!link.getAttribute('target')) {
+			link.setAttribute('target', '_blank')
+		}
 	})
 	// 目次の追加
-	let tag = document.createElement("div")
+	const tag = document.createElement("div")
 	tag.id = "tag"
 	document.querySelector("h1").insertAdjacentElement("afterend", tag)
-	var tag_target = document.getElementsByTagName('h2')
-	for (i = 0; i < tag_target.length; i++) {
-		let tag_text = tag_target[i].innerText.replace(/"/g, "'")
-		let tag_hr = document.createElement("hr")
-		let tag_link = document.createElement("a")
-		let tag_br = document.createElement("br")
+	const tag_target = document.querySelectorAll('h2')
+	tag_target.forEach((target, i) => {
+		const tag_text = target.innerText.replace(/"/g, "'")
+		const tag_hr = document.createElement("hr")
+		const tag_link = document.createElement("a")
+		const tag_br = document.createElement("br")
 		tag_hr.id = tag_text
-		tag_link.textContent = (i + 1) + '.' + tag_target[i].innerText
+		tag_link.textContent = (i + 1) + '.' + target.innerText
 		tag_link.setAttribute('href', "#" + tag_text)
-		tag_target[i].insertAdjacentElement('beforebegin', tag_hr)
+		target.insertAdjacentElement('beforebegin', tag_hr)
 		tag.insertAdjacentElement('beforeend', tag_link)
 		tag.insertAdjacentElement('beforeend', tag_br)
-	}
+	})
 	tag.insertAdjacentHTML('beforebegin', '<h2>目次<h2>')
 	// コピーボタンの追加
-	let code_target = document.getElementsByTagName('pre')
-	for (let i = 0; i < code_target.length; i++) {
-		code_target[i].setAttribute('id', "code" + i)
-		code_target[i].insertAdjacentHTML('beforebegin', '<div class="button"><button id="button' + i + '" onclick="copy(' + i + ')">copy</button></div>')
-	}
+	const code_target = document.querySelectorAll('pre')
+	code_target.forEach((target, i) => {
+		target.setAttribute('id', "code" + i)
+		target.insertAdjacentHTML('beforebegin', '<div class="button"><button id="button' + i + '" onclick="copy(' + i + ')">copy</button></div>')
+	})
 })
 function copy(target_id) {
-	var target = document.getElementById('code' + target_id)
+	const target = document.getElementById('code' + target_id)
 	navigator.clipboard.writeText(target.textContent)
 	document.getElementById('button' + target_id).textContent = 'copied!'
 	setTimeout(function () {

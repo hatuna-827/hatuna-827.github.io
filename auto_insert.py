@@ -6,6 +6,7 @@ with open("site.json", "r", encoding="utf-8") as f:
 for site in site_data:
 	path=f".{site["url"]}"
 	url=site["url"]
+	type="website"
 
 	css_path=""
 	if url.count("/")<2:
@@ -14,12 +15,12 @@ for site in site_data:
 		css_path="/link/link.css"
 	elif url.startswith("/blog"):
 		css_path="/blog/blog.css"
+		type="article"
 	else:
 		path_s=url.rsplit('/', 2)[1]
 		file_name=url.rsplit('/',1)[0]
 		css_path=f"{file_name}/{path_s}.css"
 
-	type=site["type"]
 	title=site["title"]
 	main_title=site["main_title"]
 	sub_title=site["sub_title"]

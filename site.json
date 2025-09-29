@@ -2,7 +2,6 @@
 	"site": [
 		{
 			"url": "/index.html",
-			"type": "website",
 			"name": "ホームページ",
 			"title": "",
 			"main_title": "hatuna-827",
@@ -12,7 +11,6 @@
 		},
 		{
 			"url": "/link/index.html",
-			"type": "website",
 			"name": "すべてのサイト一覧",
 			"title": "LINK すべてのサイト一覧",
 			"main_title": "LINK",
@@ -22,7 +20,6 @@
 		},
 		{
 			"url": "/link/blog/index.html",
-			"type": "website",
 			"name": "ブログ一覧",
 			"title": "Blog ブログ一覧",
 			"main_title": "Blog",
@@ -32,7 +29,6 @@
 		},
 		{
 			"url": "/link/game/index.html",
-			"type": "website",
 			"name": "ゲーム一覧",
 			"title": "Game ゲーム一覧",
 			"main_title": "Game",
@@ -42,7 +38,6 @@
 		},
 		{
 			"url": "/link/tool/index.html",
-			"type": "website",
 			"name": "ツール一覧",
 			"title": "Tool ツール一覧",
 			"main_title": "Tool",
@@ -52,7 +47,6 @@
 		},
 		{
 			"url": "/home/index.html",
-			"type": "website",
 			"name": "",
 			"title": "HOME 自己紹介",
 			"main_title": "HOME",
@@ -62,7 +56,6 @@
 		},
 		{
 			"url": "/404.html",
-			"type": "website",
 			"name": "",
 			"title": "404 Not found",
 			"main_title": "404",
@@ -71,8 +64,16 @@
 			"image": ""
 		},
 		{
+			"url": "/blog/regex/index.html",
+			"name": "VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方",
+			"title": "",
+			"main_title": "正規表現",
+			"sub_title": "~概要編~",
+			"description": "VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。",
+			"image": ""
+		},
+		{
 			"url": "/blog/youtube_playlist_sumtime/index.html",
-			"type": "article",
 			"name": "",
 			"title": "API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法",
 			"main_title": "Youtubeプレイリスト",
@@ -82,7 +83,6 @@
 		},
 		{
 			"url": "/blog/graphing_art/index.html",
-			"type": "article",
 			"name": "グラフアート",
 			"title": "グラフアート、はじめました。",
 			"main_title": "グラフアート",
@@ -92,7 +92,6 @@
 		},
 		{
 			"url": "/blog/vscode/change_design/index.html",
-			"type": "article",
 			"name": "VScodeのデザインを変更しよう",
 			"title": "",
 			"main_title": "VScodeをデザイン",
@@ -102,7 +101,6 @@
 		},
 		{
 			"url": "/blog/esperanto/about/index.html",
-			"type": "article",
 			"name": "",
 			"title": "",
 			"main_title": "エスペラント語",
@@ -112,7 +110,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/about/index.html",
-			"type": "article",
 			"name": "",
 			"title": "",
 			"main_title": "brainfuck",
@@ -122,7 +119,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/warizann/index.html",
-			"type": "article",
 			"name": "",
 			"title": "",
 			"main_title": "brainfuck",
@@ -132,7 +128,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/soinnsuubunnkai/index.html",
-			"type": "article",
 			"name": "",
 			"title": "",
 			"main_title": "brainfuck",
@@ -142,7 +137,6 @@
 		},
 		{
 			"url": "/tool/counter/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "カウンター",
@@ -152,7 +146,6 @@
 		},
 		{
 			"url": "/tool/clock/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "時計",
@@ -162,7 +155,6 @@
 		},
 		{
 			"url": "/tool/word_counter/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "単語カウンター",
@@ -172,7 +164,6 @@
 		},
 		{
 			"url": "/tool/input_esperanto/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "エスペラント語入力",
@@ -182,7 +173,6 @@
 		},
 		{
 			"url": "/tool/slant_creator/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "ごきげんななめ",
@@ -192,7 +182,6 @@
 		},
 		{
 			"url": "/game/OXgame/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "〇×ゲーム",
@@ -202,7 +191,6 @@
 		},
 		{
 			"url": "/game/lights_out/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "ライツアウト",
@@ -212,7 +200,6 @@
 		},
 		{
 			"url": "/game/othello/index.html",
-			"type": "website",
 			"name": "",
 			"title": "",
 			"main_title": "オセロ・リバーシ",
