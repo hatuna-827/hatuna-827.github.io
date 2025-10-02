@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		img.insertAdjacentElement('afterend', imgbox)
 		img.remove()
 	})
-	document.querySelectorAll('a').forEach((link) => {
+	document.querySelectorAll('#main a').forEach((link) => {
 		if (!link.getAttribute('target')) {
-			link.setAttribute('target', '_blank')
+			if (!link.getAttribute('href').startsWith("#"))
+				link.setAttribute('target', '_blank')
 		}
 	})
 	// 目次の追加
