@@ -1,5 +1,5 @@
 "use strict"
-export default async function dialog({
+export default function dialog({
 	type = "OO",
 	title = "",
 	content = "",
@@ -40,7 +40,7 @@ export default async function dialog({
 		dialog関数は非同期処理で呼び出す必要があります\n\
 		",
 	}) {
-	return await new Promise(resolve => {
+	return new Promise(resolve => {
 		const body = document.querySelector('body')
 		const _bg = document.createElement('div')
 		const _content = document.createElement('div')
