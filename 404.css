@@ -1,74 +1,81 @@
-body {
-	text-align: center;
-}
-
 h1 {
-	margin: 30px 0px;
+	margin: 30px 0px 0px;
 	line-height: 50px;
 	color: var(--black-color);
 	font-size: min(70px, 40vw);
-	text-align: center;
 }
 
 h2 {
-	margin: 20px 0px;
+	margin: 10px 0px 0px;
 	line-height: 40px;
 	color: var(--black-color);
 	font-size: 30px;
-	text-align: center;
 }
 
 h3 {
-	margin: 15px;
+	margin: 0px;
+	padding-top: 10px;
 	line-height: 40px;
 	color: var(--black-color);
 	font-size: 20px;
-	text-align: center;
 }
 
 p {
-	margin: 0px 30px;
-	line-height: 50px;
+	margin: 0px;
+	line-height: 30px;
 	color: var(--black-color);
 	font-size: 15px;
-	text-align: center;
 }
 
 button {
-	font-family: var(--main-font);
 	padding: 0px;
-	margin: 20px 7vw -5px 7vw;
+	margin: 20px 40px 0px;
 	color: var(--black-color);
-	width: 20vw;
-	height: 7vw;
+	width: 200px;
+	height: 60px;
 	max-width: 256px;
 	max-height: 90px;
 	background-color: var(--grey-green-color);
 	border-radius: 0px;
 	border: 0px;
-	font-size: min(20px, 2.5vw);
+	font-size: 20px;
+	border-radius: 10px;
+}
+
+hr {
+	margin: 10px calc(50% - 320px);
 }
 
 #main {
 	color: var(--black-color);
-	margin: 3vw;
+	margin: 40px;
 	text-align: center;
+	align-items: center;
 }
 
 @media screen and (max-width:480px) {
+	h3 {
+		font-size: 17px;
+	}
+
 	p {
 		line-height: 30px;
+		font-size: 13px;
 	}
 
 	button {
 		font-size: 15px;
 		line-height: 30px;
-		width: 50vw;
-		height: auto;
-		margin: 20px 20px -5px 20px;
+		width: 160px;
+		height: 40px;
+		margin: 20px 20px 0px;
 	}
 
 	hr {
-		margin: 7px;
+		margin: 0px;
+	}
+
+	#main {
+		margin-bottom: 20px;
 	}
 }

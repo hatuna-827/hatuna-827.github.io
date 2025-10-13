@@ -1,3 +1,7 @@
+#main {
+	margin: 50px;
+}
+
 h1 {
 	margin: 30px 0px;
 	line-height: 50px;
@@ -5,20 +9,14 @@ h1 {
 	font-size: 50px;
 }
 
-hr {
-	margin: 20px 0px;
-}
-
 a {
-	margin: 0px 40px;
-	line-height: 50px;
-	font-size: 25px;
 	color: var(--main-dark-color);
 	text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+	text-decoration: underline .5px;
+	text-underline-offset: 5px;
 }
 
 p {
@@ -26,35 +24,30 @@ p {
 	line-height: 50px;
 	color: var(--black-color);
 	font-size: 25px;
-
-	a {
-		margin: 0px;
-	}
 }
 
-#main {
-	margin: 50px;
+hr {
+	margin: 20px 0px;
 }
 
 @media screen and (max-width:480px) {
 	#main {
-		margin: 10px;
+		margin: 20px;
 	}
 
 	h1 {
-		font-size: 40px;
-		line-height: 40px;
-		margin: 20px 0px;
-	}
-
-	h2 {
 		font-size: 30px;
-		list-style: 40px;
-		margin: 10px 20px;
+		line-height: 30px;
+		margin: 0px 0px 10px;
 	}
 
 	p {
 		font-size: 20px;
 		line-height: 25px;
+		margin: 0px 10px;
+	}
+
+	hr {
+		margin: 10px;
 	}
 }
