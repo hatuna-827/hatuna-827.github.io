@@ -9,6 +9,7 @@ let loop_goal = {}
 let auto_fill_ans = []
 let auto_fill_count = 0
 let if_shift = false
+let count = 0
 // element
 let homebar = document.getElementById("homebar")
 let menu_space = document.getElementById("menu_space")
@@ -30,8 +31,8 @@ let play_mode = document.getElementById("play_mode")
 let list_null = document.getElementById("list_null")
 let work_space = document.getElementById("work_space")
 let popup_button = document.getElementById("popup_button")
-let popup_arrow1 = document.getElementById("popup_arrow1")
-let popup_arrow2 = document.getElementById("popup_arrow2")
+let popup_close = document.getElementById("popup_close")
+let popup_open = document.getElementById("popup_open")
 let save_button = document.getElementById("save_button")
 let close_button = document.getElementById("close_button")
 let create_space = document.getElementById("create_space")
@@ -41,7 +42,7 @@ let big_maru = document.getElementById("big_maru")
 // menu
 add_button.addEventListener('click', { menu_id: add, handleEvent: displaymenu })
 setting_button.addEventListener('click', { menu_id: settings, handleEvent: displaymenu })
-// list_button.addEventListener('click', { menu_id: list, handleEvent: displaymenu })
+list_button.addEventListener('click', { menu_id: list, handleEvent: displaymenu })
 // add
 square.addEventListener('click', function () {
 	if (square.checked) {
@@ -75,13 +76,13 @@ create_new.addEventListener('click', async function () {
 	f_popup()
 })
 // settings
-// auto_save.addEventListener('click', function () {
-//	 if (auto_save.checked) {
-//		 save_button.style.display = "none"
-//	 } else {
-//		 save_button.style.display = "block"
-//	 }
-// })
+auto_save.addEventListener('click', function () {
+	if (auto_save.checked) {
+		save_button.style.display = "none"
+	} else {
+		save_button.style.display = "block"
+	}
+})
 auto_fill.addEventListener('click', async function () {
 	if (auto_fill.checked) {
 		if (now_data.size.x * now_data.size.y > 20) {
@@ -150,7 +151,7 @@ window.addEventListener("keyup", e => {
 	}
 })
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
-function displaymenu(e) {
+function displaymenu() {
 	if (settings_display == this.menu_id) {
 		hidemenu()
 		settings_display = "none"
@@ -169,14 +170,14 @@ function f_popup() {
 	if (popup) {
 		homebar.style.display = "block"
 		menu_space.style.display = "block"
-		popup_arrow1.style.transform = "rotate(180deg)"
-		popup_arrow2.style.transform = "rotate(0deg)"
+		popup_close.style.display = "none"
+		popup_open.style.display = "inline"
 		popup = false
 	} else {
 		homebar.style.display = "none"
 		menu_space.style.display = "none"
-		popup_arrow1.style.transform = "rotate(0deg)"
-		popup_arrow2.style.transform = "rotate(180deg)"
+		popup_close.style.display = "inline"
+		popup_open.style.display = "none"
 		popup = true
 	}
 }
@@ -204,7 +205,6 @@ function create_box() {
 			new_box.classList.add("box")
 			new_box.id = 'box_' + x + ',' + y
 			new_box.addEventListener('click', function () { push_box(x, y) })
-			// new_box.setAttribute('onclick', 'push_box(' + x + ',' + y + ')')
 			if (now_data.box[x][y] == 1) { new_box.classList.add("f") }
 			if (now_data.box[x][y] == -1) { new_box.classList.add("b") }
 			big_box.insertAdjacentElement('beforeend', new_box)
@@ -222,7 +222,6 @@ function create_maru() {
 			new_maru.classList.add("maru")
 			new_maru.id = 'maru_' + x + ',' + y
 			new_maru.addEventListener('click', function () { push_maru(x, y) })
-			// new_maru.setAttribute('onclick', 'push_maru(' + x + ',' + y + ')')
 			new_maru.textContent = now_data.maru[x][y]
 			if (new_maru.textContent != "") {
 				new_maru.classList.add("disp")
@@ -470,9 +469,7 @@ function loop_red_box() {
 	// console.log("ループ発見", loop_goal, root)
 	let l_P = loop_goal
 	let only
-	let count = 0
 	while (root[l_P.x][l_P.y] != 1) {
-		count++; if (count == 10) { exit() }
 		// console.log("色塗り中", l_P, root[l_P.x][l_P.y])
 		let link_wall = check_link_wall(l_P.x, l_P.y, now_data.size)
 		only = true
@@ -530,7 +527,9 @@ function check_link_wall(x, y, size) {
 	}
 }
 function auto_fill_box() {
+	const start = Date.now()
 	now_data.box = f_auto_fill_data(now_data.size, now_data.maru)
+	console.log(Date.now() - start)
 	create_box()
 	if (gray_out.checked) { all_check_gray() }
 	if (rule.checked) { all_check_maru() }
@@ -548,9 +547,10 @@ function f_auto_fill_data(size, maru_data) {
 		}
 	}
 	auto_fill_data.maru = maru_data
-	// console.log("今から考える", auto_fill_data)
-	auto_fill_DFS(size, auto_fill_data, 0)
-	// if (auto_fill_count == 0) { alert("答えが存在しません。") }
+	// let conn = { list: Array.from({ length: size.x + 1 }, () => crypto.randomUUID()), tmp: crypto.randomUUID() }
+	const conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0 }
+	count = size.x
+	auto_fill_DFS(size, auto_fill_data, 0, conn)
 	for (let x = 0; x < size.x; x++) {
 		for (let y = 0; y < size.y; y++) {
 			auto_fill_ans[x][y] = Math.trunc(auto_fill_ans[x][y] / auto_fill_count)
@@ -558,12 +558,13 @@ function f_auto_fill_data(size, maru_data) {
 	}
 	return auto_fill_ans
 }
-function auto_fill_DFS(size, tmp_data, node) {
-	// console.log("DFS", size, tmp_data, node)
+function auto_fill_DFS(size, tmp_data, node, conn) {
+	// console.log("---------", conn.tmp, ...conn.list)
+	let connect = { ...conn }
 	let x = node % size.x
 	let y = Math.floor(node / size.x)
 	if (size.x * size.y == node) {
-		// console.log("One answer", tmp_data)
+		// console.log("One answer")
 		auto_fill_count++
 		for (let x = 0; x < size.x; x++) {
 			for (let y = 0; y < size.y; y++) {
@@ -573,30 +574,49 @@ function auto_fill_DFS(size, tmp_data, node) {
 		return
 	}
 	tmp_data.box[x][y] = -1
+	// const temp1 = connect.tmp
+	// connect.tmp = connect.list[x + 1]
+	// connect.list[x + 1] = temp1
+	// if (x == size.x - 1) {
+	// 	console.log("return")
+	// 	connect.tmp = crypto.randomUUID()
+	// 	connect.tmp = ++count
+	// }
+	// console.log(node, -1, ...tmp_data.box)
 	if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
-		auto_fill_DFS(size, tmp_data, node + 1)
+		auto_fill_DFS(size, tmp_data, node + 1, connect)
 	}
 	tmp_data.box[x][y] = 1
+	// connect = { ...conn }
+	// connect.list[x] = connect.list[x + 2]
+	// connect.tmp = connect.list[x + 2]
+	// connect.list[2] = crypto.randomUUID()
+	// connect.list[2] = ++count
+	// if (x == size.x - 1) {
+	// 	console.log("return")
+	// 	connect.tmp = crypto.randomUUID()
+	// 	connect.tmp = ++count
+	// }
+	// console.log(node, 1)
 	if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
-		if (x != 0) {
-			if (tmp_data.box[x - 1][y] == -1) {
-				if (!check_box_data(x, y, size, tmp_data.box)) {
-					auto_fill_DFS(size, tmp_data, node + 1)
-				}
-			} else {
-				auto_fill_DFS(size, tmp_data, node + 1)
-			}
+		if (x != 0 && tmp_data.box[x - 1][y] == -1 && !check_box_data(x, y, size, tmp_data.box)) {
+			auto_fill_DFS(size, tmp_data, node + 1, connect)
 		} else {
-			auto_fill_DFS(size, tmp_data, node + 1)
+			auto_fill_DFS(size, tmp_data, node + 1, connect)
 		}
 	}
 	tmp_data.box[x][y] = 0
+}
+function replace_list(old, from, to) {
+	let list = [...old]
+	list.forEach((x, i) => list[i] = x == from ? to : x)
+	return list
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
 // add_button.click()

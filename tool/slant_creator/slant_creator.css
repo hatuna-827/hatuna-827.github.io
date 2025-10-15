@@ -124,24 +124,9 @@ input {
 	left: 15px;
 }
 
-#popup_arrow1 {
-	position: absolute;
-	height: 25px;
-	margin: 30px 25px 5px 0px;
-	transform: rotate(180deg);
-}
-
-#popup_arrow2 {
-	height: 25px;
-	margin: 5px 0px 30px 25px;
-}
-
-#save_button {
-	display: none;
-}
-
-#close_button_image {
-	transform: rotate(45deg);
+#popup_close,
+#popup_open {
+	width: 50px;
 }
 
 .work_button {
@@ -252,4 +237,15 @@ input {
 		color: var(--red-color);
 		background-color: var(--pastel-pink-color);
 	}
+}
+
+svg {
+	color: var(--white-color);
+	stroke-width: 1px;
+}
+
+#save_button,
+#list_button,
+#auto_save {
+	display: none;
 }
