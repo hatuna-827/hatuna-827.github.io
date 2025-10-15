@@ -34,8 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	// コピーボタンの追加
 	const code_target = document.querySelectorAll('pre')
 	code_target.forEach((target, i) => {
-		target.setAttribute('id', "code" + i)
-		target.insertAdjacentHTML('beforebegin', '<div class="button"><button id="button' + i + '" onclick="copy(' + i + ')">copy</button></div>')
+		target.id = "code" + i
+		const pre_box = document.createElement('div')
+		pre_box.className = "pre-box"
+		pre_box.appendChild(target.cloneNode(true))
+		pre_box.insertAdjacentHTML('afterbegin', '<div class="sticky-box"><button id="button' + i + '" class="copy-btn" onclick="copy(' + i + ')">copy</button></div>')
+		target.insertAdjacentElement('afterend', pre_box)
+		target.remove()
 	})
 })
 function copy(target_id) {
