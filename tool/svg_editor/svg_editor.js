@@ -1,0 +1,115 @@
+"use strict"
+/* - import ------------------------------------------------------------------------------------ */
+import storage from "/storage.js"
+/* - const ------------------------------------------------------------------------------------- */
+// img drag
+let scale = 1
+let originX = 0
+let originY = 0
+let startX, startY
+let isDragging = false
+let zoom_min = 0.2
+let zoom_max = 5
+// opening_window
+let opening_window = null
+let setting = { hide_homebar: false, ...storage.get("svg-editor-setting") }
+const settings = document.getElementById("settings")
+const img_home = document.getElementById("img-home")
+const img_view = document.getElementById("img-view")
+/* - init -------------------------------------------------------------------------------------- */
+reflect_setting()
+set_views("xml", "none")
+/* - add eventListener ------------------------------------------------------------------------- */
+window.addEventListener('beforeunload', () => {
+	if (opening_window) { opening_window.close() }
+})
+settings.addEventListener('click', () => {
+	const setting_popup = nurunu_open("", '_blank', 'top=100,left=200,height=500,width=400,popup')
+	setting_popup.document.body.insertAdjacentHTML('afterbegin', '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="hatuna-827"><link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico"><link rel="stylesheet" href="/tool/svg_editor/svg_editor.css"><link rel="stylesheet" href="/hatuna-827.css"><title>設定 - SVGエディター | hatuna-827</title></head><body><noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript><div id="setting-window"></div></body></html>')
+	const setting_window = setting_popup.document.getElementById("setting-window")
+	const setting_hide_homebar = document.createElement('label')
+	setting_hide_homebar.innerHTML = "<span class='reco'>ホームバーを非表示</span><input type='checkbox'>"
+	setting_hide_homebar.querySelector('input').checked = setting.hide_homebar
+	setting_hide_homebar.querySelector('input').addEventListener('click', function () {
+		setting.hide_homebar = !!this.checked
+		reflect_setting()
+	})
+	setting_window.appendChild(setting_hide_homebar)
+})
+img_home.addEventListener('click', () => {
+	scale = 1
+	originX = 0
+	originY = 0
+	update_img_view()
+})
+// img_view
+img_view.addEventListener('mousedown', (e) => {
+	isDragging = true
+	img_view.style.cursor = 'grabbing'
+	startX = e.clientX - originX
+	startY = e.clientY - originY
+})
+img_view.addEventListener('mousemove', (e) => {
+	if (!isDragging) return
+	originX = e.clientX - startX
+	originY = e.clientY - startY
+	update_img_view()
+})
+img_view.addEventListener('mouseup', () => {
+	isDragging = false
+	img_view.style.cursor = 'grab'
+})
+img_view.addEventListener('wheel', (e) => {
+	e.preventDefault()
+	const zoomIntensity = 0.1
+	const delta = e.deltaY < 0 ? 1 : -1
+	const newScale = scale + delta * zoomIntensity * scale
+	scale = Math.min(Math.max(newScale, zoom_min), zoom_max)
+	update_img_view()
+})
+/* - function ---------------------------------------------------------------------------------- */
+function update_img_view() {
+	const content = document.getElementById("img-content")
+	content.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
+}
+function nurunu_open(url, target, features) {
+	if (opening_window) { opening_window.close() }
+	opening_window = window.open(url, target, features)
+	opening_window.addEventListener('beforeunload', () => {
+		opening_window.close()
+		opening_window = null
+	})
+	return opening_window
+}
+function reflect_setting() {
+	const homebar = document.getElementById("homebar")
+	if (setting.hide_homebar) { homebar.style.display = "none" } else { homebar.style.display = "block" }
+}
+function set_views(main, sub) {
+	// const
+	const main_editor = document.getElementById("main-content")
+	const sub_view = document.getElementById("sub-view")
+	const img_content = document.getElementById("img-content")
+	// reset
+	main_editor.innerHTML = ""
+	sub_view.innerHTML = ""
+	if (main == "xml") {
+		const line_numbers = document.createElement('div')
+		const textarea = document.createElement('textarea')
+		line_numbers.className = "line-numbers"
+		textarea.id = "xml-textarea"
+		textarea.className = "xml"
+		textarea.spellcheck = false
+		textarea.addEventListener('input', () => {
+			line_numbers.innerHTML = ""
+			let line_count = textarea.value.match(/\n/g)
+			if (line_count) { line_count = line_count.length + 1 } else { line_count = 1 }
+			for (let i = 0; i < line_count; i++) { line_numbers.insertAdjacentElement('beforeend', document.createElement('span')) }
+			img_content.innerHTML = textarea.value
+		})
+		line_numbers.insertAdjacentElement('beforeend', document.createElement('span'))
+		main_editor.appendChild(line_numbers)
+		main_editor.appendChild(textarea)
+	}
+}
+/* --------------------------------------------------------------------------------------------- */

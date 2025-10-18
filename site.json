@@ -136,6 +136,15 @@
 			"image": ""
 		},
 		{
+			"url": "/tool/svg_editor/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "SVGエディター",
+			"sub_title": "",
+			"description": "プレビュー付き・シンプルなSVGエディター",
+			"image": ""
+		},
+		{
 			"url": "/tool/counter/index.html",
 			"name": "",
 			"title": "",

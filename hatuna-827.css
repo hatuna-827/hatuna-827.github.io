@@ -18,6 +18,7 @@
 		--grey-d-color: #555;
 		--grey-c-color: #444;
 		--grey-a-color: #333;
+		--grey-5-color: #aaa;
 		/* green */
 		--grey-green-color: #454;
 		--light-green-color: #afd8af;
@@ -36,14 +37,15 @@
 	:root {
 		/* main */
 		--main-color: #709170;
-		--main-light-color: #B2E9B2;
+		--main-light-color: #b2e9b2;
 		--main-dark-color: #007e00;
 		--main-bg-color: #f8f7f2;
 		/* grey */
-		--grey-e5-color: #E5E5E5;
+		--grey-e5-color: #e5e5e5;
 		--grey-d-color: #ddd;
 		--grey-c-color: #ccc;
 		--grey-a-color: #aaa;
+		--grey-5-color: #555;
 		/* green */
 		--grey-green-color: #cdc;
 		--light-green-color: #afd8af;
@@ -59,8 +61,8 @@
 }
 
 ::selection {
-	background-color: var(--main-dark-color);
-	color: var(--white-color);
+	background-color: var(--leaf-green-color);
+	color: var(--blak-color);
 }
 
 body {

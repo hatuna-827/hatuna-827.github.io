@@ -1,0 +1,201 @@
+#main {
+	position: relative;
+	height: 100vh;
+}
+
+#title-bar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 0px 40px;
+	height: 50px;
+	width: calc(50% - 80px);
+	background-color: var(--main-color);
+	user-select: none;
+}
+
+
+#title-bar>p {
+	margin: 0px;
+	font-size: 30px;
+	line-height: 50px;
+	color: var(--white-color);
+}
+
+#main-editor {
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	height: calc(100% - 50px);
+	width: 50%;
+	box-sizing: border-box;
+	background-color: var(--main-bg-color);
+	border: 1px var(--grey-a-color) solid;
+}
+
+#img-view {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 50%;
+	width: 50%;
+	box-sizing: border-box;
+	background-color: var(--white-color);
+	border: 1px var(--grey-a-color) solid;
+	overflow: hidden;
+	cursor: grab;
+}
+
+#main:has(#sub-view.hide)>#img-view {
+	height: 100%;
+}
+
+#img-content {
+	border: 1px solid var(--grey-a-color);
+}
+
+#sub-view {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	height: 50%;
+	width: 50%;
+	box-sizing: border-box;
+	background-color: var(--white-color);
+	border: 1px var(--grey-a-color) solid;
+}
+
+#sub-view.hide {
+	display: none;
+}
+
+/* mini-btn */
+.mini-btn-box {
+	position: absolute;
+	top: 7px;
+	right: 12px;
+}
+
+.mini-btn {
+	padding: 5px 8px;
+	height: 22px;
+	width: 22px;
+	color: var(--white-color);
+	background-color: var(--main-color);
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.mini-btn.white {
+	color: var(--main-color);
+	background-color: var(--white-color);
+}
+
+/* setting-window */
+#setting-window {
+	padding: 10px;
+	user-select: none;
+}
+
+#setting-window>label {
+	color: var(--black-color);
+	font-size: 15px;
+}
+
+#setting-window span.reco::after {
+	content: "(推奨)";
+	color: var(--grey-5-color);
+	font-size: 10px;
+}
+
+#setting-window input[type="checkbox"] {
+	position: relative;
+	margin: 0px 10px;
+	height: 15px;
+	width: 15px;
+	background-color: var(--white-color);
+	border-radius: 2px;
+	border: 1px solid var(--black-color);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+#setting-window input[type="checkbox"]:checked::after {
+	content: '';
+	position: absolute;
+	top: 0px;
+	left: 4px;
+	transform: rotate(50deg);
+	width: 3px;
+	height: 8px;
+	border-right: 1.5px solid var(--black-color);
+	border-bottom: 1.5px solid var(--black-color);
+}
+
+/* line-numbers */
+.line-numbers {
+	counter-reset: line;
+	position: absolute;
+	font-family: var(--code-font), monospace;
+	border-right: 1px solid var(--black-color);
+	white-space: pre;
+	min-height: 100%;
+	field-sizing: content;
+}
+
+.line-numbers span {
+	counter-increment: line;
+	display: block;
+	text-align: right;
+	width: 30px;
+}
+
+.line-numbers span::before {
+	content: counter(line);
+	margin-right: 5px;
+	color: gray;
+	font-size: 15px;
+	line-height: 21px;
+}
+
+/* xml */
+.xml {
+	margin: 0px 0px 0px 30px;
+	padding: 0px 10px;
+	box-sizing: border-box;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0px;
+	border-radius: 0px;
+	resize: none;
+	min-height: 100%;
+	width: calc(100% - 30px);
+	font-family: var(--code-font);
+	font-size: 15px;
+	line-height: 21px;
+	white-space: pre;
+	overflow-y: hidden;
+	field-sizing: content;
+}
+
+.xml:focus {
+	outline: none;
+}
+
+/* tips */
+.relative {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.noeffect {
+	height: 100%;
+	width: 100%;
+}
+
+.overflow {
+	overflow-y: auto;
+	overflow-x: hidden;
+	scrollbar-width: thin;
+}
