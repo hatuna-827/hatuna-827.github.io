@@ -42,12 +42,12 @@ for site in site_data:
 \t<meta property="og:title" content="{title}">
 \t<meta property="og:description" content="{description}">
 \t<meta property="og:site_name" content="{name}">
-\t<meta property="og:image" content="/1200_630.png">
-\t<meta name="twitter:card" content="summary_large_image">
+\t<meta property="og:image" content="/hatuna-827.ico">
+\t<meta name="twitter:card" content="summary">
 \t<meta name="twitter:domain" content="hatuna-827.github.io">
 \t<meta name="twitter:title" content="{title}">
 \t<meta name="twitter:description" content="{description}">
-\t<meta name="twitter:image" content="/1200_630.png">
+\t<meta name="twitter:image" content="/hatuna-827.ico">
 \t<meta name="theme-color" content="#709170">
 \t<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
 \t<link rel="apple-touch-icon" href="/hatuna-827.ico">

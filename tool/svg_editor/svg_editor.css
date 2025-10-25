@@ -88,7 +88,7 @@
 
 .mini-btn.white {
 	color: var(--main-color);
-	background-color: var(--white-color);
+	background-color: var(--main-bg-color);
 }
 
 /* line-numbers */
@@ -112,7 +112,7 @@
 .line-numbers span::before {
 	content: counter(line);
 	margin-right: 5px;
-	color: gray;
+	color: var(--grey-5-color);
 	font-size: 15px;
 	line-height: 21px;
 }
@@ -122,6 +122,7 @@
 	margin: 0px 0px 0px 30px;
 	padding: 0px 10px;
 	box-sizing: border-box;
+	color: var(--black-color);
 	background-color: rgba(0, 0, 0, 0);
 	border: 0px;
 	border-radius: 0px;

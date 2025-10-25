@@ -193,6 +193,7 @@ body {
 	height: 30px;
 	width: 30px;
 	transform: translate(0, -50%);
+	color: var(--black-color);
 }
 
 noscript {

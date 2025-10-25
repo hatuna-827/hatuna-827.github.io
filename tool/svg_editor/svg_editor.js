@@ -89,12 +89,19 @@ function set_views(main, sub) {
 		textarea.id = "xml-textarea"
 		textarea.className = "xml"
 		textarea.spellcheck = false
-		textarea.addEventListener('input', () => {
+		textarea.textContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
+  stroke-linecap="round" stroke-linejoin="round">
+</svg>`
+		textarea.addEventListener('input', function () {
+			if (this.value == "") {
+				this.value = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
+  stroke-linecap="round" stroke-linejoin="round">
+</svg>` }
 			line_numbers.innerHTML = ""
-			let line_count = textarea.value.match(/\n/g)
+			let line_count = this.value.match(/\n/g)
 			if (line_count) { line_count = line_count.length + 1 } else { line_count = 1 }
 			for (let i = 0; i < line_count; i++) { line_numbers.insertAdjacentElement('beforeend', document.createElement('span')) }
-			img_content.innerHTML = textarea.value
+			img_content.innerHTML = this.value
 		})
 		line_numbers.insertAdjacentElement('beforeend', document.createElement('span'))
 		main_editor.appendChild(line_numbers)
