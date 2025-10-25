@@ -91,48 +91,6 @@
 	background-color: var(--white-color);
 }
 
-/* setting-window */
-#setting-window {
-	padding: 10px;
-	user-select: none;
-}
-
-#setting-window>label {
-	color: var(--black-color);
-	font-size: 15px;
-}
-
-#setting-window span.reco::after {
-	content: "(推奨)";
-	color: var(--grey-5-color);
-	font-size: 10px;
-}
-
-#setting-window input[type="checkbox"] {
-	position: relative;
-	margin: 0px 10px;
-	height: 15px;
-	width: 15px;
-	background-color: var(--white-color);
-	border-radius: 2px;
-	border: 1px solid var(--black-color);
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
-
-#setting-window input[type="checkbox"]:checked::after {
-	content: '';
-	position: absolute;
-	top: 0px;
-	left: 4px;
-	transform: rotate(50deg);
-	width: 3px;
-	height: 8px;
-	border-right: 1.5px solid var(--black-color);
-	border-bottom: 1.5px solid var(--black-color);
-}
-
 /* line-numbers */
 .line-numbers {
 	counter-reset: line;

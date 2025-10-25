@@ -1,18 +1,17 @@
 "use strict"
 function modify(obj, path, value) {
   if (obj === undefined || path === undefined) {
-    throw new Error("Not enough arguments")
+    throw new Error("|obj_manip module| Not enough arguments")
   }
   let root = [obj]
   path = path.split(/[.[\]]/)
   path.forEach((next_path) => {
     let next = root[root.length - 1][next_path]
     if (next == undefined) {
-      throw new Error("Path value not found")
+      throw new Error("|obj_manip module| Path value not found")
     }
     root.push(next)
   })
-  console.log("modify", root)
   root[root.length - 1] = value
   path.reverse().forEach((next_path) => {
     root[root.length - 2][next_path] = root.pop()
@@ -21,14 +20,14 @@ function modify(obj, path, value) {
 }
 function remove(obj, path) {
   if (obj === undefined || path === undefined) {
-    throw new Error("Not enough arguments")
+    throw new Error("|obj_manip module| Not enough arguments")
   }
   let root = [obj]
   path = path.split(/[.[\]]/)
   path.forEach((next_path) => {
     let next = root[root.length - 1][next_path]
     if (next == undefined) {
-      throw new Error("Path value not found")
+      throw new Error("|obj_manip module| Path value not found")
     }
     root.push(next)
   })

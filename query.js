@@ -2,7 +2,10 @@
 export default function query(name) {
 	const src = location.href
 	const result = new Object()
-	if (!src.includes('?')) { return result }
+	if (!src.includes('?')) {
+		if (name != null) { return result[name] }
+		return result
+	}
 	const query = src.substring(src.indexOf('?') + 1)
 	const parameters = query.split('&')
 	parameters.forEach((parameter) => {
@@ -11,6 +14,7 @@ export default function query(name) {
 		const value = decodeURIComponent(element[1])
 		result[key] = value
 	})
-	if (name != null) return result[name]
+	if (name != null) { return result[name] }
 	return result
 }
+// Object.fromEntries(new URLSearchParams(window.location.search).entries())

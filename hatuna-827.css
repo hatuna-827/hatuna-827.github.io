@@ -1,63 +1,159 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-	/* fonts */
+	/* ------------ fonts ------------ */
 	--main-font: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
 	--code-font: 'Ubuntu mono', monospace;
+	/* ---------- dark mode ---------- */
+	/* main */
+	--dark-mode-main-color: #709170;
+	--dark-mode-main-light-color: #565;
+	--dark-mode-main-dark-color: #41c641;
+	--dark-mode-main-bg-color: #383732;
+	/* grey */
+	--dark-mode-grey-e5-color: #666;
+	--dark-mode-grey-d-color: #555;
+	--dark-mode-grey-c-color: #444;
+	--dark-mode-grey-a-color: #333;
+	--dark-mode-grey-5-color: #aaa;
+	/* green */
+	--dark-mode-grey-green-color: #454;
+	--dark-mode-light-green-color: #485748;
+	--dark-mode-leaf-green-color: #587a4c;
+	--dark-mode-dark-green-color: #3f4e3f;
+	/* any color */
+	--dark-mode-black-color: #ffffff;
+	--dark-mode-white-color: #000000;
+	--dark-mode-red-color: #b20024;
+	--dark-mode-pink-color: #b3000d;
+	--dark-mode-pastel-pink-color: #ff7d79;
+	/* --------- light mode --------- */
+	/* main */
+	--light-mode-main-color: #709170;
+	--light-mode-main-light-color: #b2e9b2;
+	--light-mode-main-dark-color: #007e00;
+	--light-mode-main-bg-color: #f8f7f2;
+	/* grey */
+	--light-mode-grey-e5-color: #e5e5e5;
+	--light-mode-grey-d-color: #ddd;
+	--light-mode-grey-c-color: #ccc;
+	--light-mode-grey-a-color: #aaa;
+	--light-mode-grey-5-color: #555;
+	/* green */
+	--light-mode-grey-green-color: #cdc;
+	--light-mode-light-green-color: #afd8af;
+	--light-mode-leaf-green-color: #89b76c;
+	--light-mode-dark-green-color: #3f4e3f;
+	/* any color */
+	--light-mode-black-color: #000000;
+	--light-mode-white-color: #ffffff;
+	--light-mode-red-color: #ff0000;
+	--light-mode-pink-color: #ff86c2;
+	--light-mode-pastel-pink-color: #f6bdc0;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
 		/* main */
-		--main-color: #709170;
-		--main-light-color: #565;
-		--main-dark-color: #41c641;
-		--main-bg-color: #383732;
+		--main-color: var(--dark-mode-main-color);
+		--main-light-color: var(--dark-mode-main-light-color);
+		--main-dark-color: var(--dark-mode-main-dark-color);
+		--main-bg-color: var(--dark-mode-main-bg-color);
 		/* grey */
-		--grey-e5-color: #666;
-		--grey-d-color: #555;
-		--grey-c-color: #444;
-		--grey-a-color: #333;
-		--grey-5-color: #aaa;
+		--grey-e5-color: var(--dark-mode-grey-e5-color);
+		--grey-d-color: var(--dark-mode-grey-d-color);
+		--grey-c-color: var(--dark-mode-grey-c-color);
+		--grey-a-color: var(--dark-mode-grey-a-color);
+		--grey-5-color: var(--dark-mode-grey-5-color);
 		/* green */
-		--grey-green-color: #454;
-		--light-green-color: #afd8af;
-		--leaf-green-color: #587a4c;
-		--dark-green-color: #3f4e3f;
+		--grey-green-color: var(--dark-mode-grey-green-color);
+		--light-green-color: var(--dark-mode-light-green-color);
+		--leaf-green-color: var(--dark-mode-leaf-green-color);
+		--dark-green-color: var(--dark-mode-dark-green-color);
 		/* any color */
-		--black-color: #ffffff;
-		--white-color: #000000;
-		--red-color: #b20024;
-		--pink-color: #b3000d;
-		--pastel-pink-color: #ff7d79;
+		--black-color: var(--dark-mode-black-color);
+		--white-color: var(--dark-mode-white-color);
+		--red-color: var(--dark-mode-red-color);
+		--pink-color: var(--dark-mode-pink-color);
+		--pastel-pink-color: var(--dark-mode-pastel-pink-color);
 	}
 }
 
 @media (prefers-color-scheme: light) {
 	:root {
 		/* main */
-		--main-color: #709170;
-		--main-light-color: #b2e9b2;
-		--main-dark-color: #007e00;
-		--main-bg-color: #f8f7f2;
+		--main-color: var(--light-mode-main-color);
+		--main-light-color: var(--light-mode-main-light-color);
+		--main-dark-color: var(--light-mode-main-dark-color);
+		--main-bg-color: var(--light-mode-main-bg-color);
 		/* grey */
-		--grey-e5-color: #e5e5e5;
-		--grey-d-color: #ddd;
-		--grey-c-color: #ccc;
-		--grey-a-color: #aaa;
-		--grey-5-color: #555;
+		--grey-e5-color: var(--light-mode-grey-e5-color);
+		--grey-d-color: var(--light-mode-grey-d-color);
+		--grey-c-color: var(--light-mode-grey-c-color);
+		--grey-a-color: var(--light-mode-grey-a-color);
+		--grey-5-color: var(--light-mode-grey-5-color);
 		/* green */
-		--grey-green-color: #cdc;
-		--light-green-color: #afd8af;
-		--leaf-green-color: #89b76c;
-		--dark-green-color: #3f4e3f;
+		--grey-green-color: var(--light-mode-grey-green-color);
+		--light-green-color: var(--light-mode-light-green-color);
+		--leaf-green-color: var(--light-mode-leaf-green-color);
+		--dark-green-color: var(--light-mode-dark-green-color);
 		/* any color */
-		--black-color: #000000;
-		--white-color: #ffffff;
-		--red-color: #ff0000;
-		--pink-color: #ff86c2;
-		--pastel-pink-color: #f6bdc0;
+		--black-color: var(--light-mode-black-color);
+		--white-color: var(--light-mode-white-color);
+		--red-color: var(--light-mode-red-color);
+		--pink-color: var(--light-mode-pink-color);
+		--pastel-pink-color: var(--light-mode-pastel-pink-color);
 	}
+}
+
+body[data-theme="dark"] {
+	/* main */
+	--main-color: var(--dark-mode-main-color);
+	--main-light-color: var(--dark-mode-main-light-color);
+	--main-dark-color: var(--dark-mode-main-dark-color);
+	--main-bg-color: var(--dark-mode-main-bg-color);
+	/* grey */
+	--grey-e5-color: var(--dark-mode-grey-e5-color);
+	--grey-d-color: var(--dark-mode-grey-d-color);
+	--grey-c-color: var(--dark-mode-grey-c-color);
+	--grey-a-color: var(--dark-mode-grey-a-color);
+	--grey-5-color: var(--dark-mode-grey-5-color);
+	/* green */
+	--grey-green-color: var(--dark-mode-grey-green-color);
+	--light-green-color: var(--dark-mode-light-green-color);
+	--leaf-green-color: var(--dark-mode-leaf-green-color);
+	--dark-green-color: var(--dark-mode-dark-green-color);
+	/* any color */
+	--black-color: var(--dark-mode-black-color);
+	--white-color: var(--dark-mode-white-color);
+	--red-color: var(--dark-mode-red-color);
+	--pink-color: var(--dark-mode-pink-color);
+	--pastel-pink-color: var(--dark-mode-pastel-pink-color);
+}
+
+body[data-theme="light"] {
+	/* main */
+	--main-color: var(--light-mode-main-color);
+	--main-light-color: var(--light-mode-main-light-color);
+	--main-dark-color: var(--light-mode-main-dark-color);
+	--main-bg-color: var(--light-mode-main-bg-color);
+	/* grey */
+	--grey-e5-color: var(--light-mode-grey-e5-color);
+	--grey-d-color: var(--light-mode-grey-d-color);
+	--grey-c-color: var(--light-mode-grey-c-color);
+	--grey-a-color: var(--light-mode-grey-a-color);
+	--grey-5-color: var(--light-mode-grey-5-color);
+	/* green */
+	--grey-green-color: var(--light-mode-grey-green-color);
+	--light-green-color: var(--light-mode-light-green-color);
+	--leaf-green-color: var(--light-mode-leaf-green-color);
+	--dark-green-color: var(--light-mode-dark-green-color);
+	/* any color */
+	--black-color: var(--light-mode-black-color);
+	--white-color: var(--light-mode-white-color);
+	--red-color: var(--light-mode-red-color);
+	--pink-color: var(--light-mode-pink-color);
+	--pastel-pink-color: var(--light-mode-pastel-pink-color);
 }
 
 ::selection {
@@ -74,19 +170,29 @@ body {
 }
 
 #homebar {
+	position: relative;
 	background-color: var(--main-light-color);
 	width: 100%;
 	height: min(90px, 15vw);
 	text-align: center;
 	user-select: none;
+}
 
-	a {
-		margin: 0px;
-		font-size: min(50px, 10vw);
-		color: var(--black-color);
-		text-decoration: none;
-		line-height: min(90px, 15vw);
-	}
+#homebar a {
+	margin: 0px;
+	font-size: min(50px, 10vw);
+	color: var(--black-color);
+	text-decoration: none;
+	line-height: min(90px, 15vw);
+}
+
+#site-setting {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	height: 30px;
+	width: 30px;
+	transform: translate(0, -50%);
 }
 
 noscript {
@@ -99,9 +205,11 @@ noscript {
 	right: 0px;
 	justify-content: center;
 	align-items: center;
-	font-size: 30px;
+	text-align: center;
+	font-size: 25px;
 	color: var(--black-color);
 	z-index: 1001;
+	padding: 20px;
 }
 
 button,

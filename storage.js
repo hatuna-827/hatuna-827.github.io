@@ -5,21 +5,21 @@ function get(key) {
 }
 function set(key, value) {
   if (key === undefined) {
-    throw new Error("Not enough arguments")
+    throw new Error("|Storage module| Not enough arguments")
   }
   localStorage.setItem(key, JSON.stringify(value))
   return
 }
 function modify(key, path, value) {
   if (key === undefined || path === undefined) {
-    throw new Error("Not enough arguments")
+    throw new Error("|Storage module| Not enough arguments")
   }
   localStorage.setItem(key, JSON.stringify(obj_manip.modify(JSON.parse(localStorage.getItem(key)), path, value)))
   return
 }
 function remove(key, path) {
   if (key === undefined) {
-    throw new Error("Not enough arguments")
+    throw new Error("|Storage module| Not enough arguments")
   }
   if (path === undefined) {
     localStorage.removeItem(key)

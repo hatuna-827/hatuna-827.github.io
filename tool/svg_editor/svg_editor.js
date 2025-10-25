@@ -10,10 +10,7 @@ let startX, startY
 let isDragging = false
 let zoom_min = 0.2
 let zoom_max = 5
-// opening_window
 let opening_window = null
-let setting = { hide_homebar: false, ...storage.get("svg-editor-setting") }
-const settings = document.getElementById("settings")
 const img_home = document.getElementById("img-home")
 const img_view = document.getElementById("img-view")
 /* - init -------------------------------------------------------------------------------------- */
@@ -23,18 +20,8 @@ set_views("xml", "none")
 window.addEventListener('beforeunload', () => {
 	if (opening_window) { opening_window.close() }
 })
-settings.addEventListener('click', () => {
-	const setting_popup = nurunu_open("", '_blank', 'top=100,left=200,height=500,width=400,popup')
-	setting_popup.document.body.insertAdjacentHTML('afterbegin', '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="hatuna-827"><link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico"><link rel="stylesheet" href="/tool/svg_editor/svg_editor.css"><link rel="stylesheet" href="/hatuna-827.css"><title>設定 - SVGエディター | hatuna-827</title></head><body><noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript><div id="setting-window"></div></body></html>')
-	const setting_window = setting_popup.document.getElementById("setting-window")
-	const setting_hide_homebar = document.createElement('label')
-	setting_hide_homebar.innerHTML = "<span class='reco'>ホームバーを非表示</span><input type='checkbox'>"
-	setting_hide_homebar.querySelector('input').checked = setting.hide_homebar
-	setting_hide_homebar.querySelector('input').addEventListener('click', function () {
-		setting.hide_homebar = !!this.checked
-		reflect_setting()
-	})
-	setting_window.appendChild(setting_hide_homebar)
+document.getElementById("settings").addEventListener('click', () => {
+	nurunu_open("/settings/?p=svg_editor", '_blank', 'top=100,left=200,height=500,width=400,popup')
 })
 img_home.addEventListener('click', () => {
 	scale = 1
@@ -67,10 +54,11 @@ img_view.addEventListener('wheel', (e) => {
 	scale = Math.min(Math.max(newScale, zoom_min), zoom_max)
 	update_img_view()
 })
+window.addEventListener('storage', reflect_setting)
 /* - function ---------------------------------------------------------------------------------- */
 function update_img_view() {
 	const content = document.getElementById("img-content")
-	content.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
+	content.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`
 }
 function nurunu_open(url, target, features) {
 	if (opening_window) { opening_window.close() }
@@ -82,6 +70,7 @@ function nurunu_open(url, target, features) {
 	return opening_window
 }
 function reflect_setting() {
+	const setting = storage.get("svg-editor-setting")
 	const homebar = document.getElementById("homebar")
 	if (setting.hide_homebar) { homebar.style.display = "none" } else { homebar.style.display = "block" }
 }

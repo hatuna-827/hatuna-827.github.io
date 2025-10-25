@@ -65,9 +65,9 @@
 		},
 		{
 			"url": "/blog/regex/index.html",
-			"name": "VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方",
+			"name": "はじめての正規表現 - VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方",
 			"title": "",
-			"main_title": "正規表現",
+			"main_title": "はじめての正規表現",
 			"sub_title": "~概要編~",
 			"description": "VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。",
 			"image": ""
@@ -214,6 +214,15 @@
 			"main_title": "オセロ・リバーシ",
 			"sub_title": "",
 			"description": "オセロ・リバーシ",
+			"image": ""
+		},
+		{
+			"url": "/settings/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "設定",
+			"sub_title": "",
+			"description": "サイトのテーマなど、設定を変更できます。",
 			"image": ""
 		}
 	]

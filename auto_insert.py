@@ -1,6 +1,6 @@
 import json
 import re
-import os
+homebar_ignore=["/index.html","/settings/index.html"]
 with open("site.json", "r", encoding="utf-8") as f:
 	site_data=json.load(f)["site"]
 for site in site_data:
@@ -9,7 +9,7 @@ for site in site_data:
 	type="website"
 
 	css_path=""
-	if url.count("/")<2:
+	if url.count("/")==1:
 		css_path=url.replace("html","css")
 	elif url.startswith("/link"):
 		css_path="/link/link.css"
@@ -53,13 +53,13 @@ for site in site_data:
 \t<link rel="apple-touch-icon" href="/hatuna-827.ico">
 \t<link rel="stylesheet" href="{css_path}">
 \t<link rel="stylesheet" href="/hatuna-827.css">
-\t<script src="/hatuna-827.js"></script>
+\t<script src="/hatuna-827.js" type="module"></script>
 \t<title>{name}</title>
 \t<!-- Auto insert head end -->'''
 	html=html.replace("<!-- Auto insert head --><!-- Auto insert head end -->", head)
 	# body
 	html=re.sub(r'<!-- Auto insert body -->.*?<!-- Auto insert body end -->', '<!-- Auto insert body --><!-- Auto insert body end -->', html, flags=re.DOTALL)
-	body=f'''<!-- Auto insert body -->{'\n\t<div id="homebar"></div>' if url!="/index.html" else ''}
+	body=f'''<!-- Auto insert body -->{'\n\t<div id="homebar"></div>' if url not in homebar_ignore else ''}
 \t<noscript><style>body {{overflow: hidden;}}</style>You need to enable JavaScript to view this site.</noscript>
 \t<!-- Auto insert body end -->'''
 	html=html.replace("<!-- Auto insert body --><!-- Auto insert body end -->", body)
