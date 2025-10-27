@@ -1,8 +1,8 @@
 // window.open("/settings/?p=***", '_blank', 'top=100,left=200,height=500,width=400,popup')
 "use strict"
 import reflect_setting from "/hatuna-827.js"
-import query from "/query.js"
-import storage from "/storage.js"
+import query from "/module/query.js"
+import storage from "/module/storage.js"
 const page = query("p")
 if (!window.opener) {
 	window.open("/link", "_self")

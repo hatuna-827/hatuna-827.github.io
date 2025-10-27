@@ -1,5 +1,5 @@
 "use strict"
-import obj_manip from "./obj_manip.js"
+import obj_manip from "/module/obj_manip.js"
 function get(key) {
   return JSON.parse(localStorage.getItem(key))
 }

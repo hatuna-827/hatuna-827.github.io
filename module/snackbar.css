@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+#snackbar_box {
+	font-family: 'Kosugi Maru', monospace;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	padding: 5px;
+	pointer-events: none;
+	user-select: none;
+}
+
+.snackbar {
+	position: relative;
+	margin: 7px;
+	width: 250px;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
+	animation: snackbar 0.7s forwards ease-out;
+	pointer-events: all;
+}
+
+.snackbar>.color-bar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 45px;
+	width: 5px;
+}
+
+.snackbar>.icon {
+	position: absolute;
+	top: 22.5px;
+	left: 27.5px;
+	height: 28px;
+	width: 28px;
+	animation: icon 0.4s forwards;
+}
+
+.snackbar>.content {
+	position: absolute;
+	top: 0px;
+	left: 50px;
+	font-size: 17px;
+	line-height: 45px;
+}
+
+.snackbar>.close {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 45px;
+	width: 30px;
+	border-radius: 2px;
+}
+
+.snackbar>.close::before,
+.snackbar>.close::after {
+	content: '';
+	position: absolute;
+	top: 15px;
+	right: 14px;
+	height: 15px;
+	width: 2px;
+	border-radius: 2px;
+	background-color: #888;
+}
+
+.snackbar>.close::before {
+	transform: rotate(45deg);
+}
+.snackbar>.close::after{
+	transform: rotate(-45deg);
+}
+
+@keyframes snackbar {
+	from {
+		opacity: 0;
+		height: 0px;
+	}
+
+	to {
+		opacity: 1;
+		height: 45px;
+	}
+}
+
+@keyframes icon {
+	from {
+		transform: translate(-50%, 0%);
+	}
+
+	to {
+		transform: translate(-50%, -50%);
+	}
+}

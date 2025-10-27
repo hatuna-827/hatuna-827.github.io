@@ -1,5 +1,5 @@
 "use strict"
-import dialog from "/dialog.js"
+import dialog from "/module/dialog.js"
 let settings_display = "none"
 let popup = false
 let now_data = {}

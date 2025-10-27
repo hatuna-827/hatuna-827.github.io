@@ -1,6 +1,6 @@
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
-import storage from "/storage.js"
+import storage from "/module/storage.js"
 /* - const ------------------------------------------------------------------------------------- */
 // img drag
 let scale = 1
@@ -71,6 +71,7 @@ function nurunu_open(url, target, features) {
 }
 function reflect_setting() {
 	const setting = storage.get("svg-editor-setting")
+	if (!setting) { return }
 	const homebar = document.getElementById("homebar")
 	if (setting.hide_homebar) { homebar.style.display = "none" } else { homebar.style.display = "block" }
 }
