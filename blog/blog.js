@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		img.insertAdjacentElement('afterend', imgbox)
 		img.remove()
 	})
+	img_fit()
 	document.querySelectorAll('#main a').forEach((link) => {
 		if (!link.getAttribute('target')) {
 			if (!link.getAttribute('href').startsWith("#"))
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		target.remove()
 	})
 })
+window.addEventListener('resize', img_fit)
 function copy(target_id) {
 	const target = document.getElementById('code' + target_id)
 	navigator.clipboard.writeText(target.textContent)
@@ -50,4 +52,19 @@ function copy(target_id) {
 	setTimeout(function () {
 		document.getElementById('button' + target_id).textContent = 'copy'
 	}, 1000)
+}
+function img_fit() {
+	document.querySelectorAll('img').forEach((img) => {
+		img.parentElement.style.height = "50vh"
+		img.parentElement.style.width = "calc(100% - 60px)"
+		img.style.height = "auto"
+		img.style.width = "auto"
+		img.style.width = img.parentElement.offsetWidth + "px"
+		if (img.parentElement.offsetHeight < img.offsetHeight) {
+			img.style.width = "auto"
+			img.style.height = img.parentElement.offsetHeight + "px"
+		}
+		img.parentElement.style.height = "auto"
+		img.parentElement.style.width = "auto"
+	})
 }

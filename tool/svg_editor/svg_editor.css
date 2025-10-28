@@ -14,7 +14,6 @@
 	user-select: none;
 }
 
-
 #title-bar>p {
 	margin: 0px;
 	font-size: 30px;
@@ -50,8 +49,21 @@
 	height: 100%;
 }
 
-#img-content {
+#img-box {
 	border: 1px solid var(--grey-a-color);
+}
+
+#img-doc {
+	position: absolute;
+	pointer-events: none;
+	opacity: 0.4;
+	z-index: -1;
+}
+
+#doc {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
 }
 
 #sub-view {
@@ -72,11 +84,13 @@
 /* mini-btn */
 .mini-btn-box {
 	position: absolute;
-	top: 7px;
+	height: 32px;
+	top: 9px;
 	right: 12px;
 }
 
 .mini-btn {
+	display: inline-block;
 	padding: 5px 8px;
 	height: 22px;
 	width: 22px;
@@ -89,6 +103,14 @@
 .mini-btn.white {
 	color: var(--main-color);
 	background-color: var(--main-bg-color);
+}
+
+label {
+	margin-right: 10px;
+}
+
+input[type="file"] {
+	display: none;
 }
 
 /* line-numbers */

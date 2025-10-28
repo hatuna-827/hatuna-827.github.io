@@ -67,6 +67,7 @@ br {
 }
 
 #mini {
+	color: var(--black-color);
 	font-size: 50px;
 	margin: 20px 0px 0px 0px;
 	line-height: 50px;

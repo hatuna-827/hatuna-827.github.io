@@ -37,6 +37,15 @@
 		<div id="title-bar">
 			<p>SVGエディター</p>
 			<div class="mini-btn-box">
+				<label>
+					<input id="add-doc" type="file" accept="image/*">
+					<div class="mini-btn white">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
+							stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12,6H7a3,3 0 0 0-3,3v8a3,3 0 0 0 3,3h8a3,3 0 0 0 3-3V12m-6,0l8-8h-5h5v5" />
+						</svg>
+					</div>
+				</label>
 				<div id="settings" class="mini-btn white">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
 						stroke="currentColor">
@@ -52,20 +61,21 @@
 		</div>
 		<div id="img-view">
 			<div class="relative">
-				<div id="img-content"></div>
+				<div id="img-box">
+					<div id="img-doc"></div>
+					<div id="img-content"></div>
+				</div>
 				<div class="mini-btn-box">
 					<div id="img-home" class="mini-btn">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M5,9 V20 H19 V9 M10,20 v-5 a2 2 0 0 1 4,0 v5 M2,11 12,3 22,11">
 						</svg>
-						</svg>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="sub-view" class="hide"></div>
-
 	</div>
 	<script src="./svg_editor.js" type="module"></script>
 </body>

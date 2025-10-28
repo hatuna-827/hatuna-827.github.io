@@ -11,7 +11,6 @@ let isDragging = false
 let zoom_min = 0.2
 let zoom_max = 5
 let opening_window = null
-const img_home = document.getElementById("img-home")
 const img_view = document.getElementById("img-view")
 const default_xml_value = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
 \ \ stroke-linecap="round" stroke-linejoin="round">
@@ -26,11 +25,24 @@ window.addEventListener('beforeunload', () => {
 document.getElementById("settings").addEventListener('click', () => {
 	nurunu_open("/settings/?p=svg_editor", '_blank', 'top=100,left=200,height=500,width=400,popup')
 })
-img_home.addEventListener('click', () => {
+document.getElementById("img-home").addEventListener('click', () => {
 	scale = 1
 	originX = 0
 	originY = 0
 	update_img_view()
+})
+document.getElementById("add-doc").addEventListener('change', function () {
+	const fileReader = new FileReader()
+	fileReader.addEventListener('load', function () {
+		const img_doc = document.getElementById('img-doc')
+		const doc = document.createElement('img')
+		doc.id = "doc"
+		doc.src = this.result
+		img_doc.innerHTML = ""
+		img_doc.appendChild(doc)
+		update_img_view()
+	})
+	fileReader.readAsDataURL(this.files[0])
 })
 // img_view
 img_view.addEventListener('mousedown', (e) => {
@@ -60,8 +72,14 @@ img_view.addEventListener('wheel', (e) => {
 window.addEventListener('storage', reflect_setting)
 /* - function ---------------------------------------------------------------------------------- */
 function update_img_view() {
-	const content = document.getElementById("img-content")
+	const content = document.getElementById("img-box")
 	content.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`
+	const doc = document.getElementById("img-doc")
+	if (doc) {
+		const img = document.getElementById("img-content")
+		doc.style.height = img.offsetHeight + "px"
+		doc.style.width = img.offsetWidth + "px"
+	}
 }
 function nurunu_open(url, target, features) {
 	if (opening_window) { opening_window.close() }
@@ -101,8 +119,9 @@ function set_views(main, sub) {
 			if (line_count) { line_count = line_count.length + 1 } else { line_count = 1 }
 			for (let i = 0; i < line_count; i++) { line_numbers.insertAdjacentElement('beforeend', document.createElement('span')) }
 			img_content.innerHTML = this.value
+			update_img_view()
 		})
-		line_numbers.insertAdjacentElement('beforeend', document.createElement('span'))
+		textarea.dispatchEvent(new Event('input', { bubbles: true }))
 		main_editor.appendChild(line_numbers)
 		main_editor.appendChild(textarea)
 	}
