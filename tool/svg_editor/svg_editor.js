@@ -13,6 +13,9 @@ let zoom_max = 5
 let opening_window = null
 const img_home = document.getElementById("img-home")
 const img_view = document.getElementById("img-view")
+const default_xml_value = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
+\ \ stroke-linecap="round" stroke-linejoin="round">
+</svg>`
 /* - init -------------------------------------------------------------------------------------- */
 reflect_setting()
 set_views("xml", "none")
@@ -90,14 +93,9 @@ function set_views(main, sub) {
 		textarea.id = "xml-textarea"
 		textarea.className = "xml"
 		textarea.spellcheck = false
-		textarea.textContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
-  stroke-linecap="round" stroke-linejoin="round">
-</svg>`
+		textarea.textContent = default_xml_value
 		textarea.addEventListener('input', function () {
-			if (this.value == "") {
-				this.value = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
-  stroke-linecap="round" stroke-linejoin="round">
-</svg>` }
+			if (this.value == "") { this.value = default_xml_value }
 			line_numbers.innerHTML = ""
 			let line_count = this.value.match(/\n/g)
 			if (line_count) { line_count = line_count.length + 1 } else { line_count = 1 }

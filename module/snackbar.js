@@ -30,7 +30,7 @@ export default function snackbar({
 		}
 		color = "var(--snackbar-color-" + type.toLowerCase() + "," + design.color + ")"
 		bg_color = "var(--snackbar-bg-color-" + type.toLowerCase() + ",var(--snackbar-bg-color,#fff))"
-		icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="white"><circle cx="12" cy="12" r="12" fill="currentColor" stroke-width="2"  stroke="none" />' + design.icon + '</svg>'
+		icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="white"><circle cx="12" cy="12" r="12" fill="currentColor" stroke-width="2"	stroke="none" />' + design.icon + '</svg>'
 	}
 	if (!context) { context = "context" }
 	const snackbar_box = document.getElementById("snackbar_box")

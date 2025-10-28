@@ -101,13 +101,13 @@ function out() {
 		}
 	}
 	if (siro == 0 || kuro == 0) {
-		if (siro == 0) { popmain.style.color = "var(--black-color)" }
-		if (kuro == 0) { popmain.style.color = "var(--white-color)" }
+		if (siro == 0) { popmain.style.color = "#000" }
+		if (kuro == 0) { popmain.style.color = "#fff" }
 		pop.style.display = "flex"
 	}
 	if (siro + kuro == 64) {
-		popmain.style.color = "var(--black-color)"
-		if (kuro < siro) { popmain.style.color = "var(--white-color)" }
+		popmain.style.color = "#000"
+		if (kuro < siro) { popmain.style.color = "#fff" }
 		if (kuro == siro) {
 			popmain.textContent = "-"
 			mini.textContent = "draw!"
