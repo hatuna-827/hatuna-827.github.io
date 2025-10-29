@@ -14,7 +14,7 @@ input {
 	text-align: center;
 }
 
-.menu_button {
+.menu-button {
 	margin: 0px 15px;
 	height: 60px;
 	width: 60px;
@@ -25,7 +25,7 @@ input {
 	border-radius: 10px;
 }
 
-.setting_image {
+.setting-image {
 	height: 50px;
 	margin: 5px 0px;
 }
@@ -103,33 +103,33 @@ input {
 	}
 }
 
-#list_null {
+#list-null {
 	font-size: 20px;
 	text-align: center;
 	display: none;
 }
 
-#list_null:only-child {
+#list-null:only-child {
 	display: block;
 }
 
-#work_space {
+#work-space {
 	display: none;
 }
 
-#work_buttons {
+#work-buttons {
 	position: absolute;
 	height: calc(100vh - 100px);
 	width: 60px;
 	left: 15px;
 }
 
-#popup_close,
-#popup_open {
+#popup-close,
+#popup-open {
 	width: 50px;
 }
 
-.work_button {
+.work-button {
 	margin: 15px 0px;
 	height: 60px;
 	width: 60px;
@@ -140,20 +140,31 @@ input {
 	border-radius: 10px;
 }
 
-#create_space {
+#create-space {
+	position: relative;
 	margin: 50px 0px 0px 40px;
 	height: calc(100vh - 100px);
 	width: calc(100vw - 140px);
 	background-color: var(--white-color);
 	border: 1px solid var(--black-color);
 	box-sizing: border-box;
-	overflow: scroll;
-	text-align: center;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
 	align-items: center;
 
-	#big_box {
-		margin: calc(1015px + 2px / 3);
+	#pan-and-zoom {
+		position: relative;
+		cursor: default;
+		padding: 15px;
+		height: fit-content;
+		width: fit-content;
+	}
+
+	#big-box {
 		border: .5px solid var(--black-color);
+		height: fit-content;
+		width: fit-content;
 	}
 
 	.box {
@@ -193,10 +204,21 @@ input {
 		background-color: var(--red-color);
 	}
 
-	#big_maru {
-		position: static;
-		margin: 0px 1000px;
+	#big-maru {
+		position: absolute;
+		top: 0px;
+		left: 0px;
 		visibility: hidden;
+	}
+
+	#big-maru:not(.play-mode) {
+		.maru:hover {
+			opacity: 0.3;
+		}
+
+		.maru.disp {
+			opacity: 0.9999999;
+		}
 	}
 
 	.maru {
@@ -213,16 +235,6 @@ input {
 		font-size: 17px;
 		line-height: 20px;
 		vertical-align: middle;
-	}
-
-	#big_maru:not(.play_mode) {
-		.maru:hover {
-			opacity: .3;
-		}
-
-		.maru.disp {
-			opacity: 0.9999999;
-		}
 	}
 
 	.maru.disp {
@@ -244,8 +256,8 @@ svg {
 	stroke-width: 1px;
 }
 
-#save_button,
-#list_button,
-#auto_save {
+#save-button,
+#list-button,
+#auto-save {
 	display: none;
 }

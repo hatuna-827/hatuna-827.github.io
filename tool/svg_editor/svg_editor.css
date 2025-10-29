@@ -50,6 +50,16 @@
 }
 
 #img-box {
+	align-items: center;
+}
+
+#img-content {
+	display: flex;
+	justify-content: center;
+	color: var(--black-color);
+}
+
+#img-content>svg {
 	border: 1px solid var(--grey-a-color);
 }
 
