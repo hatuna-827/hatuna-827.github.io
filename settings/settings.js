@@ -5,7 +5,8 @@ import query from "/module/query.js"
 import storage from "/module/storage.js"
 const page = query("p")
 if (!window.opener) {
-	window.open("/link", "_self")
+	window.close()
+	window.open("/link")
 }
 if (page && page == "svg_editor") {
 	/* - const ------------------------------------------------------------------------------------- */

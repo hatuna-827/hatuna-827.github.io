@@ -12,6 +12,11 @@ input {
 #main {
 	margin: 50px;
 	text-align: center;
+
+	svg {
+		color: var(--white-color);
+		stroke-width: 1px;
+	}
 }
 
 .menu-button {
@@ -249,11 +254,6 @@ input {
 		color: var(--red-color);
 		background-color: var(--pastel-pink-color);
 	}
-}
-
-svg {
-	color: var(--white-color);
-	stroke-width: 1px;
 }
 
 #save-button,
