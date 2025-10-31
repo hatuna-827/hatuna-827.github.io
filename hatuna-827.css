@@ -165,6 +165,7 @@ body {
 	margin: 0px;
 	font-family: var(--main-font);
 	font-size: 0px;
+	color: var(--black-color);
 	background-color: var(--main-bg-color);
 	scrollbar-color: var(--leaf-green-color) var(--white-color);
 }
