@@ -13,96 +13,84 @@
 
 	a {
 		margin: 0px;
-
-		div {
-			transition: all 0.2s;
-			box-sizing: border-box;
-			margin: 20px;
-			padding: 70px 0px;
-			background-color: var(--grey-c-color);
-			height: 200px;
-			width: 330px;
-			display: inline-block;
-			border-radius: 30px;
-
-			p {
-				color: var(--black-color);
-				text-decoration: none;
-				display: inline-block;
-				vertical-align: middle;
-				line-height: 60px;
-				font-size: 30px;
-				margin: 0px;
-			}
-
-			span {
-				display: block;
-				font-size: 20px;
-				line-height: 0px;
-			}
-		}
 	}
 
-	a:hover {
-		div {
-			background-color: var(--grey-green-color);
-			box-shadow: 5px 5px 5px var(--grey-a-color);
-			transition: all 0.2s;
-		}
+	a div {
+		transition: all 0.2s;
+		box-sizing: border-box;
+		margin: 20px;
+		padding: 70px 0px;
+		background-color: var(--grey-c-color);
+		height: 200px;
+		width: 330px;
+		display: inline-block;
+		border-radius: 30px;
 	}
 
-	#topic {
-		a {
-			div {
-				width: calc((100% - 220px) / 3);
-				max-width: 330px;
-				padding: 75px 0px;
-
-				p {
-					line-height: 50px;
-					font-size: 40px;
-				}
-			}
-		}
+	a div p {
+		color: var(--black-color);
+		text-decoration: none;
+		display: inline-block;
+		vertical-align: middle;
+		line-height: 60px;
+		font-size: 30px;
+		margin: 0px;
 	}
 
-	@media screen and (max-width:840px) {
-		#main {
-			text-align: left;
-		}
+	a div span {
+		display: block;
+		font-size: 20px;
+		line-height: 0px;
+	}
 
-		a {
-			div {
-				margin: 10px;
-				padding: 25px;
-				height: 50px;
-				width: 100%;
-				min-width: 480px;
+	a:hover div {
+		background-color: var(--grey-green-color);
+		box-shadow: 5px 5px 5px var(--grey-a-color);
+		transition: all 0.2s;
+	}
 
-				p {
-					line-height: 0px;
-				}
+	#topic a div {
+		width: calc((100% - 220px) / 3);
+		max-width: 330px;
+		padding: 75px 0px;
+	}
 
-				span {
-					display: inline-block;
-				}
-			}
-		}
+	#topuic a p {
+		line-height: 50px;
+		font-size: 40px;
+	}
+}
 
-		#topic {
-			a {
-				div {
-					width: 100%;
-					max-width: none;
-					padding: 25px;
+@media screen and (max-width:840px) {
+	#main {
+		text-align: left;
+	}
 
-					p {
-						line-height: 0px;
-						font-size: 30px;
-					}
-				}
-			}
-		}
+	a div {
+		margin: 10px;
+		padding: 25px;
+		height: 50px;
+		width: 100%;
+		min-width: 480px;
+	}
+
+	a div p {
+		line-height: 0px;
+	}
+
+	a div span {
+		display: inline-block;
+	}
+
+	#topic a div {
+		width: 100%;
+		max-width: none;
+		padding: 25px;
+	}
+
+	#topic a div p {
+		line-height: 0px;
+		font-size: 30px;
 	}
 }
 
@@ -119,24 +107,22 @@
 
 	a {
 		text-decoration: none;
+	}
 
-		div {
-			p {
-				margin: 10px 30px;
-				font-size: 20px;
-				line-height: 25px;
-				color: var(--black-color);
-			}
+	a div p {
+		margin: 10px 30px;
+		font-size: 20px;
+		line-height: 25px;
+		color: var(--black-color);
+	}
 
-			span {
-				padding: 0px 30px;
-				display: block;
-				font-size: 15px;
-			}
+	a div span {
+		padding: 0px 30px;
+		display: block;
+		font-size: 15px;
+	}
 
-			p::before {
-				content: "・";
-			}
-		}
+	a div p::before {
+		content: "・";
 	}
 }

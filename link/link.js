@@ -3,7 +3,7 @@ import data from "../site.json" with {type: "json"}
 let links = data.site
 let link_box = document.getElementById("auto_links")
 let filter = link_box.dataset.filter
-if (filter == "all") { links = links.filter((link) => !/^\/(index|link)/.test(link.url)) }
+if (filter == "all") { links = links.filter((link) => /^\/(home|blog|game|tool|404)/.test(link.url)) }
 if (filter == "blog") { links = links.filter((link) => /^\/(blog|link\/index)/.test(link.url)) }
 if (filter == "game") { links = links.filter((link) => /^\/(game|link\/index)/.test(link.url)) }
 if (filter == "tool") { links = links.filter((link) => /^\/(tool|link\/index)/.test(link.url)) }
