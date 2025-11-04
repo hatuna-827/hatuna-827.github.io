@@ -1,20 +1,21 @@
-let date
+let data
 let point
 let log = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 let nul = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 let save_point = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 let random_point = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+let last_load
 reset()
 function reset() {
 	point = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-	date = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+	data = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 	hidepoint()
 	out()
 }
 function out() {
 	for (let x = 0; x < 3; x++) {
 		for (let y = 0; y < 3; y++) {
-			if (date[x][y] == 0) {
+			if (data[x][y] == 0) {
 				document.getElementById(x * 3 + y).style.backgroundColor = "var(--main-bg-color)"
 			} else {
 				document.getElementById(x * 3 + y).style.backgroundColor = "var(--main-light-color)"
@@ -27,7 +28,7 @@ function push(x, y) {
 	log[x][y] += 1
 	change(x, y)
 	out()
-	if (JSON.stringify(log) == JSON.stringify(random_point)) {
+	if (JSON.stringify(log) == JSON.stringify(random_point) || JSON.stringify(log) == JSON.stringify(save_point) && JSON.stringify(data) == JSON.stringify(nul)) {
 		document.getElementById("pop").style.display = 'flex'
 	}
 }
@@ -39,7 +40,7 @@ function change(x, y) {
 	if (y != 0) { changeif(x, y - 1) }
 }
 function changeif(x, y) {
-	if (date[x][y] == 0) { date[x][y] = 1 } else { date[x][y] = 0 }
+	if (data[x][y] == 0) { data[x][y] = 1 } else { data[x][y] = 0 }
 }
 function random() {
 	hidepoint()
@@ -49,13 +50,14 @@ function random() {
 			else { random_point[x][y] = 0 }
 		}
 	}
-	load(random_point, 1)
+	load(random_point)
 }
-function load(input, x) {
+function load(input) {
+	last_load = JSON.parse(JSON.stringify(input))
 	hidepoint()
-	if (x == 1) { log = [[0, 0, 0], [0, 0, 0], [0, 0, 0]] }
+	log = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 	point = JSON.parse(JSON.stringify(input))
-	date = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+	data = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 	for (let x = 0; x < 3; x++) {
 		for (let y = 0; y < 3; y++) {
 			if (point[x][y] == 1) { change(x, y) }
@@ -67,7 +69,7 @@ function save() {
 	save_point = JSON.parse(JSON.stringify(point))
 }
 function answer() {
-	load(random_point, 1)
+	load(random_point)
 	for (let x = 0; x < 3; x++) {
 		for (let y = 0; y < 3; y++) {
 			if (point[x][y] == 1) { document.getElementById(x * 3 + y).textContent = "・" }
@@ -81,6 +83,6 @@ function hidepoint() {
 	}
 }
 function hidepop() {
-	load(random_point, 1)
+	load(last_load)
 	document.getElementById("pop").style.display = 'none'
 }

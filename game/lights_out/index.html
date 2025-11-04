@@ -45,11 +45,12 @@
 			onclick="push(1,2)"></button><br>
 		<button id="6" onclick="push(2,0)"></button><button id="7" onclick="push(2,1)"></button><button id="8"
 			onclick="push(2,2)"></button><br>
-		<div id="random"><button class="setbutton" onclick="load(random_point,1)">最初から解き直す</button><br><button
+		<div id="random"><button class="setbutton" onclick="load(random_point)">最初から解き直す</button><br><button
 				class="setbutton" onclick="random()">ランダムな問題を生成</button><br><button class="setbutton" id="answerbutton"
 				onclick="answer()">答えを表示</button></div>
 		<div id="save_load"><button class="setbutton" onclick="save()">現在の状態を保存</button><br><button class="setbutton"
-				onclick="load(save_point,0)">保存した状態に復元</button><br><button class="setbutton" onclick="reset()">リセット</button>
+				onclick="load(save_point)">保存した状態に復元</button><br><button class="setbutton"
+				onclick="reset()">リセット</button>
 		</div>
 	</div>
 	<script src="./lights_out.js"></script>
