@@ -1,0 +1,91 @@
+:root {
+	--structure-title: #709170;
+	--structure-title-text: #ffffff;
+	--structure-border: #709170;
+	--structure-input: #ffffff;
+	--structure-input-text: #000000;
+	--structure-nest-border: #888888;
+	--structure-invalid: #ff0000;
+	--structure-border-radius: 3px
+}
+
+.structure {
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 7px 13px;
+}
+
+.structure .field {
+	display: flex;
+	margin: 6px 0px;
+	align-items: center;
+	overflow: hidden;
+}
+
+.structure .title {
+	display: inline-block;
+	padding: 17.5px 13px;
+	height: 0px;
+	text-align: center;
+	font-size: 18px;
+	line-height: 0px;
+	color: var(--structure-title-text);
+	background: var(--structure-title);
+	border-radius: var(--structure-border-radius) 0px 0px var(--structure-border-radius);
+	user-select: none;
+}
+
+.structure .title.object,
+.structure .title.list {
+	border-radius: var(--structure-border-radius);
+}
+
+.structure .input[type="text"],
+.structure .input[type="number"] {
+	padding: 0px 5px;
+	height: 35px;
+	box-sizing: border-box;
+	font-size: 18px;
+	line-height: 0px;
+	background-color: var(--structure-input);
+	border: 1px solid var(--structure-border);
+	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
+	outline: none;
+}
+
+.structure .input[type="checkbox"] {
+	display: none;
+}
+
+.structure .true-btn,
+.structure .false-btn {
+	display: inline-block;
+	padding: 0px 5px;
+	height: 35px;
+	width: 70px;
+	font-size: 18px;
+	line-height: 35px;
+	color: var(--structure-input-text);
+	background-color: var(--structure-input);
+	border: 1px solid var(--structure-border);
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.structure .false-btn {
+	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
+}
+
+.structure .btn:has(input:checked)>.true-btn,
+.structure .btn:not(:has(input:checked))>.false-btn {
+	color: var(--structure-title-text);
+	background-color: var(--structure-title);
+}
+
+.structure .nest {
+	padding-left: 25px;
+	border-left: 1px solid var(--structure-nest-border);
+}
+
+.structure .invalid {
+	border-color: var(--structure-invalid);
+}
