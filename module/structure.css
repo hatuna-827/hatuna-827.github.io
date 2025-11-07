@@ -4,6 +4,7 @@
 	--structure-border: #709170;
 	--structure-input: #ffffff;
 	--structure-input-text: #000000;
+	--structure-input-true: #89b76c;
 	--structure-nest-border: #888888;
 	--structure-invalid: #ff0000;
 	--structure-border-radius: 3px
@@ -14,11 +15,25 @@
 	padding: 7px 13px;
 }
 
-.structure .field {
+.structure .field,
+.structure .title-add {
 	display: flex;
 	margin: 6px 0px;
 	align-items: center;
 	overflow: hidden;
+}
+
+.structure .nest .field:last-child {
+	margin: 6px 0px 0px;
+}
+
+.structure .field.object,
+.structure .field.list {
+	display: block;
+}
+
+.structure .title-add {
+	margin: 0px;
 }
 
 .structure .title {
@@ -34,8 +49,7 @@
 	user-select: none;
 }
 
-.structure .title.object,
-.structure .title.list {
+.structure .title.object {
 	border-radius: var(--structure-border-radius);
 }
 
@@ -69,16 +83,45 @@
 	border: 1px solid var(--structure-border);
 	box-sizing: border-box;
 	text-align: center;
+	user-select: none;
 }
 
 .structure .false-btn {
+	border-left: none;
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
-.structure .btn:has(input:checked)>.true-btn,
-.structure .btn:not(:has(input:checked))>.false-btn {
+.structure *:has(input:checked)>.true-btn,
+.structure *:not(:has(input:checked))>.false-btn {
 	color: var(--structure-title-text);
-	background-color: var(--structure-title);
+	background-color: var(--structure-input-true);
+}
+
+.structure .true-btn::before {
+	content: "True";
+}
+
+.structure .false-btn::before {
+	content: "Flase";
+}
+
+.structure .add-btn {
+	display: inline-block;
+	height: 35px;
+	width: 35px;
+	font-size: 30px;
+	line-height: 35px;
+	color: var(--structure-title);
+	background-color: var(--structure-input);
+	border: 1px solid var(--structure-border);
+	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
+	box-sizing: border-box;
+	text-align: center;
+	user-select: none;
+}
+
+.structure .add-btn::before {
+	content: "+";
 }
 
 .structure .nest {

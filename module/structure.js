@@ -25,6 +25,7 @@ function add_field(pos, struct, path, change_func) {
 			const pattern = value.pattern
 			const field_UUID = crypto.randomUUID()
 			const field = document.createElement('label')
+			field.id = name
 			field.className = `${type} field`
 			const title = document.createElement('span')
 			title.className = `${type} title`
@@ -59,6 +60,7 @@ function add_field(pos, struct, path, change_func) {
 			field.appendChild(input)
 			pos.appendChild(field)
 		} else if (type == "boolean") {
+			const default_value = value.default
 			const field_UUID = crypto.randomUUID()
 			const field = document.createElement('div')
 			field.id = name
@@ -70,37 +72,54 @@ function add_field(pos, struct, path, change_func) {
 			input.id = field_UUID
 			input.className = "boolean input"
 			input.type = "checkbox"
-			const btn = document.createElement('div')
-			btn.className = "btn"
+			if (default_value !== undefined) { input.checked = default_value }
 			const true_btn = document.createElement('div')
 			true_btn.className = "true-btn"
-			true_btn.textContent = "True"
 			true_btn.addEventListener('click', function () {
-				this.parentElement.firstChild.checked = true
+				this.parentElement.querySelector('input').checked = true
 			})
 			const false_btn = document.createElement('div')
 			false_btn.className = "false-btn"
-			false_btn.textContent = "False"
 			false_btn.addEventListener('click', function () {
-				this.parentElement.firstChild.checked = false
+				this.parentElement.querySelector('input').checked = false
 			})
 			obj_manip.set(structs_UUID, [...path, name], field_UUID)
-			btn.appendChild(input)
-			btn.appendChild(true_btn)
-			btn.appendChild(false_btn)
 			field.appendChild(title)
-			field.appendChild(btn)
+			field.appendChild(input)
+			field.appendChild(true_btn)
+			field.appendChild(false_btn)
 			pos.appendChild(field)
 		} else if (type == "list") {
+			const field = document.createElement('div')
+			field.id = name
+			field.className = "list field"
+			const title_add = document.createElement('div')
+			title_add.className = "list title-add"
+			const title = document.createElement('span')
+			title.className = "list title"
+			title.textContent = name
 			const nest = document.createElement('div')
-			nest.id = name
-			nest.className = "nest list"
-			pos.appendChild(nest)
-			add_field(nest, value.children, [...path, name], change_func)
+			nest.className = "list nest"
+			const add_btn = document.createElement('div')
+			add_btn.className = "list add-btn"
+			add_btn.addEventListener('click', function () {
+				const remove_btn = document.createElement('div')
+				const index = nest.childElementCount / 2
+				remove_btn.className = "list remove-btn"
+				nest.appendChild(remove_btn)
+				obj_manip.set(structs_UUID, [...path, name, index], {})
+				add_field(nest, { [Object.keys(value.children)[0]]: Object.values(value.children)[0] }, [...path, name, index], change_func)
+			})
+			obj_manip.set(structs_UUID, [...path, name], [])
+			title_add.appendChild(title)
+			title_add.appendChild(add_btn)
+			field.appendChild(title_add)
+			field.appendChild(nest)
+			pos.appendChild(field)
 		} else if (type == "object") {
 			const field = document.createElement('div')
 			field.id = name
-			field.className = "object"
+			field.className = "object field"
 			const title = document.createElement('span')
 			title.className = "object title"
 			title.textContent = name
@@ -112,11 +131,11 @@ function add_field(pos, struct, path, change_func) {
 			add_field(nest, value.children, [...path, name], change_func)
 		} else if (type == "select") {
 		} else if (type == "reference") {
-			const group = document.createElement('div')
-			group.id = name
-			group.className = "reference"
-			pos.appendChild(group)
-			add_field(group, structs[value.name], path, change_func)
+			const field = document.createElement('div')
+			field.id = name
+			field.className = "reference"
+			pos.appendChild(field)
+			add_field(field, structs[value.name], path, change_func)
 		} else {
 			console.error(`type is not defined (in ${path},${name})`)
 		}
@@ -149,13 +168,13 @@ function replace_UUID(struct) {
 }
 export default { set, def_struct, get }
 
-// const struct_example =
-// {
-// 	string: { min: 0, max: 0, default: "", pattern: "" },
-// 	number: { min: 0, max: 0, step: 0, default: 0, pattern: "" },
-// 	boolean: { default: true },
-// 	list: { children: {}, max: 0, min: 0 },
-// 	object: { children: {} },
-// 	select: { option: {} },
-// 	reference: { name: struct_name }
-// }
+// const struct = [
+// 	{ type: "string", min: 0, max: 0, default: "", pattern: "" },
+// 	{ type: "number", min: 0, max: 0, step: 0, default: 0, pattern: "" },
+// 	{ type: "boolean", default: true },
+// 	{ type: "list", children: struct, max: 0, min: 0 },
+// 	{ type: "object", children: { name: struct } },
+// 	{ type: "select", option: { name: struct } },
+// 	{ type: "reference", name: struct_name }
+// ]
+// const example = { name: struct }
