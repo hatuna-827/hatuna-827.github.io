@@ -12,150 +12,202 @@ function set(id, struct_name, change_func) {
 	if (!render_box) { throw new Error(`|Structure module| No element found with this id (${id})`) }
 	const struct = structs[struct_name]
 	render_box.classList.add("structure")
+	if (change_func === undefined) { change_func = function () { } }
 	add_field(render_box, struct, [id, struct_name], change_func)
+}
+function add_title(field, type, name) {
+	field.id = name
+	field.className = `${type} field`
+	const title = document.createElement('span')
+	title.className = `${type} title`
+	title.textContent = name
+	field.appendChild(title)
 }
 function add_field(pos, struct, path, change_func) {
 	Object.keys(struct).forEach((name) => {
 		const value = struct[name]
 		const type = value.type
-		if (type == "string" || type == "number") {
-			const min = value.min
-			const max = value.max
-			const default_value = value.default
-			const pattern = value.pattern
-			const field_UUID = crypto.randomUUID()
+		if (type === "string" || type === "number") {
 			const field = document.createElement('label')
-			field.id = name
-			field.className = `${type} field`
-			const title = document.createElement('span')
-			title.className = `${type} title`
-			title.textContent = name
-			const input = document.createElement('input')
-			input.id = field_UUID
-			input.className = `${type} input`
-			input.addEventListener('input', function () {
-				if (this.checkValidity()) {
-					this.classList.remove("invalid")
-					change_func()
-				} else {
-					this.classList.add("invalid")
-				}
-			})
-			if (default_value !== undefined) { input.value = default_value }
-			if (pattern !== undefined) { input.pattern = pattern }
-			if (type == "string") {
-				input.type = "text"
-				input.spellcheck = false
-				if (min !== undefined) { input.minLength = min }
-				if (max !== undefined) { input.maxLength = max }
-			} else if (type == "number") {
-				const step = value.step
-				input.type = "number"
-				if (min !== undefined) { input.min = min }
-				if (max !== undefined) { input.max = max }
-				if (step !== undefined) { input.step = step }
-			}
-			obj_manip.set(structs_UUID, [...path, name], field_UUID)
-			field.appendChild(title)
-			field.appendChild(input)
+			add_title(field, type, name)
+			add_input(field, value, [...path, name], change_func)
 			pos.appendChild(field)
-		} else if (type == "boolean") {
-			const default_value = value.default
-			const field_UUID = crypto.randomUUID()
+		} else if (type === "boolean" || type === "list" || type === "object" || type === "select") {
 			const field = document.createElement('div')
-			field.id = name
-			field.className = "boolean field"
-			const title = document.createElement('span')
-			title.className = "boolean title"
-			title.textContent = name
-			const input = document.createElement('input')
-			input.id = field_UUID
-			input.className = "boolean input"
-			input.type = "checkbox"
-			if (default_value !== undefined) { input.checked = default_value }
-			const true_btn = document.createElement('div')
-			true_btn.className = "true-btn"
-			true_btn.addEventListener('click', function () {
-				this.parentElement.querySelector('input').checked = true
-			})
-			const false_btn = document.createElement('div')
-			false_btn.className = "false-btn"
-			false_btn.addEventListener('click', function () {
-				this.parentElement.querySelector('input').checked = false
-			})
-			obj_manip.set(structs_UUID, [...path, name], field_UUID)
-			field.appendChild(title)
-			field.appendChild(input)
-			field.appendChild(true_btn)
-			field.appendChild(false_btn)
+			add_title(field, type, name)
+			add_input(field, value, [...path, name], change_func)
 			pos.appendChild(field)
-		} else if (type == "list") {
-			const field = document.createElement('div')
-			field.id = name
-			field.className = "list field"
-			const title_add = document.createElement('div')
-			title_add.className = "list title-add"
-			const title = document.createElement('span')
-			title.className = "list title"
-			title.textContent = name
-			const nest = document.createElement('div')
-			nest.className = "list nest"
-			const add_btn = document.createElement('div')
-			add_btn.className = "list add-btn"
-			add_btn.addEventListener('click', function () {
-				const remove_btn = document.createElement('div')
-				const index = nest.childElementCount / 2
-				remove_btn.className = "list remove-btn"
-				nest.appendChild(remove_btn)
-				obj_manip.set(structs_UUID, [...path, name, index], {})
-				add_field(nest, { [Object.keys(value.children)[0]]: Object.values(value.children)[0] }, [...path, name, index], change_func)
-			})
-			obj_manip.set(structs_UUID, [...path, name], [])
-			title_add.appendChild(title)
-			title_add.appendChild(add_btn)
-			field.appendChild(title_add)
-			field.appendChild(nest)
-			pos.appendChild(field)
-		} else if (type == "object") {
-			const field = document.createElement('div')
-			field.id = name
-			field.className = "object field"
-			const title = document.createElement('span')
-			title.className = "object title"
-			title.textContent = name
-			const nest = document.createElement('div')
-			nest.className = "object nest"
-			field.appendChild(title)
-			field.appendChild(nest)
-			pos.appendChild(field)
-			add_field(nest, value.children, [...path, name], change_func)
-		} else if (type == "select") {
-		} else if (type == "reference") {
+		} else if (type === "reference") {
 			const field = document.createElement('div')
 			field.id = name
 			field.className = "reference"
-			pos.appendChild(field)
 			add_field(field, structs[value.name], path, change_func)
+			pos.appendChild(field)
 		} else {
 			console.error(`type is not defined (in ${path},${name})`)
 		}
 	})
+}
+function add_input(pos, value, path, change_func) {
+	const type = value.type
+	if (type === "string" || type === "number") {
+		const field_UUID = crypto.randomUUID()
+		const min = value.min
+		const max = value.max
+		const default_value = value.default
+		const pattern = value.pattern
+		const input = document.createElement('input')
+		input.id = field_UUID
+		input.className = `${type} input`
+		input.addEventListener('input', function () {
+			if (this.checkValidity()) {
+				this.classList.remove("invalid")
+				change_func()
+			} else {
+				this.classList.add("invalid")
+			}
+		})
+		if (default_value !== undefined) { input.value = default_value }
+		if (pattern !== undefined) { input.pattern = pattern }
+		if (type === "string") {
+			input.type = "text"
+			input.spellcheck = false
+			if (min !== undefined) { input.minLength = min }
+			if (max !== undefined) { input.maxLength = max }
+		} else if (type === "number") {
+			const step = value.step
+			input.type = "number"
+			if (min !== undefined) { input.min = min }
+			if (max !== undefined) { input.max = max }
+			if (step !== undefined) { input.step = step }
+		}
+		obj_manip.set(structs_UUID, path, field_UUID)
+		pos.appendChild(input)
+	} else if (type === "boolean") {
+		const field_UUID = crypto.randomUUID()
+		const default_value = value.default
+		const input = document.createElement('div')
+		input.className = "boolean input"
+		const checkbox = document.createElement('input')
+		checkbox.id = field_UUID
+		checkbox.className = "checkbox"
+		checkbox.type = "checkbox"
+		if (default_value !== undefined) { input.checked = default_value }
+		const true_btn = document.createElement('div')
+		true_btn.className = "true-btn"
+		true_btn.addEventListener('click', function () {
+			this.parentElement.querySelector('input').checked = true
+			change_func()
+		})
+		const false_btn = document.createElement('div')
+		false_btn.className = "false-btn"
+		false_btn.addEventListener('click', function () {
+			this.parentElement.querySelector('input').checked = false
+			change_func()
+		})
+		obj_manip.set(structs_UUID, path, field_UUID)
+		input.appendChild(checkbox)
+		input.appendChild(true_btn)
+		input.appendChild(false_btn)
+		pos.appendChild(input)
+	} else if (type === "list") {
+		const nest = document.createElement('div')
+		nest.className = "list nest"
+		nest.dataset.count = -1
+		const add_btn = document.createElement('div')
+		add_btn.className = "list add-btn"
+		add_btn.addEventListener('click', function () {
+			const index = ++nest.dataset.count
+			const remove_field = document.createElement('div')
+			remove_field.className = `${value.children.type} field`
+			const remove_btn = document.createElement('div')
+			remove_btn.className = `${value.children.type} remove-btn title`
+			remove_btn.addEventListener('click', function () {
+				obj_manip.modify(structs_UUID, [...path, index], "")
+				this.parentElement.remove()
+			})
+			remove_field.appendChild(remove_btn)
+			add_input(remove_field, value.children, [...path, index], change_func)
+			nest.appendChild(remove_field)
+		})
+		obj_manip.set(structs_UUID, path, [])
+		pos.appendChild(add_btn)
+		pos.appendChild(nest)
+	} else if (type === "object") {
+		const nest = document.createElement('div')
+		nest.className = "object nest"
+		pos.appendChild(nest)
+		add_field(nest, value.children, path, change_func)
+	} else if (type === "select") {
+		const field_UUID = crypto.randomUUID()
+		const field = document.createElement('div')
+		field.className = "select field"
+		if (Object.keys(value.option).length === 1) {
+			const input = document.createElement('input')
+			input.id = field_UUID
+			input.className = "select checkbox"
+			input.type = "checkbox"
+			const btn = document.createElement('div')
+			btn.className = "select select-btn"
+			btn.addEventListener('click', function () {
+				input.checked = !input.checked
+				if (input.checked) {
+					add_field(field, Object.values(value.option)[0].children, path.slice(0, -1), change_func)
+				} else {
+					field.innerHTML = ""
+				}
+			})
+			pos.appendChild(input)
+			pos.appendChild(btn)
+		} else {
+			const input = document.createElement('select')
+			input.id = field_UUID
+			input.className = "select input"
+			Object.keys(value.option).forEach((name) => {
+				const option = document.createElement('option')
+				option.className = "option"
+				option.textContent = name
+				input.appendChild(option)
+			})
+			input.addEventListener('change', function () {
+				field.innerHTML = ""
+				add_field(field, value.option[input.value], path.slice(0, -1), change_func)
+			})
+			add_field(field, value.option[input.value], path.slice(0, -1), change_func)
+			pos.appendChild(input)
+		}
+		obj_manip.set(structs_UUID, path, field_UUID)
+		pos.appendChild(field)
+	} else if (type === "reference") {
+		const field = document.createElement('div')
+		field.id = value.name
+		field.className = "reference"
+		pos.appendChild(field)
+		add_input(field, { type: "object", children: structs[value.name] }, path, change_func)
+	} else {
+		console.error(`type is not defined (in ${path})`)
+	}
 }
 function get(id) {
 	let struct = JSON.parse(JSON.stringify(structs_UUID[id]))
 	return replace_UUID(struct)
 }
 function replace_UUID(struct) {
+	if (Array.isArray(struct)) { struct = struct.filter(value => value !== "") }
 	Object.keys(struct).forEach((name) => {
 		const value = struct[name]
-		if (typeof (value) == "string") {
+		if (typeof (value) === "string") {
 			const target = document.getElementById(value)
+			if (target === null) {
+				delete struct[name]
+				return
+			}
 			const type = target.type
-			if (type == "text") {
+			if (target.tagName === "SELECT" || type === "text") {
 				struct[name] = target.value
-			} else if (type == "number") {
+			} else if (type === "number") {
 				struct[name] = Number(target.value)
-			} else if (type == "checkbox") {
+			} else if (type === "checkbox") {
 				struct[name] = target.checked
 			} else {
 				struct[name] = null
@@ -174,7 +226,7 @@ export default { set, def_struct, get }
 // 	{ type: "boolean", default: true },
 // 	{ type: "list", children: struct, max: 0, min: 0 },
 // 	{ type: "object", children: { name: struct } },
-// 	{ type: "select", option: { name: struct } },
+// 	{ type: "select", option: { name: { name: struct } } },
 // 	{ type: "reference", name: struct_name }
 // ]
 // const example = { name: struct }

@@ -7,66 +7,61 @@
 	--structure-input-true: #89b76c;
 	--structure-nest-border: #888888;
 	--structure-invalid: #ff0000;
-	--structure-border-radius: 3px
+	--structure-border-radius: 3px;
+	--structure-font: Arial, Helvetica, sans-serif;
 }
 
 .structure {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: var(--structure-font);
 	padding: 7px 13px;
 }
 
-.structure .field,
-.structure .title-add {
+.structure .field {
 	display: flex;
 	margin: 6px 0px;
 	align-items: center;
-	overflow: hidden;
-}
-
-.structure .nest .field:last-child {
-	margin: 6px 0px 0px;
 }
 
 .structure .field.object,
-.structure .field.list {
+.structure .field.list,
+.structure .field.select,
+.structure .field.reference {
 	display: block;
-}
-
-.structure .title-add {
-	margin: 0px;
 }
 
 .structure .title {
 	display: inline-block;
-	padding: 17.5px 13px;
-	height: 0px;
+	padding: 0px 13px;
 	text-align: center;
 	font-size: 18px;
-	line-height: 0px;
+	line-height: 35px;
 	color: var(--structure-title-text);
 	background: var(--structure-title);
 	border-radius: var(--structure-border-radius) 0px 0px var(--structure-border-radius);
 	user-select: none;
+	vertical-align: top;
 }
 
+.structure .title.reference,
 .structure .title.object {
 	border-radius: var(--structure-border-radius);
 }
 
-.structure .input[type="text"],
-.structure .input[type="number"] {
+.structure .string.input,
+.structure .number.input,
+.structure .select.input {
 	padding: 0px 5px;
 	height: 35px;
 	box-sizing: border-box;
 	font-size: 18px;
-	line-height: 0px;
+	font-family: var(--structure-font);
 	background-color: var(--structure-input);
 	border: 1px solid var(--structure-border);
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 	outline: none;
 }
 
-.structure .input[type="checkbox"] {
+.structure .checkbox {
 	display: none;
 }
 
@@ -91,8 +86,8 @@
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
-.structure *:has(input:checked)>.true-btn,
-.structure *:not(:has(input:checked))>.false-btn {
+.structure .input:has(.checkbox:checked)>.true-btn,
+.structure .input:not(:has(.checkbox:checked))>.false-btn {
 	color: var(--structure-title-text);
 	background-color: var(--structure-input-true);
 }
@@ -105,23 +100,39 @@
 	content: "Flase";
 }
 
+.structure .select-btn,
+.structure .remove-btn,
 .structure .add-btn {
 	display: inline-block;
 	height: 35px;
 	width: 35px;
 	font-size: 30px;
-	line-height: 35px;
-	color: var(--structure-title);
-	background-color: var(--structure-input);
-	border: 1px solid var(--structure-border);
-	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 	box-sizing: border-box;
 	text-align: center;
 	user-select: none;
 }
 
+.structure .select-btn,
+.structure .add-btn {
+	line-height: 35px;
+	color: var(--structure-title);
+	background-color: var(--structure-input);
+	border: 1px solid var(--structure-border);
+	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
+}
+
+.structure .field.select:not(:has(.checkbox:checked))>.select-btn::before,
 .structure .add-btn::before {
 	content: "+";
+}
+
+.structure .field.select:has(.checkbox:checked)>.select-btn::before,
+.structure .remove-btn::before {
+	content: "-";
+}
+
+.structure .option {
+	background-color: var(--structure-input);
 }
 
 .structure .nest {
@@ -130,5 +141,5 @@
 }
 
 .structure .invalid {
-	border-color: var(--structure-invalid);
+	border-color: var(--structure-invalid) !important;
 }
