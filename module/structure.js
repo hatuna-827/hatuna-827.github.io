@@ -11,13 +11,18 @@ function set(id, struct_name, change_func) {
 	const render_box = document.getElementById(id)
 	if (!render_box) { throw new Error(`|Structure module| No element found with this id (${id})`) }
 	const struct = structs[struct_name]
+	if (struct === undefined) { throw new Error(`|Structure module| No struct found with this struct name (${struct_name})`) }
 	render_box.classList.add("structure")
 	if (change_func === undefined) { change_func = function () { } }
 	add_field(render_box, struct, [id, struct_name], change_func)
 }
-function add_title(field, type, name) {
+function generate_field(tag, type, name) {
+	const field = document.createElement(tag)
 	field.id = name
 	field.className = `${type} field`
+	return field
+}
+function add_title(field, type, name) {
 	const title = document.createElement('span')
 	title.className = `${type} title`
 	title.textContent = name
@@ -27,35 +32,34 @@ function add_field(pos, struct, path, change_func) {
 	Object.keys(struct).forEach((name) => {
 		const value = struct[name]
 		const type = value.type
-		if (type === "string" || type === "number") {
-			const field = document.createElement('label')
+		if (["string", "number"].includes(type)) {
+			const field = generate_field('label', type, name)
 			add_title(field, type, name)
 			add_input(field, value, [...path, name], change_func)
 			pos.appendChild(field)
-		} else if (type === "boolean" || type === "list" || type === "object" || type === "select") {
-			const field = document.createElement('div')
+		} else if (["boolean", "list", "object", "select"].includes(type)) {
+			const field = generate_field('div', type, name)
 			add_title(field, type, name)
 			add_input(field, value, [...path, name], change_func)
 			pos.appendChild(field)
 		} else if (type === "reference") {
-			const field = document.createElement('div')
-			field.id = name
-			field.className = "reference"
+			const field = generate_field('div', type, name)
 			add_field(field, structs[value.name], path, change_func)
 			pos.appendChild(field)
 		} else {
-			console.error(`type is not defined (in ${path},${name})`)
+			console.error(`type is not defined (in ${path},${name})`, value)
 		}
 	})
 }
 function add_input(pos, value, path, change_func) {
 	const type = value.type
-	if (type === "string" || type === "number") {
+	if (["string", "number"].includes(type)) {
 		const field_UUID = crypto.randomUUID()
 		const min = value.min
 		const max = value.max
 		const default_value = value.default
 		const pattern = value.pattern
+		const placeholder = value.placeholder
 		const input = document.createElement('input')
 		input.id = field_UUID
 		input.className = `${type} input`
@@ -69,6 +73,7 @@ function add_input(pos, value, path, change_func) {
 		})
 		if (default_value !== undefined) { input.value = default_value }
 		if (pattern !== undefined) { input.pattern = pattern }
+		if (placeholder !== undefined) { input.placeholder = placeholder }
 		if (type === "string") {
 			input.type = "text"
 			input.spellcheck = false
@@ -163,7 +168,11 @@ function add_input(pos, value, path, change_func) {
 			const input = document.createElement('select')
 			input.id = field_UUID
 			input.className = "select input"
-			Object.keys(value.option).forEach((name) => {
+			let options = value.option
+			if (!Array.isArray(value.option)) {
+				options = Object.keys(options)
+			}
+			options.forEach((name) => {
 				const option = document.createElement('option')
 				option.className = "option"
 				option.textContent = name
@@ -171,9 +180,9 @@ function add_input(pos, value, path, change_func) {
 			})
 			input.addEventListener('change', function () {
 				field.innerHTML = ""
-				add_field(field, value.option[input.value], path.slice(0, -1), change_func)
+				if (value.option[input.value]) { add_field(field, value.option[input.value], path.slice(0, -1), change_func) }
 			})
-			add_field(field, value.option[input.value], path.slice(0, -1), change_func)
+			if (value.option[input.value]) { add_field(field, value.option[input.value], path.slice(0, -1), change_func) }
 			pos.appendChild(input)
 		}
 		obj_manip.set(structs_UUID, path, field_UUID)
@@ -181,7 +190,7 @@ function add_input(pos, value, path, change_func) {
 	} else if (type === "reference") {
 		const field = document.createElement('div')
 		field.id = value.name
-		field.className = "reference"
+		field.className = "reference field"
 		pos.appendChild(field)
 		add_input(field, { type: "object", children: structs[value.name] }, path, change_func)
 	} else {
@@ -221,12 +230,13 @@ function replace_UUID(struct) {
 export default { set, def_struct, get }
 
 // const struct = [
-// 	{ type: "string", min: 0, max: 0, default: "", pattern: "" },
-// 	{ type: "number", min: 0, max: 0, step: 0, default: 0, pattern: "" },
+// 	{ type: "string", min: 0, max: 0, default: "", pattern: "", placeholder: "" },
+// 	{ type: "number", min: 0, max: 0, step: 0, default: 0, pattern: "", placeholder: "" },
 // 	{ type: "boolean", default: true },
 // 	{ type: "list", children: struct, max: 0, min: 0 },
 // 	{ type: "object", children: { name: struct } },
-// 	{ type: "select", option: { name: { name: struct } } },
+// 	{ type: "select", option: { option_name: { name: struct } } },
+// 	{ type: "select", option: [option_name] },
 // 	{ type: "reference", name: struct_name }
 // ]
 // const example = { name: struct }
