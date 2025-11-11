@@ -43,7 +43,8 @@
 }
 
 .structure .title.reference,
-.structure .title.object {
+.structure .title.object,
+.structure .add-btn.add-end {
 	border-radius: var(--structure-border-radius);
 }
 
@@ -129,6 +130,10 @@
 .structure .field.select:has(.checkbox:checked)>.select-btn::before,
 .structure .remove-btn::before {
 	content: "-";
+}
+
+.structure .list.nest:not(:has(*))+.add-end {
+	display: none;
 }
 
 .structure .option {
