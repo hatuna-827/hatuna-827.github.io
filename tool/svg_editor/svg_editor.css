@@ -167,9 +167,6 @@ input[type="file"] {
 	white-space: pre;
 	overflow-y: hidden;
 	field-sizing: content;
-}
-
-.xml:focus {
 	outline: none;
 }
 

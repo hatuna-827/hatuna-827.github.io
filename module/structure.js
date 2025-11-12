@@ -8,13 +8,15 @@ function def_struct(name, struct) {
 	structs[name] = struct
 }
 function set(id, struct_name, change_func) {
-	const render_box = document.getElementById(id)
+	const render_box = document.createElement('div')
+	const pos = document.getElementById(id)
 	if (!render_box) { throw new Error(`|Structure module| No element found with this id (${id})`) }
 	const struct = structs[struct_name]
 	if (struct === undefined) { throw new Error(`|Structure module| No struct found with this struct name (${struct_name})`) }
 	render_box.classList.add("structure")
 	if (change_func === undefined) { change_func = function () { } }
 	add_field(render_box, struct, [id, struct_name], change_func)
+	pos.appendChild(render_box)
 }
 function generate_field(tag, type, name) {
 	const field = document.createElement(tag)
@@ -22,24 +24,25 @@ function generate_field(tag, type, name) {
 	field.className = `${type} field`
 	return field
 }
-function add_title(field, type, name) {
+function add_title(field, type, name, display_name) {
 	const title = document.createElement('span')
 	title.className = `${type} title`
-	title.textContent = name
+	title.textContent = display_name === undefined ? name : display_name
 	field.appendChild(title)
 }
 function add_field(pos, struct, path, change_func) {
 	Object.keys(struct).forEach((name) => {
 		const value = struct[name]
 		const type = value.type
+		const display_name = value.display_name
 		if (["string", "number"].includes(type)) {
 			const field = generate_field('label', type, name)
-			add_title(field, type, name)
+			add_title(field, type, name, display_name)
 			add_input(field, value, [...path, name], change_func)
 			pos.appendChild(field)
-		} else if (["boolean", "list", "object", "select"].includes(type)) {
+		} else if (["boolean", "toggle", "list", "object", "select"].includes(type)) {
 			const field = generate_field('div', type, name)
-			add_title(field, type, name)
+			add_title(field, type, name, display_name)
 			add_input(field, value, [...path, name], change_func)
 			pos.appendChild(field)
 		} else if (type === "reference") {
@@ -115,6 +118,31 @@ function add_input(pos, value, path, change_func) {
 		input.appendChild(true_btn)
 		input.appendChild(false_btn)
 		pos.appendChild(input)
+	} else if (type === "toggle") {
+		const default_value = value.default
+		const field = document.createElement('div')
+		field.className = "toggle field"
+		const input = document.createElement('input')
+		input.className = "toggle checkbox"
+		input.type = "checkbox"
+		if (default_value !== undefined) { input.checked = default_value }
+		const btn = document.createElement('div')
+		btn.className = "toggle toggle-btn"
+		btn.addEventListener('click', function () {
+			input.checked = !input.checked
+			if (input.checked) {
+				add_input(field, value.children, path, change_func)
+			} else {
+				field.innerHTML = ""
+				obj_manip.set(structs_UUID, path, null)
+			}
+			change_func()
+		})
+		obj_manip.set(structs_UUID, path, null)
+		pos.appendChild(input)
+		pos.appendChild(btn)
+		pos.appendChild(field)
+		if (input.checked) { add_input(field, value.children, path, change_func) }
 	} else if (type === "list") {
 		const field_UUID = crypto.randomUUID()
 		const min = value.min
@@ -157,12 +185,16 @@ function add_input(pos, value, path, change_func) {
 		const nest = document.createElement('div')
 		nest.className = "object nest"
 		pos.appendChild(nest)
+		obj_manip.set(structs_UUID, path, {})
 		add_field(nest, value.children, path, change_func)
 	} else if (type === "select") {
 		const field_UUID = crypto.randomUUID()
+		let options = value.option
+		if (Array.isArray(options)) { options = Object.fromEntries(options.map(key => [key, {}])) }
+		const option_keys = Object.keys(options)
 		const field = document.createElement('div')
 		field.className = "select field"
-		if (Object.keys(value.option).length === 1) {
+		if (option_keys.length === 1) {
 			const input = document.createElement('input')
 			input.id = field_UUID
 			input.className = "select checkbox"
@@ -172,10 +204,11 @@ function add_input(pos, value, path, change_func) {
 			btn.addEventListener('click', function () {
 				input.checked = !input.checked
 				if (input.checked) {
-					add_field(field, Object.values(value.option)[0].children, path.slice(0, -1), change_func)
+					add_field(field, options[option_keys[0]].children, path.slice(0, -1), change_func)
 				} else {
 					field.innerHTML = ""
 				}
+				change_func()
 			})
 			pos.appendChild(input)
 			pos.appendChild(btn)
@@ -183,21 +216,21 @@ function add_input(pos, value, path, change_func) {
 			const input = document.createElement('select')
 			input.id = field_UUID
 			input.className = "select input"
-			let options = value.option
-			if (!Array.isArray(value.option)) {
-				options = Object.keys(options)
-			}
-			options.forEach((name) => {
+			option_keys.forEach((name) => {
+				const display_name = options[name].display_name
 				const option = document.createElement('option')
 				option.className = "option"
+				option.value = name
 				option.textContent = name
+				if (display_name !== undefined) { option.textContent = display_name }
 				input.appendChild(option)
 			})
 			input.addEventListener('change', function () {
 				field.innerHTML = ""
-				if (value.option[input.value]) { add_field(field, value.option[input.value], path.slice(0, -1), change_func) }
+				if (options[input.value].children) { add_field(field, options[input.value].children, path.slice(0, -1), change_func) }
+				change_func()
 			})
-			if (value.option[input.value]) { add_field(field, value.option[input.value], path.slice(0, -1), change_func) }
+			if (options[input.value].children) { add_field(field, options[input.value].children, path.slice(0, -1), change_func) }
 			pos.appendChild(input)
 		}
 		obj_manip.set(structs_UUID, path, field_UUID)
@@ -213,19 +246,24 @@ function add_input(pos, value, path, change_func) {
 	}
 }
 function get(id) {
-	const list_keys = Object.keys(structs_UUID)
-	let struct = JSON.parse(JSON.stringify(structs_UUID[id]))
-	return replace_UUID(struct, list_keys)
+	const structs = JSON.parse(JSON.stringify(structs_UUID))
+	const list_keys = Object.keys(structs)
+	let struct = JSON.parse(JSON.stringify(structs[id]))
+	return replace_UUID(structs, struct, list_keys)
 }
-function replace_UUID(struct, list_keys) {
+function replace_UUID(structs, struct, list_keys) {
 	Object.keys(struct).forEach((name) => {
 		const value = struct[name]
-		if (typeof (value) === "string") {
+		if (typeof (value) === "string" || value === null) {
 			if (list_keys.includes(value)) {
-				struct[name] = replace_UUID(structs_UUID[value], list_keys)
+				struct[name] = replace_UUID(structs, structs[value], list_keys)
 				return
 			}
 			const target = document.getElementById(value)
+			if (target === null) {
+				struct[name] = null
+				return
+			}
 			const type = target.type
 			if (target.tagName === "SELECT" || type === "text") {
 				struct[name] = target.value
@@ -235,7 +273,7 @@ function replace_UUID(struct, list_keys) {
 				struct[name] = target.checked
 			}
 		} else {
-			struct[name] = replace_UUID(value, list_keys)
+			struct[name] = replace_UUID(structs, value, list_keys)
 		}
 	})
 	return struct
@@ -243,13 +281,14 @@ function replace_UUID(struct, list_keys) {
 export default { set, def_struct, get }
 
 // const struct = [
-// 	{ type: "string", min: 0, max: 0, default: "", pattern: "", placeholder: "" },
-// 	{ type: "number", min: 0, max: 0, step: 0, default: 0, pattern: "", placeholder: "" },
-// 	{ type: "boolean", default: true },
-// 	{ type: "list", children: struct, min: 0, max: 0 },
-// 	{ type: "object", children: { name: struct } },
-// 	{ type: "select", option: { option_name: { name: struct } } },
-// 	{ type: "select", option: [option_name] },
+// 	{ type: "string", display_name: "", min: 0, max: 0, default: "", pattern: "", placeholder: "" },
+// 	{ type: "number", display_name: "", min: 0, max: 0, step: 0, default: 0, pattern: "", placeholder: "" },
+// 	{ type: "boolean", display_name: "", default: false },
+// 	{ type: "toggle", display_name: "", children: struct, default: false },
+// 	{ type: "list", display_name: "", children: struct, min: 0, max: 0 },
+// 	{ type: "object", display_name: "", children: { name: struct } },
+// 	{ type: "select", display_name: "", option: { option_name: { display_name: "", children: { name: struct } } } },
+// 	{ type: "select", display_name: "", option: [option_name] },
 // 	{ type: "reference", name: struct_name }
 // ]
 // const example = { name: struct }
