@@ -60,6 +60,7 @@
 	height: 35px;
 	box-sizing: border-box;
 	font-size: 18px;
+	color: var(--structure-input-text);
 	font-family: var(--structure-font);
 	background-color: var(--structure-input);
 	border: 1px solid var(--structure-border);

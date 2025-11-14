@@ -227,7 +227,7 @@ function add_input(pos, value, path, change_func) {
 			})
 			input.addEventListener('change', function () {
 				field.innerHTML = ""
-				if (options[input.value].children) { add_field(field, options[input.value].children, path.slice(0, -1), change_func) }
+				if (options[this.value].children) { add_field(field, options[this.value].children, path.slice(0, -1), change_func) }
 				change_func()
 			})
 			if (options[input.value].children) { add_field(field, options[input.value].children, path.slice(0, -1), change_func) }

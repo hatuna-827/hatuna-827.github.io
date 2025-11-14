@@ -11,7 +11,7 @@ function get(obj, path) {
 	return root.pop()
 }
 function modify(obj, _path, value) {
-	const path = JSON.parse(JSON.stringify(_path))
+	let path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }
@@ -27,7 +27,7 @@ function modify(obj, _path, value) {
 	return root[0]
 }
 function remove(obj, _path) {
-	const path = JSON.parse(JSON.stringify(_path))
+	let path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }
@@ -48,7 +48,7 @@ function remove(obj, _path) {
 	return root[0]
 }
 function set(obj, _path, value) {
-	const path = JSON.parse(JSON.stringify(_path))
+	let path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }

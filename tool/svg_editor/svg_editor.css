@@ -1,3 +1,16 @@
+:root {
+	--structure-title: var(--main-color);
+	--structure-title-text: var(--white-color);
+	--structure-border: var(--main-color);
+	--structure-input: var(--white-color);
+	--structure-input-text: var(--black-color);
+	--structure-input-true: var(--leaf-green-color);
+	--structure-nest-border: var(--grey-5-color);
+	--structure-invalid: var(--red-color);
+	--structure-border-radius: 3px;
+	--structure-font: Arial, Helvetica, sans-serif;
+}
+
 #main {
 	position: relative;
 	height: 100vh;
@@ -108,6 +121,15 @@
 	background-color: var(--main-color);
 	border-radius: 6px;
 	cursor: pointer;
+}
+
+.mini-btn:not(.clicked) {
+	transition: color 0.5s, background-color 0.5s;
+}
+
+.mini-btn.clicked {
+	color: var(--main-color);
+	background-color: var(--white-color);
 }
 
 .mini-btn.white {
