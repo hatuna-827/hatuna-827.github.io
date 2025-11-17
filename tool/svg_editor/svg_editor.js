@@ -3,6 +3,7 @@
 import storage from "/module/storage.js"
 import structure from "/module/structure.js"
 /* - const ------------------------------------------------------------------------------------- */
+let inline = false
 // img drag
 let scale = 1
 let originX = 0
@@ -216,9 +217,18 @@ document.getElementById("img-home").addEventListener('click', function () {
 	clicked(this)
 })
 document.getElementById("sub-xml-copy").addEventListener('click', function () {
-	const target = document.getElementById("sub-content")
+	const target = document.getElementById("xml-sub-view")
 	navigator.clipboard.writeText(target.textContent)
 	clicked(this)
+})
+document.getElementById("inline").addEventListener('click', function () {
+	inline = !inline
+	if (inline) {
+		this.classList.add("inline")
+	} else {
+		this.classList.remove("inline")
+	}
+	update_sub_view()
 })
 // img_view
 img_view.addEventListener('mousedown', (e) => {
@@ -290,11 +300,9 @@ function set_views(view_type) {
 	// const
 	const main_editor = document.getElementById("main-content")
 	const sub_view = document.getElementById("sub-view")
-	const sub_content = document.getElementById("sub-content")
 	const img_content = document.getElementById("img-content")
 	// reset
 	main_editor.innerHTML = ""
-	sub_content.innerHTML = ""
 	if (view_type == "xml") {
 		sub_view.className = "hide"
 		const line_numbers = document.createElement('div')
@@ -318,24 +326,18 @@ function set_views(view_type) {
 		main_editor.appendChild(textarea)
 	} else if (view_type == "gui") {
 		sub_view.className = ""
-		const line_numbers = document.createElement('div')
-		const textarea = document.createElement('div')
-		line_numbers.className = "line-numbers"
-		textarea.id = "xml-textarea"
-		textarea.className = "xml"
-		textarea.spellcheck = false
-		textarea.dispatchEvent(new Event('input', { bubbles: true }))
-		sub_content.appendChild(line_numbers)
-		sub_content.appendChild(textarea)
 		structure.set("main-content", "svg", () => {
-			update_sub_view(line_numbers, textarea)
+			update_sub_view()
 		})
-		update_sub_view(line_numbers, textarea)
+		update_sub_view()
 	}
 }
-function update_sub_view(line_numbers, textarea) {
+function update_sub_view() {
 	const img_content = document.getElementById("img-content")
-	const xml = object_to_svg(structure.get("main-content"), 0)
+	const textarea = document.getElementById("xml-sub-view")
+	const line_numbers = document.getElementById("line-numbers-sub-view")
+	let xml = object_to_svg(structure.get("main-content"))
+	if (inline) { xml = comp_xml(xml) }
 	img_content.innerHTML = xml
 	textarea.textContent = xml
 	line_numbers.innerHTML = ""
@@ -343,7 +345,7 @@ function update_sub_view(line_numbers, textarea) {
 	if (line_count) { line_count = line_count.length + 1 } else { line_count = 1 }
 	for (let i = 0; i < line_count; i++) { line_numbers.insertAdjacentElement('beforeend', document.createElement('span')) }
 }
-function object_to_svg(obj, comp) {
+function object_to_svg(obj) {
 	const shape_options = svg_struct.element.children.children.shape.option
 	const d_option = svg_struct.element.children.children.shape.option.path.children.d.children.children.type.option
 	const attribute_types = ["fill", "fill-opacity", "stroke", "stroke-opacity", "stroke-width", "stroke-dasharray", "stroke-linecap", "stroke-linejoin"]
@@ -403,16 +405,22 @@ function object_to_svg(obj, comp) {
 	return xml
 }
 function add_xml(types, obj) {
+	let not_first = false
 	let result = ""
 	if (obj === null) { return result }
-	types.forEach((type, i) => {
+	types.forEach((type) => {
 		const value = obj[type]
 		if (value !== null && (!Array.isArray(value) || value.length !== 0)) {
-			if (i) { result += " " }
+			if (not_first) { result += " " }
+			not_first = true
 			result += `${type}="${value}"`
 		}
 	})
 	if (result !== "") { result = " " + result }
 	return result
+}
+function comp_xml(xml) {
+	xml = xml.replace(/\n *|(?<=[0-9]) *(?=[a-zA-Z])|(?<=") *|[, ](?=-)/g, "")
+	return xml
 }
 /* --------------------------------------------------------------------------------------------- */

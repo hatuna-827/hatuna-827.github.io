@@ -19,6 +19,7 @@ if (page && page == "svg_editor") {
 	document.querySelector('title').textContent = "設定 - SVGエディター | hatuna-827"
 	setting.innerHTML = "<label><span class='reco'>ホームバーを非表示</span><input type='checkbox' id='hide-homebar'></label><br><label><span>編集ウィンドウ</span><select id='views'><option value='easy'>簡単編集</option><option value='xml'>xml編集</option></select></label><hr><br><button class='center' id='all-reset'>全てリセット</button>"
 	document.getElementById("hide-homebar").checked = settings.hide_homebar
+	document.getElementById("views").selectedIndex = settings.views === "easy" ? 0 : 1
 	/* - add eventListener ------------------------------------------------------------------------- */
 	document.getElementById("hide-homebar").addEventListener('click', function () {
 		storage.modify(storage_key, "hide_homebar", this.checked)

@@ -137,11 +137,19 @@
 	background-color: var(--main-bg-color);
 }
 
-label {
+.mini-btn.margin-right {
 	margin-right: 10px;
 }
 
 input[type="file"] {
+	display: none;
+}
+
+#inline.inline #inline-true {
+	display: none;
+}
+
+#inline:not(.inline) #inline-false {
 	display: none;
 }
 
