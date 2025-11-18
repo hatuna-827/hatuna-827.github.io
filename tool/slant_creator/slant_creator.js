@@ -1,5 +1,6 @@
 "use strict"
 import dialog from "/module/dialog.js"
+import obj_manip from "/module/obj_manip.js"
 let settings_display = "none"
 let popup = false
 let now_data = {}
@@ -9,7 +10,6 @@ let loop_goal = {}
 let auto_fill_ans = []
 let auto_fill_count = 0
 let if_shift = false
-let count = 0
 // pan and zoom
 let scale = 1
 let originX = 0
@@ -98,8 +98,8 @@ let zoom_max = 5
 	})
 	auto_fill.addEventListener('click', async function () {
 		if (auto_fill.checked) {
-			if (now_data.size.x * now_data.size.y > 20) {
-				await dialog({ content: "処理量の問題により大きさは20マスまでです。" })
+			if (now_data.size.x * now_data.size.y > 900) {
+				await dialog({ content: "処理量の問題により大きさは900マスまでです。" })
 				auto_fill.checked = false
 			} else {
 				const checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
@@ -234,19 +234,11 @@ function f_popup() {
 }
 // create_new
 function create_new_data() {
-	now_data = { size: { x: width.value * 1, y: height.value * 1 }, box: [], maru: [] }
-	for (let x = 0; x < now_data.size.x; x++) {
-		now_data.box.push([])
-		for (let y = 0; y < now_data.size.y; y++) {
-			now_data.box[x].push(0)
-		}
+	now_data = {
+		size: { x: width.value * 1, y: height.value * 1 }, box: [], maru: []
 	}
-	for (let x = 0; x <= now_data.size.x; x++) {
-		now_data.maru.push([])
-		for (let y = 0; y <= now_data.size.y; y++) {
-			now_data.maru[x].push("")
-		}
-	}
+	now_data.box = obj_manip.array_2d.create(now_data.size.x, now_data.size.y, 0)
+	now_data.maru = obj_manip.array_2d.create(now_data.size.x + 1, now_data.size.y + 1, "")
 }
 function create_box() {
 	const big_box = document.getElementById("big-box")
@@ -595,21 +587,10 @@ function auto_fill_box() {
 	if (rule.checked) { all_check_maru() }
 }
 function f_auto_fill_data(size, maru_data) {
-	const auto_fill_data = { box: [], maru: [] }
-	auto_fill_ans = []
+	const auto_fill_data = { box: obj_manip.array_2d.create(size.x, size.y, 0), maru: maru_data }
+	auto_fill_ans = obj_manip.array_2d.create(size.x, size.y, 0)
 	auto_fill_count = 0
-	for (let x = 0; x < size.x; x++) {
-		auto_fill_data.box.push([])
-		auto_fill_ans.push([])
-		for (let y = 0; y < size.y; y++) {
-			auto_fill_data.box[x].push(0)
-			auto_fill_ans[x].push(0)
-		}
-	}
-	auto_fill_data.maru = maru_data
-	// let conn = { list: Array.from({ length: size.x + 1 }, () => crypto.randomUUID()), tmp: crypto.randomUUID() }
-	const conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0 }
-	count = size.x
+	const conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 }
 	auto_fill_DFS(size, auto_fill_data, 0, conn)
 	for (let x = 0; x < size.x; x++) {
 		for (let y = 0; y < size.y; y++) {
@@ -618,13 +599,13 @@ function f_auto_fill_data(size, maru_data) {
 	}
 	return auto_fill_ans
 }
-function auto_fill_DFS(size, tmp_data, node, conn) {
-	// console.log("---------", conn.tmp, ...conn.list)
-	let connect = { ...conn }
+function auto_fill_DFS(size, _tmp_data, node, _conn) {
+	const tmp_data = JSON.parse(JSON.stringify(_tmp_data))
 	const x = node % size.x
 	const y = Math.floor(node / size.x)
 	if (size.x * size.y == node) {
 		// console.log("One answer")
+		// console.log(JSON.stringify(tmp_data.box))
 		auto_fill_count++
 		for (let x = 0; x < size.x; x++) {
 			for (let y = 0; y < size.y; y++) {
@@ -634,50 +615,87 @@ function auto_fill_DFS(size, tmp_data, node, conn) {
 		return
 	}
 	tmp_data.box[x][y] = -1
-	// const temp1 = connect.tmp
-	// connect.tmp = connect.list[x + 1]
-	// connect.list[x + 1] = temp1
-	// if (x == size.x - 1) {
-	// 	console.log("return")
-	// 	connect.tmp = crypto.randomUUID()
-	// 	connect.tmp = ++count
-	// }
-	// console.log(node, -1, ...tmp_data.box)
 	if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
-		auto_fill_DFS(size, tmp_data, node + 1, connect)
+		let conn = JSON.parse(JSON.stringify(_conn))
+		// console.log(-1, conn.tmp, ...conn.list, `node:${node}`)
+		const tmp1 = conn.tmp
+		conn.tmp = conn.list[x + 1]
+		conn.list[x + 1] = tmp1
+		if (x == size.x - 1) {
+			conn.tmp = conn.list[0]
+			conn.list[0] = ++conn.count
+		}
+		// console.log("--", conn.tmp, ...conn.list)
+		auto_fill_DFS(size, tmp_data, node + 1, conn)
+	} else {
+		// console.log("err-", JSON.stringify(tmp_data.box), node)
 	}
 	tmp_data.box[x][y] = 1
-	// connect = { ...conn }
-	// connect.list[x] = connect.list[x + 2]
-	// connect.tmp = connect.list[x + 2]
-	// connect.list[2] = crypto.randomUUID()
-	// connect.list[2] = ++count
-	// if (x == size.x - 1) {
-	// 	console.log("return")
-	// 	connect.tmp = crypto.randomUUID()
-	// 	connect.tmp = ++count
-	// }
-	// console.log(node, 1)
 	if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
-		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
-		if (x != 0 && tmp_data.box[x - 1][y] == -1 && !check_box_data(x, y, size, tmp_data.box)) {
-			auto_fill_DFS(size, tmp_data, node + 1, connect)
-		} else {
-			auto_fill_DFS(size, tmp_data, node + 1, connect)
+		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru) ||
+		_conn.list[x] == _conn.list[x + 1])) {
+		let conn = JSON.parse(JSON.stringify(_conn))
+		// console.log(1, conn.tmp, ...conn.list, `x:${x}`)
+		conn = replace_conn(conn, conn.list[x], conn.list[x + 1])
+		conn.tmp = conn.list[x + 1]
+		conn.list[x + 1] = ++conn.count
+		if (x == size.x - 1) {
+			conn.tmp = conn.list[0]
+			conn.list[0] = ++conn.count
 		}
+		// console.log("+", conn.tmp, ...conn.list)
+		auto_fill_DFS(size, tmp_data, node + 1, conn)
+	} else {
+		// console.log("err1", JSON.stringify(tmp_data.box), node)
 	}
-	tmp_data.box[x][y] = 0
 }
-function replace_list(old, from, to) {
-	const list = [...old]
-	list.forEach((x, i) => list[i] = x == from ? to : x)
-	return list
+function replace_conn(old, from, to) {
+	const conn = JSON.parse(JSON.stringify(old))
+	conn.list.forEach((x, i) => conn.list[i] = x == from ? to : x)
+	conn.tmp = conn.tmp == from ? to : conn.tmp
+	return conn
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------*/
-// add_button.click()
-// create_new.click()
+// console.log(JSON.stringify(f_auto_fill_data({ x: 3, y: 3 },
+// 	[
+// 		['', '', '', ''],
+// 		['', '', '1', ''],
+// 		['', '1', '', ''],
+// 		['', '', '', '']
+// 	]
+// )))
+// console.log(JSON.stringify(f_auto_fill_data({ x: 3, y: 3 },
+// 	[
+// 		['', '', '', ''],
+// 		['', '1', '', ''],
+// 		['', '', '1', ''],
+// 		['', '', '', '']
+// 	]
+// )))
+// console.log(JSON.stringify(f_auto_fill_data({ x: 4, y: 4 },
+// 	[
+// 		['', '', '', '', ''],
+// 		['', '', '', '1', ''],
+// 		['', '', '1', '', ''],
+// 		['', '', '', '', ''],
+// 		['', '', '', '', '']
+// 	]
+// )))
+// console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
+// let conn = { tmp: 0, list: [1, 2, 3, 4], count: 4 }
+// const x = 0
+// console.log("+", conn.tmp, ...conn.list, `x:${x}`)
+// conn = replace_conn(conn, conn.list[x], conn.list[x + 1])
+// conn = replace_conn(conn, conn.tmp, conn.list[x + 1])
+// conn.list[x + 1] = ++conn.count
+// console.log("+", conn.tmp, ...conn.list, `x:${x}`)
+// if (x == 3 - 1) {
+// 	conn = replace_conn(conn, conn.tmp, conn.list[0])
+// 	conn = replace_conn(conn, conn.list[0], ++conn.count)
+// }
+// console.log("+", conn.tmp, ...conn.list)

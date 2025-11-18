@@ -79,4 +79,18 @@ function next_check(next) {
 	}
 }
 
-export default { get, modify, remove, set }
+function overwrite(base, content, baseX, baseY) {
+	if (baseX === undefined) { baseX = 0 }
+	if (baseY === undefined) { baseY = 0 }
+	content.forEach((line, y) => {
+		line.forEach((value, x) => {
+			if (value !== null) { base[y + baseY][x + baseX] = value }
+		})
+	})
+	return base
+}
+function create(height, width, default_value) {
+	return Array.from({ length: height }).fill(Array.from({ length: width }).fill(default_value))
+}
+
+export default { get, modify, remove, set, array_2d: { overwrite, create } }
