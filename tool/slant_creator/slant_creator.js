@@ -591,7 +591,31 @@ function f_auto_fill_data(size, maru_data) {
 	auto_fill_ans = obj_manip.array_2d.create(size.x, size.y, 0)
 	auto_fill_count = 0
 	const conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 }
-	auto_fill_DFS(size, auto_fill_data, 0, conn)
+	let area = obj_manip.array_2d.create(size.x, size.y, 0)
+	for (let x = 0; x <= size.x; x++) {
+		for (let y = 0; y <= size.y; y++) {
+			if (auto_fill_data.maru[x][y] !== "") {
+				if (x !== 0 && y !== size.y) { area[x - 1][y] = 1 }
+				if (x !== size.x && y !== 0) { area[x][y - 1] = 1 }
+				if (x !== 0 && y !== 0) { area[x - 1][y - 1] = 1 }
+				if (x !== size.x && y !== size.y) { area[x][y] = 1 }
+			}
+		}
+	}
+	let old = ""
+	while (old != JSON.stringify(area)) {
+		old = JSON.stringify(area)
+		for (let x = 0; x < size.x; x++) {
+			for (let y = 0; y < size.y; y++) {
+				if (auto_fill_data.maru[x][y] == 0) {
+					if (((x !== 0 && area[x - 1][y] === 1) || (x !== size.x - 1 && area[x + 1][y] === 1)) && (
+						(y !== 0 && area[x][y - 1] === 1) || (y !== size.y - 1 && area[x][y + 1] === 1))) { area[x][y] = 1 }
+				}
+			}
+		}
+	}
+	console.log("area:", area)
+	// auto_fill_DFS(size, auto_fill_data, 0, conn)
 	for (let x = 0; x < size.x; x++) {
 		for (let y = 0; y < size.y; y++) {
 			auto_fill_ans[x][y] = Math.trunc(auto_fill_ans[x][y] / auto_fill_count)
@@ -677,16 +701,23 @@ function replace_conn(old, from, to) {
 // 		['', '', '', '']
 // 	]
 // )))
-// console.log(JSON.stringify(f_auto_fill_data({ x: 4, y: 4 },
-// 	[
-// 		['', '', '', '', ''],
-// 		['', '', '', '1', ''],
-// 		['', '', '1', '', ''],
-// 		['', '', '', '', ''],
-// 		['', '', '', '', '']
-// 	]
-// )))
-// console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
+const start = Date.now()
+console.log(JSON.stringify(f_auto_fill_data({ x: 5, y: 5 },
+	[
+		['1', '', '', '', '', ''],
+		['', '', '', '', '', ''],
+		['', '', '', '1', '', '2'],
+		['', '', '1', '', '', ''],
+		['', '', '', '', '', ''],
+		['', '', '', '', '', '1'],
+	]
+)))
+// 13100
+//  9100
+//  9500
+//  9400
+console.log("time:", Date.now() - start)
+console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
 // let conn = { tmp: 0, list: [1, 2, 3, 4], count: 4 }
 // const x = 0
 // console.log("+", conn.tmp, ...conn.list, `x:${x}`)

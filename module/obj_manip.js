@@ -90,7 +90,14 @@ function overwrite(base, content, baseX, baseY) {
 	return base
 }
 function create(height, width, default_value) {
-	return Array.from({ length: height }).fill(Array.from({ length: width }).fill(default_value))
+	let result = []
+	for (let h = 0; h < height; h++) {
+		result.push([])
+		for (let w = 0; w < width; w++) {
+			result[h].push(default_value)
+		}
+	}
+	return result
 }
 
 export default { get, modify, remove, set, array_2d: { overwrite, create } }
