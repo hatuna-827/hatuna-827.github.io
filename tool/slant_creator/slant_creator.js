@@ -429,13 +429,7 @@ function check_link_box(x, y, size, box_data) {
 	return link_box
 }
 function all_check_box() {
-	loop_checked = []
-	for (let x = 0; x < now_data.size.x; x++) {
-		loop_checked.push([])
-		for (let y = 0; y < now_data.size.y; y++) {
-			loop_checked[x].push(0)
-		}
-	}
+	loop_checked = obj_manip.array_2d.create(now_data.size.x, now_data.size.y, 0)
 	for (let x = 0; x < now_data.size.x; x++) {
 		for (let y = 0; y < now_data.size.y; y++) {
 			document.getElementById('box_' + x + ',' + y).classList.remove("red")
@@ -454,13 +448,7 @@ function all_check_box() {
 function check_box_data(x, y, size, box_data) {
 	if (box_data[x][y] == 0) { return false }
 	let queue = []
-	root = []
-	for (let x = 0; x <= size.x; x++) {
-		root.push([])
-		for (let y = 0; y <= size.y; y++) {
-			root[x].push(0)
-		}
-	}
+	root = obj_manip.array_2d.create(size.x + 1, size.y + 1, 0)
 	if (box_data[x][y] == 1) {
 		queue.push({ x: x + 1, y: y })
 		root[x + 1][y] = 1
@@ -476,32 +464,19 @@ function check_box_data(x, y, size, box_data) {
 		const P = queue[0]
 		// console.log(queue, P)
 		const link_wall = check_link_wall(P.x, P.y, size)
-		if (link_wall.right && link_wall.down) {
-			// 右下
-			const n = { x: P.x + 1, y: P.y + 1 }
-			if (box_data[P.x][P.y] == -1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
-			}
-		}
-		if (link_wall.up && link_wall.right) {
-			// 右上
-			const n = { x: P.x + 1, y: P.y - 1 }
-			if (box_data[P.x][P.y - 1] == 1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
-			}
-		}
-		if (link_wall.down && link_wall.left) {
-			// 左下
-			const n = { x: P.x - 1, y: P.y + 1 }
-			if (box_data[P.x - 1][P.y] == 1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
-			}
-		}
-		if (link_wall.up && link_wall.left) {
-			// 左上
-			const n = { x: P.x - 1, y: P.y - 1 }
-			if (box_data[P.x - 1][P.y - 1] == -1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
+		const patterns = [
+			{ wall: ["down", "right"], nPx: 1, nPy: 1, Px: 0, Py: 0, slant: -1 },
+			{ wall: ["up", "right"], nPx: 1, nPy: -1, Px: 0, Py: -1, slant: 1 },
+			{ wall: ["down", "left"], nPx: -1, nPy: 1, Px: -1, Py: 0, slant: 1 },
+			{ wall: ["up", "left"], nPx: -1, nPy: -1, Px: -1, Py: -1, slant: -1 }
+		]
+		for (const pattern of patterns) {
+			const [wall, nPx, nPy, Px, Py, slant] = [pattern.wall, pattern.nPx, pattern.nPy, pattern.Px, pattern.Py, pattern.slant]
+			if (link_wall[wall[0]] && link_wall[wall[1]]) {
+				const n = { x: P.x + nPx, y: P.y + nPy }
+				if (box_data[P.x + Px][P.y + Py] == slant && root[n.x][n.y] == 0) {
+					if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
+				}
 			}
 		}
 		queue.shift()
@@ -590,32 +565,30 @@ function f_auto_fill_data(size, maru_data) {
 	const auto_fill_data = { box: obj_manip.array_2d.create(size.x, size.y, 0), maru: maru_data }
 	auto_fill_ans = obj_manip.array_2d.create(size.x, size.y, 0)
 	auto_fill_count = 0
-	const conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 }
-	let area = obj_manip.array_2d.create(size.x, size.y, 0)
-	for (let x = 0; x <= size.x; x++) {
-		for (let y = 0; y <= size.y; y++) {
-			if (auto_fill_data.maru[x][y] !== "") {
-				if (x !== 0 && y !== size.y) { area[x - 1][y] = 1 }
-				if (x !== size.x && y !== 0) { area[x][y - 1] = 1 }
-				if (x !== 0 && y !== 0) { area[x - 1][y - 1] = 1 }
-				if (x !== size.x && y !== size.y) { area[x][y] = 1 }
-			}
-		}
-	}
-	let old = ""
-	while (old != JSON.stringify(area)) {
-		old = JSON.stringify(area)
-		for (let x = 0; x < size.x; x++) {
-			for (let y = 0; y < size.y; y++) {
-				if (auto_fill_data.maru[x][y] == 0) {
-					if (((x !== 0 && area[x - 1][y] === 1) || (x !== size.x - 1 && area[x + 1][y] === 1)) && (
-						(y !== 0 && area[x][y - 1] === 1) || (y !== size.y - 1 && area[x][y + 1] === 1))) { area[x][y] = 1 }
-				}
-			}
-		}
-	}
-	console.log("area:", area)
-	// auto_fill_DFS(size, auto_fill_data, 0, conn)
+	// let i = 0
+	// while (i < 2) {
+	// 	i++
+	// 	let minX, maxX, minY, maxY, no_break = true
+	// 	for (let x = 0; x <= size.x; x++) {
+	// 		for (let y = 0; y <= size.y; y++) {
+	// 			if (auto_fill_data.maru[x][y] !== "") {
+	// 				no_break = false;
+	// 				[minX, maxX, minY, maxY] = [x, x, y, y]
+	// 			}
+	// 		}
+	// 		if (!no_break) { break }
+	// 	}
+	// 	if (no_break) { break }
+	// 	let x = maxX, y = minY
+	// 	console.log(minX, maxX, minY, maxY)
+	// 	while (auto_fill_data.maru[x][y] !== "") {
+	// 		console.log(x)
+	// 		x++
+	// 	}
+	// 	console.log(x)
+	// 	// minX = x
+	// }
+	auto_fill_DFS(size, auto_fill_data, 0, { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 })
 	for (let x = 0; x < size.x; x++) {
 		for (let y = 0; y < size.y; y++) {
 			auto_fill_ans[x][y] = Math.trunc(auto_fill_ans[x][y] / auto_fill_count)
@@ -702,21 +675,31 @@ function replace_conn(old, from, to) {
 // 	]
 // )))
 const start = Date.now()
-console.log(JSON.stringify(f_auto_fill_data({ x: 5, y: 5 },
-	[
-		['1', '', '', '', '', ''],
-		['', '', '', '', '', ''],
-		['', '', '', '1', '', '2'],
-		['', '', '1', '', '', ''],
-		['', '', '', '', '', ''],
-		['', '', '', '', '', '1'],
-	]
-)))
-// 13100
-//  9100
-//  9500
-//  9400
-console.log("time:", Date.now() - start)
+// f_auto_fill_data({ x: 5, y: 5 },
+// 	[
+// 		['1', '', '', '', '', ''],
+// 		['', '', '', '', '', ''],
+// 		['', '', '', '1', '', '2'],
+// 		['', '', '1', '', '', ''],
+// 		['', '', '', '', '', ''],
+// 		['', '', '', '', '', '1']
+// 	]
+// ).forEach((line) => {
+// 	console.log(JSON.stringify(line))
+// })
+// // [
+// // 	['', '', '', '', '', ''],
+// // 	['', '', '', '', '', ''],
+// // 	['', '', '', '1', '', ''],
+// // 	['', '', '1', '', '', ''],
+// // 	['', '', '', '', '', ''],
+// // 	['', '', '', '', '', '']
+// // ]
+// // 13100
+// //  9100
+// //  9500
+// //  9400
+// console.log("time:", Date.now() - start)
 console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
 // let conn = { tmp: 0, list: [1, 2, 3, 4], count: 4 }
 // const x = 0
