@@ -1,6 +1,8 @@
 "use strict"
+/* - import ------------------------------------------------------------------------------------ */
 import dialog from "/module/dialog.js"
 import obj_manip from "/module/obj_manip.js"
+/* - const ------------------------------------------------------------------------------------- */
 let settings_display = "none"
 let popup = false
 let now_data = {}
@@ -18,153 +20,126 @@ let startX, startY
 let isDragging = false
 let zoom_min = 0.2
 let zoom_max = 5
-// element
-{
-	const add_button = document.getElementById("add-button")
-	const setting_button = document.getElementById("setting-button")
-	const list_button = document.getElementById("list-button")
-	const square = document.getElementById("square")
+/* - add eventListener ------------------------------------------------------------------------- */
+// menu
+document.getElementById("add-button").addEventListener('click', { menu_id: document.getElementById("add"), handleEvent: displaymenu })
+document.getElementById("setting-button").addEventListener('click', { menu_id: document.getElementById("settings"), handleEvent: displaymenu })
+document.getElementById("list-button").addEventListener('click', { menu_id: document.getElementById("list"), handleEvent: displaymenu })
+// add
+document.getElementById("square").addEventListener('click', function () {
+	const width = document.getElementById("width")
 	const height = document.getElementById("height")
-	const create_new = document.getElementById("create-new")
-	const auto_save = document.getElementById("auto-save")
-	const auto_fill = document.getElementById("auto-fill")
-	const gray_out = document.getElementById("gray-out")
-	const rule = document.getElementById("rule")
-	const play_mode = document.getElementById("play-mode")
-	const popup_button = document.getElementById("popup-button")
-	const close_button = document.getElementById("close-button")
-	const create_space = document.getElementById("create-space")
-
-	// const add = document.getElementById("add")
-	// const settings = document.getElementById("settings")
-	// const list = document.getElementById("list")
-	// const width = document.getElementById("width")
-	// const list_null = document.getElementById("list-null")
-	// const work_space = document.getElementById("work-space")
-	// const popup_close = document.getElementById("popup-close")
-	// const popup_open = document.getElementById("popup-open")
-	// const save_button = document.getElementById("save-button")
-	// const big_box = document.getElementById("big-box")
-	// const big_maru = document.getElementById("big-maru")
-	/*--------------------------------------------------------------------------------------------------------------------------------------------*/
-	// menu
-	add_button.addEventListener('click', { menu_id: document.getElementById("add"), handleEvent: displaymenu })
-	setting_button.addEventListener('click', { menu_id: document.getElementById("settings"), handleEvent: displaymenu })
-	list_button.addEventListener('click', { menu_id: document.getElementById("list"), handleEvent: displaymenu })
-	// add
-	square.addEventListener('click', function () {
-		const square = document.getElementById("square")
-		const width = document.getElementById("width")
-		if (square.checked) {
-			width.disabled = true
-			width.value = height.value
+	if (this.checked) {
+		width.disabled = true
+		width.value = height.value
+	} else {
+		width.disabled = false
+	}
+})
+document.getElementById("height").addEventListener('input', function () {
+	const square = document.getElementById("square")
+	const width = document.getElementById("width")
+	if (square.checked) {
+		width.value = this.value
+	}
+})
+document.getElementById("create-new").addEventListener('click', async function () {
+	const height = document.getElementById("height")
+	const width = document.getElementById("width")
+	if (!(height.value % 1 == 0 && height.value > 0 && width.value % 1 == 0 && width.value > 0)) {
+		await dialog({ content: "入力内容に誤りがあります。" })
+		return
+	}
+	document.getElementById("auto-fill").checked = false
+	document.getElementById("gray-out").checked = false
+	document.getElementById("rule").checked = true
+	document.getElementById("play-mode").checked = false
+	create_new_data()
+	hidemenu()
+	create_box()
+	create_maru()
+	document.getElementById("work-space").style.display = "block"
+	f_popup()
+})
+// settings
+document.getElementById("auto-save").addEventListener('click', function () {
+	if (this.checked) {
+		save_button.style.display = "none"
+	} else {
+		save_button.style.display = "block"
+	}
+})
+document.getElementById("auto-fill").addEventListener('click', async function () {
+	if (this.checked) {
+		if (now_data.size.x * now_data.size.y > 900) {
+			await dialog({ content: "処理量の問題により大きさは900マスまでです。" })
+			this.checked = false
 		} else {
-			width.disabled = false
-		}
-	})
-	height.addEventListener('input', function () {
-		const square = document.getElementById("square")
-		const width = document.getElementById("width")
-		if (square.checked) {
-			width.value = height.value
-		}
-	})
-	create_new.addEventListener('click', async function () {
-		const height = document.getElementById("height")
-		const width = document.getElementById("width")
-		const work_space = document.getElementById("work-space")
-		if (!(height.value % 1 == 0 && height.value > 0 && width.value % 1 == 0 && width.value > 0)) {
-			await dialog({ content: "入力内容に誤りがあります。" })
-			return
-		}
-		auto_fill.checked = false
-		gray_out.checked = false
-		rule.checked = true
-		play_mode.checked = false
-		create_new_data()
-		hidemenu()
-		create_box()
-		create_maru()
-		work_space.style.display = "block"
-		f_popup()
-	})
-	// settings
-	auto_save.addEventListener('click', function () {
-		if (auto_save.checked) {
-			save_button.style.display = "none"
-		} else {
-			save_button.style.display = "block"
-		}
-	})
-	auto_fill.addEventListener('click', async function () {
-		if (auto_fill.checked) {
-			if (now_data.size.x * now_data.size.y > 900) {
-				await dialog({ content: "処理量の問題により大きさは900マスまでです。" })
-				auto_fill.checked = false
+			const checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
+			if (checkSaveFlg == 0) {
+				auto_fill_box()
 			} else {
-				const checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
-				if (checkSaveFlg == 0) {
-					auto_fill_box()
-				} else {
-					auto_fill.checked = false
-				}
+				this.checked = false
 			}
 		}
-	})
-	gray_out.addEventListener('click', function () {
-		if (gray_out.checked) {
-			all_check_gray()
-		} else {
-			for (let x = 0; x <= now_data.size.x; x++) {
-				for (let y = 0; y <= now_data.size.y; y++) {
-					document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
-				}
+	}
+})
+document.getElementById("gray-out").addEventListener('click', function () {
+	if (this.checked) {
+		all_check_gray()
+	} else {
+		for (let x = 0; x <= now_data.size.x; x++) {
+			for (let y = 0; y <= now_data.size.y; y++) {
+				document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
 			}
 		}
-	})
-	rule.addEventListener('click', function () {
-		if (rule.checked) {
-			all_check_maru()
-			all_check_box()
-		} else {
-			for (let x = 0; x <= now_data.size.x; x++) {
-				for (let y = 0; y <= now_data.size.y; y++) {
-					document.getElementById('maru_' + x + ',' + y).classList.remove("red")
-				}
-			}
-			for (let x = 0; x < now_data.size.x; x++) {
-				for (let y = 0; y < now_data.size.y; y++) {
-					document.getElementById('box_' + x + ',' + y).classList.remove("red")
-				}
+	}
+})
+document.getElementById("rule").addEventListener('click', function () {
+	if (this.checked) {
+		all_check_maru()
+		all_check_box()
+	} else {
+		for (let x = 0; x <= now_data.size.x; x++) {
+			for (let y = 0; y <= now_data.size.y; y++) {
+				document.getElementById('maru_' + x + ',' + y).classList.remove("red")
 			}
 		}
-	})
-	play_mode.addEventListener('click', function () {
-		const big_maru = document.getElementById("big-maru")
-		if (play_mode.checked) {
-			big_maru.classList.add("play-mode")
-		} else {
-			big_maru.classList.remove("play-mode")
+		for (let x = 0; x < now_data.size.x; x++) {
+			for (let y = 0; y < now_data.size.y; y++) {
+				document.getElementById('box_' + x + ',' + y).classList.remove("red")
+			}
 		}
-	})
-	// list
-	// workspace
-	popup_button.addEventListener('click', f_popup)
-	close_button.addEventListener('click', function () {
-		const work_space = document.getElementById("work-space")
-		if (popup) { f_popup() }
-		work_space.style.display = "none"
-	})
-	window.addEventListener("keydown", e => {
-		if (e.shiftKey) {
-			if_shift = true
-		}
-	})
-	window.addEventListener("keyup", e => {
-		if (!e.shiftKey) {
-			if_shift = false
-		}
-	})
+	}
+})
+document.getElementById("play-mode").addEventListener('click', function () {
+	const big_maru = document.getElementById("big-maru")
+	if (this.checked) {
+		big_maru.classList.add("play-mode")
+	} else {
+		big_maru.classList.remove("play-mode")
+	}
+})
+// list
+// workspace
+document.getElementById("popup-button").addEventListener('click', f_popup)
+document.getElementById("close-button").addEventListener('click', function () {
+	const work_space = document.getElementById("work-space")
+	if (popup) { f_popup() }
+	work_space.style.display = "none"
+})
+window.addEventListener("keydown", e => {
+	if (e.shiftKey) {
+		if_shift = true
+	}
+})
+window.addEventListener("keyup", e => {
+	if (!e.shiftKey) {
+		if_shift = false
+	}
+})
+{
+	const create_space = document.getElementById("create-space")
 	create_space.addEventListener('mousedown', (e) => {
 		isDragging = true
 		create_space.style.cursor = 'grabbing'
@@ -193,7 +168,7 @@ let zoom_max = 5
 		e.stopPropagation()
 	})
 }
-/*--------------------------------------------------------------------------------------------------------------------------------------------*/
+/* - function ---------------------------------------------------------------------------------- */
 function update_create_space() {
 	const content = document.getElementById("pan-and-zoom")
 	content.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`
@@ -234,6 +209,8 @@ function f_popup() {
 }
 // create_new
 function create_new_data() {
+	const height = document.getElementById("height")
+	const width = document.getElementById("width")
 	now_data = {
 		size: { x: width.value * 1, y: height.value * 1 }, box: [], maru: []
 	}
@@ -273,9 +250,6 @@ function create_maru() {
 		}
 		big_maru.insertAdjacentHTML('beforeend', '<br>')
 	}
-	// big_maru.style.height = (31 + 1 / 3) * now_data.size.y + 31 + 1 / 3 + "px"
-	// big_maru.style.width = (31 + 1 / 3) * now_data.size.x + 31 + 1 / 3 + "px"
-	// big_maru.style.marginTop = (-31 - 1 / 3) * now_data.size.y - 1031 - 1 / 3 + "px"
 }
 function push_box(x, y) {
 	const auto_fill = document.getElementById("auto-fill")
@@ -319,8 +293,7 @@ function push_maru(x, y) {
 	const auto_fill = document.getElementById("auto-fill")
 	const gray_out = document.getElementById("gray-out")
 	const rule = document.getElementById("rule")
-	const play_mode = document.getElementById("play-mode")
-	if (play_mode.checked) { return }
+	if (document.getElementById("play-mode").checked) { return }
 	const targetmaru = document.getElementById('maru_' + x + ',' + y)
 	targetmaru.classList.add("disp")
 	let next_num
@@ -464,14 +437,13 @@ function check_box_data(x, y, size, box_data) {
 		const P = queue[0]
 		// console.log(queue, P)
 		const link_wall = check_link_wall(P.x, P.y, size)
-		const patterns = [
-			{ wall: ["down", "right"], nPx: 1, nPy: 1, Px: 0, Py: 0, slant: -1 },
+		const pattern = [
 			{ wall: ["up", "right"], nPx: 1, nPy: -1, Px: 0, Py: -1, slant: 1 },
-			{ wall: ["down", "left"], nPx: -1, nPy: 1, Px: -1, Py: 0, slant: 1 },
-			{ wall: ["up", "left"], nPx: -1, nPy: -1, Px: -1, Py: -1, slant: -1 }
+			{ wall: ["up", "left"], nPx: -1, nPy: -1, Px: -1, Py: -1, slant: -1 },
+			{ wall: ["down", "right"], nPx: 1, nPy: 1, Px: 0, Py: 0, slant: -1 },
+			{ wall: ["down", "left"], nPx: -1, nPy: 1, Px: -1, Py: 0, slant: 1 }
 		]
-		for (const pattern of patterns) {
-			const [wall, nPx, nPy, Px, Py, slant] = [pattern.wall, pattern.nPx, pattern.nPy, pattern.Px, pattern.Py, pattern.slant]
+		for (const { wall, nPx, nPy, Px, Py, slant } of pattern) {
 			if (link_wall[wall[0]] && link_wall[wall[1]]) {
 				const n = { x: P.x + nPx, y: P.y + nPy }
 				if (box_data[P.x + Px][P.y + Py] == slant && root[n.x][n.y] == 0) {
@@ -493,45 +465,23 @@ function loop_check(n, P, queue) {
 function loop_red_box() {
 	// console.log("ループ発見", loop_goal, root)
 	let l_P = loop_goal
-	let only
 	while (root[l_P.x][l_P.y] != 1) {
 		// console.log("色塗り中", l_P, root[l_P.x][l_P.y])
 		const link_wall = check_link_wall(l_P.x, l_P.y, now_data.size)
-		only = true
-		if (link_wall.right && link_wall.down && only) {
-			// console.log("右下")
-			const n_P = { x: l_P.x + 1, y: l_P.y + 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x, l_P.y)
-				only = false
-				l_P = n_P
-			}
-		}
-		if (link_wall.up && link_wall.right && only) {
-			// console.log("右上")
-			const n_P = { x: l_P.x + 1, y: l_P.y - 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x, l_P.y - 1)
-				only = false
-				l_P = n_P
-			}
-		}
-		if (link_wall.down && link_wall.left && only) {
-			// console.log("左下")
-			const n_P = { x: l_P.x - 1, y: l_P.y + 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x - 1, l_P.y)
-				only = false
-				l_P = n_P
-			}
-		}
-		if (link_wall.up && link_wall.left && only) {
-			// console.log("左上")
-			const n_P = { x: l_P.x - 1, y: l_P.y - 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x - 1, l_P.y - 1)
-				only = false
-				l_P = n_P
+		const pattern = [
+			{ wall: ["up", "right"], nPx: 1, nPy: -1, lPx: 0, lPy: -1 },
+			{ wall: ["up", "left"], nPx: -1, nPy: -1, lPx: -1, lPy: -1 },
+			{ wall: ["down", "right"], nPx: 1, nPy: 1, lPx: 0, lPy: 0 },
+			{ wall: ["down", "left"], nPx: -1, nPy: 1, lPx: -1, lPy: 0 }
+		]
+		for (const { wall, nPx, nPy, lPx, lPy } of pattern) {
+			if (link_wall[wall[0]] && link_wall[wall[1]]) {
+				const n_P = { x: l_P.x + nPx, y: l_P.y + nPy }
+				if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
+					red_box(l_P.x + lPx, l_P.y + lPy)
+					l_P = n_P
+					break
+				}
 			}
 		}
 	}
@@ -657,7 +607,7 @@ function replace_conn(old, from, to) {
 	conn.tmp = conn.tmp == from ? to : conn.tmp
 	return conn
 }
-/*--------------------------------------------------------------------------------------------------------------------------------------------*/
+/* - init -------------------------------------------------------------------------------------- */
 // console.log(JSON.stringify(f_auto_fill_data({ x: 3, y: 3 },
 // 	[
 // 		['', '', '', ''],
@@ -713,3 +663,4 @@ console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑�
 // 	conn = replace_conn(conn, conn.list[0], ++conn.count)
 // }
 // console.log("+", conn.tmp, ...conn.list)
+/* --------------------------------------------------------------------------------------------- */
