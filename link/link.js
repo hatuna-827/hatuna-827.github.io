@@ -1,22 +1,45 @@
 "use strict"
 import data from "../site.json" with {type: "json"}
-let links = data.site
-let link_box = document.getElementById("auto_links")
-let filter = link_box.dataset.filter
-if (filter == "all") { links = links.filter((link) => /^\/(home|blog|game|tool|404)/.test(link.url)) }
-if (filter == "blog") { links = links.filter((link) => /^\/(blog|link\/index)/.test(link.url)) }
-if (filter == "game") { links = links.filter((link) => /^\/(game|link\/index)/.test(link.url)) }
-if (filter == "tool") { links = links.filter((link) => /^\/(tool|link\/index)/.test(link.url)) }
-links.forEach(link => {
-	let new_a = document.createElement("a")
-	let new_div = document.createElement("div")
-	let new_p = document.createElement("p")
-	let new_span = document.createElement("span")
-	new_a.setAttribute("href", link.url.replace("index.html", ""))
-	new_p.textContent = link.main_title
-	new_span.textContent = link.sub_title
-	link_box.insertAdjacentElement("beforeend", new_a)
-	new_a.appendChild(new_div)
-	new_div.appendChild(new_p)
-	new_p.appendChild(new_span)
-})
+const _sites = data.site
+const links = document.getElementById("auto_links")
+if (links) { auto_links(links) }
+const topic = document.getElementById("topic")
+if (topic) { auto_links(topic) }
+function auto_links(pos) {
+	let sites = JSON.parse(JSON.stringify(_sites))
+	const filter = pos.dataset.filter
+	if (filter == "all") {
+		sites = sites.filter((site) => /^\/(home|blog|game|tool|404)/.test(site.url))
+	} else if (filter == "topic") {
+		sites = sites.filter((site) => /^\/link\/(?!index)/.test(site.url))
+	} else if (filter == "blog") {
+		sites = sites.filter((site) => /^\/(blog|link\/index)/.test(site.url))
+	} else if (filter == "game") {
+		sites = sites.filter((site) => /^\/(game|link\/index)/.test(site.url))
+	} else if (filter == "tool") {
+		sites = sites.filter((site) => /^\/(tool|link\/index)/.test(site.url))
+	} else {
+		return
+	}
+	sites.forEach(site => {
+		const link = document.createElement('a')
+		link.className = "link"
+		link.setAttribute('href', site.url.replace("index.html", ""))
+		const display_box = document.createElement('div')
+		display_box.className = "display-box"
+		const title = document.createElement('div')
+		title.className = "title"
+		title.textContent = site.main_title
+		const sub_title = document.createElement('div')
+		sub_title.className = "sub-title"
+		sub_title.textContent = site.sub_title
+		const description = document.createElement('div')
+		description.className = "description"
+		description.innerText = site.description
+		display_box.appendChild(title)
+		display_box.appendChild(sub_title)
+		display_box.appendChild(description)
+		link.appendChild(display_box)
+		pos.appendChild(link)
+	})
+}

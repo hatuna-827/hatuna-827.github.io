@@ -1,5 +1,5 @@
 "use strict"
-function get(obj, path) {
+export function get(obj, path) {
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }
@@ -10,8 +10,8 @@ function get(obj, path) {
 	})
 	return root.pop()
 }
-function modify(obj, _path, value) {
-	let path = JSON.parse(JSON.stringify(_path))
+export function modify(obj, _path, value) {
+	const path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }
@@ -26,8 +26,8 @@ function modify(obj, _path, value) {
 	})
 	return root[0]
 }
-function remove(obj, _path) {
-	let path = JSON.parse(JSON.stringify(_path))
+export function remove(obj, _path) {
+	const path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }
@@ -47,8 +47,8 @@ function remove(obj, _path) {
 	})
 	return root[0]
 }
-function set(obj, _path, value) {
-	let path = JSON.parse(JSON.stringify(_path))
+export function set(obj, _path, value) {
+	const path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }
@@ -79,4 +79,35 @@ function next_check(next) {
 	}
 }
 
-export default { get, modify, remove, set }
+function overwrite(base, content, baseX, baseY) {
+	if (baseX === undefined) { baseX = 0 }
+	if (baseY === undefined) { baseY = 0 }
+	content.forEach((line, y) => {
+		line.forEach((value, x) => {
+			if (value !== null) { base[y + baseY][x + baseX] = value }
+		})
+	})
+	return base
+}
+function create(height, width, default_value) {
+	let result = []
+	for (let h = 0; h < height; h++) {
+		result.push([])
+		for (let w = 0; w < width; w++) {
+			result[h].push(default_value)
+		}
+	}
+	return result
+}
+function replace(base, from, to) {
+	let result = JSON.parse(JSON.stringify(base))
+	result.forEach((line, i) => {
+		line.forEach((value, j) => {
+			base[i][j] = value === from ? to : value
+		})
+	})
+	return result
+}
+
+export const array_2d = { overwrite, create, replace }
+export default { get, modify, remove, set, array_2d }

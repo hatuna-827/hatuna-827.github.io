@@ -1,8 +1,8 @@
 h1 {
-	margin: 30px 0px 0px;
+	margin: 0px;
 	line-height: 50px;
 	color: var(--black-color);
-	font-size: min(70px, 40vw);
+	font-size: 70px;
 }
 
 h2 {
@@ -43,7 +43,8 @@ button {
 }
 
 hr {
-	margin: 10px calc(50% - 320px);
+	margin: 10px auto;
+	max-width: 640px;
 }
 
 #main {
@@ -54,13 +55,24 @@ hr {
 }
 
 @media screen and (max-width:480px) {
+	h1 {
+		font-size: 45px;
+		line-height: 50px;
+	}
+
+	h2 {
+		margin: 0px;
+		font-size: 25px;
+	}
+
 	h3 {
-		font-size: 17px;
+		font-size: 16px;
+		line-height: 22px;
 	}
 
 	p {
-		line-height: 30px;
-		font-size: 13px;
+		line-height: 20px;
+		font-size: 14px;
 	}
 
 	button {
@@ -72,10 +84,10 @@ hr {
 	}
 
 	hr {
-		margin: 0px;
+		margin: 4px;
 	}
 
 	#main {
-		margin-bottom: 20px;
+		margin: 20px;
 	}
 }

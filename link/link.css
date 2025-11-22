@@ -1,4 +1,4 @@
-@media screen and (min-width:650px) {
+@media screen and (min-width:840px) {
 	#main {
 		margin: 50px;
 		text-align: center;
@@ -6,123 +6,158 @@
 
 	h1 {
 		margin: 30px 0px;
+		font-size: 45px;
 		line-height: 50px;
 		color: var(--black-color);
-		font-size: 45px;
 	}
 
-	a {
+	.link {
 		margin: 0px;
 	}
 
-	a div {
-		transition: all 0.2s;
-		box-sizing: border-box;
+	.display-box {
+		display: inline-block;
 		margin: 20px;
 		padding: 70px 0px;
-		background-color: var(--grey-c-color);
+		box-sizing: border-box;
 		height: 200px;
 		width: 330px;
-		display: inline-block;
+		background-color: var(--grey-c-color);
 		border-radius: 30px;
+		transition: all 0.2s;
+		vertical-align: bottom;
 	}
 
-	a div p {
-		color: var(--black-color);
-		text-decoration: none;
+	.title {
 		display: inline-block;
-		vertical-align: middle;
-		line-height: 60px;
-		font-size: 30px;
 		margin: 0px;
+		font-size: 30px;
+		line-height: 60px;
+		color: var(--black-color);
 	}
 
-	a div span {
+	.sub-title {
 		display: block;
 		font-size: 20px;
 		line-height: 0px;
+		color: var(--black-color);
 	}
 
-	a:hover div {
+	.description {
+		display: none;
+	}
+
+	.display-box:hover {
 		background-color: var(--grey-green-color);
 		box-shadow: 5px 5px 5px var(--grey-a-color);
 		transition: all 0.2s;
 	}
 
-	#topic a div {
+	#topic .display-box {
+		padding: 75px 0px;
 		width: calc((100% - 220px) / 3);
 		max-width: 330px;
-		padding: 75px 0px;
 	}
 
-	#topuic a p {
-		line-height: 50px;
+	#topuic .title {
 		font-size: 40px;
+		line-height: 50px;
 	}
 }
 
-@media screen and (max-width:840px) {
-	#main {
-		text-align: left;
-	}
-
-	a div {
-		margin: 10px;
-		padding: 25px;
-		height: 50px;
-		width: 100%;
-		min-width: 480px;
-	}
-
-	a div p {
-		line-height: 0px;
-	}
-
-	a div span {
-		display: inline-block;
-	}
-
-	#topic a div {
-		width: 100%;
-		max-width: none;
-		padding: 25px;
-	}
-
-	#topic a div p {
-		line-height: 0px;
-		font-size: 30px;
-	}
-}
-
-@media screen and (max-width:650px) {
+@media screen and (max-width:839px) and (min-width:481px) {
 	#main {
 		margin: 20px;
 	}
 
 	h1 {
+		margin: 10px 0px;
 		font-size: 30px;
-		line-height: 40px;
-		margin: 20px 0px;
+		text-align: center;
 	}
 
-	a {
+	.link {
+		display: block;
+		margin: 7px 0px 0px;
+		align-items: center;
+		justify-items: center;
 		text-decoration: none;
 	}
 
-	a div p {
-		margin: 10px 30px;
+	.display-box {
+		padding: 5px 10px;
+		height: 80px;
+		width: 480px;
+		border: 1px solid var(--grey-a-color);
+		box-sizing: border-box;
+	}
+
+	.title {
+		display: inline-block;
 		font-size: 20px;
-		line-height: 25px;
+		color: var(--black-color);
+		vertical-align: baseline;
+	}
+
+	.sub-title {
+		display: inline-block;
+		padding-left: 4px;
+		font-size: 15px;
 		color: var(--black-color);
 	}
 
-	a div span {
-		padding: 0px 30px;
-		display: block;
-		font-size: 15px;
+	.description {
+		font-size: 11px;
+		color: var(--black-color);
+	}
+}
+
+@media screen and (max-width:480px) {
+	#main {
+		margin: 20px;
 	}
 
-	a div p::before {
-		content: "・";
+	h1 {
+		margin: 10px 0px 0px;
+		font-size: 20px;
+		line-height: 30px;
+	}
+
+	.link {
+		text-decoration: none;
+	}
+
+	.display-box {
+		position: relative;
+	}
+
+	.title {
+		margin: 0px 20px;
+		font-size: 17px;
+		line-height: 28px;
+		color: var(--black-color);
+	}
+
+	.sub-title {
+		padding-left: 30px;
+		display: block;
+		font-size: 13px;
+		color: var(--black-color);
+	}
+
+	.description {
+		display: none;
+	}
+
+	.display-box::before {
+		content: "";
+		position: absolute;
+		display: block;
+		top: 9px;
+		left: 9px;
+		height: 5px;
+		width: 5px;
+		border-radius: 5px;
+		background-color: var(--main-color);
 	}
 }
