@@ -1,3 +1,16 @@
+:root {
+	--structure-title: var(--main-color);
+	--structure-title-text: var(--white-color);
+	--structure-border: var(--main-color);
+	--structure-input: var(--white-color);
+	--structure-input-text: var(--black-color);
+	--structure-input-true: var(--leaf-green-color);
+	--structure-nest-border: var(--grey-5-color);
+	--structure-invalid: var(--red-color);
+	--structure-border-radius: 3px;
+	--structure-font: Arial, Helvetica, sans-serif;
+}
+
 #main {
 	position: relative;
 	height: 100vh;
@@ -110,16 +123,33 @@
 	cursor: pointer;
 }
 
+.mini-btn:not(.clicked) {
+	transition: color 0.5s, background-color 0.5s;
+}
+
+.mini-btn.clicked {
+	color: var(--main-color);
+	background-color: var(--white-color);
+}
+
 .mini-btn.white {
 	color: var(--main-color);
 	background-color: var(--main-bg-color);
 }
 
-label {
+.mini-btn.margin-right {
 	margin-right: 10px;
 }
 
 input[type="file"] {
+	display: none;
+}
+
+#inline.inline #inline-true {
+	display: none;
+}
+
+#inline:not(.inline) #inline-false {
 	display: none;
 }
 
@@ -167,9 +197,6 @@ input[type="file"] {
 	white-space: pre;
 	overflow-y: hidden;
 	field-sizing: content;
-}
-
-.xml:focus {
 	outline: none;
 }
 

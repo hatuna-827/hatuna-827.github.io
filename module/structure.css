@@ -22,11 +22,16 @@
 	align-items: center;
 }
 
+.structure .field.toggle:has(.nest),
 .structure .field.object,
 .structure .field.list,
 .structure .field.select,
 .structure .field.reference {
 	display: block;
+}
+
+.structure .field.toggle>.field.toggle {
+	margin: 0px;
 }
 
 .structure .title {
@@ -43,7 +48,8 @@
 }
 
 .structure .title.reference,
-.structure .title.object {
+.structure .title.object,
+.structure .add-btn.add-end {
 	border-radius: var(--structure-border-radius);
 }
 
@@ -54,6 +60,7 @@
 	height: 35px;
 	box-sizing: border-box;
 	font-size: 18px;
+	color: var(--structure-input-text);
 	font-family: var(--structure-font);
 	background-color: var(--structure-input);
 	border: 1px solid var(--structure-border);
@@ -100,6 +107,7 @@
 	content: "Flase";
 }
 
+.structure .toggle-btn,
 .structure .select-btn,
 .structure .remove-btn,
 .structure .add-btn {
@@ -112,6 +120,7 @@
 	user-select: none;
 }
 
+.structure .toggle-btn,
 .structure .select-btn,
 .structure .add-btn {
 	line-height: 35px;
@@ -121,14 +130,26 @@
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
+.structure .field.toggle:not(:has(.checkbox:checked))>.toggle-btn::before,
 .structure .field.select:not(:has(.checkbox:checked))>.select-btn::before,
 .structure .add-btn::before {
 	content: "+";
 }
 
+.structure .field.toggle:has(.checkbox:checked)>.toggle-btn::before,
 .structure .field.select:has(.checkbox:checked)>.select-btn::before,
 .structure .remove-btn::before {
 	content: "-";
+}
+
+.structure .field.toggle:has(.checkbox:checked):not(:has(.nest))>.toggle-btn {
+	width: 34px;
+	border-radius: 0px;
+	border-right: none;
+}
+
+.structure .list.nest:not(:has(*))+.add-end {
+	display: none;
 }
 
 .structure .option {

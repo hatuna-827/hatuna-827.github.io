@@ -1,5 +1,5 @@
 "use strict"
-function get(obj, path) {
+export function get(obj, path) {
 	arguments_check(obj, path)
 	let root = [obj]
 	if (typeof (path) == "string") { path = path.split(/[.[\]]/) }
@@ -10,7 +10,7 @@ function get(obj, path) {
 	})
 	return root.pop()
 }
-function modify(obj, _path, value) {
+export function modify(obj, _path, value) {
 	const path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
@@ -26,7 +26,7 @@ function modify(obj, _path, value) {
 	})
 	return root[0]
 }
-function remove(obj, _path) {
+export function remove(obj, _path) {
 	const path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
@@ -47,7 +47,7 @@ function remove(obj, _path) {
 	})
 	return root[0]
 }
-function set(obj, _path, value) {
+export function set(obj, _path, value) {
 	const path = JSON.parse(JSON.stringify(_path))
 	arguments_check(obj, path)
 	let root = [obj]
@@ -99,5 +99,16 @@ function create(height, width, default_value) {
 	}
 	return result
 }
+function replace(base, from, to) {
+	let result = JSON.parse(JSON.stringify(base))
+	result.forEach((line, i) => {
+		line.forEach((value, j) => {
+			base[i][j] = value === from ? to : value
+		})
+	})
+	return result
+}
 
-export default { get, modify, remove, set, array_2d: { overwrite, create } }
+export const array_2d = { overwrite, create, replace }
+export default { get, modify, remove, set, array_2d }
+

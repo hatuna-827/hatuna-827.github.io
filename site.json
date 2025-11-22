@@ -13,7 +13,7 @@
 			"url": "/link/index.html",
 			"name": "すべてのサイト一覧",
 			"title": "LINK すべてのサイト一覧",
-			"main_title": "LINK",
+			"main_title": "←もどる",
 			"sub_title": "すべてのサイト一覧",
 			"description": "すべてのサイトへのリンク一覧",
 			"image": ""
@@ -22,27 +22,27 @@
 			"url": "/link/blog/index.html",
 			"name": "ブログ一覧",
 			"title": "Blog ブログ一覧",
-			"main_title": "Blog",
-			"sub_title": "ブログ一覧",
-			"description": "ブログへのリンク一覧",
+			"main_title": "ブログ",
+			"sub_title": "Blog",
+			"description": "プログラミングの話。Esperanto語・Brainfuckの布教をしています。\n人気記事：Youtubeプレイリストの合計時間の計算方法",
 			"image": ""
 		},
 		{
 			"url": "/link/game/index.html",
 			"name": "ゲーム一覧",
 			"title": "Game ゲーム一覧",
-			"main_title": "Game",
-			"sub_title": "ゲーム一覧",
-			"description": "ゲームへのリンク一覧",
+			"main_title": "ゲーム",
+			"sub_title": "Game",
+			"description": "今のところ、OXゲーム・ライツアウト・オセロしかありません。\nおすすめ：ライツアウト",
 			"image": ""
 		},
 		{
 			"url": "/link/tool/index.html",
 			"name": "ツール一覧",
 			"title": "Tool ツール一覧",
-			"main_title": "Tool",
-			"sub_title": "ツール一覧",
-			"description": "ツールへのリンク一覧",
+			"main_title": "ツール",
+			"sub_title": "Tool",
+			"description": "ちょっと便利なツール達です。\nおすすめ：SVGエディター・ごきげんななめ作問ツール",
 			"image": ""
 		},
 		{
@@ -60,16 +60,7 @@
 			"title": "404 Not found",
 			"main_title": "404",
 			"sub_title": "Not found",
-			"description": "404 page not found",
-			"image": ""
-		},
-		{
-			"url": "/blog/regex/index.html",
-			"name": "はじめての正規表現 - VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方",
-			"title": "",
-			"main_title": "はじめての正規表現",
-			"sub_title": "~概要編~",
-			"description": "VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。",
+			"description": "404 Page Not Found",
 			"image": ""
 		},
 		{
@@ -88,6 +79,15 @@
 			"main_title": "グラフアート",
 			"sub_title": "グラフアート、はじめました。",
 			"description": "desmosを用い、一緒にグラフアートを始めましょう！",
+			"image": ""
+		},
+		{
+			"url": "/blog/regex/index.html",
+			"name": "はじめての正規表現 - VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方",
+			"title": "",
+			"main_title": "はじめての正規表現",
+			"sub_title": "~概要編~",
+			"description": "VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。",
 			"image": ""
 		},
 		{
@@ -145,12 +145,12 @@
 			"image": ""
 		},
 		{
-			"url": "/tool/counter/index.html",
+			"url": "/tool/slant_creator/index.html",
 			"name": "",
 			"title": "",
-			"main_title": "カウンター",
-			"sub_title": "",
-			"description": "シンプルなカウンター",
+			"main_title": "ごきげんななめ",
+			"sub_title": "作問ツール",
+			"description": "ごきげんななめの作問を補助します。",
 			"image": ""
 		},
 		{
@@ -181,12 +181,12 @@
 			"image": ""
 		},
 		{
-			"url": "/tool/slant_creator/index.html",
+			"url": "/tool/counter/index.html",
 			"name": "",
 			"title": "",
-			"main_title": "ごきげんななめ",
-			"sub_title": "作問ツール",
-			"description": "ごきげんななめの作問を補助します。",
+			"main_title": "カウンター",
+			"sub_title": "",
+			"description": "シンプルなカウンター",
 			"image": ""
 		},
 		{

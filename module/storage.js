@@ -1,27 +1,27 @@
 "use strict"
 import obj_manip from "/module/obj_manip.js"
-function get(key) {
+export function get(key) {
 	try {
 		return JSON.parse(localStorage.getItem(key))
 	} catch {
 		return null
 	}
 }
-function set(key, value) {
+export function set(key, value) {
 	if (key === undefined) {
 		throw new Error("|Storage module| Not enough arguments")
 	}
 	localStorage.setItem(key, JSON.stringify(value))
 	return
 }
-function modify(key, path, value) {
+export function modify(key, path, value) {
 	if (key === undefined || path === undefined) {
 		throw new Error("|Storage module| Not enough arguments")
 	}
 	set(key, obj_manip.modify(get(key), path, value))
 	return
 }
-function remove(key, path) {
+export function remove(key, path) {
 	if (key === undefined) {
 		throw new Error("|Storage module| Not enough arguments")
 	}

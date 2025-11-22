@@ -24,7 +24,7 @@ for site in site_data:
 	title=site["title"]
 	main_title=site["main_title"]
 	sub_title=site["sub_title"]
-	description=site["description"]
+	description=site["description"].replace("\n","")
 	name=site["name"]
 	title=main_title+sub_title if title=="" else title
 	name=title+" | hatuna-827" if name=="" else name+" | hatuna-827"
