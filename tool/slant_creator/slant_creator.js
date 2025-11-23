@@ -13,13 +13,15 @@ let auto_fill_ans = []
 let auto_fill_count = 0
 let if_shift = false
 // pan and zoom
-let scale = 1
+let scale = 2
 let originX = 0
 let originY = 0
 let startX, startY
 let isDragging = false
 let zoom_min = 0.2
 let zoom_max = 5
+/* - init -------------------------------------------------------------------------------------- */
+update_create_space()
 /* - add eventListener ------------------------------------------------------------------------- */
 // menu
 document.getElementById("add-button").addEventListener('click', { menu_id: document.getElementById("add"), handleEvent: displaymenu })
@@ -90,7 +92,7 @@ document.getElementById("gray-out").addEventListener('click', function () {
 	} else {
 		for (let x = 0; x <= now_data.size.x; x++) {
 			for (let y = 0; y <= now_data.size.y; y++) {
-				document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
+				document.getElementById(`maru_${x},${y}`).classList.remove("gray")
 			}
 		}
 	}
@@ -102,12 +104,12 @@ document.getElementById("rule").addEventListener('click', function () {
 	} else {
 		for (let x = 0; x <= now_data.size.x; x++) {
 			for (let y = 0; y <= now_data.size.y; y++) {
-				document.getElementById('maru_' + x + ',' + y).classList.remove("red")
+				document.getElementById(`maru_${x},${y}`).classList.remove("red")
 			}
 		}
 		for (let x = 0; x < now_data.size.x; x++) {
 			for (let y = 0; y < now_data.size.y; y++) {
-				document.getElementById('box_' + x + ',' + y).classList.remove("red")
+				document.getElementById(`box_${x},${y}`).classList.remove("red")
 			}
 		}
 	}
@@ -224,13 +226,13 @@ function create_box() {
 		for (let x = 0; x < now_data.size.x; x++) {
 			const new_box = document.createElement("div")
 			new_box.classList.add("box")
-			new_box.id = 'box_' + x + ',' + y
+			new_box.id = `box_${x},${y}`
 			new_box.addEventListener('click', function () { push_box(x, y) })
 			if (now_data.box[x][y] == 1) { new_box.classList.add("f") }
 			if (now_data.box[x][y] == -1) { new_box.classList.add("b") }
 			big_box.insertAdjacentElement('beforeend', new_box)
 		}
-		big_box.insertAdjacentHTML('beforeend', '<br>')
+		big_box.insertAdjacentElement('beforeend', document.createElement('br'))
 	}
 }
 function create_maru() {
@@ -240,7 +242,7 @@ function create_maru() {
 		for (let x = 0; x <= now_data.size.x; x++) {
 			const new_maru = document.createElement("div")
 			new_maru.classList.add("maru")
-			new_maru.id = 'maru_' + x + ',' + y
+			new_maru.id = `maru_${x},${y}`
 			new_maru.addEventListener('click', function () { push_maru(x, y) })
 			new_maru.textContent = now_data.maru[x][y]
 			if (new_maru.textContent != "") {
@@ -248,7 +250,7 @@ function create_maru() {
 			}
 			big_maru.insertAdjacentElement('beforeend', new_maru)
 		}
-		big_maru.insertAdjacentHTML('beforeend', '<br>')
+		big_maru.insertAdjacentElement('beforeend', document.createElement('br'))
 	}
 }
 function push_box(x, y) {
@@ -256,7 +258,7 @@ function push_box(x, y) {
 	const gray_out = document.getElementById("gray-out")
 	const rule = document.getElementById("rule")
 	if (auto_fill.checked) { return }
-	const targetbox = document.getElementById('box_' + x + ',' + y)
+	const targetbox = document.getElementById(`box_${x},${y}`)
 	const c_list = targetbox.classList
 	if (now_data.box[x][y] == -1) {
 		c_list.remove("b")
@@ -294,7 +296,7 @@ function push_maru(x, y) {
 	const gray_out = document.getElementById("gray-out")
 	const rule = document.getElementById("rule")
 	if (document.getElementById("play-mode").checked) { return }
-	const targetmaru = document.getElementById('maru_' + x + ',' + y)
+	const targetmaru = document.getElementById(`maru_${x},${y}`)
 	targetmaru.classList.add("disp")
 	let next_num
 	if (now_data.maru[x][y] === "") {
@@ -321,7 +323,7 @@ function all_check_gray() {
 	}
 }
 function check_gray(x, y) {
-	const targetmaru = document.getElementById('maru_' + x + ',' + y)
+	const targetmaru = document.getElementById(`maru_${x},${y}`)
 	targetmaru.classList.remove("gray")
 	if (targetmaru.innerText == "") { return }
 	const link_box = check_link_box(x, y, now_data.size, now_data.box)
@@ -332,10 +334,7 @@ function check_gray(x, y) {
 	if (link_wall.up && link_wall.right && link_wall.down && link_wall.left) {
 		// 壁0
 		if (now_data.maru[x][y] == 4 - link_box.false) { targetmaru.classList.add("gray") }
-	} else if (link_wall.up && link_wall.right && link_wall.down ||
-		link_wall.up && link_wall.right && link_wall.left ||
-		link_wall.up && link_wall.down && link_wall.left ||
-		link_wall.right && link_wall.down && link_wall.left) {
+	} else if (link_wall.up + link_wall.right + link_wall.down + link_wall.left == 3) {
 		// 壁1
 		if (now_data.maru[x][y] == 2 - link_box.false) { targetmaru.classList.add("gray") }
 	} else {
@@ -351,7 +350,7 @@ function all_check_maru() {
 	}
 }
 function check_maru(x, y) {
-	const targetmaru = document.getElementById('maru_' + x + ',' + y)
+	const targetmaru = document.getElementById(`maru_${x},${y}`)
 	targetmaru.classList.remove("red")
 	if (check_maru_data(x, y, now_data.size, now_data.box, now_data.maru)) { targetmaru.classList.add("red") }
 }
@@ -366,10 +365,7 @@ function check_maru_data(x, y, size, box_data, maru_data) {
 		// 壁0
 		if (maru_data[x][y] > 4 - link_box.false) { return true }
 		if (maru_data[x][y] == 0) { return true }
-	} else if (link_wall.up && link_wall.right && link_wall.down ||
-		link_wall.up && link_wall.right && link_wall.left ||
-		link_wall.up && link_wall.down && link_wall.left ||
-		link_wall.right && link_wall.down && link_wall.left) {
+	} else if (link_wall.up + link_wall.right + link_wall.down + link_wall.left == 3) {
 		// 壁1
 		if (maru_data[x][y] > 2 - link_box.false) { return true }
 		if (maru_data[x][y] > 2) { return true }
@@ -383,40 +379,61 @@ function check_maru_data(x, y, size, box_data, maru_data) {
 function check_link_box(x, y, size, box_data) {
 	const link_box = { true: 0, false: 0 }
 	const link_wall = check_link_wall(x, y, size)
-	if (link_wall.right && link_wall.down) {
-		if (box_data[x][y] == -1) { link_box.true++ }
-		if (box_data[x][y] == 1) { link_box.false++ }
-	}
-	if (link_wall.up && link_wall.right) {
-		if (box_data[x][y - 1] == 1) { link_box.true++ }
-		if (box_data[x][y - 1] == -1) { link_box.false++ }
-	}
-	if (link_wall.down && link_wall.left) {
-		if (box_data[x - 1][y] == 1) { link_box.true++ }
-		if (box_data[x - 1][y] == -1) { link_box.false++ }
-	}
-	if (link_wall.up && link_wall.left) {
-		if (box_data[x - 1][y - 1] == -1) { link_box.true++ }
-		if (box_data[x - 1][y - 1] == 1) { link_box.false++ }
-	}
+	const pattern = [
+		{ wall: ["down", "right"], dx: 0, dy: 0, slant: -1 },
+		{ wall: ["up", "right"], dx: 0, dy: -1, slant: 1 },
+		{ wall: ["down", "left"], dx: -1, dy: 0, slant: 1 },
+		{ wall: ["up", "left"], dx: -1, dy: -1, slant: -1 },
+	]
+	pattern.forEach(({ wall, dx, dy, slant }) => {
+		if (link_wall[wall[0]] && link_wall[wall[1]]) {
+			if (box_data[x + dx][y + dy] == slant) { link_box.true++ }
+			if (box_data[x + dx][y + dy] == slant * -1) { link_box.false++ }
+		}
+	})
 	return link_box
 }
 function all_check_box() {
 	loop_checked = obj_manip.array_2d.create(now_data.size.x, now_data.size.y, 0)
 	for (let x = 0; x < now_data.size.x; x++) {
 		for (let y = 0; y < now_data.size.y; y++) {
-			document.getElementById('box_' + x + ',' + y).classList.remove("red")
+			document.getElementById(`box_${x},${y}`).classList.remove("red")
 		}
 	}
+	const loop = all_check_box_data(now_data.size, now_data.box)
 	for (let x = 0; x < now_data.size.x; x++) {
 		for (let y = 0; y < now_data.size.y; y++) {
-			if (loop_checked[x][y] == 0) {
-				if (check_box_data(x, y, now_data.size, now_data.box)) {
-					loop_red_box()
-				}
+			if (loop.loop.includes(loop.map[x][y])) {
+				document.getElementById(`box_${x},${y}`).classList.add("red")
 			}
 		}
 	}
+}
+function all_check_box_data(size, box_data) {
+	let result = { map: obj_manip.array_2d.create(size.x, size.y, -1), loop: [] }
+	let conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 }
+	for (let x = 0; x < size.x; x++) {
+		for (let y = 0; y < size.y; y++) {
+			if (box_data[x][y] === -1) {
+				result.map[x][y]=conn.tmp
+				const tmp = conn.tmp
+				conn.tmp = conn.list[x + 1]
+				conn.list[x + 1] = tmp
+			} else if (box_data[x][y] === 0) {
+				conn.tmp = conn.list[x + 1]
+				conn.list[x + 1] = ++conn.count
+			} else if (box_data[x][y] === 1) {
+				conn = replace_conn(conn, conn.list[x], conn.list[x + 1])
+				conn.tmp = conn.list[x + 1]
+				conn.list[x + 1] = ++conn.count
+			}
+			if (x == size.x - 1) {
+				conn.tmp = conn.list[0]
+				conn.list[0] = ++conn.count
+			}
+		}
+	}
+	return result
 }
 function check_box_data(x, y, size, box_data) {
 	if (box_data[x][y] == 0) { return false }
@@ -489,11 +506,10 @@ function loop_red_box() {
 }
 function red_box(x, y) {
 	// console.log("red_box", x, y)
-	document.getElementById('box_' + x + ',' + y).classList.add("red")
+	document.getElementById(`box_${x},${y}`).classList.add("red")
 	loop_checked[x][y] = 1
 }
 function check_link_wall(x, y, size) {
-	// (x,y)の丸について↑→↓←の順で壁がなければTrue
 	return {
 		up: y != 0,
 		right: x != size.x,
@@ -567,7 +583,6 @@ function auto_fill_DFS(size, _tmp_data, node, _conn) {
 		check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
 		let conn = JSON.parse(JSON.stringify(_conn))
-		// console.log(-1, conn.tmp, ...conn.list, `node:${node}`)
 		const tmp1 = conn.tmp
 		conn.tmp = conn.list[x + 1]
 		conn.list[x + 1] = tmp1
@@ -575,10 +590,7 @@ function auto_fill_DFS(size, _tmp_data, node, _conn) {
 			conn.tmp = conn.list[0]
 			conn.list[0] = ++conn.count
 		}
-		// console.log("--", conn.tmp, ...conn.list)
 		auto_fill_DFS(size, tmp_data, node + 1, conn)
-	} else {
-		// console.log("err-", JSON.stringify(tmp_data.box), node)
 	}
 	tmp_data.box[x][y] = 1
 	if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
@@ -587,7 +599,6 @@ function auto_fill_DFS(size, _tmp_data, node, _conn) {
 		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru) ||
 		_conn.list[x] == _conn.list[x + 1])) {
 		let conn = JSON.parse(JSON.stringify(_conn))
-		// console.log(1, conn.tmp, ...conn.list, `x:${x}`)
 		conn = replace_conn(conn, conn.list[x], conn.list[x + 1])
 		conn.tmp = conn.list[x + 1]
 		conn.list[x + 1] = ++conn.count
@@ -595,10 +606,7 @@ function auto_fill_DFS(size, _tmp_data, node, _conn) {
 			conn.tmp = conn.list[0]
 			conn.list[0] = ++conn.count
 		}
-		// console.log("+", conn.tmp, ...conn.list)
 		auto_fill_DFS(size, tmp_data, node + 1, conn)
-	} else {
-		// console.log("err1", JSON.stringify(tmp_data.box), node)
 	}
 }
 function replace_conn(old, from, to) {
@@ -608,6 +616,9 @@ function replace_conn(old, from, to) {
 	return conn
 }
 /* - init -------------------------------------------------------------------------------------- */
+document.getElementById("add-button").click()
+document.getElementById("create-new").click()
+
 // console.log(JSON.stringify(f_auto_fill_data({ x: 3, y: 3 },
 // 	[
 // 		['', '', '', ''],
@@ -624,7 +635,7 @@ function replace_conn(old, from, to) {
 // 		['', '', '', '']
 // 	]
 // )))
-const start = Date.now()
+// const start = Date.now()
 // f_auto_fill_data({ x: 5, y: 5 },
 // 	[
 // 		['1', '', '', '', '', ''],
@@ -650,17 +661,5 @@ const start = Date.now()
 // //  9500
 // //  9400
 // console.log("time:", Date.now() - start)
-console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
-// let conn = { tmp: 0, list: [1, 2, 3, 4], count: 4 }
-// const x = 0
-// console.log("+", conn.tmp, ...conn.list, `x:${x}`)
-// conn = replace_conn(conn, conn.list[x], conn.list[x + 1])
-// conn = replace_conn(conn, conn.tmp, conn.list[x + 1])
-// conn.list[x + 1] = ++conn.count
-// console.log("+", conn.tmp, ...conn.list, `x:${x}`)
-// if (x == 3 - 1) {
-// 	conn = replace_conn(conn, conn.tmp, conn.list[0])
-// 	conn = replace_conn(conn, conn.list[0], ++conn.count)
-// }
-// console.log("+", conn.tmp, ...conn.list)
+// console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
 /* --------------------------------------------------------------------------------------------- */
