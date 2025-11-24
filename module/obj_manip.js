@@ -108,7 +108,16 @@ function replace(base, from, to) {
 	})
 	return result
 }
+function cut(base, startX, startY, height, width) {
+	let result = create(height, width, 0)
+	for (let h = 0; h < height; h++) {
+		for (let w = 0; w < width; w++) {
+			result[h][w] = base[startY + h][startX + w]
+		}
+	}
+	return result
+}
 
-export const array_2d = { overwrite, create, replace }
+export const array_2d = { overwrite, create, replace, cut }
 export default { get, modify, remove, set, array_2d }
 
