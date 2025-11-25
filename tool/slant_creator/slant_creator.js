@@ -1,7 +1,7 @@
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
 import dialog from "/module/dialog.js"
-import obj_manip from "/module/obj_manip.js"
+import { array_2d } from "/module/obj_manip.js"
 /* - const ------------------------------------------------------------------------------------- */
 let settings_display = "none"
 let popup = false
@@ -13,7 +13,7 @@ let auto_fill_ans = []
 let auto_fill_count = 0
 let if_shift = false
 // pan and zoom
-let scale = 2
+let scale = 1
 let originX = 0
 let originY = 0
 let startX, startY
@@ -216,8 +216,8 @@ function create_new_data() {
 	now_data = {
 		size: { x: width.value * 1, y: height.value * 1 }, box: [], maru: []
 	}
-	now_data.box = obj_manip.array_2d.create(now_data.size.x, now_data.size.y, 0)
-	now_data.maru = obj_manip.array_2d.create(now_data.size.x + 1, now_data.size.y + 1, "")
+	now_data.box = array_2d.create(now_data.size.x, now_data.size.y, 0)
+	now_data.maru = array_2d.create(now_data.size.x + 1, now_data.size.y + 1, "")
 }
 function create_box() {
 	const big_box = document.getElementById("big-box")
@@ -394,51 +394,26 @@ function check_link_box(x, y, size, box_data) {
 	return link_box
 }
 function all_check_box() {
-	loop_checked = obj_manip.array_2d.create(now_data.size.x, now_data.size.y, 0)
+	loop_checked = array_2d.create(now_data.size.x, now_data.size.y, 0)
 	for (let x = 0; x < now_data.size.x; x++) {
 		for (let y = 0; y < now_data.size.y; y++) {
 			document.getElementById(`box_${x},${y}`).classList.remove("red")
 		}
 	}
-	const loop = all_check_box_data(now_data.size, now_data.box)
 	for (let x = 0; x < now_data.size.x; x++) {
 		for (let y = 0; y < now_data.size.y; y++) {
-			if (loop.loop.includes(loop.map[x][y])) {
-				document.getElementById(`box_${x},${y}`).classList.add("red")
+			if (loop_checked[x][y] == 0) {
+				if (check_box_data(x, y, now_data.size, now_data.box)) {
+					loop_red_box()
+				}
 			}
 		}
 	}
-}
-function all_check_box_data(size, box_data) {
-	let result = { map: obj_manip.array_2d.create(size.x, size.y, -1), loop: [] }
-	let conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 }
-	for (let x = 0; x < size.x; x++) {
-		for (let y = 0; y < size.y; y++) {
-			if (box_data[x][y] === -1) {
-				result.map[x][y]=conn.tmp
-				const tmp = conn.tmp
-				conn.tmp = conn.list[x + 1]
-				conn.list[x + 1] = tmp
-			} else if (box_data[x][y] === 0) {
-				conn.tmp = conn.list[x + 1]
-				conn.list[x + 1] = ++conn.count
-			} else if (box_data[x][y] === 1) {
-				conn = replace_conn(conn, conn.list[x], conn.list[x + 1])
-				conn.tmp = conn.list[x + 1]
-				conn.list[x + 1] = ++conn.count
-			}
-			if (x == size.x - 1) {
-				conn.tmp = conn.list[0]
-				conn.list[0] = ++conn.count
-			}
-		}
-	}
-	return result
 }
 function check_box_data(x, y, size, box_data) {
 	if (box_data[x][y] == 0) { return false }
 	let queue = []
-	root = obj_manip.array_2d.create(size.x + 1, size.y + 1, 0)
+	root = array_2d.create(size.x + 1, size.y + 1, 0)
 	if (box_data[x][y] == 1) {
 		queue.push({ x: x + 1, y: y })
 		root[x + 1][y] = 1
@@ -452,7 +427,6 @@ function check_box_data(x, y, size, box_data) {
 	box_data[x][y] *= -1
 	while (queue.length != 0) {
 		const P = queue[0]
-		// console.log(queue, P)
 		const link_wall = check_link_wall(P.x, P.y, size)
 		const pattern = [
 			{ wall: ["up", "right"], nPx: 1, nPy: -1, Px: 0, Py: -1, slant: 1 },
@@ -480,10 +454,8 @@ function loop_check(n, P, queue) {
 	return false
 }
 function loop_red_box() {
-	// console.log("ループ発見", loop_goal, root)
 	let l_P = loop_goal
 	while (root[l_P.x][l_P.y] != 1) {
-		// console.log("色塗り中", l_P, root[l_P.x][l_P.y])
 		const link_wall = check_link_wall(l_P.x, l_P.y, now_data.size)
 		const pattern = [
 			{ wall: ["up", "right"], nPx: 1, nPy: -1, lPx: 0, lPy: -1 },
@@ -505,7 +477,6 @@ function loop_red_box() {
 	red_box((l_P.x + loop_goal.x) / 2 - 0.5, (l_P.y + loop_goal.y) / 2 - 0.5)
 }
 function red_box(x, y) {
-	// console.log("red_box", x, y)
 	document.getElementById(`box_${x},${y}`).classList.add("red")
 	loop_checked[x][y] = 1
 }
@@ -521,40 +492,72 @@ function auto_fill_box() {
 	const gray_out = document.getElementById("gray-out")
 	const rule = document.getElementById("rule")
 	const start = Date.now()
-	now_data.box = f_auto_fill_data(now_data.size, now_data.maru)
+	now_data.box = auto_fill_data(now_data.size, now_data.maru)
 	console.log(Date.now() - start)
 	create_box()
 	if (gray_out.checked) { all_check_gray() }
 	if (rule.checked) { all_check_maru() }
 }
-function f_auto_fill_data(size, maru_data) {
-	const auto_fill_data = { box: obj_manip.array_2d.create(size.x, size.y, 0), maru: maru_data }
-	auto_fill_ans = obj_manip.array_2d.create(size.x, size.y, 0)
+function auto_fill_data(size, maru_data) {
+	let area = array_2d.create(size.x, size.y, 0)
+	for (let x = 0; x <= size.x; x++) {
+		for (let y = 0; y <= size.y; y++) {
+			if (maru_data[x][y] !== "") {
+				if (x !== 0 && y !== size.y) { area[x - 1][y] = 1 }
+				if (x !== size.x && y !== 0) { area[x][y - 1] = 1 }
+				if (x !== 0 && y !== 0) { area[x - 1][y - 1] = 1 }
+				if (x !== size.x && y !== size.y) { area[x][y] = 1 }
+			}
+		}
+	}
+	let old = ""
+	while (old != JSON.stringify(area)) {
+		old = JSON.stringify(area)
+		for (let x = 0; x < size.x - 1; x++) {
+			for (let y = 0; y < size.y - 1; y++) {
+				if (area[x][y] + area[x + 1][y] + area[x][y + 1] + area[x + 1][y + 1] === 3) {
+					array_2d.overwrite(area, [[1, 1], [1, 1]], x, y)
+				}
+			}
+		}
+	}
+	let result = array_2d.create(size.x, size.y, 0)
+	while (true) {
+		let clear_frag = false
+		let minX, minY
+		for (let x = 0; x < size.x; x++) {
+			for (let y = 0; y < size.y; y++) {
+				if (area[x][y] === 1) {
+					clear_frag = true
+					minX = x
+					minY = y
+					break
+				}
+			}
+			if (clear_frag) { break }
+		}
+		if (!clear_frag) { break }
+		let maxX = minX, maxY = minY
+		while (maxX < size.x && area[maxX][maxY] === 1) { maxX++ }
+		maxX--
+		while (maxY < size.y && area[maxX][maxY] === 1) { maxY++ }
+		maxY--
+		array_2d.overwrite(
+			result,
+			auto_fill_block_data(
+				{ x: maxX - minX + 1, y: maxY - minY + 1 },
+				array_2d.cut(maru_data, minX, minY, maxX - minX + 2, maxY - minY + 2)
+			),
+			minX, minY
+		)
+		array_2d.overwrite(area, array_2d.create(maxX - minX + 1, maxY - minY + 1, 0), minX, minY)
+	}
+	return result
+}
+function auto_fill_block_data(size, maru_data) {
+	auto_fill_ans = array_2d.create(size.x, size.y, 0)
 	auto_fill_count = 0
-	// let i = 0
-	// while (i < 2) {
-	// 	i++
-	// 	let minX, maxX, minY, maxY, no_break = true
-	// 	for (let x = 0; x <= size.x; x++) {
-	// 		for (let y = 0; y <= size.y; y++) {
-	// 			if (auto_fill_data.maru[x][y] !== "") {
-	// 				no_break = false;
-	// 				[minX, maxX, minY, maxY] = [x, x, y, y]
-	// 			}
-	// 		}
-	// 		if (!no_break) { break }
-	// 	}
-	// 	if (no_break) { break }
-	// 	let x = maxX, y = minY
-	// 	console.log(minX, maxX, minY, maxY)
-	// 	while (auto_fill_data.maru[x][y] !== "") {
-	// 		console.log(x)
-	// 		x++
-	// 	}
-	// 	console.log(x)
-	// 	// minX = x
-	// }
-	auto_fill_DFS(size, auto_fill_data, 0, { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 })
+	auto_fill_DFS(size, { box: array_2d.create(size.x, size.y, 0), maru: maru_data }, 0, { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 })
 	for (let x = 0; x < size.x; x++) {
 		for (let y = 0; y < size.y; y++) {
 			auto_fill_ans[x][y] = Math.trunc(auto_fill_ans[x][y] / auto_fill_count)
@@ -567,8 +570,6 @@ function auto_fill_DFS(size, _tmp_data, node, _conn) {
 	const x = node % size.x
 	const y = Math.floor(node / size.x)
 	if (size.x * size.y == node) {
-		// console.log("One answer")
-		// console.log(JSON.stringify(tmp_data.box))
 		auto_fill_count++
 		for (let x = 0; x < size.x; x++) {
 			for (let y = 0; y < size.y; y++) {
@@ -615,51 +616,4 @@ function replace_conn(old, from, to) {
 	conn.tmp = conn.tmp == from ? to : conn.tmp
 	return conn
 }
-/* - init -------------------------------------------------------------------------------------- */
-document.getElementById("add-button").click()
-document.getElementById("create-new").click()
-
-// console.log(JSON.stringify(f_auto_fill_data({ x: 3, y: 3 },
-// 	[
-// 		['', '', '', ''],
-// 		['', '', '1', ''],
-// 		['', '1', '', ''],
-// 		['', '', '', '']
-// 	]
-// )))
-// console.log(JSON.stringify(f_auto_fill_data({ x: 3, y: 3 },
-// 	[
-// 		['', '', '', ''],
-// 		['', '1', '', ''],
-// 		['', '', '1', ''],
-// 		['', '', '', '']
-// 	]
-// )))
-// const start = Date.now()
-// f_auto_fill_data({ x: 5, y: 5 },
-// 	[
-// 		['1', '', '', '', '', ''],
-// 		['', '', '', '', '', ''],
-// 		['', '', '', '1', '', '2'],
-// 		['', '', '1', '', '', ''],
-// 		['', '', '', '', '', ''],
-// 		['', '', '', '', '', '1']
-// 	]
-// ).forEach((line) => {
-// 	console.log(JSON.stringify(line))
-// })
-// // [
-// // 	['', '', '', '', '', ''],
-// // 	['', '', '', '', '', ''],
-// // 	['', '', '', '1', '', ''],
-// // 	['', '', '1', '', '', ''],
-// // 	['', '', '', '', '', ''],
-// // 	['', '', '', '', '', '']
-// // ]
-// // 13100
-// //  9100
-// //  9500
-// //  9400
-// console.log("time:", Date.now() - start)
-// console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
 /* --------------------------------------------------------------------------------------------- */
