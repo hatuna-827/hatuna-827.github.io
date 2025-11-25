@@ -1,5 +1,8 @@
 "use strict"
+/* - import ------------------------------------------------------------------------------------ */
 import dialog from "/module/dialog.js"
+import { array_2d } from "/module/obj_manip.js"
+/* - const ------------------------------------------------------------------------------------- */
 let settings_display = "none"
 let popup = false
 let now_data = {}
@@ -9,7 +12,6 @@ let loop_goal = {}
 let auto_fill_ans = []
 let auto_fill_count = 0
 let if_shift = false
-let count = 0
 // pan and zoom
 let scale = 1
 let originX = 0
@@ -18,153 +20,123 @@ let startX, startY
 let isDragging = false
 let zoom_min = 0.2
 let zoom_max = 5
-// element
-{
-	const add_button = document.getElementById("add-button")
-	const setting_button = document.getElementById("setting-button")
-	const list_button = document.getElementById("list-button")
-	const square = document.getElementById("square")
+/* - init -------------------------------------------------------------------------------------- */
+update_create_space()
+/* - add eventListener ------------------------------------------------------------------------- */
+// menu
+document.getElementById("add-button").addEventListener('click', { menu_id: document.getElementById("add"), handleEvent: displaymenu })
+document.getElementById("setting-button").addEventListener('click', { menu_id: document.getElementById("settings"), handleEvent: displaymenu })
+document.getElementById("list-button").addEventListener('click', { menu_id: document.getElementById("list"), handleEvent: displaymenu })
+// add
+document.getElementById("square").addEventListener('click', function () {
+	const width = document.getElementById("width")
 	const height = document.getElementById("height")
-	const create_new = document.getElementById("create-new")
-	const auto_save = document.getElementById("auto-save")
-	const auto_fill = document.getElementById("auto-fill")
-	const gray_out = document.getElementById("gray-out")
-	const rule = document.getElementById("rule")
-	const play_mode = document.getElementById("play-mode")
-	const popup_button = document.getElementById("popup-button")
-	const close_button = document.getElementById("close-button")
+	if (this.checked) {
+		width.disabled = true
+		width.value = height.value
+	} else {
+		width.disabled = false
+	}
+})
+document.getElementById("height").addEventListener('input', function () {
+	const square = document.getElementById("square")
+	const width = document.getElementById("width")
+	if (square.checked) {
+		width.value = this.value
+	}
+})
+document.getElementById("create-new").addEventListener('click', async function () {
+	const height = document.getElementById("height")
+	const width = document.getElementById("width")
+	if (!(height.value % 1 == 0 && height.value > 0 && width.value % 1 == 0 && width.value > 0)) {
+		await dialog({ content: "入力内容に誤りがあります。" })
+		return
+	}
+	document.getElementById("auto-fill").checked = false
+	document.getElementById("gray-out").checked = false
+	document.getElementById("rule").checked = true
+	document.getElementById("play-mode").checked = false
+	create_new_data()
+	hidemenu()
+	create_box()
+	create_maru()
+	document.getElementById("work-space").style.display = "block"
+	f_popup()
+})
+// settings
+document.getElementById("auto-save").addEventListener('click', function () {
+	if (this.checked) {
+		save_button.style.display = "none"
+	} else {
+		save_button.style.display = "block"
+	}
+})
+document.getElementById("auto-fill").addEventListener('click', async function () {
+	if (this.checked) {
+		const checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
+		if (checkSaveFlg == 0) {
+			auto_fill_box()
+		} else {
+			this.checked = false
+		}
+	}
+})
+document.getElementById("gray-out").addEventListener('click', function () {
+	if (this.checked) {
+		all_check_gray()
+	} else {
+		for (let x = 0; x <= now_data.size.x; x++) {
+			for (let y = 0; y <= now_data.size.y; y++) {
+				document.getElementById(`maru_${x},${y}`).classList.remove("gray")
+			}
+		}
+	}
+})
+document.getElementById("rule").addEventListener('click', function () {
+	if (this.checked) {
+		all_check_maru()
+		all_check_box()
+	} else {
+		for (let x = 0; x <= now_data.size.x; x++) {
+			for (let y = 0; y <= now_data.size.y; y++) {
+				document.getElementById(`maru_${x},${y}`).classList.remove("red")
+			}
+		}
+		for (let x = 0; x < now_data.size.x; x++) {
+			for (let y = 0; y < now_data.size.y; y++) {
+				document.getElementById(`box_${x},${y}`).classList.remove("red")
+			}
+		}
+	}
+})
+document.getElementById("play-mode").addEventListener('click', function () {
+	const big_maru = document.getElementById("big-maru")
+	if (this.checked) {
+		big_maru.classList.add("play-mode")
+	} else {
+		big_maru.classList.remove("play-mode")
+	}
+})
+// list
+// workspace
+document.getElementById("popup-button").addEventListener('click', f_popup)
+document.getElementById("close-button").addEventListener('click', function () {
+	const work_space = document.getElementById("work-space")
+	if (popup) { f_popup() }
+	work_space.style.display = "none"
+})
+window.addEventListener("keydown", e => {
+	if (e.shiftKey) {
+		if_shift = true
+	}
+})
+window.addEventListener("keyup", e => {
+	if (!e.shiftKey) {
+		if_shift = false
+	}
+})
+{
 	const create_space = document.getElementById("create-space")
-
-	// const add = document.getElementById("add")
-	// const settings = document.getElementById("settings")
-	// const list = document.getElementById("list")
-	// const width = document.getElementById("width")
-	// const list_null = document.getElementById("list-null")
-	// const work_space = document.getElementById("work-space")
-	// const popup_close = document.getElementById("popup-close")
-	// const popup_open = document.getElementById("popup-open")
-	// const save_button = document.getElementById("save-button")
-	// const big_box = document.getElementById("big-box")
-	// const big_maru = document.getElementById("big-maru")
-	/*--------------------------------------------------------------------------------------------------------------------------------------------*/
-	// menu
-	add_button.addEventListener('click', { menu_id: document.getElementById("add"), handleEvent: displaymenu })
-	setting_button.addEventListener('click', { menu_id: document.getElementById("settings"), handleEvent: displaymenu })
-	list_button.addEventListener('click', { menu_id: document.getElementById("list"), handleEvent: displaymenu })
-	// add
-	square.addEventListener('click', function () {
-		const square = document.getElementById("square")
-		const width = document.getElementById("width")
-		if (square.checked) {
-			width.disabled = true
-			width.value = height.value
-		} else {
-			width.disabled = false
-		}
-	})
-	height.addEventListener('input', function () {
-		const square = document.getElementById("square")
-		const width = document.getElementById("width")
-		if (square.checked) {
-			width.value = height.value
-		}
-	})
-	create_new.addEventListener('click', async function () {
-		const height = document.getElementById("height")
-		const width = document.getElementById("width")
-		const work_space = document.getElementById("work-space")
-		if (!(height.value % 1 == 0 && height.value > 0 && width.value % 1 == 0 && width.value > 0)) {
-			await dialog({ content: "入力内容に誤りがあります。" })
-			return
-		}
-		auto_fill.checked = false
-		gray_out.checked = false
-		rule.checked = true
-		play_mode.checked = false
-		create_new_data()
-		hidemenu()
-		create_box()
-		create_maru()
-		work_space.style.display = "block"
-		f_popup()
-	})
-	// settings
-	auto_save.addEventListener('click', function () {
-		if (auto_save.checked) {
-			save_button.style.display = "none"
-		} else {
-			save_button.style.display = "block"
-		}
-	})
-	auto_fill.addEventListener('click', async function () {
-		if (auto_fill.checked) {
-			if (now_data.size.x * now_data.size.y > 20) {
-				await dialog({ content: "処理量の問題により大きさは20マスまでです。" })
-				auto_fill.checked = false
-			} else {
-				const checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
-				if (checkSaveFlg == 0) {
-					auto_fill_box()
-				} else {
-					auto_fill.checked = false
-				}
-			}
-		}
-	})
-	gray_out.addEventListener('click', function () {
-		if (gray_out.checked) {
-			all_check_gray()
-		} else {
-			for (let x = 0; x <= now_data.size.x; x++) {
-				for (let y = 0; y <= now_data.size.y; y++) {
-					document.getElementById('maru_' + x + ',' + y).classList.remove("gray")
-				}
-			}
-		}
-	})
-	rule.addEventListener('click', function () {
-		if (rule.checked) {
-			all_check_maru()
-			all_check_box()
-		} else {
-			for (let x = 0; x <= now_data.size.x; x++) {
-				for (let y = 0; y <= now_data.size.y; y++) {
-					document.getElementById('maru_' + x + ',' + y).classList.remove("red")
-				}
-			}
-			for (let x = 0; x < now_data.size.x; x++) {
-				for (let y = 0; y < now_data.size.y; y++) {
-					document.getElementById('box_' + x + ',' + y).classList.remove("red")
-				}
-			}
-		}
-	})
-	play_mode.addEventListener('click', function () {
-		const big_maru = document.getElementById("big-maru")
-		if (play_mode.checked) {
-			big_maru.classList.add("play-mode")
-		} else {
-			big_maru.classList.remove("play-mode")
-		}
-	})
-	// list
-	// workspace
-	popup_button.addEventListener('click', f_popup)
-	close_button.addEventListener('click', function () {
-		const work_space = document.getElementById("work-space")
-		if (popup) { f_popup() }
-		work_space.style.display = "none"
-	})
-	window.addEventListener("keydown", e => {
-		if (e.shiftKey) {
-			if_shift = true
-		}
-	})
-	window.addEventListener("keyup", e => {
-		if (!e.shiftKey) {
-			if_shift = false
-		}
-	})
 	create_space.addEventListener('mousedown', (e) => {
 		isDragging = true
 		create_space.style.cursor = 'grabbing'
@@ -193,7 +165,7 @@ let zoom_max = 5
 		e.stopPropagation()
 	})
 }
-/*--------------------------------------------------------------------------------------------------------------------------------------------*/
+/* - function ---------------------------------------------------------------------------------- */
 function update_create_space() {
 	const content = document.getElementById("pan-and-zoom")
 	content.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`
@@ -234,19 +206,13 @@ function f_popup() {
 }
 // create_new
 function create_new_data() {
-	now_data = { size: { x: width.value * 1, y: height.value * 1 }, box: [], maru: [] }
-	for (let x = 0; x < now_data.size.x; x++) {
-		now_data.box.push([])
-		for (let y = 0; y < now_data.size.y; y++) {
-			now_data.box[x].push(0)
-		}
+	const height = document.getElementById("height")
+	const width = document.getElementById("width")
+	now_data = {
+		size: { x: width.value * 1, y: height.value * 1 }, box: [], maru: []
 	}
-	for (let x = 0; x <= now_data.size.x; x++) {
-		now_data.maru.push([])
-		for (let y = 0; y <= now_data.size.y; y++) {
-			now_data.maru[x].push("")
-		}
-	}
+	now_data.box = array_2d.create(now_data.size.x, now_data.size.y, 0)
+	now_data.maru = array_2d.create(now_data.size.x + 1, now_data.size.y + 1, "")
 }
 function create_box() {
 	const big_box = document.getElementById("big-box")
@@ -255,13 +221,13 @@ function create_box() {
 		for (let x = 0; x < now_data.size.x; x++) {
 			const new_box = document.createElement("div")
 			new_box.classList.add("box")
-			new_box.id = 'box_' + x + ',' + y
+			new_box.id = `box_${x},${y}`
 			new_box.addEventListener('click', function () { push_box(x, y) })
 			if (now_data.box[x][y] == 1) { new_box.classList.add("f") }
 			if (now_data.box[x][y] == -1) { new_box.classList.add("b") }
 			big_box.insertAdjacentElement('beforeend', new_box)
 		}
-		big_box.insertAdjacentHTML('beforeend', '<br>')
+		big_box.insertAdjacentElement('beforeend', document.createElement('br'))
 	}
 }
 function create_maru() {
@@ -271,7 +237,7 @@ function create_maru() {
 		for (let x = 0; x <= now_data.size.x; x++) {
 			const new_maru = document.createElement("div")
 			new_maru.classList.add("maru")
-			new_maru.id = 'maru_' + x + ',' + y
+			new_maru.id = `maru_${x},${y}`
 			new_maru.addEventListener('click', function () { push_maru(x, y) })
 			new_maru.textContent = now_data.maru[x][y]
 			if (new_maru.textContent != "") {
@@ -279,18 +245,15 @@ function create_maru() {
 			}
 			big_maru.insertAdjacentElement('beforeend', new_maru)
 		}
-		big_maru.insertAdjacentHTML('beforeend', '<br>')
+		big_maru.insertAdjacentElement('beforeend', document.createElement('br'))
 	}
-	// big_maru.style.height = (31 + 1 / 3) * now_data.size.y + 31 + 1 / 3 + "px"
-	// big_maru.style.width = (31 + 1 / 3) * now_data.size.x + 31 + 1 / 3 + "px"
-	// big_maru.style.marginTop = (-31 - 1 / 3) * now_data.size.y - 1031 - 1 / 3 + "px"
 }
 function push_box(x, y) {
 	const auto_fill = document.getElementById("auto-fill")
 	const gray_out = document.getElementById("gray-out")
 	const rule = document.getElementById("rule")
 	if (auto_fill.checked) { return }
-	const targetbox = document.getElementById('box_' + x + ',' + y)
+	const targetbox = document.getElementById(`box_${x},${y}`)
 	const c_list = targetbox.classList
 	if (now_data.box[x][y] == -1) {
 		c_list.remove("b")
@@ -327,9 +290,8 @@ function push_maru(x, y) {
 	const auto_fill = document.getElementById("auto-fill")
 	const gray_out = document.getElementById("gray-out")
 	const rule = document.getElementById("rule")
-	const play_mode = document.getElementById("play-mode")
-	if (play_mode.checked) { return }
-	const targetmaru = document.getElementById('maru_' + x + ',' + y)
+	if (document.getElementById("play-mode").checked) { return }
+	const targetmaru = document.getElementById(`maru_${x},${y}`)
 	targetmaru.classList.add("disp")
 	let next_num
 	if (now_data.maru[x][y] === "") {
@@ -356,7 +318,7 @@ function all_check_gray() {
 	}
 }
 function check_gray(x, y) {
-	const targetmaru = document.getElementById('maru_' + x + ',' + y)
+	const targetmaru = document.getElementById(`maru_${x},${y}`)
 	targetmaru.classList.remove("gray")
 	if (targetmaru.innerText == "") { return }
 	const link_box = check_link_box(x, y, now_data.size, now_data.box)
@@ -367,10 +329,7 @@ function check_gray(x, y) {
 	if (link_wall.up && link_wall.right && link_wall.down && link_wall.left) {
 		// 壁0
 		if (now_data.maru[x][y] == 4 - link_box.false) { targetmaru.classList.add("gray") }
-	} else if (link_wall.up && link_wall.right && link_wall.down ||
-		link_wall.up && link_wall.right && link_wall.left ||
-		link_wall.up && link_wall.down && link_wall.left ||
-		link_wall.right && link_wall.down && link_wall.left) {
+	} else if (link_wall.up + link_wall.right + link_wall.down + link_wall.left == 3) {
 		// 壁1
 		if (now_data.maru[x][y] == 2 - link_box.false) { targetmaru.classList.add("gray") }
 	} else {
@@ -386,7 +345,7 @@ function all_check_maru() {
 	}
 }
 function check_maru(x, y) {
-	const targetmaru = document.getElementById('maru_' + x + ',' + y)
+	const targetmaru = document.getElementById(`maru_${x},${y}`)
 	targetmaru.classList.remove("red")
 	if (check_maru_data(x, y, now_data.size, now_data.box, now_data.maru)) { targetmaru.classList.add("red") }
 }
@@ -401,10 +360,7 @@ function check_maru_data(x, y, size, box_data, maru_data) {
 		// 壁0
 		if (maru_data[x][y] > 4 - link_box.false) { return true }
 		if (maru_data[x][y] == 0) { return true }
-	} else if (link_wall.up && link_wall.right && link_wall.down ||
-		link_wall.up && link_wall.right && link_wall.left ||
-		link_wall.up && link_wall.down && link_wall.left ||
-		link_wall.right && link_wall.down && link_wall.left) {
+	} else if (link_wall.up + link_wall.right + link_wall.down + link_wall.left == 3) {
 		// 壁1
 		if (maru_data[x][y] > 2 - link_box.false) { return true }
 		if (maru_data[x][y] > 2) { return true }
@@ -418,35 +374,25 @@ function check_maru_data(x, y, size, box_data, maru_data) {
 function check_link_box(x, y, size, box_data) {
 	const link_box = { true: 0, false: 0 }
 	const link_wall = check_link_wall(x, y, size)
-	if (link_wall.right && link_wall.down) {
-		if (box_data[x][y] == -1) { link_box.true++ }
-		if (box_data[x][y] == 1) { link_box.false++ }
-	}
-	if (link_wall.up && link_wall.right) {
-		if (box_data[x][y - 1] == 1) { link_box.true++ }
-		if (box_data[x][y - 1] == -1) { link_box.false++ }
-	}
-	if (link_wall.down && link_wall.left) {
-		if (box_data[x - 1][y] == 1) { link_box.true++ }
-		if (box_data[x - 1][y] == -1) { link_box.false++ }
-	}
-	if (link_wall.up && link_wall.left) {
-		if (box_data[x - 1][y - 1] == -1) { link_box.true++ }
-		if (box_data[x - 1][y - 1] == 1) { link_box.false++ }
-	}
+	const pattern = [
+		{ wall: ["down", "right"], dx: 0, dy: 0, slant: -1 },
+		{ wall: ["up", "right"], dx: 0, dy: -1, slant: 1 },
+		{ wall: ["down", "left"], dx: -1, dy: 0, slant: 1 },
+		{ wall: ["up", "left"], dx: -1, dy: -1, slant: -1 },
+	]
+	pattern.forEach(({ wall, dx, dy, slant }) => {
+		if (link_wall[wall[0]] && link_wall[wall[1]]) {
+			if (box_data[x + dx][y + dy] == slant) { link_box.true++ }
+			if (box_data[x + dx][y + dy] == slant * -1) { link_box.false++ }
+		}
+	})
 	return link_box
 }
 function all_check_box() {
-	loop_checked = []
-	for (let x = 0; x < now_data.size.x; x++) {
-		loop_checked.push([])
-		for (let y = 0; y < now_data.size.y; y++) {
-			loop_checked[x].push(0)
-		}
-	}
+	loop_checked = array_2d.create(now_data.size.x, now_data.size.y, 0)
 	for (let x = 0; x < now_data.size.x; x++) {
 		for (let y = 0; y < now_data.size.y; y++) {
-			document.getElementById('box_' + x + ',' + y).classList.remove("red")
+			document.getElementById(`box_${x},${y}`).classList.remove("red")
 		}
 	}
 	for (let x = 0; x < now_data.size.x; x++) {
@@ -462,13 +408,7 @@ function all_check_box() {
 function check_box_data(x, y, size, box_data) {
 	if (box_data[x][y] == 0) { return false }
 	let queue = []
-	root = []
-	for (let x = 0; x <= size.x; x++) {
-		root.push([])
-		for (let y = 0; y <= size.y; y++) {
-			root[x].push(0)
-		}
-	}
+	root = array_2d.create(size.x + 1, size.y + 1, 0)
 	if (box_data[x][y] == 1) {
 		queue.push({ x: x + 1, y: y })
 		root[x + 1][y] = 1
@@ -482,34 +422,19 @@ function check_box_data(x, y, size, box_data) {
 	box_data[x][y] *= -1
 	while (queue.length != 0) {
 		const P = queue[0]
-		// console.log(queue, P)
 		const link_wall = check_link_wall(P.x, P.y, size)
-		if (link_wall.right && link_wall.down) {
-			// 右下
-			const n = { x: P.x + 1, y: P.y + 1 }
-			if (box_data[P.x][P.y] == -1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
-			}
-		}
-		if (link_wall.up && link_wall.right) {
-			// 右上
-			const n = { x: P.x + 1, y: P.y - 1 }
-			if (box_data[P.x][P.y - 1] == 1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
-			}
-		}
-		if (link_wall.down && link_wall.left) {
-			// 左下
-			const n = { x: P.x - 1, y: P.y + 1 }
-			if (box_data[P.x - 1][P.y] == 1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
-			}
-		}
-		if (link_wall.up && link_wall.left) {
-			// 左上
-			const n = { x: P.x - 1, y: P.y - 1 }
-			if (box_data[P.x - 1][P.y - 1] == -1 && root[n.x][n.y] == 0) {
-				if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
+		const pattern = [
+			{ wall: ["up", "right"], nPx: 1, nPy: -1, Px: 0, Py: -1, slant: 1 },
+			{ wall: ["up", "left"], nPx: -1, nPy: -1, Px: -1, Py: -1, slant: -1 },
+			{ wall: ["down", "right"], nPx: 1, nPy: 1, Px: 0, Py: 0, slant: -1 },
+			{ wall: ["down", "left"], nPx: -1, nPy: 1, Px: -1, Py: 0, slant: 1 }
+		]
+		for (const { wall, nPx, nPy, Px, Py, slant } of pattern) {
+			if (link_wall[wall[0]] && link_wall[wall[1]]) {
+				const n = { x: P.x + nPx, y: P.y + nPy }
+				if (box_data[P.x + Px][P.y + Py] == slant && root[n.x][n.y] == 0) {
+					if (loop_check(n, P, queue)) { box_data[x][y] *= -1; return true }
+				}
 			}
 		}
 		queue.shift()
@@ -524,59 +449,33 @@ function loop_check(n, P, queue) {
 	return false
 }
 function loop_red_box() {
-	// console.log("ループ発見", loop_goal, root)
 	let l_P = loop_goal
-	let only
 	while (root[l_P.x][l_P.y] != 1) {
-		// console.log("色塗り中", l_P, root[l_P.x][l_P.y])
 		const link_wall = check_link_wall(l_P.x, l_P.y, now_data.size)
-		only = true
-		if (link_wall.right && link_wall.down && only) {
-			// console.log("右下")
-			const n_P = { x: l_P.x + 1, y: l_P.y + 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x, l_P.y)
-				only = false
-				l_P = n_P
-			}
-		}
-		if (link_wall.up && link_wall.right && only) {
-			// console.log("右上")
-			const n_P = { x: l_P.x + 1, y: l_P.y - 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x, l_P.y - 1)
-				only = false
-				l_P = n_P
-			}
-		}
-		if (link_wall.down && link_wall.left && only) {
-			// console.log("左下")
-			const n_P = { x: l_P.x - 1, y: l_P.y + 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x - 1, l_P.y)
-				only = false
-				l_P = n_P
-			}
-		}
-		if (link_wall.up && link_wall.left && only) {
-			// console.log("左上")
-			const n_P = { x: l_P.x - 1, y: l_P.y - 1 }
-			if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
-				red_box(l_P.x - 1, l_P.y - 1)
-				only = false
-				l_P = n_P
+		const pattern = [
+			{ wall: ["up", "right"], nPx: 1, nPy: -1, lPx: 0, lPy: -1 },
+			{ wall: ["up", "left"], nPx: -1, nPy: -1, lPx: -1, lPy: -1 },
+			{ wall: ["down", "right"], nPx: 1, nPy: 1, lPx: 0, lPy: 0 },
+			{ wall: ["down", "left"], nPx: -1, nPy: 1, lPx: -1, lPy: 0 }
+		]
+		for (const { wall, nPx, nPy, lPx, lPy } of pattern) {
+			if (link_wall[wall[0]] && link_wall[wall[1]]) {
+				const n_P = { x: l_P.x + nPx, y: l_P.y + nPy }
+				if (root[l_P.x][l_P.y] - root[n_P.x][n_P.y] == 1) {
+					red_box(l_P.x + lPx, l_P.y + lPy)
+					l_P = n_P
+					break
+				}
 			}
 		}
 	}
 	red_box((l_P.x + loop_goal.x) / 2 - 0.5, (l_P.y + loop_goal.y) / 2 - 0.5)
 }
 function red_box(x, y) {
-	// console.log("red_box", x, y)
-	document.getElementById('box_' + x + ',' + y).classList.add("red")
+	document.getElementById(`box_${x},${y}`).classList.add("red")
 	loop_checked[x][y] = 1
 }
 function check_link_wall(x, y, size) {
-	// (x,y)の丸について↑→↓←の順で壁がなければTrue
 	return {
 		up: y != 0,
 		right: x != size.x,
@@ -588,29 +487,72 @@ function auto_fill_box() {
 	const gray_out = document.getElementById("gray-out")
 	const rule = document.getElementById("rule")
 	const start = Date.now()
-	now_data.box = f_auto_fill_data(now_data.size, now_data.maru)
+	now_data.box = auto_fill_data(now_data.size, now_data.maru)
 	console.log(Date.now() - start)
 	create_box()
 	if (gray_out.checked) { all_check_gray() }
 	if (rule.checked) { all_check_maru() }
 }
-function f_auto_fill_data(size, maru_data) {
-	const auto_fill_data = { box: [], maru: [] }
-	auto_fill_ans = []
-	auto_fill_count = 0
-	for (let x = 0; x < size.x; x++) {
-		auto_fill_data.box.push([])
-		auto_fill_ans.push([])
-		for (let y = 0; y < size.y; y++) {
-			auto_fill_data.box[x].push(0)
-			auto_fill_ans[x].push(0)
+function auto_fill_data(size, maru_data) {
+	let area = array_2d.create(size.x, size.y, 0)
+	for (let x = 0; x <= size.x; x++) {
+		for (let y = 0; y <= size.y; y++) {
+			if (maru_data[x][y] !== "") {
+				if (x !== 0 && y !== size.y) { area[x - 1][y] = 1 }
+				if (x !== size.x && y !== 0) { area[x][y - 1] = 1 }
+				if (x !== 0 && y !== 0) { area[x - 1][y - 1] = 1 }
+				if (x !== size.x && y !== size.y) { area[x][y] = 1 }
+			}
 		}
 	}
-	auto_fill_data.maru = maru_data
-	// let conn = { list: Array.from({ length: size.x + 1 }, () => crypto.randomUUID()), tmp: crypto.randomUUID() }
-	const conn = { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0 }
-	count = size.x
-	auto_fill_DFS(size, auto_fill_data, 0, conn)
+	let old = ""
+	while (old != JSON.stringify(area)) {
+		old = JSON.stringify(area)
+		for (let x = 0; x < size.x - 1; x++) {
+			for (let y = 0; y < size.y - 1; y++) {
+				if (area[x][y] + area[x + 1][y] + area[x][y + 1] + area[x + 1][y + 1] === 3) {
+					array_2d.overwrite(area, [[1, 1], [1, 1]], x, y)
+				}
+			}
+		}
+	}
+	let result = array_2d.create(size.x, size.y, 0)
+	while (true) {
+		let clear_frag = false
+		let minX, minY
+		for (let x = 0; x < size.x; x++) {
+			for (let y = 0; y < size.y; y++) {
+				if (area[x][y] === 1) {
+					clear_frag = true
+					minX = x
+					minY = y
+					break
+				}
+			}
+			if (clear_frag) { break }
+		}
+		if (!clear_frag) { break }
+		let maxX = minX, maxY = minY
+		while (maxX < size.x && area[maxX][maxY] === 1) { maxX++ }
+		maxX--
+		while (maxY < size.y && area[maxX][maxY] === 1) { maxY++ }
+		maxY--
+		array_2d.overwrite(
+			result,
+			auto_fill_block_data(
+				{ x: maxX - minX + 1, y: maxY - minY + 1 },
+				array_2d.cut(maru_data, minX, minY, maxX - minX + 2, maxY - minY + 2)
+			),
+			minX, minY
+		)
+		array_2d.overwrite(area, array_2d.create(maxX - minX + 1, maxY - minY + 1, 0), minX, minY)
+	}
+	return result
+}
+function auto_fill_block_data(size, maru_data) {
+	auto_fill_ans = array_2d.create(size.x, size.y, 0)
+	auto_fill_count = 0
+	auto_fill_DFS(size, { box: array_2d.create(size.x, size.y, 0), maru: maru_data }, 0, { list: Array(size.x + 1).fill().map((v, i) => ++i), tmp: 0, count: size.x + 1 })
 	for (let x = 0; x < size.x; x++) {
 		for (let y = 0; y < size.y; y++) {
 			auto_fill_ans[x][y] = Math.trunc(auto_fill_ans[x][y] / auto_fill_count)
@@ -618,13 +560,11 @@ function f_auto_fill_data(size, maru_data) {
 	}
 	return auto_fill_ans
 }
-function auto_fill_DFS(size, tmp_data, node, conn) {
-	// console.log("---------", conn.tmp, ...conn.list)
-	let connect = { ...conn }
+function auto_fill_DFS(size, _tmp_data, node, _conn) {
+	const tmp_data = JSON.parse(JSON.stringify(_tmp_data))
 	const x = node % size.x
 	const y = Math.floor(node / size.x)
 	if (size.x * size.y == node) {
-		// console.log("One answer")
 		auto_fill_count++
 		for (let x = 0; x < size.x; x++) {
 			for (let y = 0; y < size.y; y++) {
@@ -634,50 +574,41 @@ function auto_fill_DFS(size, tmp_data, node, conn) {
 		return
 	}
 	tmp_data.box[x][y] = -1
-	// const temp1 = connect.tmp
-	// connect.tmp = connect.list[x + 1]
-	// connect.list[x + 1] = temp1
-	// if (x == size.x - 1) {
-	// 	console.log("return")
-	// 	connect.tmp = crypto.randomUUID()
-	// 	connect.tmp = ++count
-	// }
-	// console.log(node, -1, ...tmp_data.box)
 	if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
-		auto_fill_DFS(size, tmp_data, node + 1, connect)
+		let conn = JSON.parse(JSON.stringify(_conn))
+		const tmp1 = conn.tmp
+		conn.tmp = conn.list[x + 1]
+		conn.list[x + 1] = tmp1
+		if (x == size.x - 1) {
+			conn.tmp = conn.list[0]
+			conn.list[0] = ++conn.count
+		}
+		auto_fill_DFS(size, tmp_data, node + 1, conn)
 	}
 	tmp_data.box[x][y] = 1
-	// connect = { ...conn }
-	// connect.list[x] = connect.list[x + 2]
-	// connect.tmp = connect.list[x + 2]
-	// connect.list[2] = crypto.randomUUID()
-	// connect.list[2] = ++count
-	// if (x == size.x - 1) {
-	// 	console.log("return")
-	// 	connect.tmp = crypto.randomUUID()
-	// 	connect.tmp = ++count
-	// }
-	// console.log(node, 1)
 	if (!(check_maru_data(x, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x + 1, y, size, tmp_data.box, tmp_data.maru) ||
 		check_maru_data(x, y + 1, size, tmp_data.box, tmp_data.maru) ||
-		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru))) {
-		if (x != 0 && tmp_data.box[x - 1][y] == -1 && !check_box_data(x, y, size, tmp_data.box)) {
-			auto_fill_DFS(size, tmp_data, node + 1, connect)
-		} else {
-			auto_fill_DFS(size, tmp_data, node + 1, connect)
+		check_maru_data(x + 1, y + 1, size, tmp_data.box, tmp_data.maru) ||
+		_conn.list[x] == _conn.list[x + 1])) {
+		let conn = JSON.parse(JSON.stringify(_conn))
+		conn = replace_conn(conn, conn.list[x], conn.list[x + 1])
+		conn.tmp = conn.list[x + 1]
+		conn.list[x + 1] = ++conn.count
+		if (x == size.x - 1) {
+			conn.tmp = conn.list[0]
+			conn.list[0] = ++conn.count
 		}
+		auto_fill_DFS(size, tmp_data, node + 1, conn)
 	}
-	tmp_data.box[x][y] = 0
 }
-function replace_list(old, from, to) {
-	const list = [...old]
-	list.forEach((x, i) => list[i] = x == from ? to : x)
-	return list
+function replace_conn(old, from, to) {
+	const conn = JSON.parse(JSON.stringify(old))
+	conn.list.forEach((x, i) => conn.list[i] = x == from ? to : x)
+	conn.tmp = conn.tmp == from ? to : conn.tmp
+	return conn
 }
-/*--------------------------------------------------------------------------------------------------------------------------------------------*/
-// add_button.click()
-// create_new.click()
+/* --------------------------------------------------------------------------------------------- */

@@ -12,11 +12,11 @@ input {
 #main {
 	margin: 50px;
 	text-align: center;
+}
 
-	svg {
-		color: var(--white-color);
-		stroke-width: 1px;
-	}
+#main svg {
+	color: var(--white-color);
+	stroke-width: 1px;
 }
 
 .menu-button {
@@ -47,65 +47,65 @@ input {
 	font-size: 25px;
 	line-height: 40px;
 	text-align: left;
+}
 
-	input[type=checkbox] {
-		margin: 0px 10px;
-		box-sizing: border-box;
-		border: 1px solid var(--black-color);
-		border-radius: 3px;
-		height: 30px;
-		width: 30px;
-		background-color: var(--white-color);
-		display: inline-block;
-		vertical-align: -7px;
-		position: relative;
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
-	}
+.menu input[type=checkbox] {
+	margin: 0px 10px;
+	box-sizing: border-box;
+	border: 1px solid var(--black-color);
+	border-radius: 3px;
+	height: 30px;
+	width: 30px;
+	background-color: var(--white-color);
+	display: inline-block;
+	vertical-align: -7px;
+	position: relative;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
 
-	input[type=checkbox]:checked:before {
-		position: absolute;
-		top: 2px;
-		left: 9.5px;
-		transform: rotate(50deg);
-		width: 8px;
-		height: 16px;
-		border-right: 2px solid var(--black-color);
-		border-bottom: 2px solid var(--black-color);
-		content: '';
-	}
+.menu input[type=checkbox]:checked:before {
+	position: absolute;
+	top: 2px;
+	left: 9.5px;
+	transform: rotate(50deg);
+	width: 8px;
+	height: 16px;
+	border-right: 2px solid var(--black-color);
+	border-bottom: 2px solid var(--black-color);
+	content: '';
+}
 
-	input[type=number] {
-		margin: 0px 10px;
-		height: 30px;
-		width: 100px;
-		border: 1px solid var(--black-color);
-		background-color: var(--white-color);
-		border-radius: 3px;
-		color: var(--black-color);
-		font-size: 20px;
-		text-align: center;
-		vertical-align: 1px;
-	}
+.menu input[type=number] {
+	margin: 0px 10px;
+	height: 30px;
+	width: 100px;
+	border: 1px solid var(--black-color);
+	background-color: var(--white-color);
+	border-radius: 3px;
+	color: var(--black-color);
+	font-size: 20px;
+	text-align: center;
+	vertical-align: 1px;
+}
 
-	input[type=number]:disabled {
-		border: 1px solid var(--grey-d-color);
-	}
+.menu input[type=number]:disabled {
+	border: 1px solid var(--grey-d-color);
+}
 
-	input[type=number]:invalid {
-		border: 1px solid var(--red-color);
-	}
+.menu input[type=number]:invalid {
+	border: 1px solid var(--red-color);
+}
 
-	button {
-		margin: 50px 250px 10px 250px;
-		height: 50px;
-		width: 200px;
-		background-color: var(--main-color);
-		color: var(--white-color);
-		border: none;
-		border-radius: 10px;
-	}
+.menu button {
+	margin: 30px 250px 0px;
+	height: 50px;
+	width: 200px;
+	background-color: var(--main-color);
+	color: var(--white-color);
+	border: none;
+	border-radius: 10px;
 }
 
 #list-null {
@@ -157,103 +157,98 @@ input {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
 
-	#pan-and-zoom {
-		position: relative;
-		cursor: default;
-		padding: 15px;
-		height: fit-content;
-		width: fit-content;
-	}
+#create-space #pan-and-zoom {
+	position: relative;
+	cursor: default;
+	padding: 15px;
+}
 
-	#big-box {
-		border: .5px solid var(--black-color);
-		height: fit-content;
-		width: fit-content;
-	}
+#create-space #big-box {
+	border: .5px solid var(--black-color);
+	white-space: nowrap;
+}
 
-	.box {
-		height: 30px;
-		width: 30px;
-		border: .5px solid var(--black-color);
-		display: inline-block;
-		position: relative;
-	}
+#create-space .box {
+	height: 30px;
+	width: 30px;
+	border: .5px solid var(--black-color);
+	display: inline-block;
+	position: relative;
+}
 
-	.box.b::before,
-	.box.f::before {
-		position: absolute;
-		top: 0;
-		transform-origin: top left;
-		width: 1px;
-		height: 43px;
-		background-color: var(--black-color);
-		content: '';
-	}
+#create-space .box.b::before,
+#create-space .box.f::before {
+	position: absolute;
+	top: 0;
+	transform-origin: top left;
+	width: 1px;
+	height: 43px;
+	background-color: var(--black-color);
+	content: '';
+}
 
-	.box.b::before {
-		left: 0;
-		transform: rotate(-45deg) translateX(-.5px);
-	}
+#create-space .box.b::before {
+	left: 0;
+	transform: rotate(-45deg) translateX(-.5px);
+}
 
-	.box.f::before {
-		right: 0;
-		transform: rotate(45deg) translateY(-1px) translateX(.5px);
-	}
+#create-space .box.f::before {
+	right: 0;
+	transform: rotate(45deg) translateY(-1px) translateX(.5px);
+}
 
-	.box.green::before {
-		background-color: var(--main-dark-color);
-	}
+#create-space .box.green::before {
+	background-color: var(--main-dark-color);
+}
 
-	.box.red::before {
-		background-color: var(--red-color);
-	}
+#create-space .box.red::before {
+	background-color: var(--red-color);
+}
 
-	#big-maru {
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		visibility: hidden;
-	}
+#create-space #big-maru {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	visibility: hidden;
+}
 
-	#big-maru:not(.play-mode) {
-		.maru:hover {
-			opacity: 0.3;
-		}
+#create-space #big-maru:not(.play-mode) .maru:hover {
+	opacity: 0.3;
+}
 
-		.maru.disp {
-			opacity: 0.9999999;
-		}
-	}
+#create-space #big-maru:not(.play-mode) .maru.disp {
+	opacity: 0.9999999;
+}
 
-	.maru {
-		display: inline-block;
-		visibility: visible;
-		opacity: 0;
-		margin: 5px;
-		height: 20px;
-		width: 20px;
-		border: .5px solid var(--black-color);
-		border-radius: 20px;
-		background-color: var(--white-color);
-		color: var(--black-color);
-		font-size: 17px;
-		line-height: 20px;
-		vertical-align: middle;
-	}
+#create-space .maru {
+	display: inline-block;
+	visibility: visible;
+	opacity: 0;
+	margin: 5px;
+	height: 20px;
+	width: 20px;
+	border: .5px solid var(--black-color);
+	border-radius: 20px;
+	background-color: var(--white-color);
+	color: var(--black-color);
+	font-size: 17px;
+	line-height: 20px;
+	vertical-align: middle;
+}
 
-	.maru.disp {
-		opacity: 0.9999999;
-	}
+#create-space .maru.disp {
+	opacity: 0.9999999;
+}
 
-	.maru.gray {
-		background-color: var(--grey-c-color);
-	}
+#create-space .maru.gray {
+	background-color: var(--grey-c-color);
+}
 
-	.maru.red {
-		color: var(--red-color);
-		background-color: var(--pastel-pink-color);
-	}
+#create-space .maru.red {
+	color: var(--red-color);
+	background-color: var(--pastel-pink-color);
 }
 
 #save-button,

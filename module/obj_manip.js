@@ -82,9 +82,9 @@ function next_check(next) {
 function overwrite(base, content, baseX, baseY) {
 	if (baseX === undefined) { baseX = 0 }
 	if (baseY === undefined) { baseY = 0 }
-	content.forEach((line, y) => {
-		line.forEach((value, x) => {
-			if (value !== null) { base[y + baseY][x + baseX] = value }
+	content.forEach((line, x) => {
+		line.forEach((value, y) => {
+			if (value !== null) { base[x + baseX][y + baseY] = value }
 		})
 	})
 	return base
@@ -108,6 +108,16 @@ function replace(base, from, to) {
 	})
 	return result
 }
+function cut(base, startX, startY, height, width) {
+	let result = create(height, width, 0)
+	for (let h = 0; h < height; h++) {
+		for (let w = 0; w < width; w++) {
+			result[h][w] = base[startX + h][startY + w]
+		}
+	}
+	return result
+}
 
-export const array_2d = { overwrite, create, replace }
+export const array_2d = { overwrite, create, replace, cut }
 export default { get, modify, remove, set, array_2d }
+
