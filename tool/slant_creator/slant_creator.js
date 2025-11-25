@@ -73,16 +73,11 @@ document.getElementById("auto-save").addEventListener('click', function () {
 })
 document.getElementById("auto-fill").addEventListener('click', async function () {
 	if (this.checked) {
-		if (now_data.size.x * now_data.size.y > 900) {
-			await dialog({ content: "処理量の問題により大きさは900マスまでです。" })
-			this.checked = false
+		const checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
+		if (checkSaveFlg == 0) {
+			auto_fill_box()
 		} else {
-			const checkSaveFlg = await dialog({ type: "OC", content: "現在の斜線情報がすべて失われます。よろしいですか？" })
-			if (checkSaveFlg == 0) {
-				auto_fill_box()
-			} else {
-				this.checked = false
-			}
+			this.checked = false
 		}
 	}
 })
