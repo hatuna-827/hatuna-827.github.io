@@ -136,6 +136,15 @@
 			"image": ""
 		},
 		{
+			"url": "/tool/word_book/index.html",
+			"name": "",
+			"title": "デジタル単語帳",
+			"main_title": "単語帳",
+			"sub_title": "デジタル単語帳",
+			"description": "ローカルストレージを使用したデジタル単語帳です。",
+			"image": ""
+		},
+		{
 			"url": "/tool/svg_editor/index.html",
 			"name": "",
 			"title": "",

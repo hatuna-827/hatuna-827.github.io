@@ -70,7 +70,8 @@
 .snackbar>.close::before {
 	transform: rotate(45deg);
 }
-.snackbar>.close::after{
+
+.snackbar>.close::after {
 	transform: rotate(-45deg);
 }
 
