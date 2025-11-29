@@ -8,12 +8,12 @@ function def_struct(name, struct) {
 	structs[name] = struct
 }
 function set(id, struct_name, change_func) {
-	const render_box = document.createElement('div')
 	const pos = document.getElementById(id)
-	if (!render_box) { throw new Error(`|Structure module| No element found with this id (${id})`) }
+	if (!pos) { throw new Error(`|Structure module| No element found with this id (${id})`) }
 	const struct = structs[struct_name]
 	if (struct === undefined) { throw new Error(`|Structure module| No struct found with this struct name (${struct_name})`) }
-	render_box.classList.add("structure")
+	const render_box = document.createElement('div')
+	render_box.className = "structure"
 	if (change_func === undefined) { change_func = function () { } }
 	add_field(render_box, struct, [id, struct_name], change_func)
 	pos.appendChild(render_box)
@@ -21,12 +21,12 @@ function set(id, struct_name, change_func) {
 function generate_field(tag, type, name) {
 	const field = document.createElement(tag)
 	field.id = name
-	field.className = `${type} field`
+	field.className = `structure-${type} structure-field`
 	return field
 }
 function add_title(field, type, name, display_name) {
 	const title = document.createElement('span')
-	title.className = `${type} title`
+	title.className = `structure-${type} structure-title`
 	title.textContent = display_name === undefined ? name : display_name
 	field.appendChild(title)
 }
@@ -65,7 +65,7 @@ function add_input(pos, value, path, change_func) {
 		const placeholder = value.placeholder
 		const input = document.createElement('input')
 		input.id = field_UUID
-		input.className = `${type} input`
+		input.className = `structure-${type} structure-input`
 		input.addEventListener('input', function () {
 			if (this.checkValidity()) {
 				this.classList.remove("invalid")
@@ -95,20 +95,20 @@ function add_input(pos, value, path, change_func) {
 		const field_UUID = crypto.randomUUID()
 		const default_value = value.default
 		const input = document.createElement('div')
-		input.className = "boolean input"
+		input.className = "structure-boolean structure-input"
 		const checkbox = document.createElement('input')
 		checkbox.id = field_UUID
-		checkbox.className = "checkbox"
+		checkbox.className = "structure-checkbox"
 		checkbox.type = "checkbox"
 		if (default_value !== undefined) { input.checked = default_value }
 		const true_btn = document.createElement('div')
-		true_btn.className = "true-btn"
+		true_btn.className = "structure-true-btn"
 		true_btn.addEventListener('click', function () {
 			this.parentElement.querySelector('input').checked = true
 			change_func()
 		})
 		const false_btn = document.createElement('div')
-		false_btn.className = "false-btn"
+		false_btn.className = "structure-false-btn"
 		false_btn.addEventListener('click', function () {
 			this.parentElement.querySelector('input').checked = false
 			change_func()
@@ -121,13 +121,13 @@ function add_input(pos, value, path, change_func) {
 	} else if (type === "toggle") {
 		const default_value = value.default
 		const field = document.createElement('div')
-		field.className = "toggle field"
+		field.className = "structure-toggle structure-field"
 		const input = document.createElement('input')
-		input.className = "toggle checkbox"
+		input.className = "structure-toggle structure-checkbox"
 		input.type = "checkbox"
 		if (default_value !== undefined) { input.checked = default_value }
 		const btn = document.createElement('div')
-		btn.className = "toggle toggle-btn"
+		btn.className = "structure-toggle structure-toggle-btn"
 		btn.addEventListener('click', function () {
 			input.checked = !input.checked
 			if (input.checked) {
@@ -148,20 +148,20 @@ function add_input(pos, value, path, change_func) {
 		const min = value.min
 		const max = value.max
 		const nest = document.createElement('div')
-		nest.className = "list nest"
+		nest.className = "structure-list structure-nest"
 		const btn_data = [
 			{ class: "begin", unshift: true, where: "afterbegin" },
 			{ class: "end", unshift: false, where: "beforeend" },
 		]
 		btn_data.forEach((data) => {
 			data.element = document.createElement('div')
-			data.element.className = `list add-btn add-${data.class}`
+			data.element.className = `structure-list structure-add-btn structure-add-${data.class}`
 			data.element.addEventListener('click', function () {
 				if (nest.childElementCount >= max) { return }
 				const remove_field = document.createElement('div')
-				remove_field.className = `${value.children.type} field`
+				remove_field.className = `structure-${value.children.type} structure-field`
 				const remove_btn = document.createElement('div')
-				remove_btn.className = `${value.children.type} remove-btn title`
+				remove_btn.className = `structure-${value.children.type} structure-remove-btn structure-title`
 				remove_btn.addEventListener('click', function () {
 					if (nest.childElementCount <= min) { return }
 					obj_manip.remove(structs_UUID, [field_UUID, Array.from(nest.children).indexOf(remove_field)])
@@ -183,7 +183,7 @@ function add_input(pos, value, path, change_func) {
 		for (let i = 0; i < min; i++) { btn_data[1].element.click() }
 	} else if (type === "object") {
 		const nest = document.createElement('div')
-		nest.className = "object nest"
+		nest.className = "structure-object structure-nest"
 		pos.appendChild(nest)
 		obj_manip.set(structs_UUID, path, {})
 		add_field(nest, value.children, path, change_func)
@@ -193,14 +193,14 @@ function add_input(pos, value, path, change_func) {
 		if (Array.isArray(options)) { options = Object.fromEntries(options.map(key => [key, {}])) }
 		const option_keys = Object.keys(options)
 		const field = document.createElement('div')
-		field.className = "select field"
+		field.className = "structure-select structure-field"
 		if (option_keys.length === 1) {
 			const input = document.createElement('input')
 			input.id = field_UUID
-			input.className = "select checkbox"
+			input.className = "structure-select structure-checkbox"
 			input.type = "checkbox"
 			const btn = document.createElement('div')
-			btn.className = "select select-btn"
+			btn.className = "structure-select structure-select-btn"
 			btn.addEventListener('click', function () {
 				input.checked = !input.checked
 				if (input.checked) {
@@ -215,11 +215,11 @@ function add_input(pos, value, path, change_func) {
 		} else {
 			const input = document.createElement('select')
 			input.id = field_UUID
-			input.className = "select input"
+			input.className = "structure-select structure-input"
 			option_keys.forEach((name) => {
 				const display_name = options[name].display_name
 				const option = document.createElement('option')
-				option.className = "option"
+				option.className = "structure-option"
 				option.value = name
 				option.textContent = name
 				if (display_name !== undefined) { option.textContent = display_name }
@@ -238,7 +238,7 @@ function add_input(pos, value, path, change_func) {
 	} else if (type === "reference") {
 		const field = document.createElement('div')
 		field.id = value.name
-		field.className = "reference field"
+		field.className = "structure-reference structure-field"
 		pos.appendChild(field)
 		add_input(field, { type: "object", children: structs[value.name] }, path, change_func)
 	} else {

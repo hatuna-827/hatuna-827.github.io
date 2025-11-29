@@ -24,6 +24,7 @@
 	/* any color */
 	--dark-mode-black-color: #ffffff;
 	--dark-mode-white-color: #000000;
+	--dark-mode-light-side-color: #4f4f4f;
 	--dark-mode-red-color: #b20024;
 	--dark-mode-pink-color: #b3000d;
 	--dark-mode-pastel-pink-color: #ff7d79;
@@ -47,6 +48,7 @@
 	/* any color */
 	--light-mode-black-color: #000000;
 	--light-mode-white-color: #ffffff;
+	--light-mode-light-side-color: #ffffff;
 	--light-mode-red-color: #ff0000;
 	--light-mode-pink-color: #ff86c2;
 	--light-mode-pastel-pink-color: #f6bdc0;
@@ -73,6 +75,7 @@
 		/* any color */
 		--black-color: var(--dark-mode-black-color);
 		--white-color: var(--dark-mode-white-color);
+		--light-side-color: var(--dark-mode-light-side-color);
 		--red-color: var(--dark-mode-red-color);
 		--pink-color: var(--dark-mode-pink-color);
 		--pastel-pink-color: var(--dark-mode-pastel-pink-color);
@@ -100,6 +103,7 @@
 		/* any color */
 		--black-color: var(--light-mode-black-color);
 		--white-color: var(--light-mode-white-color);
+		--light-side-color: var(--light-mode-light-side-color);
 		--red-color: var(--light-mode-red-color);
 		--pink-color: var(--light-mode-pink-color);
 		--pastel-pink-color: var(--light-mode-pastel-pink-color);
@@ -126,6 +130,7 @@ body[data-theme="dark"] {
 	/* any color */
 	--black-color: var(--dark-mode-black-color);
 	--white-color: var(--dark-mode-white-color);
+	--light-side-color: var(--dark-mode-light-side-color);
 	--red-color: var(--dark-mode-red-color);
 	--pink-color: var(--dark-mode-pink-color);
 	--pastel-pink-color: var(--dark-mode-pastel-pink-color);
@@ -151,6 +156,7 @@ body[data-theme="light"] {
 	/* any color */
 	--black-color: var(--light-mode-black-color);
 	--white-color: var(--light-mode-white-color);
+	--light-side-color: var(--light-mode-light-side-color);
 	--red-color: var(--light-mode-red-color);
 	--pink-color: var(--light-mode-pink-color);
 	--pastel-pink-color: var(--light-mode-pastel-pink-color);
@@ -167,7 +173,7 @@ body {
 	font-size: 0px;
 	color: var(--black-color);
 	background-color: var(--main-bg-color);
-	scrollbar-color: var(--leaf-green-color) var(--white-color);
+	scrollbar-color: var(--leaf-green-color) #0000;
 }
 
 #homebar {
@@ -218,4 +224,5 @@ button,
 input,
 textarea {
 	font-family: inherit;
+	font-size: inherit;
 }

@@ -16,25 +16,25 @@
 	padding: 7px 13px;
 }
 
-.structure .field {
+.structure .structure-field {
 	display: flex;
 	margin: 6px 0px;
 	align-items: center;
 }
 
-.structure .field.toggle:has(.nest),
-.structure .field.object,
-.structure .field.list,
-.structure .field.select,
-.structure .field.reference {
+.structure .structure-field.structure-toggle:has(.structure-nest),
+.structure .structure-field.structure-object,
+.structure .structure-field.structure-list,
+.structure .structure-field.structure-select,
+.structure .structure-field.structure-reference {
 	display: block;
 }
 
-.structure .field.toggle>.field.toggle {
+.structure .structure-field.structure-toggle>.structure-field.structure-toggle {
 	margin: 0px;
 }
 
-.structure .title {
+.structure .structure-title {
 	display: inline-block;
 	padding: 0px 13px;
 	text-align: center;
@@ -47,15 +47,15 @@
 	vertical-align: top;
 }
 
-.structure .title.reference,
-.structure .title.object,
-.structure .add-btn.add-end {
+.structure .structure-title.structure-reference,
+.structure .structure-title.structure-object,
+.structure .structure-add-btn.structure-add-end {
 	border-radius: var(--structure-border-radius);
 }
 
-.structure .string.input,
-.structure .number.input,
-.structure .select.input {
+.structure .structure-string.structure-input,
+.structure .structure-number.structure-input,
+.structure .structure-select.structure-input {
 	padding: 0px 5px;
 	height: 35px;
 	box-sizing: border-box;
@@ -68,12 +68,12 @@
 	outline: none;
 }
 
-.structure .checkbox {
+.structure .structure-checkbox {
 	display: none;
 }
 
-.structure .true-btn,
-.structure .false-btn {
+.structure .structure-true-btn,
+.structure .structure-false-btn {
 	display: inline-block;
 	padding: 0px 5px;
 	height: 35px;
@@ -88,29 +88,29 @@
 	user-select: none;
 }
 
-.structure .false-btn {
+.structure .structure-false-btn {
 	border-left: none;
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
-.structure .input:has(.checkbox:checked)>.true-btn,
-.structure .input:not(:has(.checkbox:checked))>.false-btn {
+.structure .structure-input:has(.structure-checkbox:checked)>.structure-true-btn,
+.structure .structure-input:not(:has(.structure-checkbox:checked))>.structure-false-btn {
 	color: var(--structure-title-text);
 	background-color: var(--structure-input-true);
 }
 
-.structure .true-btn::before {
+.structure .structure-true-btn::before {
 	content: "True";
 }
 
-.structure .false-btn::before {
+.structure .structure-false-btn::before {
 	content: "Flase";
 }
 
-.structure .toggle-btn,
-.structure .select-btn,
-.structure .remove-btn,
-.structure .add-btn {
+.structure .structure-toggle-btn,
+.structure .structure-select-btn,
+.structure .structure-remove-btn,
+.structure .structure-add-btn {
 	display: inline-block;
 	height: 35px;
 	width: 35px;
@@ -120,9 +120,9 @@
 	user-select: none;
 }
 
-.structure .toggle-btn,
-.structure .select-btn,
-.structure .add-btn {
+.structure .structure-toggle-btn,
+.structure .structure-select-btn,
+.structure .structure-add-btn {
 	line-height: 35px;
 	color: var(--structure-title);
 	background-color: var(--structure-input);
@@ -130,37 +130,37 @@
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
-.structure .field.toggle:not(:has(.checkbox:checked))>.toggle-btn::before,
-.structure .field.select:not(:has(.checkbox:checked))>.select-btn::before,
-.structure .add-btn::before {
+.structure .structure-field.structure-toggle:not(:has(.structure-checkbox:checked))>.structure-toggle-btn::before,
+.structure .structure-field.structure-select:not(:has(.structure-checkbox:checked))>.structure-select-btn::before,
+.structure .structure-add-btn::before {
 	content: "+";
 }
 
-.structure .field.toggle:has(.checkbox:checked)>.toggle-btn::before,
-.structure .field.select:has(.checkbox:checked)>.select-btn::before,
-.structure .remove-btn::before {
+.structure .structure-field.structure-toggle:has(.structure-checkbox:checked)>.structure-toggle-btn::before,
+.structure .structure-field.structure-select:has(.structure-checkbox:checked)>.structure-select-btn::before,
+.structure .structure-remove-btn::before {
 	content: "-";
 }
 
-.structure .field.toggle:has(.checkbox:checked):not(:has(.nest))>.toggle-btn {
+.structure .structure-field.structure-toggle:has(.structure-checkbox:checked):not(:has(.structure-nest))>.structure-toggle-btn {
 	width: 34px;
 	border-radius: 0px;
 	border-right: none;
 }
 
-.structure .list.nest:not(:has(*))+.add-end {
+.structure .structure-list.structure-nest:not(:has(*))+.structure-add-end {
 	display: none;
 }
 
-.structure .option {
+.structure .structure-option {
 	background-color: var(--structure-input);
 }
 
-.structure .nest {
+.structure .structure-nest {
 	padding-left: 25px;
 	border-left: 1px solid var(--structure-nest-border);
 }
 
-.structure .invalid {
+.structure .structure-invalid {
 	border-color: var(--structure-invalid) !important;
 }

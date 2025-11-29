@@ -1,0 +1,134 @@
+:root {
+	--structure-title: var(--main-color);
+	--structure-title-text: var(--white-color);
+	--structure-border: var(--main-color);
+	--structure-input: var(--light-side-color);
+	--structure-input-text: var(--black-color);
+	--structure-input-true: var(--leaf-green-color);
+	--structure-nest-border: var(--grey-5-color);
+	--structure-invalid: var(--red-color);
+	--structure-border-radius: 3px;
+	--structure-font: var(--main-font);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#main {
+	position: relative;
+	width: 800px;
+	margin: 30px auto;
+}
+
+.split {
+	margin: 10px 0px;
+}
+
+.title {
+	margin: 10px 0px 0px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.sub-title {
+	margin: 0px;
+	margin-left: 10px;
+	font-size: 22px;
+	line-height: 38px;
+}
+
+.text {
+	margin: 0px;
+	margin-left: 30px;
+	font-size: 17px;
+	line-height: 30px;
+}
+
+.list {
+	margin: 0px;
+	padding-left: 50px;
+	font-size: 17px;
+	line-height: 30px;
+}
+
+.list .list {
+	padding-left: 20px;
+}
+
+/* input-json */
+#input-json-label {
+	display: block;
+}
+
+#input-json-file {
+	display: none;
+}
+
+#input-json-file-button {
+	display: inline-block;
+	padding: 0px 6px;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+#input-json-file-name {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+#input-json-area {
+	margin: 10px 0px;
+	height: 100px;
+	min-height: 100px;
+	width: 100%;
+	resize: vertical;
+	outline: none;
+}
+
+/* input-format */
+#execute {
+	display: block;
+	text-align: center;
+	margin: 0px 50px;
+	width: 700px;
+	font-size: 15px;
+	line-height: 30px;
+}
+
+/* output */
+.result-empty:empty::before {
+	content: "-";
+}
+
+#output-field {
+	margin: 10px 0px;
+	height: 100px;
+	min-height: 100px;
+	width: 100%;
+	white-space: pre;
+	tab-size: 2;
+	overflow: auto;
+	resize: vertical;
+}
+
+/* log */
+
+/* class */
+.button {
+	background-color: var(--grey-e5-color);
+	border-radius: 3px;
+	border: 1px solid var(--grey-5-color);
+}
+
+.textarea {
+	padding: 3px 5px;
+	color: var(--black-color);
+	font-size: 13px;
+	font-family: var(--code-font);
+	background-color: var(--light-side-color);
+	border-radius: 3px;
+	border: 1px solid var(--grey-a-color);
+}

@@ -136,6 +136,15 @@
 			"image": ""
 		},
 		{
+			"url": "/tool/json_formatter/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "JSONフォーマッタ",
+			"sub_title": "",
+			"description": "jsonファイルをあなたの望む形にフォーマットできます。",
+			"image": ""
+		},
+		{
 			"url": "/tool/word_book/index.html",
 			"name": "",
 			"title": "デジタル単語帳",
