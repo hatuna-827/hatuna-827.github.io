@@ -10,9 +10,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	} catch { }
 })
 window.addEventListener('storage', reflect_setting)
-export default function reflect_setting() {
+export function reflect_setting() {
 	const setting = storage.get("site-setting")
-	if (setting && setting.theme && (setting.theme == "linght" || setting.theme == "dark")) {
+	if (setting && setting.theme && (setting.theme == "light" || setting.theme == "dark")) {
 		document.body.dataset.theme = setting.theme
 	} else {
 		document.body.dataset.theme = "device"
