@@ -103,12 +103,14 @@ function add_input(pos, value, path, change_func) {
 		if (default_value !== undefined) { input.checked = default_value }
 		const true_btn = document.createElement('div')
 		true_btn.className = "structure-true-btn"
+		true_btn.textContent = "True"
 		true_btn.addEventListener('click', function () {
 			this.parentElement.querySelector('input').checked = true
 			change_func()
 		})
 		const false_btn = document.createElement('div')
 		false_btn.className = "structure-false-btn"
+		false_btn.textContent = "false"
 		false_btn.addEventListener('click', function () {
 			this.parentElement.querySelector('input').checked = false
 			change_func()
@@ -121,7 +123,7 @@ function add_input(pos, value, path, change_func) {
 	} else if (type === "toggle") {
 		const default_value = value.default
 		const field = document.createElement('div')
-		field.className = "structure-toggle structure-field"
+		field.className = "structure-toggle structure-input"
 		const input = document.createElement('input')
 		input.className = "structure-toggle structure-checkbox"
 		input.type = "checkbox"

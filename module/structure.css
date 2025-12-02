@@ -9,11 +9,16 @@
 	--structure-invalid: #ff0000;
 	--structure-border-radius: 3px;
 	--structure-font: Arial, Helvetica, sans-serif;
+	--structure-font-size: 18px;
 }
 
 .structure {
-	font-family: var(--structure-font);
 	padding: 7px 13px;
+}
+
+.structure * {
+	font-family: var(--structure-font);
+	box-sizing: content-box;
 }
 
 .structure .structure-field {
@@ -30,21 +35,19 @@
 	display: block;
 }
 
-.structure .structure-field.structure-toggle>.structure-field.structure-toggle {
-	margin: 0px;
-}
-
 .structure .structure-title {
 	display: inline-block;
-	padding: 0px 13px;
+	padding: 8px 11px;
+	height: var(--structure-font-size);
 	text-align: center;
-	font-size: 18px;
-	line-height: 35px;
+	font-size: var(--structure-font-size);
+	line-height: var(--structure-font-size);
 	color: var(--structure-title-text);
 	background: var(--structure-title);
 	border-radius: var(--structure-border-radius) 0px 0px var(--structure-border-radius);
+	border: 1px solid var(--structure-border);
 	user-select: none;
-	vertical-align: top;
+	vertical-align: bottom;
 }
 
 .structure .structure-title.structure-reference,
@@ -53,19 +56,30 @@
 	border-radius: var(--structure-border-radius);
 }
 
+.structure .structure-nest {
+	padding-left: 25px;
+	border-left: 1px solid var(--structure-nest-border);
+}
+
 .structure .structure-string.structure-input,
 .structure .structure-number.structure-input,
 .structure .structure-select.structure-input {
-	padding: 0px 5px;
-	height: 35px;
-	box-sizing: border-box;
-	font-size: 18px;
+	padding: 8px 5px;
+	height: var(--structure-font-size);
+	font-size: var(--structure-font-size);
+	line-height: var(--structure-font-size);
 	color: var(--structure-input-text);
-	font-family: var(--structure-font);
 	background-color: var(--structure-input);
-	border: 1px solid var(--structure-border);
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
+	border: 1px solid var(--structure-border);
+	border-left: none;
 	outline: none;
+}
+
+.structure .structure-select.structure-input {
+	padding: 0px 5px;
+	height: calc(var(--structure-font-size) + 16px);
+	line-height: calc(var(--structure-font-size) + 16px);
 }
 
 .structure .structure-checkbox {
@@ -75,15 +89,13 @@
 .structure .structure-true-btn,
 .structure .structure-false-btn {
 	display: inline-block;
-	padding: 0px 5px;
-	height: 35px;
-	width: 70px;
-	font-size: 18px;
-	line-height: 35px;
+	padding: 8px calc(var(--structure-font-size) - 3px);
+	height: var(--structure-font-size);
+	font-size: var(--structure-font-size);
+	line-height: var(--structure-font-size);
 	color: var(--structure-input-text);
 	background-color: var(--structure-input);
 	border: 1px solid var(--structure-border);
-	box-sizing: border-box;
 	text-align: center;
 	user-select: none;
 }
@@ -99,66 +111,84 @@
 	background-color: var(--structure-input-true);
 }
 
-.structure .structure-true-btn::before {
-	content: "True";
-}
-
-.structure .structure-false-btn::before {
-	content: "Flase";
-}
-
 .structure .structure-toggle-btn,
 .structure .structure-select-btn,
 .structure .structure-remove-btn,
 .structure .structure-add-btn {
+	position: relative;
 	display: inline-block;
-	height: 35px;
-	width: 35px;
-	font-size: 30px;
-	box-sizing: border-box;
-	text-align: center;
+	padding: 8px;
+	height: var(--structure-font-size);
+	width: var(--structure-font-size);
+	font-size: calc(var(--structure-font-size) + 12px);
 	user-select: none;
 }
 
 .structure .structure-toggle-btn,
 .structure .structure-select-btn,
 .structure .structure-add-btn {
-	line-height: 35px;
-	color: var(--structure-title);
+	line-height: var(--structure-font-size);
 	background-color: var(--structure-input);
 	border: 1px solid var(--structure-border);
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
-.structure .structure-field.structure-toggle:not(:has(.structure-checkbox:checked))>.structure-toggle-btn::before,
-.structure .structure-field.structure-select:not(:has(.structure-checkbox:checked))>.structure-select-btn::before,
-.structure .structure-add-btn::before {
-	content: "+";
+.structure .structure-toggle-btn::before,
+.structure .structure-select-btn::before,
+.structure .structure-add-btn::before,
+.structure .structure-remove-btn::before,
+.structure .structure-toggle-btn::after,
+.structure .structure-select-btn::after,
+.structure .structure-add-btn::after,
+.structure .structure-remove-btn::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
-.structure .structure-field.structure-toggle:has(.structure-checkbox:checked)>.structure-toggle-btn::before,
-.structure .structure-field.structure-select:has(.structure-checkbox:checked)>.structure-select-btn::before,
+.structure .structure-toggle-btn::before,
+.structure .structure-select-btn::before,
+.structure .structure-add-btn::before,
 .structure .structure-remove-btn::before {
-	content: "-";
+	content: "";
+	height: calc(var(--structure-font-size)/7.5);
+	width: calc(var(--structure-font-size)/1.5);
+}
+
+.structure .structure-toggle-btn::before,
+.structure .structure-select-btn::before,
+.structure .structure-add-btn::before,
+.structure .structure-toggle-btn::after,
+.structure .structure-select-btn::after,
+.structure .structure-add-btn::after {
+	background-color: var(--structure-title);
+}
+
+.structure .structure-remove-btn::before {
+	background-color: var(--structure-title-text);
+}
+
+.structure .structure-field.structure-toggle:not(:has(.structure-checkbox:checked))>.structure-toggle-btn::after,
+.structure .structure-field.structure-select:not(:has(.structure-checkbox:checked))>.structure-select-btn::after,
+.structure .structure-add-btn::after {
+	content: "";
+	height: calc(var(--structure-font-size)/1.5);
+	width: calc(var(--structure-font-size)/7.5);
 }
 
 .structure .structure-field.structure-toggle:has(.structure-checkbox:checked):not(:has(.structure-nest))>.structure-toggle-btn {
-	width: 34px;
 	border-radius: 0px;
 	border-right: none;
 }
 
-.structure .structure-list.structure-nest:not(:has(*))+.structure-add-end {
+.structure .structure-list.structure-nest:empty+.structure-add-end {
 	display: none;
 }
 
 .structure .structure-option {
 	background-color: var(--structure-input);
-}
-
-.structure .structure-nest {
-	padding-left: 25px;
-	border-left: 1px solid var(--structure-nest-border);
+	line-height: var(--structure-font-size);
 }
 
 .structure .structure-invalid {
