@@ -57,20 +57,39 @@
 		<hr class="split">
 		<h2 class="sub-title">安心・安全</h2>
 		<p class="text">※処理はJavaScriptのみで行っています。サーバーに送信せず、ローカルで完結しますので安全です。</p>
+		<hr class="split">
+		<h2 class="sub-title">注意</h2>
+		<p class="text">構造を指定した場合、構造に沿ってデータが削除される可能性があります。</p>
+		<p class="text">削除されたデータは<a class="link" href="#log">ログ</a>で見ることができます。</p>
 		<h1 id="input-json" class="title">JSONを入力</h1>
 		<label id="input-json-label">
 			<div id="input-json-file-button" class="button">ファイルを選択</div>
 			<div id="input-json-file-name"></div>
 		</label>
-		<textarea id="input-json-area" class="textarea" spellcheck="false"></textarea>
+		<textarea id="input-json-area" class="textarea text-input" spellcheck="false"></textarea>
 		<h1 id="input-format" class="title">フォーマットを指定</h1>
+		<p class="text">インデント・フォーマットを設定してください。</p>
+		<p class="text">JSONの構文チェック・整形のみ行うの場合、「構造」で「指定しない」を選択してください。</p>
+		<p class="text"><a href="How-to-write-format" class="link">フォーマット指定の仕方</a></p>
 		<div id="input-format-structure"></div>
+		<div id="input-format-text">
+			<label id="input-format-text-label">
+				<div id="input-format-text-file-button" class="button">ファイルを選択</div>
+			</label>
+			<textarea id="input-format-area" class="textarea text-input" spellcheck="false"></textarea>
+		</div>
+		<div id="input-format-gui-structure"></div>
 		<div id="execute" class="button">実行</div>
 		<h1 id="output" class="title">出力</h1>
-		<p class="text">入力の検証結果：<span id="input-validity" class="result-empty"></span></p>
 		<div id="output-field" class="textarea"></div>
-		<h1 id="log" class="title">ログ</h1>
-		<div id="log-field"></div>
+		<h1 id="log" class="title">ログ / エラー表示</h1>
+		<p class="text">入力の検証結果：<span id="input-validity" class="result-empty"></span></p>
+		<div id="log-field" class="textarea"></div>
+		<h1 id="How-to-write-format" class="title">フォーマット指定の仕方</h1>
+		<p class="text"></p>
+		<p class="text"></p>
+		<p class="text"></p>
+		<p class="text"></p>
 	</div>
 	<script src="./json_formatter.js" type="module"></script>
 </body>

@@ -250,6 +250,7 @@ function add_input(pos, value, path, change_func) {
 function get(id) {
 	const structs = JSON.parse(JSON.stringify(structs_UUID))
 	const list_keys = Object.keys(structs)
+	if (!list_keys.includes(id)) { console.error("id is not defined", id) }
 	let struct = JSON.parse(JSON.stringify(structs[id]))
 	return replace_UUID(structs, struct, list_keys)
 }

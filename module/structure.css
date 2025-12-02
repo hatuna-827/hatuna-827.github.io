@@ -1,15 +1,17 @@
 :root {
 	--structure-title: #709170;
 	--structure-title-text: #ffffff;
-	--structure-border: #709170;
+	--structure-border: var(--structure-title);
 	--structure-input: #ffffff;
 	--structure-input-text: #000000;
 	--structure-input-true: #89b76c;
+	--structure-add: var(--structure-title);
 	--structure-nest-border: #888888;
 	--structure-invalid: #ff0000;
 	--structure-border-radius: 3px;
 	--structure-font: Arial, Helvetica, sans-serif;
 	--structure-font-size: 18px;
+	--structure-nest-size: 25px;
 }
 
 .structure {
@@ -57,7 +59,7 @@
 }
 
 .structure .structure-nest {
-	padding-left: 25px;
+	padding-left: var(--structure-nest-size);
 	border-left: 1px solid var(--structure-nest-border);
 }
 
@@ -72,7 +74,6 @@
 	background-color: var(--structure-input);
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 	border: 1px solid var(--structure-border);
-	border-left: none;
 	outline: none;
 }
 
@@ -101,7 +102,6 @@
 }
 
 .structure .structure-false-btn {
-	border-left: none;
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
@@ -162,7 +162,7 @@
 .structure .structure-toggle-btn::after,
 .structure .structure-select-btn::after,
 .structure .structure-add-btn::after {
-	background-color: var(--structure-title);
+	background-color: var(--structure-add);
 }
 
 .structure .structure-remove-btn::before {
@@ -179,11 +179,21 @@
 
 .structure .structure-field.structure-toggle:has(.structure-checkbox:checked):not(:has(.structure-nest))>.structure-toggle-btn {
 	border-radius: 0px;
-	border-right: none;
 }
 
 .structure .structure-list.structure-nest:empty+.structure-add-end {
 	display: none;
+}
+
+.structure .structure-string.structure-input,
+.structure .structure-number.structure-input,
+.structure .structure-select.structure-input,
+.structure .structure-true-btn,
+.structure .structure-false-btn,
+.structure .structure-toggle-btn,
+.structure .structure-select-btn,
+.structure .structure-add-btn:not(.structure-add-end) {
+	border-left: none;
 }
 
 .structure .structure-option {
