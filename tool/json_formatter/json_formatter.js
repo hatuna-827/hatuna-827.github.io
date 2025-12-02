@@ -4,10 +4,10 @@ import structure from "/module/structure.js"
 const format_structure = {
 	indent_type: {
 		display_name: "インデントの種類", type: "select", option: {
-			space: { display_name: "スペース", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, default: 2, placeholder: 2 } } },
-			tab: { display_name: "タブ", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, default: 1, placeholder: 1 } } },
+			space: { display_name: "スペース", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, max: 10, default: 2, placeholder: "0~10" } } },
+			tab: { display_name: "タブ", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, max: 10, default: 1, placeholder: "0~10" } } },
 			no_indent: { display_name: "インデントしない", children: {} },
-			other: { display_name: "その他の文字列", children: { indent_text: { display_name: "インデント文字列", type: "string" } } }
+			other: { display_name: "その他の文字列", children: { indent_text: { display_name: "インデント文字列", max: 10, type: "string", placeholder: "0~10文字" } } }
 		}
 	},
 	structure: {
@@ -23,13 +23,12 @@ const gui_structure = {
 		type: "select", display_name: "トップレベルの構造", option: {
 			object: {
 				display_name: "オブジェクト", children: {
-					sort: { type: "boolean", display_name: "自動ソート" },
-					entry: { type: "reference", name: "entry" }
+					object: { type: "reference", name: "object_children" }
 				}
 			},
 			array: {
 				display_name: "リスト", children: {
-					type: { type: "reference", name: "select_type" }
+					array: { type: "reference", name: "array_children" }
 				}
 			}
 		}
@@ -50,10 +49,26 @@ const select_type_structure = {
 		type: "select", display_name: "型", option: {
 			string: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "string" } } } },
 			number: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "number" } } } },
-			object: { children: { sort: { type: "boolean", display_name: "自動ソート" }, entry: { type: "reference", name: "entry" } } },
-			array: { children: { sort: { type: "boolean", display_name: "自動ソート" }, entry: { type: "reference", name: "entry" } } },
+			object: { children: { object: { type: "reference", name: "object_children" } } },
+			array: {
+				children: {
+					defalut: { type: "boolean", display_name: "デフォルトで空配列を設定する" },
+					array: { type: "reference", name: "array_children" }
+				}
+			},
 			bool: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "boolean" } } } },
 			null: { children: {} }
+		}
+	}
+}
+const object_children_structure = {
+	sort: { type: "boolean", display_name: "自動ソート" },
+	entry: { type: "reference", name: "entry" }
+}
+const array_children_structure = {
+	children: {
+		type: "object", display_name: "要素", children: {
+			entry: { type: "reference", name: "select_type" }
 		}
 	}
 }
@@ -64,6 +79,8 @@ structure.def_struct("format", format_structure)
 structure.def_struct("gui", gui_structure)
 structure.def_struct("entry", entry_structure)
 structure.def_struct("select_type", select_type_structure)
+structure.def_struct("object_children", object_children_structure)
+structure.def_struct("array_children", array_children_structure)
 structure.set("input-format-structure", "format", change_format)
 structure.set("input-format-gui-structure", "gui", change_format_gui)
 change_format()
@@ -171,6 +188,7 @@ function execute() {
 		log(json.value)
 		return
 	}
+	log("入力されたJSON：OK")
 
 	const format_data = structure.get("input-format-structure").format
 	let result = {}
@@ -179,6 +197,14 @@ function execute() {
 	if (structure_type === "no") {
 		result = json.value
 	} else if (structure_type === "text") {
+		const format_text_data = parse_json(document.getElementById("input-format-area").value)
+		if (format_text_data.status === "error") {
+			set_result("error")
+			log("入力されたJSONの構造が無効です。")
+			log(format_text_data.value)
+			return
+		}
+		log("入力されたJSONの構造：有効")
 	} else if (structure_type === "gui") {
 		const format_gui_data = structure.get("input-format-gui-structure").gui
 		console.log(format_gui_data)
@@ -206,6 +232,16 @@ function parse_json(json) {
 	} catch (err) {
 		return { status: "error", value: err }
 	}
+}
+function filter_format_data(obj) {
+	let result = {}
+	const keys = Object.keys(obj)
+	keys.forEach((key) => {
+		const value = obj[key]
+		if (value !== undefined && value !== null){
+			result
+		}
+	})
 }
 function log(content) {
 	const log_field = document.getElementById("log-field")

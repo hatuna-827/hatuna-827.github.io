@@ -92,10 +92,11 @@
 	width: 700px;
 	font-size: 15px;
 	line-height: 30px;
+	transition: none;
 }
 
 #execute:hover {
-	background-color: var(--grey-c-color);
+	background-color: var(--grey-d-color);
 }
 
 /* output */
