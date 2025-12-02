@@ -40,7 +40,7 @@
 	</noscript>
 	<!-- Auto insert body end -->
 	<div id="main">
-		<h1 id="about" class="title">概要</h1>
+		<h1 id="about" class="title">JSONフォーマッタ</h1>
 		<h2 class="sub-title">できること</h2>
 		<ul class="list">
 			<li>JSONの構文チェック</li>
@@ -66,24 +66,29 @@
 			<div id="input-json-file-button" class="button">ファイルを選択</div>
 			<div id="input-json-file-name"></div>
 		</label>
-		<textarea id="input-json-area" class="textarea text-input" spellcheck="false"></textarea>
+		<textarea id="input-json-area" class="textarea text-input textarea-copy-download" spellcheck="false">{}</textarea>
 		<h1 id="input-format" class="title">フォーマットを指定</h1>
 		<p class="text">インデント・フォーマットを設定してください。</p>
 		<p class="text">JSONの構文チェック・整形のみ行うの場合、「構造」で「指定しない」を選択してください。</p>
-		<p class="text"><a href="How-to-write-format" class="link">フォーマット指定の仕方</a></p>
+		<p class="text"><a href="#How-to-write-format" class="link">フォーマット指定の仕方</a></p>
 		<div id="input-format-structure"></div>
 		<div id="input-format-text">
 			<label id="input-format-text-label">
 				<div id="input-format-text-file-button" class="button">ファイルを選択</div>
 			</label>
-			<textarea id="input-format-area" class="textarea text-input" spellcheck="false"></textarea>
+			<div id="generate-format-text-button" class="button">JSONから生成</div>
+			<textarea id="input-format-area" class="textarea text-input textarea-copy-download" spellcheck="false"></textarea>
 		</div>
-		<div id="input-format-gui-structure"></div>
+		<div id="input-format-gui">
+			<div id="input-format-gui-structure"></div>
+			<p id="input-format-gui-read-only">構造 (読み取り専用)</p>
+			<div id="input-format-gui-area" class="textarea textarea-copy-download"></div>
+		</div>
 		<div id="execute" class="button">実行</div>
-		<h1 id="output" class="title">出力</h1>
-		<div id="output-field" class="textarea"></div>
+		<h1 id="output" class="title">実行結果</h1>
+		<div id="output-field" class="textarea textarea-copy-download"></div>
 		<h1 id="log" class="title">ログ / エラー表示</h1>
-		<p class="text">入力の検証結果：<span id="input-validity" class="result-empty"></span></p>
+		<p class="text">結果：<span id="result" class="result-empty"></span></p>
 		<div id="log-field" class="textarea"></div>
 		<h1 id="How-to-write-format" class="title">フォーマット指定の仕方</h1>
 		<p class="text"></p>
