@@ -16,6 +16,8 @@
 	--dark-mode-grey-c-color: #444;
 	--dark-mode-grey-a-color: #333;
 	--dark-mode-grey-5-color: #aaa;
+	--dark-mode-contrast-color: #303030;
+	--dark-mode-light-side-color: #4f4f4f;
 	/* green */
 	--dark-mode-grey-green-color: #454;
 	--dark-mode-light-green-color: #485748;
@@ -24,9 +26,9 @@
 	/* any color */
 	--dark-mode-black-color: #ffffff;
 	--dark-mode-white-color: #000000;
-	--dark-mode-red-color: #b20024;
+	--dark-mode-red-color: #da3e44;
 	--dark-mode-pink-color: #b3000d;
-	--dark-mode-pastel-pink-color: #ff7d79;
+	--dark-mode-contrast-pink-color: #450200;
 	/* --------- light mode --------- */
 	/* main */
 	--light-mode-main-color: #709170;
@@ -39,6 +41,8 @@
 	--light-mode-grey-c-color: #ccc;
 	--light-mode-grey-a-color: #aaa;
 	--light-mode-grey-5-color: #555;
+	--light-mode-contrast-color: #fff;
+	--light-mode-light-side-color: #ffffff;
 	/* green */
 	--light-mode-grey-green-color: #cdc;
 	--light-mode-light-green-color: #afd8af;
@@ -49,7 +53,7 @@
 	--light-mode-white-color: #ffffff;
 	--light-mode-red-color: #ff0000;
 	--light-mode-pink-color: #ff86c2;
-	--light-mode-pastel-pink-color: #f6bdc0;
+	--light-mode-contrast-pink-color: #f6bdc0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,6 +69,8 @@
 		--grey-c-color: var(--dark-mode-grey-c-color);
 		--grey-a-color: var(--dark-mode-grey-a-color);
 		--grey-5-color: var(--dark-mode-grey-5-color);
+		--contrast-color: var(--dark-mode-contrast-color);
+		--light-side-color: var(--dark-mode-light-side-color);
 		/* green */
 		--grey-green-color: var(--dark-mode-grey-green-color);
 		--light-green-color: var(--dark-mode-light-green-color);
@@ -75,7 +81,7 @@
 		--white-color: var(--dark-mode-white-color);
 		--red-color: var(--dark-mode-red-color);
 		--pink-color: var(--dark-mode-pink-color);
-		--pastel-pink-color: var(--dark-mode-pastel-pink-color);
+		--contrast-pink-color: var(--dark-mode-contrast-pink-color);
 	}
 }
 
@@ -92,6 +98,8 @@
 		--grey-c-color: var(--light-mode-grey-c-color);
 		--grey-a-color: var(--light-mode-grey-a-color);
 		--grey-5-color: var(--light-mode-grey-5-color);
+		--contrast-color: var(--light-mode-contrast-color);
+		--light-side-color: var(--light-mode-light-side-color);
 		/* green */
 		--grey-green-color: var(--light-mode-grey-green-color);
 		--light-green-color: var(--light-mode-light-green-color);
@@ -102,7 +110,7 @@
 		--white-color: var(--light-mode-white-color);
 		--red-color: var(--light-mode-red-color);
 		--pink-color: var(--light-mode-pink-color);
-		--pastel-pink-color: var(--light-mode-pastel-pink-color);
+		--contrast-pink-color: var(--light-mode-contrast-pink-color);
 	}
 }
 
@@ -118,6 +126,8 @@ body[data-theme="dark"] {
 	--grey-c-color: var(--dark-mode-grey-c-color);
 	--grey-a-color: var(--dark-mode-grey-a-color);
 	--grey-5-color: var(--dark-mode-grey-5-color);
+	--contrast-color: var(--dark-mode-contrast-color);
+	--light-side-color: var(--dark-mode-light-side-color);
 	/* green */
 	--grey-green-color: var(--dark-mode-grey-green-color);
 	--light-green-color: var(--dark-mode-light-green-color);
@@ -128,7 +138,7 @@ body[data-theme="dark"] {
 	--white-color: var(--dark-mode-white-color);
 	--red-color: var(--dark-mode-red-color);
 	--pink-color: var(--dark-mode-pink-color);
-	--pastel-pink-color: var(--dark-mode-pastel-pink-color);
+	--contrast-pink-color: var(--dark-mode-contrast-pink-color);
 }
 
 body[data-theme="light"] {
@@ -143,6 +153,8 @@ body[data-theme="light"] {
 	--grey-c-color: var(--light-mode-grey-c-color);
 	--grey-a-color: var(--light-mode-grey-a-color);
 	--grey-5-color: var(--light-mode-grey-5-color);
+	--contrast-color: var(--light-mode-contrast-color);
+	--light-side-color: var(--light-mode-light-side-color);
 	/* green */
 	--grey-green-color: var(--light-mode-grey-green-color);
 	--light-green-color: var(--light-mode-light-green-color);
@@ -153,7 +165,7 @@ body[data-theme="light"] {
 	--white-color: var(--light-mode-white-color);
 	--red-color: var(--light-mode-red-color);
 	--pink-color: var(--light-mode-pink-color);
-	--pastel-pink-color: var(--light-mode-pastel-pink-color);
+	--contrast-pink-color: var(--light-mode-contrast-pink-color);
 }
 
 ::selection {
@@ -167,7 +179,7 @@ body {
 	font-size: 0px;
 	color: var(--black-color);
 	background-color: var(--main-bg-color);
-	scrollbar-color: var(--leaf-green-color) var(--white-color);
+	scrollbar-color: var(--leaf-green-color) #0000;
 }
 
 #homebar {

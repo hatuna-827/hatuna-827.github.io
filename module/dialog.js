@@ -1,5 +1,5 @@
 "use strict"
-document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${URL.parse("./dialog.css", import.meta.url)}">`)
+document.head.insertAdjacentHTML('afterbegin', `<link rel="stylesheet" href="${URL.parse("./dialog.css", import.meta.url)}">`)
 export default function dialog({
 	type = "OO",
 	title = "",

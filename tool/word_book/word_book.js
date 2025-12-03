@@ -310,6 +310,7 @@ function edit_words(index) {
 		word.className = "word"
 		const input_word = document.createElement('input')
 		input_word.className = "input"
+		input_word.name = `word-${i}`
 		input_word.value = word_content.word
 		input_word.addEventListener('input', function () {
 			wordbook_data[index].words[i].word = this.value
@@ -319,6 +320,7 @@ function edit_words(index) {
 		description.className = "description"
 		const input_description = document.createElement('input')
 		input_description.className = "input"
+		input_description.name = `word-${i}`
 		input_description.value = word_content.description
 		input_description.addEventListener('input', function () {
 			wordbook_data[index].words[i].description = this.value
@@ -364,7 +366,6 @@ function edit_words(index) {
 function dots_click(e) {
 	e.stopPropagation()
 	if (document.querySelector(`#title${hover_index} #dots-menu`)) {
-		console.log(hover_index)
 		document.getElementById("dots-menu").remove()
 		return
 	}
