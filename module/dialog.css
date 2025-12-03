@@ -19,7 +19,7 @@
   z-index: 1001;
 }
 
-#dialog #content {
+#dialog #dialog-content {
   all: unset;
   max-height: 80vh;
   max-width: 70vw;
@@ -34,7 +34,7 @@
   font-family: var(--dialog-font);
 }
 
-#dialog #title {
+#dialog #dialog-title {
   all: unset;
   display: block;
   margin: 0px;
@@ -47,7 +47,7 @@
   background-color: var(--dialog-main-color);
 }
 
-#dialog #text {
+#dialog #dialog-text {
   all: unset;
   display: block;
   margin: 10px 0px 0px;
@@ -59,12 +59,12 @@
   color: var(--dialog-text-color);
 }
 
-#dialog #reply-button {
+#dialog #dialog-reply-button {
   margin: 10px 10px;
   overflow: auto;
 }
 
-#dialog #reply-button .button {
+#dialog #dialog-reply-button .dialog-button {
   all: unset;
   display: inline;
   white-space: nowrap;
@@ -86,17 +86,17 @@
     --dialog-font-size: 16px;
   }
 
-  #dialog #title {
+  #dialog #dialog-title {
     height: 40px;
     font-size: 20px;
     line-height: 40px;
   }
 
-  #dialog #text {
+  #dialog #dialog-text {
     line-height: 20px;
   }
 
-  #dialog #reply-button .button {
+  #dialog #dialog-reply-button .dialog-button {
     height: 30px;
     line-height: 30px;
   }

@@ -1,4 +1,5 @@
 "use strict"
+document.head.insertAdjacentHTML('afterbegin', `<link rel="stylesheet" href="${URL.parse("./dialog.css", import.meta.url)}">`)
 export default function dialog({
 	type = "OO",
 	title = "",
@@ -41,10 +42,10 @@ export default function dialog({
 		const _text = document.createElement('div')
 		const _reply_button = document.createElement('div')
 		_bg.id = "dialog"
-		_content.id = "content"
-		_title.id = "title"
-		_text.id = "text"
-		_reply_button.id = "reply-button"
+		_content.id = "dialog-content"
+		_title.id = "dialog-title"
+		_text.id = "dialog-text"
+		_reply_button.id = "dialog-reply-button"
 		if (button.length == 0) {
 			if (type === "OO") { button = ["OK"] }
 			else if (type === "OC") { button = ["OK", "キャンセル"] }
@@ -59,14 +60,13 @@ export default function dialog({
 		button.forEach((button_content, i) => {
 			const new_reply_button = document.createElement('button')
 			new_reply_button.innerText = button_content
-			new_reply_button.className = "button"
+			new_reply_button.className = "dialog-button"
 			new_reply_button.addEventListener('click', () => {
 				document.body.removeChild(_bg)
 				resolve(i)
 			})
 			_reply_button.appendChild(new_reply_button)
 		})
-		_bg.insertAdjacentHTML('afterbegin', `<link rel="stylesheet" href="${URL.parse("./dialog.css", import.meta.url)}">`)
 		if (title != "") { _content.appendChild(_title) }
 		if (content != "") { _content.appendChild(_text) }
 		_content.appendChild(_reply_button)

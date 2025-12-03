@@ -150,7 +150,7 @@ input {
 	margin: 50px 0px 0px 40px;
 	height: calc(100vh - 100px);
 	width: calc(100vw - 140px);
-	background-color: var(--white-color);
+	background-color: var(--contrast-color);
 	border: 1px solid var(--black-color);
 	box-sizing: border-box;
 	overflow: hidden;
@@ -231,7 +231,7 @@ input {
 	width: 20px;
 	border: .5px solid var(--black-color);
 	border-radius: 20px;
-	background-color: var(--white-color);
+	background-color: var(--contrast-color);
 	color: var(--black-color);
 	font-size: 17px;
 	line-height: 20px;
@@ -248,7 +248,7 @@ input {
 
 #create-space .maru.red {
 	color: var(--red-color);
-	background-color: var(--pastel-pink-color);
+	background-color: var(--contrast-pink-color);
 }
 
 #save-button,

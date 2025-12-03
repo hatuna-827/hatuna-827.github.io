@@ -2,9 +2,10 @@
 
 /* - import ------------------------------------------------------------------------------------ */
 
-import storage from "https://hatuna-827.github.io/module/storage.js"
-import obj_manip from "https://hatuna-827.github.io/module/obj_manip.js"
-import dialog from "https://hatuna-827.github.io/module/dialog.js"
+import storage from "/module/storage.js"
+import obj_manip from "/module/obj_manip.js"
+import dialog from "/module/dialog.js"
+import snackbar from "/module/snackbar.js"
 
 /* - const ------------------------------------------------------------------------------------- */
 
@@ -23,7 +24,6 @@ const default_wordbook_data = [
 const load_data = storage.get(storage_key)
 
 const main_title = document.getElementById("main-title")
-const back = document.getElementById("back")
 const generate_box = document.getElementById("generate-box")
 
 let hover_index = -1
@@ -42,6 +42,71 @@ if (load_data !== null && load_data.length !== 0) {
 display_title()
 
 /* - add eventListener ------------------------------------------------------------------------- */
+
+document.getElementById("export-execute-button").addEventListener('click', function () {
+	const remove = document.getElementById("export-remove-checkbox").checked
+	let result = []
+	let count = 0
+	document.querySelectorAll("#export-select-box .export-checkbox").forEach((checkbox) => {
+		if (!checkbox.checked) { return }
+		result.push(wordbook_data[checkbox.dataset.index - count])
+		if (remove) { wordbook_data.splice(checkbox.dataset.index - count, 1) }
+		count++
+	})
+	save_wordbook_data()
+	result = JSON.stringify(result)
+	const download = document.createElement("a")
+	download.setAttribute('href', URL.createObjectURL(new Blob([result], { type: "text/plain" })))
+	download.setAttribute('download', "download.json")
+	download.click()
+	document.getElementById("export").style.display = "none"
+	display_title()
+})
+
+document.getElementById("export-all-checkbox").addEventListener('change', function () {
+	document.querySelectorAll("#export-select-box .export-checkbox").forEach((checkbox) => {
+		checkbox.checked = this.checked
+	})
+})
+
+document.getElementById("export-button").addEventListener('click', function () {
+	document.getElementById("export").style.display = "flex"
+	const select_box = document.getElementById("export-select-box")
+	select_box.innerHTML = ""
+	wordbook_data.forEach((book_data, i) => {
+		const book_name = book_data.name
+		const label = document.createElement('label')
+		label.className = "export-label"
+		const checkbox = document.createElement('input')
+		checkbox.className = "export-checkbox"
+		checkbox.type = "checkbox"
+		checkbox.dataset.index = i
+		const name = document.createElement('div')
+		name.className = "export-book-name"
+		name.textContent = book_name
+		label.appendChild(checkbox)
+		label.appendChild(name)
+		select_box.appendChild(label)
+	})
+})
+
+document.getElementById("import-file").addEventListener('change', function () {
+	const file = this.files[0]
+	if (!file) return
+	const reader = new FileReader()
+	reader.readAsText(file)
+	reader.addEventListener('load', function () {
+		try {
+			const new_books = JSON.parse(this.result)
+			wordbook_data = [...wordbook_data, ...new_books]
+			save_wordbook_data()
+			display_title()
+		} catch (err) {
+			snackbar({ type: "err", context: "無効なJSONファイル" })
+			display_title()
+		}
+	})
+})
 
 generate_box.addEventListener("dragstart", (e) => {
 	if (e.target.classList && e.target.classList.contains("title-move")) {
@@ -70,25 +135,22 @@ generate_box.addEventListener("dragover", (e) => {
 	if (!dragEl) return
 	const afterElement = getDragAfterElement(generate_box, e.clientY).element
 	generate_box.insertBefore(dragEl, afterElement)
-	generate_box.appendChild(document.getElementById('add_button'))
+	generate_box.appendChild(document.getElementById('add-button'))
 })
 
 /* - function ---------------------------------------------------------------------------------- */
 
 function getDragAfterElement(container, y) {
 	const elements = [...container.querySelectorAll(".title-block:not(.dragging)")]
-	return elements.reduce(
-		(closest, child, i) => {
-			const size = child.getBoundingClientRect()
-			const offset = y - size.top - size.height / 2
-			if (offset < 0 && offset > closest.offset) {
-				return { offset: offset, element: child, index: i }
-			} else {
-				return closest
-			}
-		},
-		{ offset: Number.NEGATIVE_INFINITY, index: wordbook_data.length }
-	)
+	return elements.reduce((closest, child, i) => {
+		const size = child.getBoundingClientRect()
+		const offset = y - size.top - size.height / 2
+		if (offset < 0 && offset > closest.offset) {
+			return { offset: offset, element: child, index: i }
+		} else {
+			return closest
+		}
+	}, { offset: Number.NEGATIVE_INFINITY, index: wordbook_data.length })
 }
 
 function update_card() {
@@ -98,13 +160,13 @@ function update_card() {
 	}
 	const main_text = document.getElementById("card-main-text")
 	const front_word = document.getElementById("front-word")
-	let text = wordbook_data[card_data.book.index].words[card_data.card_index]
-	let sub_text = ""
+	let card = wordbook_data[card_data.book.index].words[card_data.card_index]
+	let text, sub_text = ""
 	if (card_data.is_front) {
-		text = text.word
+		text = card.word
 	} else {
-		sub_text = text.word
-		text = text.description
+		text = card.description
+		sub_text = card.word
 	}
 	main_text.textContent = text
 	front_word.textContent = sub_text
@@ -123,8 +185,7 @@ function next_card() {
 function open_wordbook(index) {
 	const book = wordbook_data[index]
 	main_title.textContent = book.name
-	back.style.display = "block"
-	back.onclick = display_title
+	set_back_button("title")
 	generate_box.innerHTML = ""
 	card_data = { book: { index: index, name: book.name, length: book.words.length }, card_index: 0, is_front: true }
 	const card = document.createElement('div')
@@ -143,23 +204,29 @@ function open_wordbook(index) {
 function display_title() {
 	hover_index = -1
 	main_title.textContent = "デジタル単語帳"
-	back.style.display = "none"
+	set_back_button("none")
 	generate_box.innerHTML = ""
 	wordbook_data.forEach((wordbook, i) => {
 		const title = document.createElement("div")
 		title.id = `title${i}`
 		title.dataset.index = i
 		title.className = "title-block"
-		title.textContent = wordbook.name
 		title.addEventListener('click', () => { open_wordbook(hover_index) })
 		title.addEventListener('mouseover', () => { hover_index = i })
 		title.addEventListener('mouseleave', () => { hover_index = -1 })
+		const title_name = document.createElement('div')
+		title_name.className = "title-name"
+		const title_name_text = document.createElement('div')
+		title_name_text.className = "title-name-text"
+		title_name_text.textContent = wordbook.name
 		const dots = document.createElement("div")
 		dots.className = "dots"
 		dots.addEventListener('click', dots_click)
 		const title_move = document.createElement("div")
 		title_move.className = "title-move"
 		title_move.draggable = true
+		title_name.appendChild(title_name_text)
+		title.appendChild(title_name)
 		title.appendChild(title_move)
 		title.appendChild(dots)
 		generate_box.appendChild(title)
@@ -175,8 +242,7 @@ function display_title() {
 function display_words(index) {
 	main_title.textContent = wordbook_data[index].name
 	generate_box.innerHTML = ""
-	back.style.display = "block"
-	back.onclick = display_title
+	set_back_button("title")
 	const words_list_table = document.createElement('table')
 	words_list_table.id = "words-list-table"
 	const line = document.createElement('tr')
@@ -219,8 +285,7 @@ function display_words(index) {
 function edit_words(index) {
 	main_title.textContent = wordbook_data[index].name
 	generate_box.innerHTML = ""
-	back.style.display = "block"
-	back.onclick = display_title
+	set_back_button("title")
 	const words_list_table = document.createElement('div')
 	words_list_table.id = "words-edit-field"
 	const line = document.createElement('div')
@@ -245,6 +310,7 @@ function edit_words(index) {
 		word.className = "word"
 		const input_word = document.createElement('input')
 		input_word.className = "input"
+		input_word.name = `word-${i}`
 		input_word.value = word_content.word
 		input_word.addEventListener('input', function () {
 			wordbook_data[index].words[i].word = this.value
@@ -254,6 +320,7 @@ function edit_words(index) {
 		description.className = "description"
 		const input_description = document.createElement('input')
 		input_description.className = "input"
+		input_description.name = `word-${i}`
 		input_description.value = word_content.description
 		input_description.addEventListener('input', function () {
 			wordbook_data[index].words[i].description = this.value
@@ -298,7 +365,7 @@ function edit_words(index) {
 
 function dots_click(e) {
 	e.stopPropagation()
-	if (document.querySelector(`#title${hover_index} #dots_menu`)) {
+	if (document.querySelector(`#title${hover_index} #dots-menu`)) {
 		document.getElementById("dots-menu").remove()
 		return
 	}
@@ -367,4 +434,18 @@ function input_new_title_name() {
 function save_wordbook_data() {
 	storage.set(storage_key, wordbook_data)
 }
+
+function set_back_button(type) {
+	const back = document.getElementById("back")
+	const export_import = document.getElementById("export-import-buttons")
+	export_import.style.display = "none"
+	if (type === "none") {
+		back.style.display = "none"
+		export_import.style.display = "flex"
+	} else if (type = "title") {
+		back.style.display = "block"
+		back.onclick = display_title
+	}
+}
+
 /* --------------------------------------------------------------------------------------------- */
