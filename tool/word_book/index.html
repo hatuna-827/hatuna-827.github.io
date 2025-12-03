@@ -35,9 +35,39 @@
 	<!-- Auto insert body end -->
 	<div id="main">
 		<h1 id="main-title"></h1>
-		<div id="back">&#x25C1;<div id="back-text"> back</div>
+		<div id="back">&#x25C1;<div id="back-text">back</div>
+		</div>
+		<div id="export-import-buttons">
+			<div id="export-button" class="mini-button" title="エクスポート">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
+					stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12,6H7a3,3 0 0 0-3,3v8a3,3 0 0 0 3,3h8a3,3 0 0 0 3-3V12m-6,0l8-8h-5h5v5" />
+				</svg>
+			</div>
+			<label id="import-button" class="mini-button" title="インポート">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"
+					stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12,5H7a3,3 0 0 0-3,3v9a3,3 0 0 0 3,3h9a3,3 0 0 0 3-3V11m0-6l-8,8h5h-5v-5" />
+				</svg>
+				<input type="file" id="import-file" accept=".json" style="display: none;">
+			</label>
 		</div>
 		<div id="generate-box"></div>
+		<div id="export">
+			<div id="export-popup">
+				<div id="export-title">単語帳を選択</div>
+				<label class="export-label" id="export-all">
+					<input id="export-all-checkbox" type="checkbox" class="export-checkbox">
+					<div class="export-book-name">すべて選択</div>
+				</label>
+				<div id="export-select-box"></div>
+				<label class="export-label" id="export-remove">
+					<input id="export-remove-checkbox" type="checkbox" class="export-checkbox">
+					<div class="export-book-name">エクスポートして削除</div>
+				</label>
+				<div id="export-execute-button">エクスポート</div>
+			</div>
+		</div>
 	</div>
 	<script src="./word_book.js" type="module"></script>
 </body>

@@ -13,7 +13,7 @@ export default function snackbar({
 	bg_color,
 	icon,
 	close = false,
-	timer = 300000
+	timer = 3000
 } = {}) {
 	if (!color || !bg_color || !icon) {
 		type = type.toUpperCase()
@@ -41,16 +41,16 @@ export default function snackbar({
 	snackbar.style.backgroundColor = bg_color
 	// color bar
 	const color_bar = document.createElement('div')
-	color_bar.className = "color-bar"
+	color_bar.className = "snackbar-color-bar"
 	color_bar.style.backgroundColor = color
 	// icon
 	const ico = document.createElement('div')
-	ico.className = "icon"
+	ico.className = "snackbar-icon"
 	ico.innerHTML = icon
 	ico.style.color = color
 	// context
 	const content = document.createElement('div')
-	content.className = "content"
+	content.className = "snackbar-content"
 	content.textContent = context
 	// appned
 	snackbar.appendChild(color_bar)
@@ -59,7 +59,7 @@ export default function snackbar({
 	// close
 	if (close) {
 		const close_btn = document.createElement('div')
-		close_btn.className = "close"
+		close_btn.className = "snackbar-close"
 		close_btn.style.backgroundColor = bg_color
 		close_btn.addEventListener('click', function () {
 			this.parentElement.remove()
