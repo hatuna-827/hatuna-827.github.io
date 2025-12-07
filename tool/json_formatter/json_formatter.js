@@ -96,11 +96,7 @@ document.querySelectorAll(".textarea-copy-download").forEach((element) => {
 	copy_button.className = "copy-button button"
 	copy_button.textContent = "コピー"
 	download_button.addEventListener('click', function () {
-		const download = document.createElement('a')
-		download.setAttribute('download', "download.json")
-		const content = `data:application/json;base64,${btoa(element.value || element.textContent)}`
-		download.setAttribute('href', content)
-		download.click()
+		download("download.json", element.value || element.textContent)
 		clicked(this)
 	})
 	copy_button.addEventListener('click', function () {
@@ -238,7 +234,7 @@ function filter_format_data(obj) {
 	const keys = Object.keys(obj)
 	keys.forEach((key) => {
 		const value = obj[key]
-		if (value !== undefined && value !== null){
+		if (value !== undefined && value !== null) {
 			result
 		}
 	})
@@ -269,5 +265,12 @@ function clicked(target) {
 	setTimeout(() => {
 		target.classList.remove("clicked")
 	}, 0)
+}
+// download
+function download(title, value) {
+	const download = document.createElement("a")
+	download.setAttribute('href', URL.createObjectURL(new Blob([value], { type: "text/plain" })))
+	download.setAttribute('download', title)
+	download.click()
 }
 /* --------------------------------------------------------------------------------------------- */
