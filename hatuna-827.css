@@ -10,6 +10,7 @@
 	--dark-mode-main-light-color: #565;
 	--dark-mode-main-dark-color: #41c641;
 	--dark-mode-main-bg-color: #383732;
+	--dark-mode-main-text-color: #ddd;
 	/* grey */
 	--dark-mode-grey-e5-color: #666;
 	--dark-mode-grey-d-color: #555;
@@ -35,6 +36,7 @@
 	--light-mode-main-light-color: #b2e9b2;
 	--light-mode-main-dark-color: #007e00;
 	--light-mode-main-bg-color: #f8f7f2;
+	--light-mode-main-text-color: #222;
 	/* grey */
 	--light-mode-grey-e5-color: #e5e5e5;
 	--light-mode-grey-d-color: #ddd;
@@ -56,14 +58,14 @@
 	--light-mode-contrast-pink-color: #f6bdc0;
 }
 
+/* Auto insert color */
 @media (prefers-color-scheme: dark) {
 	:root {
-		/* main */
 		--main-color: var(--dark-mode-main-color);
 		--main-light-color: var(--dark-mode-main-light-color);
 		--main-dark-color: var(--dark-mode-main-dark-color);
 		--main-bg-color: var(--dark-mode-main-bg-color);
-		/* grey */
+		--main-text-color: var(--dark-mode-main-text-color);
 		--grey-e5-color: var(--dark-mode-grey-e5-color);
 		--grey-d-color: var(--dark-mode-grey-d-color);
 		--grey-c-color: var(--dark-mode-grey-c-color);
@@ -71,12 +73,10 @@
 		--grey-5-color: var(--dark-mode-grey-5-color);
 		--contrast-color: var(--dark-mode-contrast-color);
 		--light-side-color: var(--dark-mode-light-side-color);
-		/* green */
 		--grey-green-color: var(--dark-mode-grey-green-color);
 		--light-green-color: var(--dark-mode-light-green-color);
 		--leaf-green-color: var(--dark-mode-leaf-green-color);
 		--dark-green-color: var(--dark-mode-dark-green-color);
-		/* any color */
 		--black-color: var(--dark-mode-black-color);
 		--white-color: var(--dark-mode-white-color);
 		--red-color: var(--dark-mode-red-color);
@@ -87,12 +87,11 @@
 
 @media (prefers-color-scheme: light) {
 	:root {
-		/* main */
 		--main-color: var(--light-mode-main-color);
 		--main-light-color: var(--light-mode-main-light-color);
 		--main-dark-color: var(--light-mode-main-dark-color);
 		--main-bg-color: var(--light-mode-main-bg-color);
-		/* grey */
+		--main-text-color: var(--light-mode-main-text-color);
 		--grey-e5-color: var(--light-mode-grey-e5-color);
 		--grey-d-color: var(--light-mode-grey-d-color);
 		--grey-c-color: var(--light-mode-grey-c-color);
@@ -100,12 +99,10 @@
 		--grey-5-color: var(--light-mode-grey-5-color);
 		--contrast-color: var(--light-mode-contrast-color);
 		--light-side-color: var(--light-mode-light-side-color);
-		/* green */
 		--grey-green-color: var(--light-mode-grey-green-color);
 		--light-green-color: var(--light-mode-light-green-color);
 		--leaf-green-color: var(--light-mode-leaf-green-color);
 		--dark-green-color: var(--light-mode-dark-green-color);
-		/* any color */
 		--black-color: var(--light-mode-black-color);
 		--white-color: var(--light-mode-white-color);
 		--red-color: var(--light-mode-red-color);
@@ -114,13 +111,12 @@
 	}
 }
 
-body[data-theme="dark"] {
-	/* main */
+body[data-theme='dark'] {
 	--main-color: var(--dark-mode-main-color);
 	--main-light-color: var(--dark-mode-main-light-color);
 	--main-dark-color: var(--dark-mode-main-dark-color);
 	--main-bg-color: var(--dark-mode-main-bg-color);
-	/* grey */
+	--main-text-color: var(--dark-mode-main-text-color);
 	--grey-e5-color: var(--dark-mode-grey-e5-color);
 	--grey-d-color: var(--dark-mode-grey-d-color);
 	--grey-c-color: var(--dark-mode-grey-c-color);
@@ -128,12 +124,10 @@ body[data-theme="dark"] {
 	--grey-5-color: var(--dark-mode-grey-5-color);
 	--contrast-color: var(--dark-mode-contrast-color);
 	--light-side-color: var(--dark-mode-light-side-color);
-	/* green */
 	--grey-green-color: var(--dark-mode-grey-green-color);
 	--light-green-color: var(--dark-mode-light-green-color);
 	--leaf-green-color: var(--dark-mode-leaf-green-color);
 	--dark-green-color: var(--dark-mode-dark-green-color);
-	/* any color */
 	--black-color: var(--dark-mode-black-color);
 	--white-color: var(--dark-mode-white-color);
 	--red-color: var(--dark-mode-red-color);
@@ -141,13 +135,12 @@ body[data-theme="dark"] {
 	--contrast-pink-color: var(--dark-mode-contrast-pink-color);
 }
 
-body[data-theme="light"] {
-	/* main */
+body[data-theme='light'] {
 	--main-color: var(--light-mode-main-color);
 	--main-light-color: var(--light-mode-main-light-color);
 	--main-dark-color: var(--light-mode-main-dark-color);
 	--main-bg-color: var(--light-mode-main-bg-color);
-	/* grey */
+	--main-text-color: var(--light-mode-main-text-color);
 	--grey-e5-color: var(--light-mode-grey-e5-color);
 	--grey-d-color: var(--light-mode-grey-d-color);
 	--grey-c-color: var(--light-mode-grey-c-color);
@@ -155,18 +148,18 @@ body[data-theme="light"] {
 	--grey-5-color: var(--light-mode-grey-5-color);
 	--contrast-color: var(--light-mode-contrast-color);
 	--light-side-color: var(--light-mode-light-side-color);
-	/* green */
 	--grey-green-color: var(--light-mode-grey-green-color);
 	--light-green-color: var(--light-mode-light-green-color);
 	--leaf-green-color: var(--light-mode-leaf-green-color);
 	--dark-green-color: var(--light-mode-dark-green-color);
-	/* any color */
 	--black-color: var(--light-mode-black-color);
 	--white-color: var(--light-mode-white-color);
 	--red-color: var(--light-mode-red-color);
 	--pink-color: var(--light-mode-pink-color);
 	--contrast-pink-color: var(--light-mode-contrast-pink-color);
 }
+
+/* Auto insert color end */
 
 ::selection {
 	background-color: var(--leaf-green-color);

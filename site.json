@@ -1,4 +1,31 @@
 {
+	"themes": [
+		"dark",
+		"light"
+	],
+	"colors": [
+		"main-color",
+		"main-light-color",
+		"main-dark-color",
+		"main-bg-color",
+		"main-text-color",
+		"grey-e5-color",
+		"grey-d-color",
+		"grey-c-color",
+		"grey-a-color",
+		"grey-5-color",
+		"contrast-color",
+		"light-side-color",
+		"grey-green-color",
+		"light-green-color",
+		"leaf-green-color",
+		"dark-green-color",
+		"black-color",
+		"white-color",
+		"red-color",
+		"pink-color",
+		"contrast-pink-color"
+	],
 	"site": [
 		{
 			"url": "/index.html",
