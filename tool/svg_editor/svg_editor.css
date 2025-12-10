@@ -69,7 +69,6 @@
 #img-content {
 	display: flex;
 	justify-content: center;
-	color: var(--black-color);
 }
 
 #img-content>svg {
@@ -184,7 +183,6 @@ input[type="file"] {
 	margin: 0px 0px 0px 30px;
 	padding: 0px 10px;
 	box-sizing: border-box;
-	color: var(--black-color);
 	background-color: rgba(0, 0, 0, 0);
 	border: 0px;
 	border-radius: 0px;

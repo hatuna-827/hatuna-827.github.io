@@ -8,7 +8,6 @@
 		margin: 30px 0px;
 		font-size: 45px;
 		line-height: 50px;
-		color: var(--black-color);
 	}
 
 	.link {
@@ -33,14 +32,12 @@
 		margin: 0px;
 		font-size: 30px;
 		line-height: 60px;
-		color: var(--black-color);
 	}
 
 	.sub-title {
 		display: block;
 		font-size: 20px;
 		line-height: 0px;
-		color: var(--black-color);
 	}
 
 	.description {
@@ -95,7 +92,6 @@
 	.title {
 		display: inline-block;
 		font-size: 20px;
-		color: var(--black-color);
 		vertical-align: baseline;
 	}
 
@@ -103,12 +99,10 @@
 		display: inline-block;
 		padding-left: 4px;
 		font-size: 15px;
-		color: var(--black-color);
 	}
 
 	.description {
 		font-size: 11px;
-		color: var(--black-color);
 	}
 }
 
@@ -135,14 +129,12 @@
 		margin: 0px 20px;
 		font-size: 17px;
 		line-height: 28px;
-		color: var(--black-color);
 	}
 
 	.sub-title {
 		padding-left: 30px;
 		display: block;
 		font-size: 13px;
-		color: var(--black-color);
 	}
 
 	.description {

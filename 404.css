@@ -1,14 +1,12 @@
 h1 {
 	margin: 0px;
 	line-height: 50px;
-	color: var(--black-color);
 	font-size: 70px;
 }
 
 h2 {
 	margin: 10px 0px 0px;
 	line-height: 40px;
-	color: var(--black-color);
 	font-size: 30px;
 }
 
@@ -16,21 +14,18 @@ h3 {
 	margin: 0px;
 	padding-top: 10px;
 	line-height: 40px;
-	color: var(--black-color);
 	font-size: 20px;
 }
 
 p {
 	margin: 0px;
 	line-height: 30px;
-	color: var(--black-color);
 	font-size: 15px;
 }
 
 button {
 	padding: 0px;
 	margin: 20px 40px 0px;
-	color: var(--black-color);
 	width: 200px;
 	height: 60px;
 	max-width: 256px;
@@ -44,10 +39,10 @@ button {
 hr {
 	margin: 10px auto;
 	max-width: 640px;
+	border: 1px solid var(--main-text-color);
 }
 
 #main {
-	color: var(--black-color);
 	margin: 40px;
 	text-align: center;
 	align-items: center;

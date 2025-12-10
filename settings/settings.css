@@ -5,14 +5,12 @@
 
 p {
 	margin: 10px 0px 0px;
-	color: var(--black-color);
 	font-size: 17px;
 	line-height: 21px;
 }
 
 label {
 	padding: 3px 0px;
-	color: var(--black-color);
 	font-size: 17px;
 	display: flex;
 	justify-items: center;
@@ -138,7 +136,6 @@ button {
 	padding: 0px 20px;
 	font-size: 17px;
 	background-color: var(--light-green-color);
-	color: var(--black-color);
 	border: none;
 	border-radius: 3px;
 }

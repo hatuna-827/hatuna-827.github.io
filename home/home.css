@@ -5,7 +5,6 @@
 h1 {
 	margin: 30px 0px;
 	line-height: 50px;
-	color: var(--black-color);
 	font-size: 50px;
 }
 
@@ -22,7 +21,6 @@ a:hover {
 p {
 	margin: 0px 40px;
 	line-height: 50px;
-	color: var(--black-color);
 	font-size: 25px;
 }
 

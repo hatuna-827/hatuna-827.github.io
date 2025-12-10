@@ -1,140 +1,22 @@
-h1 {
-	margin: 30px 0px;
-	line-height: 50px;
-	color: var(--black-color);
-	font-size: 45px;
+* {
+	box-sizing: border-box;
+	color: var(--main-text-color);
+	vertical-align: bottom;
 }
 
-h2 {
-	margin: 30px;
-	line-height: 40px;
-	color: var(--black-color);
-	font-size: 30px;
-}
-
-a {
-	margin: 0px 30px;
-	line-height: 50px;
-	color: var(--main-dark-color);
-	text-decoration: none;
-	font-size: 20px;
-}
-
-a::selection,
-a:hover {
-	text-decoration: underline .5px;
-	text-underline-offset: 3px;
-}
-
-code {
-	margin: 0px 30px;
-	padding: 5px 10px;
-	line-height: 50px;
-	font-size: 15px;
-	background-color: var(--grey-e5-color);
-	font-family: var(--code-font);
-	border-radius: 5px;
-}
-
-p {
-	margin: 0px 30px;
-	line-height: 50px;
-	color: var(--black-color);
-	font-size: 20px;
-
-	a {
-		margin: 0px;
-	}
-
-	code {
-		margin: 0px 3px;
-	}
-}
-
-.pre-box {
+#main {
 	position: relative;
 }
 
-.sticky-box {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	margin: 0px 30px 10px 30px;
-	padding: 15px;
-	height: calc(100% - 30px);
-	width: calc(100% - 90px);
-	text-align: right;
-	pointer-events: none;
-	z-index: 10;
+.nobr {
+	white-space: nowrap;
 }
 
-.copy-btn {
-	position: sticky;
-	top: 15px;
-	padding: 10px;
-	width: 90px;
-	height: 30px;
-	text-align: center;
-	font-size: 17px;
-	line-height: 0px;
-	border-radius: 5px;
-	border: 0px;
-	color: var(--black-color);
-	background-color: var(--grey-e5-color);
-	pointer-events: all;
-	cursor: pointer;
-}
-
-pre {
-	position: relative;
-	margin: 0px 30px 10px 30px;
-	padding: 15px;
-	font-family: var(--code-font);
-	white-space: pre;
-	overflow-x: auto;
-	font-size: 15px;
-	line-height: 25px;
-	border-radius: 5px;
-	color: var(--black-color);
-	background-color: var(--grey-d-color);
-
-	a {
-		font-size: 15px;
-		line-height: 25px;
-		margin: 0px;
-	}
-}
-
-ul {
-	margin: 10px 30px;
-	padding-left: 30px;
-	line-height: 30px;
-	color: var(--black-color);
-	font-size: 20px;
-
-	p {
-		margin: 0px 10px;
-	}
-
-	a {
-		margin: 0px;
-	}
-
-	code {
-		margin: 0px 3px;
-	}
-}
-
-.imgbox {
-	margin: 20px 30px;
+.img-box {
 	display: flex;
+	padding: 20px 30px;
 	justify-content: center;
 	align-items: center;
-}
-
-img {
-	color: var(--black-color);
-	font-size: 15px;
 }
 
 .border {
@@ -145,117 +27,504 @@ img {
 	image-rendering: pixelated;
 }
 
-hr {
-	margin: 20px;
-}
-
-#main {
-	margin: 50px;
-}
-
-#tag {
-	margin: 10px 30px 10px 30px;
-	padding: 20px 15px;
-	border-radius: 5px;
-	white-space: pre-wrap;
-	overflow: auto;
-	background-color: var(--grey-d-color);
-
-	a {
-		line-height: 30px;
-		color: var(--black-color);
-		font-size: 20px;
+@media screen and (min-width:1120px) {
+	#main {
+		margin: 0px auto;
+		padding: 30px 50px;
+		width: 1120px;
 	}
-}
 
-.nobr {
-	white-space: nowrap;
-	overflow-x: auto;
-}
+	#main-content {
+		padding: 20px;
+		width: 750px;
+		background-color: var(--light-side-color);
+		border-radius: 10px;
+	}
 
+	#tag-container {
+		position: absolute;
+		top: 0px;
+		right: 50px;
+		height: 100%;
+	}
 
-@media screen and (max-width:480px) {
+	#tag-wrapper {
+		position: sticky;
+		margin: 40px 0px;
+		top: 30px;
+		left: 50px;
+	}
+
+	#tag-content {
+		margin-top: 10px;
+		margin-left: 30px;
+		padding: 10px;
+		width: 240px;
+		background-color: var(--grey-d-color);
+		border-radius: 5px;
+		white-space: pre-wrap;
+	}
+
+	#tag-list {
+		margin: 0px;
+		padding: 0px;
+		padding-left: 30px;
+		max-height: calc(100vh - 126px);
+		overflow: auto;
+	}
+
+	#tag-list a {
+		display: inline-block;
+		width: 100%;
+		font-size: 15px;
+		color: var(--main-text-color);
+		vertical-align: top;
+	}
+
 	h1 {
 		margin: 0px;
-		line-height: 30px;
+		padding-left: 20px;
 		font-size: 30px;
+		line-height: 40px;
 	}
 
 	h2 {
-		margin: 15px;
-		line-height: 20px;
-		font-size: 20px;
+		margin: 0px;
+		padding-left: 20px;
+		font-size: 24px;
+		line-height: 36px;
+	}
+
+	p,
+	a,
+	ul,
+	ol,
+	code {
+		margin: 0px 20px;
+		font-size: 17px;
+		line-height: 30px;
 	}
 
 	a {
+		margin: 0px;
+		color: var(--main-dark-color);
+		text-decoration: none;
+	}
+
+	#main-content>a {
 		margin: 0px 20px;
-		line-height: 30px;
-		font-size: 15px;
+	}
+
+	a::selection,
+	a:hover {
+		text-decoration: underline .5px;
+		text-underline-offset: 3px;
 	}
 
 	code {
-		margin: 0px 20px;
-		line-height: 30px;
-		font-size: 10px;
+		margin: 0px 3px;
+		padding: 5px 7px;
+		font-size: 13px;
+		background-color: var(--grey-e5-color);
+		font-family: var(--code-font);
+		border-radius: 5px;
+		white-space: nowrap;
 	}
 
-	p {
-		margin: 0px 20px;
-		line-height: 30px;
-		font-size: 15px;
-
-		a {
-			margin: 0px;
-		}
-
-		code {
-			margin: 2px;
-		}
+	#main-content>code {
+		margin: 0px 30px;
 	}
 
-	button {
-		width: 60px;
-		height: 20px;
-		margin: 0px 20px -15px;
-		font-size: 11px;
-	}
-
-	pre {
-		margin: 0px 20px 10px 20px;
-		padding: 10px;
-		line-height: 15px;
-		font-size: 12px;
-	}
-
-	ul {
-		padding-left: 25px;
-		margin: 5px 20px;
-		line-height: 20px;
-		font-size: 15px;
-	}
-
-	img {
-		margin: 10px 20px;
-		font-size: 10px;
-		max-width: calc(100% - 40px);
+	ul,
+	ol {
+		padding-left: 30px;
 	}
 
 	hr {
-		margin: 10px;
+		margin: 15px 20px;
+		border: 1px solid var(--grey-d-color);
 	}
 
+	.pre-box {
+		position: relative;
+		margin: 10px 30px;
+		padding: 7px 15px;
+		border-radius: 5px;
+		background-color: var(--grey-d-color);
+	}
+
+	pre,
+	pre * {
+		position: relative;
+		margin: 0px;
+		font-size: 14px;
+		line-height: 25px;
+		font-family: var(--code-font);
+		white-space: pre;
+		overflow-x: auto;
+	}
+
+	.sticky-box {
+		position: absolute;
+		display: flex;
+		top: 0px;
+		bottom: 0px;
+		right: 0px;
+		left: 0px;
+		padding: 7px 15px;
+		justify-content: right;
+		pointer-events: none;
+	}
+
+	.copy-btn {
+		position: sticky;
+		padding: 0px 3px;
+		top: 15px;
+		height: 25px;
+		border-radius: 5px;
+		background-color: var(--grey-e5-color);
+		pointer-events: all;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	.copy-btn-text {
+		display: inline-block;
+		height: 25px;
+		width: 0px;
+		font-size: 13px;
+		line-height: 25px;
+		overflow: hidden;
+		transition: all 0.2s;
+	}
+
+	.copy-btn:hover .copy-btn-text {
+		width: 95px;
+		transition: all 0.2s;
+	}
+
+	.copy-btn-icon {
+		display: inline-block;
+		padding: 3px;
+		height: 25px;
+		width: 25px;
+	}
+
+	img {
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-width:1120px) and (min-width:590px) {
 	#main {
-		margin: 30px;
+		padding: 30px;
 	}
 
-	#tag {
-		margin: 10px 20px 10px 20px;
-		padding: 10px;
+	#main-content {
+		padding: 20px;
+		background-color: var(--light-side-color);
+		border-radius: 10px;
+	}
 
-		a {
-			margin: 0px 10px;
-			line-height: 20px;
-			font-size: 15px;
-		}
+	#tag-content {
+		margin: 10px;
+		padding: 10px;
+		background-color: var(--grey-d-color);
+		border-radius: 5px;
+		white-space: pre-wrap;
+	}
+
+	#tag-list {
+		margin: 0px;
+		padding: 0px;
+		padding-left: 30px;
+	}
+
+	#tag-list a {
+		display: inline-block;
+		width: 100%;
+		font-size: 15px;
+		color: var(--main-text-color);
+		vertical-align: top;
+	}
+
+	h1 {
+		margin: 0px;
+		font-size: 30px;
+		line-height: 40px;
+	}
+
+	h2 {
+		margin: 0px;
+		font-size: 24px;
+		line-height: 36px;
+	}
+
+	p,
+	a,
+	ul,
+	ol,
+	code {
+		margin: 0px;
+		font-size: 17px;
+		line-height: 30px;
+	}
+
+	a {
+		color: var(--main-dark-color);
+		text-decoration: none;
+	}
+
+	a::selection,
+	a:hover {
+		text-decoration: underline .5px;
+		text-underline-offset: 3px;
+	}
+
+	code {
+		margin: 0px 3px;
+		padding: 5px 7px;
+		font-size: 13px;
+		background-color: var(--grey-e5-color);
+		font-family: var(--code-font);
+		border-radius: 5px;
+		white-space: nowrap;
+	}
+
+	#main-content>code {
+		margin: 0px 10px;
+	}
+
+	ul,
+	ol {
+		padding-left: 20px;
+	}
+
+	hr {
+		margin: 15px 0px;
+		border: 1px solid var(--grey-d-color);
+	}
+
+	.pre-box {
+		position: relative;
+		margin: 10px;
+		padding: 7px 12px;
+		border-radius: 5px;
+		background-color: var(--grey-d-color);
+	}
+
+	pre,
+	pre * {
+		position: relative;
+		margin: 0px;
+		font-size: 14px;
+		line-height: 25px;
+		font-family: var(--code-font);
+		white-space: pre;
+		overflow-x: auto;
+	}
+
+	.sticky-box {
+		position: absolute;
+		display: flex;
+		top: 0px;
+		bottom: 0px;
+		right: 0px;
+		left: 0px;
+		padding: 7px 12px;
+		justify-content: right;
+		pointer-events: none;
+	}
+
+	.copy-btn {
+		position: sticky;
+		padding: 0px 3px;
+		top: 13px;
+		height: 25px;
+		border-radius: 5px;
+		background-color: var(--grey-e5-color);
+		pointer-events: all;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	.copy-btn-text {
+		display: inline-block;
+		height: 25px;
+		width: 0px;
+		font-size: 13px;
+		line-height: 25px;
+		overflow: hidden;
+		transition: all 0.2s;
+	}
+
+	.copy-btn:hover .copy-btn-text {
+		width: 95px;
+		transition: all 0.2s;
+	}
+
+	.copy-btn-icon {
+		display: inline-block;
+		padding: 3px;
+		height: 25px;
+		width: 25px;
+	}
+
+	img {
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-width:590px) {
+	#main-content {
+		padding: 20px;
+	}
+
+	#tag-content {
+		margin: 5px;
+		padding: 5px;
+		background-color: var(--grey-d-color);
+		border-radius: 5px;
+		white-space: pre-wrap;
+	}
+
+	#tag-list {
+		margin: 0px;
+		padding: 0px;
+		padding-left: 25px;
+	}
+
+	#tag-list a {
+		display: inline-block;
+		width: 100%;
+		font-size: 14px;
+		color: var(--main-text-color);
+		vertical-align: top;
+	}
+
+	h1 {
+		margin: 0px;
+		font-size: 23px;
+		line-height: 30px;
+	}
+
+	h2 {
+		margin: 0px;
+		font-size: 20px;
+		line-height: 27px;
+	}
+
+	p,
+	a,
+	ul,
+	ol,
+	code {
+		margin: 0px;
+		font-size: 15px;
+		line-height: 27px;
+	}
+
+	a {
+		color: var(--main-dark-color);
+		text-decoration: none;
+	}
+
+	a::selection,
+	a:hover {
+		text-decoration: underline .5px;
+		text-underline-offset: 3px;
+	}
+
+	code {
+		margin: 0px 3px;
+		padding: 5px 7px;
+		font-size: 13px;
+		background-color: var(--grey-e5-color);
+		font-family: var(--code-font);
+		border-radius: 5px;
+		white-space: nowrap;
+	}
+
+	#main-content>code {
+		margin: 0px 10px;
+	}
+
+	ul,
+	ol {
+		padding-left: 18px;
+	}
+
+	hr {
+		margin: 15px 0px;
+		border: 1px solid var(--grey-d-color);
+	}
+
+	.pre-box {
+		position: relative;
+		margin: 5px;
+		padding: 5px 10px;
+		border-radius: 5px;
+		background-color: var(--grey-d-color);
+	}
+
+	pre,
+	pre * {
+		position: relative;
+		margin: 0px;
+		font-size: 13px;
+		line-height: 23px;
+		font-family: var(--code-font);
+		white-space: pre;
+		overflow-x: auto;
+	}
+
+	.sticky-box {
+		position: absolute;
+		display: flex;
+		top: 0px;
+		bottom: 0px;
+		right: 0px;
+		left: 0px;
+		padding: 5px 10px;
+		justify-content: right;
+		pointer-events: none;
+	}
+
+	.copy-btn {
+		position: sticky;
+		padding: 0px 3px;
+		top: 10px;
+		height: 25px;
+		border-radius: 5px;
+		background-color: var(--grey-e5-color);
+		pointer-events: all;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	.copy-btn-text {
+		display: inline-block;
+		height: 25px;
+		width: 0px;
+		font-size: 13px;
+		line-height: 25px;
+		overflow: hidden;
+		transition: all 0.2s;
+	}
+
+	.copy-btn:hover .copy-btn-text {
+		width: 95px;
+		transition: all 0.2s;
+	}
+
+	.copy-btn-icon {
+		display: inline-block;
+		padding: 3px;
+		height: 25px;
+		width: 25px;
+	}
+
+	img {
+		font-size: 15px;
 	}
 }

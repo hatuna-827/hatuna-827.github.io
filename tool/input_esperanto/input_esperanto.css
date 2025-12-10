@@ -11,14 +11,12 @@
 	border-radius: 0px;
 	resize: none;
 	background-color: var(--main-bg-color);
-	color: var(--black-color);
 	font-size: 20px;
 	font-family: var(--code-font);
 }
 
 #in::selection {
 	background-color: var(--leaf-green-color);
-	color: var(--black-color);
 }
 
 :focus {

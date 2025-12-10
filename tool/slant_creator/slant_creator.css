@@ -43,7 +43,6 @@ input {
 	width: 700px;
 	border-radius: 30px;
 	background-color: var(--grey-d-color);
-	color: var(--black-color);
 	font-size: 25px;
 	line-height: 40px;
 	text-align: left;
@@ -84,7 +83,6 @@ input {
 	border: 1px solid var(--black-color);
 	background-color: var(--white-color);
 	border-radius: 3px;
-	color: var(--black-color);
 	font-size: 20px;
 	text-align: center;
 	vertical-align: 1px;
