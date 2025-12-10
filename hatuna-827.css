@@ -44,7 +44,7 @@
 	--light-mode-grey-a-color: #aaa;
 	--light-mode-grey-5-color: #555;
 	--light-mode-contrast-color: #fff;
-	--light-mode-light-side-color: #ffffff;
+	--light-mode-light-side-color: #fff;
 	/* green */
 	--light-mode-grey-green-color: #cdc;
 	--light-mode-light-green-color: #afd8af;
@@ -161,6 +161,12 @@ body[data-theme='light'] {
 
 /* Auto insert color end */
 
+* {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+}
+
 ::selection {
 	background-color: var(--leaf-green-color);
 	color: var(--blak-color);
@@ -170,26 +176,27 @@ body {
 	margin: 0px;
 	font-family: var(--main-font);
 	font-size: 0px;
-	color: var(--black-color);
+	color: var(--main-text-color);
 	background-color: var(--main-bg-color);
 	scrollbar-color: var(--leaf-green-color) #0000;
 }
 
 #homebar {
 	position: relative;
-	background-color: var(--main-light-color);
+	background-color: var(--main-color);
 	width: 100%;
-	height: min(90px, 15vw);
+	height: min(80px, 15vw);
+	color: var(--white-color);
 	text-align: center;
 	user-select: none;
 }
 
 #homebar a {
 	margin: 0px;
-	font-size: min(50px, 10vw);
-	color: var(--black-color);
+	font-size: min(37px, 10vw);
+	color: var(--white-color);
 	text-decoration: none;
-	line-height: min(90px, 15vw);
+	line-height: min(80px, 15vw);
 }
 
 #site-setting {
@@ -199,7 +206,6 @@ body {
 	height: 30px;
 	width: 30px;
 	transform: translate(0, -50%);
-	color: var(--black-color);
 }
 
 noscript {
@@ -214,13 +220,7 @@ noscript {
 	align-items: center;
 	text-align: center;
 	font-size: 25px;
-	color: var(--black-color);
+	color: var(--main-text-color);
 	z-index: 1001;
 	padding: 20px;
-}
-
-button,
-input,
-textarea {
-	font-family: inherit;
 }
