@@ -4,9 +4,9 @@ import structure from "/module/structure.js"
 const format_structure = {
 	indent_type: {
 		display_name: "インデントの種類", type: "select", option: {
-			space: { display_name: "スペース", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, max: 10, default: 2, placeholder: "0~10" } } },
-			tab: { display_name: "タブ", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, max: 10, default: 1, placeholder: "0~10" } } },
-			no_indent: { display_name: "インデントしない", children: {} },
+			space: { display_name: "スペース", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, max: 10, step: 1, default: 2, placeholder: "0~10" } } },
+			tab: { display_name: "タブ", children: { indent_count: { display_name: "インデントの数", type: "number", min: 0, max: 10, step: 1, default: 1, placeholder: "0~10" } } },
+			no_indent: { display_name: "インデントしない" },
 			other: { display_name: "その他の文字列", children: { indent_text: { display_name: "インデント文字列", max: 10, type: "string", placeholder: "0~10文字" } } }
 		}
 	},
@@ -19,7 +19,7 @@ const format_structure = {
 	}
 }
 const gui_structure = {
-	top_type: {
+	type: {
 		type: "select", display_name: "トップレベルの構造", option: {
 			object: {
 				display_name: "オブジェクト", children: {
@@ -49,32 +49,46 @@ const select_type_structure = {
 		type: "select", display_name: "型", option: {
 			string: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "string" } } } },
 			number: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "number" } } } },
+			bool: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "boolean" } } } },
 			object: { children: { object: { type: "reference", name: "object_children" } } },
 			array: {
 				children: {
-					defalut: { type: "boolean", display_name: "デフォルトで空配列を設定する" },
+					default: { type: "boolean", display_name: "デフォルトで空配列を設定する" },
 					array: { type: "reference", name: "array_children" }
 				}
 			},
-			bool: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "boolean" } } } },
-			null: { children: {} }
+			null: {}
 		}
 	}
 }
 const object_children_structure = {
 	sort: { type: "boolean", display_name: "自動ソート" },
+	default: { type: "boolean", display_name: "デフォルトで空オブジェクトを設定する" },
 	entry: { type: "reference", name: "entry" }
 }
 const array_children_structure = {
-	children: {
+	element: {
 		type: "object", display_name: "要素", children: {
-			entry: { type: "reference", name: "select_type" }
+			type: {
+				type: "select", display_name: "要素の型", option: {
+					string: {}, number: {}, bool: {},
+					object: { children: { object: { type: "reference", name: "object_children" } } },
+					array: {
+						children: {
+							default: { type: "boolean", display_name: "デフォルトで空配列を設定する" },
+							array: { type: "reference", name: "array_children" }
+						}
+					}, null: {}
+				}
+			}
 		}
 	}
 }
 /* - init -------------------------------------------------------------------------------------- */
+// set input file
 set_input_file()
 set_format_input_file()
+// structure
 structure.def_struct("format", format_structure)
 structure.def_struct("gui", gui_structure)
 structure.def_struct("entry", entry_structure)
@@ -85,7 +99,7 @@ structure.set("input-format-structure", "format", change_format)
 structure.set("input-format-gui-structure", "gui", change_format_gui)
 change_format()
 change_format_gui()
-
+// add copy and download button
 document.querySelectorAll(".textarea-copy-download").forEach((element) => {
 	const button_box = document.createElement('div')
 	button_box.className = "copy-download-box"
@@ -108,7 +122,11 @@ document.querySelectorAll(".textarea-copy-download").forEach((element) => {
 	element.insertAdjacentElement('beforebegin', button_box)
 })
 /* - add eventListener ------------------------------------------------------------------------- */
+// change input json
 document.getElementById("input-json-area").addEventListener('input', set_input_file_name)
+// generate format from json
+document.getElementById("generate-format-text-button").addEventListener('click', generate_format_from_input_json)
+// execute
 document.getElementById("execute").addEventListener('click', execute)
 /* - function ---------------------------------------------------------------------------------- */
 // input
@@ -157,34 +175,54 @@ function set_format_input_file() {
 	document.getElementById("input-format-text-label").appendChild(input_format_file)
 }
 function change_format() {
-	const format = structure.get("input-format-structure").format
+	const format = structure.get("input-format-structure").format.structure
 	const text_format = document.getElementById("input-format-text")
 	const gui_format = document.getElementById("input-format-gui")
 	text_format.style.display = "none"
 	gui_format.style.display = "none"
-	if (format.structure === "no") {
-	} else if (format.structure === "text") {
+	if (format === "no") {
+	} else if (format === "text") {
 		text_format.style.display = "block"
-	} else if (format.structure === "gui") {
+	} else if (format === "gui") {
 		gui_format.style.display = "block"
 
 	}
 }
 function change_format_gui() {
-	document.getElementById("input-format-gui-area").textContent = JSON.stringify(structure.get("input-format-gui-structure").gui, null, 2)
+	document.getElementById("input-format-gui-area").textContent =
+		JSON.stringify(structure.get("input-format-gui-structure").gui, null, 2)
+}
+function generate_format_from_input_json() {
+	reset_output()
+	const json = parse_json(document.getElementById("input-json-area").value, "入力されたJSON")
+	if (json.status === "error") { return }
+	const format = generate_format(json.value)
+	document.getElementById("input-format-area").value = JSON.stringify(format, null, 2)
+	log("フォーマットの生成が完了しました！")
+	set_result("sucess")
+}
+function generate_format(target) {
+	let result = {}
+	const type = typeof (target)
+	if (type === "object") {
+		if (Array.isArray(target)) {
+			result.type = "array"
+			result.element = generate_format(target[0])
+		} else {
+			result.type = "object"
+			result.entry = []
+			Object.entries(target).forEach(([key, value]) => {
+				result.entry.push({ key: key, ...generate_format(value) })
+			})
+		}
+	} else { result.type = type }
+	return result
 }
 // output
 function execute() {
-	const output_field = document.getElementById("output-field")
 	reset_output()
-	const json = parse_json(document.getElementById("input-json-area").value)
-	if (json.status === "error") {
-		set_result("error")
-		log("入力されたJSONが無効です。")
-		log(json.value)
-		return
-	}
-	log("入力されたJSON：OK")
+	const json = parse_json(document.getElementById("input-json-area").value, "入力されたJSON")
+	if (json.status === "error") { return }
 
 	const format_data = structure.get("input-format-structure").format
 	let result = {}
@@ -192,57 +230,125 @@ function execute() {
 	const structure_type = format_data.structure
 	if (structure_type === "no") {
 		result = json.value
+		log("フォーマット : なし")
 	} else if (structure_type === "text") {
-		const format_text_data = parse_json(document.getElementById("input-format-area").value)
-		if (format_text_data.status === "error") {
+		log("フォーマット : TEXT")
+		const format_text_data = parse_json(document.getElementById("input-format-area").value, "入力されたフォーマット")
+		if (format_text_data.status === "error") { return }
+		try {
+			result = format_json(json.value, format_text_data.value)
+		} catch (err) {
 			set_result("error")
-			log("入力されたJSONの構造が無効です。")
-			log(format_text_data.value)
+			log("フォーマットに失敗しました")
+			log(err)
 			return
 		}
-		log("入力されたJSONの構造：有効")
 	} else if (structure_type === "gui") {
 		const format_gui_data = structure.get("input-format-gui-structure").gui
-		console.log(format_gui_data)
+		log("フォーマット : GUI")
+		result = format_json(json.value, format_gui_data)
 	}
 
 	const indent_type = format_data.indent_type
 	if (indent_type === "space") {
+		log(`インデント : スペース × ${format_data.indent_count}`)
 		result = JSON.stringify(result, null, format_data.indent_count)
 	} else if (indent_type === "tab") {
+		log(`インデント : タブ × ${format_data.indent_count}`)
 		result = JSON.stringify(result, null, "\t".repeat(format_data.indent_count))
 	} else if (indent_type === "other") {
+		log(`インデント : ${format_data.indent_text}`)
 		result = JSON.stringify(result, null, format_data.indent_text)
 	} else if (indent_type === "no_indent") {
+		log(`インデント : なし`)
 		result = JSON.stringify(result)
 	}
 	set_result("sucess")
-	output_field.textContent = result
+	log("フォーマットが完了しました！")
+	document.getElementById("output-field").textContent = result
 }
-function parse_json(json) {
-	try {
-		if (!/\S*\{/.test(json)) {
-			return { status: "error", value: "JSONは'{'または'['で始まる必要があります。" }
+function format_json(target, format) {
+	const type = format.type
+	if (["string", "number", "boolean", "null"].includes(type)) {
+		if (target === undefined) { if (format.default === undefined) { return undefined } else { return format_json(format.default, format) } }
+		try {
+			if (type === "string") {
+				return String(target)
+			} else if (type === "number") {
+				return Number(target)
+			} else if (type === "boolean") {
+				return Boolean(target)
+			} else if (type === "null") {
+				return null
+			}
+		} catch {
+			throw new Error(`${target} ${type}型への変換に失敗しました`)
 		}
-		return { status: "success", value: JSON.parse(json) }
-	} catch (err) {
-		return { status: "error", value: err }
+	} else if (["object", "array"].includes(type)) {
+		if (type === "object") {
+			if (target === undefined) { if (format.default === true) { return {} } else { return undefined } }
+			if (typeof (target) !== "object" || target === null || Array.isArray(target)) { throw new Error(`type:object フォーマット対象がオブジェクトではありません`) }
+			const sort = format.sort
+			const entry = format.entry
+			if (entry === undefined) { throw new Error(`type:object entryの値が見つかりません`) }
+			if (!Array.isArray(entry)) { throw new Error(`type:object entryが配列ではありません`) }
+			if (sort === true) {
+				entry.sort((a, b) => {
+					const nameA = a.name.toUpperCase()
+					const nameB = b.name.toUpperCase()
+					if (nameA < nameB) { return -1 } if (nameA > nameB) { return 1 } return 0
+				})
+			}
+			let result = {}
+			entry.forEach((entry_format, i) => {
+				const key = entry_format.key
+				if (key === undefined) { throw new Error(`type:object entryの${i}番目 keyが見つかりません`) }
+				const value = format_json(target[key], entry_format)
+				delete target[key]
+				if (value !== undefined) { result[key] = value }
+			})
+			Object.keys(target).forEach((key) => { log(`key:${key} を削除しました`) })
+			return result
+		} else if (type === "array") {
+			if (target === undefined) { if (format.default === true) { return [] } else { return undefined } }
+			if (!Array.isArray(target)) { throw new Error(`type:array フォーマット対象が配列ではありません`) }
+			let result = []
+			target.forEach((element) => {
+				const value = format_json(element, format.element)
+				if (value !== undefined) { result.push(value) }
+			})
+			return result
+		}
+	} else {
+		throw new Error(`${type} フォーマットのtypeの値が見つかりません`)
 	}
 }
-function filter_format_data(obj) {
+function parse_json(json, title) {
 	let result = {}
-	const keys = Object.keys(obj)
-	keys.forEach((key) => {
-		const value = obj[key]
-		if (value !== undefined && value !== null) {
-			result
+	try {
+		if (!/\S*\{/.test(json)) {
+			result = { status: "error", value: "JSONは'{'または'['で始まる必要があります。" }
 		}
-	})
+		result = { status: "success", value: JSON.parse(json) }
+	} catch (err) {
+		result = { status: "error", value: err }
+	}
+	if (result.status === "error") {
+		set_result("error")
+		log(`${title} : 無効`)
+		log(result.value)
+	} else {
+		log(`${title} : 有効`)
+	}
+	return result
 }
+// result log
 function log(content) {
 	const log_field = document.getElementById("log-field")
-	log_field.textContent += content
-	log_field.textContent += "\n"
+	const new_log = document.createElement('div')
+	new_log.className = "log-text"
+	new_log.textContent = content
+	log_field.appendChild(new_log)
 }
 function set_result(result) {
 	const result_element = document.getElementById("result")
@@ -256,6 +362,7 @@ function set_result(result) {
 }
 function reset_output() {
 	document.getElementById("result").textContent = ""
+	document.getElementById("result").style.color = ""
 	document.getElementById("output-field").textContent = ""
 	document.getElementById("log-field").textContent = ""
 }

@@ -405,12 +405,13 @@ function object_to_svg(obj) {
 	return xml
 }
 function add_xml(types, obj) {
+	if (obj === undefined) { return "" }
 	let not_first = false
 	let result = ""
-	if (obj === null) { return result }
 	types.forEach((type) => {
 		const value = obj[type]
-		if (value !== null && (!Array.isArray(value) || value.length !== 0)) {
+		if (value === undefined) { return }
+		if (!Array.isArray(value) || value.length !== 0) {
 			if (not_first) { result += " " }
 			not_first = true
 			result += `${type}="${value}"`
