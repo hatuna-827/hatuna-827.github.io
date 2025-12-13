@@ -1,4 +1,4 @@
-:root {
+.structure {
 	--structure-title: var(--grey-e5-color);
 	--structure-title-text: var(--black-color);
 	--structure-border: var(--grey-a-color);
@@ -21,7 +21,7 @@
 #main {
 	position: relative;
 	width: 800px;
-	margin: 30px auto;
+	margin: 30px auto 100px;
 }
 
 .split {
@@ -192,4 +192,19 @@
 
 .button.clicked {
 	background-color: var(--grey-a-color);
+}
+
+/* example */
+.example {
+	margin: 10px 0px;
+	min-height: 100px;
+	overflow: auto;
+	max-height: 300px;
+	resize: none;
+}
+
+.bold {
+	font-weight: 600;
+	text-decoration: underline .5px;
+	text-underline-offset: 3px;
 }

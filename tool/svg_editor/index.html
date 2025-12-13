@@ -23,7 +23,7 @@
 	<link rel="apple-touch-icon" href="/hatuna-827.ico">
 	<link rel="stylesheet" href="/tool/svg_editor/svg_editor.css">
 	<link rel="stylesheet" href="/hatuna-827.css">
-	<script src="/hatuna-827.js" type="module"></script>
+	<script src="/hatuna-827.js" type="module" crossorigin="use-credentials"></script>
 	<title>SVGエディター | hatuna-827</title>
 	<!-- Auto insert head end -->
 </head>
@@ -66,6 +66,12 @@
 					<div id="img-content"></div>
 				</div>
 				<div class="mini-btn-box">
+					<div id="svg-download" class="mini-btn margin-right" title="ダウンロード">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
+							stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12,5H7a3,3 0 0 0-3,3v9a3,3 0 0 0 3,3h9a3,3 0 0 0 3-3V11m0-6l-8,8h5h-5v-5" />
+						</svg>
+					</div>
 					<div id="img-home" class="mini-btn" title="中央に戻す">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -98,7 +104,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="./svg_editor.js" type="module"></script>
+	<script src="./svg_editor.js" type="module" crossorigin="use-credentials"></script>
 </body>
 
 </html>

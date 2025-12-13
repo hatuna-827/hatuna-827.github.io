@@ -21,28 +21,10 @@ const format_structure = {
 const gui_structure = {
 	type: {
 		type: "select", display_name: "トップレベルの構造", option: {
-			object: {
-				display_name: "オブジェクト", children: {
-					object: { type: "reference", name: "object_children" }
-				}
-			},
-			array: {
-				display_name: "リスト", children: {
-					array: { type: "reference", name: "array_children" }
-				}
-			}
+			object: { display_name: "オブジェクト", children: { object: { type: "reference", name: "object_children" } } },
+			array: { display_name: "リスト", children: { array: { type: "reference", name: "array_children" } } }
 		}
 	},
-}
-const entry_structure = {
-	entry: {
-		type: "list", display_name: "エントリー", children: {
-			type: "object", children: {
-				key: { type: "string", display_name: "プロパティ名", placeholder: "(必須)" },
-				type: { type: "reference", name: "select_type" }
-			}
-		}
-	}
 }
 const select_type_structure = {
 	type: {
@@ -50,7 +32,12 @@ const select_type_structure = {
 			string: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "string" } } } },
 			number: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "number" } } } },
 			bool: { children: { default: { type: "toggle", display_name: "デフォルトの値", children: { type: "boolean" } } } },
-			object: { children: { object: { type: "reference", name: "object_children" } } },
+			object: {
+				children: {
+					default: { type: "boolean", display_name: "デフォルトで空オブジェクトを設定する" },
+					object: { type: "reference", name: "object_children" }
+				}
+			},
 			array: {
 				children: {
 					default: { type: "boolean", display_name: "デフォルトで空配列を設定する" },
@@ -63,8 +50,14 @@ const select_type_structure = {
 }
 const object_children_structure = {
 	sort: { type: "boolean", display_name: "自動ソート" },
-	default: { type: "boolean", display_name: "デフォルトで空オブジェクトを設定する" },
-	entry: { type: "reference", name: "entry" }
+	entry: {
+		type: "list", display_name: "エントリー", children: {
+			type: "object", children: {
+				key: { type: "string", display_name: "プロパティ名", placeholder: "(必須)" },
+				type: { type: "reference", name: "select_type" }
+			}
+		}
+	}
 }
 const array_children_structure = {
 	element: {
@@ -91,7 +84,6 @@ set_format_input_file()
 // structure
 structure.def_struct("format", format_structure)
 structure.def_struct("gui", gui_structure)
-structure.def_struct("entry", entry_structure)
 structure.def_struct("select_type", select_type_structure)
 structure.def_struct("object_children", object_children_structure)
 structure.def_struct("array_children", array_children_structure)

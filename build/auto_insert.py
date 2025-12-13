@@ -53,7 +53,7 @@ for site in site_data:
 \t<link rel="apple-touch-icon" href="/hatuna-827.ico">
 \t<link rel="stylesheet" href="{css_path}">
 \t<link rel="stylesheet" href="/hatuna-827.css">
-\t<script src="/hatuna-827.js" type="module"></script>
+\t<script src="/hatuna-827.js" type="module" crossorigin="use-credentials"></script>
 \t<title>{name}</title>
 \t<!-- Auto insert head end -->'''
 	html=html.replace("<!-- Auto insert head --><!-- Auto insert head end -->", head)
