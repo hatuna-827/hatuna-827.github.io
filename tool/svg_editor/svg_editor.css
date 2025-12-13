@@ -1,4 +1,4 @@
-:root {
+.structure {
 	--structure-title: var(--main-color);
 	--structure-title-text: var(--white-color);
 	--structure-border: var(--main-color);

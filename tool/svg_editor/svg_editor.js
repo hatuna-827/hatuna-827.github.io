@@ -209,6 +209,12 @@ document.getElementById("add-doc").addEventListener('change', function () {
 	})
 	fileReader.readAsDataURL(this.files[0])
 })
+document.getElementById("svg-download").addEventListener('click', function () {
+	const download = document.createElement("a")
+	download.setAttribute('href', URL.createObjectURL(new Blob([comp_xml(document.getElementById("xml-sub-view").textContent)], { type: "text/plain" })))
+	download.setAttribute('download', "download.svg")
+	download.click()
+})
 document.getElementById("img-home").addEventListener('click', function () {
 	scale = 1
 	originX = 0
@@ -405,12 +411,13 @@ function object_to_svg(obj) {
 	return xml
 }
 function add_xml(types, obj) {
+	if (obj === undefined) { return "" }
 	let not_first = false
 	let result = ""
-	if (obj === null) { return result }
 	types.forEach((type) => {
 		const value = obj[type]
-		if (value !== null && (!Array.isArray(value) || value.length !== 0)) {
+		if (value === undefined) { return }
+		if (!Array.isArray(value) || value.length !== 0) {
 			if (not_first) { result += " " }
 			not_first = true
 			result += `${type}="${value}"`
@@ -420,7 +427,7 @@ function add_xml(types, obj) {
 	return result
 }
 function comp_xml(xml) {
-	xml = xml.replace(/\n *|(?<=[0-9]) *(?=[a-zA-Z])|(?<=") *|[, ](?=-)/g, "")
+	xml = xml.replace(/\n *|(?<=[0-9]) *(?=[a-zA-Z])|[, ](?=-)/g, "")
 	return xml
 }
 /* --------------------------------------------------------------------------------------------- */

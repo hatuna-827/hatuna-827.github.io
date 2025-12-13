@@ -1,0 +1,210 @@
+.structure {
+	--structure-title: var(--grey-e5-color);
+	--structure-title-text: var(--black-color);
+	--structure-border: var(--grey-a-color);
+	--structure-input: var(--light-side-color);
+	--structure-input-text: var(--black-color);
+	--structure-input-true: var(--grey-e5-color);
+	--structure-add: var(--black-color);
+	--structure-nest-border: var(--grey-a-color);
+	--structure-invalid: var(--red-color);
+	--structure-border-radius: 3px;
+	--structure-font: var(--main-font);
+	--structure-font-size: 14px;
+	--structure-nest-size: 20px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#main {
+	position: relative;
+	width: 800px;
+	margin: 30px auto 100px;
+}
+
+.split {
+	margin: 10px 0px;
+}
+
+.title {
+	margin: 40px 0px 0px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.sub-title {
+	margin: 0px;
+	margin-left: 10px;
+	font-size: 22px;
+	line-height: 38px;
+}
+
+.text {
+	margin: 0px;
+	margin-left: 30px;
+	font-size: 17px;
+	line-height: 30px;
+}
+
+.link {
+	text-decoration: underline .5px;
+	text-underline-offset: 3px;
+	color: var(--main-dark-color);
+}
+
+.list {
+	margin: 0px;
+	padding-left: 50px;
+	font-size: 17px;
+	line-height: 30px;
+}
+
+.list .list {
+	padding-left: 20px;
+}
+
+/* input-json */
+#input-json-label {
+	display: block;
+}
+
+#input-json-file-name {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+/* input-format */
+#input-format-gui-area {
+	margin: 10px 0px;
+	min-height: 100px;
+	overflow: auto;
+	max-height: 300px;
+}
+
+#execute {
+	display: block;
+	text-align: center;
+	margin: 0px 50px;
+	width: 700px;
+	font-size: 15px;
+	line-height: 30px;
+	transition: none;
+}
+
+#execute:hover {
+	background-color: var(--grey-d-color);
+}
+
+/* output */
+#output-field {
+	margin: 10px 0px;
+	height: 100px;
+	min-height: 100px;
+	overflow: auto;
+}
+
+/* log */
+.result-empty:empty::before {
+	content: "-";
+}
+
+#log-field {
+	min-height: 100px;
+	overflow: auto;
+	max-height: 300px;
+}
+
+/* class */
+.button {
+	background-color: var(--grey-e5-color);
+	border-radius: 3px;
+	border: 1px solid var(--grey-5-color);
+	cursor: pointer;
+}
+
+.textarea {
+	padding: 3px 5px;
+	width: 100%;
+	color: var(--black-color);
+	font-size: 13px;
+	font-family: var(--code-font);
+	white-space: pre;
+	background-color: var(--light-side-color);
+	border-radius: 3px;
+	border: 1px solid var(--grey-a-color);
+	tab-size: 2;
+	resize: vertical;
+}
+
+/* input */
+.text-input {
+	margin: 10px 0px;
+	height: 100px;
+	min-height: 100px;
+	width: 100%;
+	resize: vertical;
+	outline: none;
+}
+
+.download-button,
+.copy-button,
+#input-json-file-button,
+#input-format-text-file-button,
+#generate-format-text-button,
+#input-format-gui-read-only {
+	margin: 0px;
+	display: inline-block;
+	padding: 0px 6px;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+
+.button+.button,
+#generate-format-text-button {
+	margin-left: 10px;
+}
+
+#input-json-file,
+#input-format-text-file {
+	display: none;
+}
+
+/* copy-download */
+.copy-download-box {
+	position: absolute;
+	right: 0px;
+}
+
+.download-button,
+.copy-button {
+	position: relative;
+	top: -23px;
+}
+
+.button:not(.clicked) {
+	transition: background-color .3s linear;
+}
+
+.button.clicked {
+	background-color: var(--grey-a-color);
+}
+
+/* example */
+.example {
+	margin: 10px 0px;
+	min-height: 100px;
+	overflow: auto;
+	max-height: 300px;
+	resize: none;
+}
+
+.bold {
+	font-weight: 600;
+	text-decoration: underline .5px;
+	text-underline-offset: 3px;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<!-- Auto insert head -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="hatuna-827">
+	<meta name="description" content="jsonファイルをあなたの望む形にフォーマットできます。">
+	<meta property="og:url" content="https://hatuna-827.github.io/tool/json_formatter/index.html">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="JSONフォーマッタ">
+	<meta property="og:description" content="jsonファイルをあなたの望む形にフォーマットできます。">
+	<meta property="og:site_name" content="JSONフォーマッタ | hatuna-827">
+	<meta property="og:image" content="/640_640.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:domain" content="hatuna-827.github.io">
+	<meta name="twitter:title" content="JSONフォーマッタ">
+	<meta name="twitter:description" content="jsonファイルをあなたの望む形にフォーマットできます。">
+	<meta name="twitter:image" content="/640_640.png">
+	<meta name="theme-color" content="#709170">
+	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+	<link rel="apple-touch-icon" href="/hatuna-827.ico">
+	<link rel="stylesheet" href="/tool/json_formatter/json_formatter.css">
+	<link rel="stylesheet" href="/hatuna-827.css">
+	<script src="/hatuna-827.js" type="module" crossorigin="use-credentials"></script>
+	<title>JSONフォーマッタ | hatuna-827</title>
+	<!-- Auto insert head end -->
+</head>
+
+<body>
+	<!-- Auto insert body -->
+	<div id="homebar"></div>
+	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+	<!-- Auto insert body end -->
+	<div id="main">
+		<h1 id="about" class="title">JSONフォーマッタ</h1>
+		<h2 class="sub-title">できること</h2>
+		<ul class="list">
+			<li>JSONの構文チェック</li>
+			<li>JSONの整形</li>
+			<li>
+				構造の整理
+				<ul class="list">
+					<li>要素の並び替え</li>
+					<li>要素の追加・削除</li>
+				</ul>
+			</li>
+		</ul>
+		<p class="text">JavaScriptオブジェクトにも対応しています。</p>
+		<hr class="split">
+		<h2 class="sub-title">安心・安全</h2>
+		<p class="text">処理はJavaScriptのみで行っています。サーバーに送信せず、ローカルで完結します。</p>
+		<hr class="split">
+		<h2 class="sub-title">注意</h2>
+		<p class="text">構造を指定した場合、構造に沿ってデータが削除される可能性があります。</p>
+		<p class="text">削除されたデータは<a class="link" href="#log">ログ</a>で見ることができます。</p>
+		<h1 id="input-json" class="title">JSONを入力</h1>
+		<label id="input-json-label">
+			<div id="input-json-file-button" class="button">ファイルを選択</div>
+			<div id="input-json-file-name"></div>
+		</label>
+		<textarea id="input-json-area" class="textarea text-input textarea-copy-download" spellcheck="false">{}</textarea>
+		<h1 id="input-format" class="title">フォーマットを指定</h1>
+		<p class="text">インデント・フォーマットを設定してください。</p>
+		<p class="text">JSONの構文チェック・整形のみ行うの場合、「構造」で「指定しない」を選択してください。</p>
+		<p class="text"><a href="#How-to-write-the-format" class="link">フォーマット指定の仕方</a></p>
+		<div id="input-format-structure"></div>
+		<div id="input-format-text">
+			<label id="input-format-text-label">
+				<div id="input-format-text-file-button" class="button">ファイルを選択</div>
+			</label>
+			<div id="generate-format-text-button" class="button">JSONから生成</div>
+			<textarea id="input-format-area" class="textarea text-input textarea-copy-download"
+				spellcheck="false">{}</textarea>
+		</div>
+		<div id="input-format-gui">
+			<div id="input-format-gui-structure"></div>
+			<p id="input-format-gui-read-only">構造 (読み取り専用)</p>
+			<div id="input-format-gui-area" class="textarea textarea-copy-download"></div>
+		</div>
+		<div id="execute" class="button">実行</div>
+		<h1 id="output" class="title">実行結果</h1>
+		<div id="output-field" class="textarea textarea-copy-download"></div>
+		<h1 id="log" class="title">ログ / エラー表示</h1>
+		<p class="text">結果：<span id="result" class="result-empty"></span></p>
+		<div id="log-field" class="textarea"></div>
+		<h1 id="How-to-write-the-format" class="title">フォーマット指定の仕方</h1>
+		<p class="text">JSON形式のオブジェクト入力します。</p>
+		<ul class="list">
+			<li>type : 型を指定 <span class="bold">必須</span> (string・number・boolean・object・array・nullの内一つ)</li>
+			<li>default : デフォルトを指定</li>
+			<ul class="list">
+				<li>string・number・boolean : デフォルトの値を指定します</li>
+				<li>object・array : trueの場合デフォルトで空配列/空オブジェクトを設定します</li>
+			</ul>
+			<li>entry : <span class="bold">typeがobjectの場合必須</span> エントリーを配列で指定します</li>
+			<li>sort : <span class="bold">typeがobjectの場合有効</span> keyをアルファベット順に並び替えます</li>
+			<li>element : <span class="bold">typeがarrayの場合必須</span> 配列の要素を指定します</li>
+		</ul>
+		<p class="text">例) {"id": 1}</p>
+		<pre class="textarea example">{
+  "type": "object",
+  "entry": [
+    {
+      "key": "id",
+      "type": "number"
+    }
+  ]
+}</pre>
+		<p class="text">例) [{"id": 1, "name": "taro"}, {"id": 2, "name": "jiro"}]</p>
+		<pre class="textarea example">{
+  "type": "array",
+  "element": {
+    "type": "object",
+    "entry": [
+      {
+        "key": "id",
+        "type": "number"
+      },
+      {
+        "key": "name",
+        "type": "string"
+      }
+    ]
+  }
+}</pre>
+		<p class="text bold">※分からないときは、GUIを使ってみて！</p>
+	</div>
+	<script src="./json_formatter.js" type="module" crossorigin="use-credentials"></script>
+</body>
+
+</html>
