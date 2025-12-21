@@ -188,14 +188,23 @@ structure.def_struct("One_point_children", One_point_children)
 structure.def_struct("Two_point_children", Two_point_children)
 structure.def_struct("Three_point_children", Three_point_children)
 structure.def_struct("A_children", A_children)
-reflect_setting()
 /* - add eventListener ------------------------------------------------------------------------- */
 window.addEventListener('beforeunload', () => {
 	if (opening_window) { opening_window.close() }
 })
-document.getElementById("settings").addEventListener('click', () => {
-	nurunu_open("/settings/?p=svg_editor", '_blank', 'top=100,left=200,height=500,width=400,popup')
+// main-editor
+document.getElementById("main-xml-textarea").addEventListener('input', function () {
+	const xml_editor = document.getElementById("main-xml-textarea")
+	const line_numbers = document.getElementById("main-xml-line-numbers")
+	if (xml_editor.value == "") { xml_editor.value = default_xml_value }
+	update_line_numbers(xml_editor.value, line_numbers)
+	document.getElementById("img-content").innerHTML = this.value
 })
+document.getElementById("main-xml-textarea").dispatchEvent(new Event('input', { bubbles: true }))
+structure.set("main-gui", "svg", change_gui)
+change_gui()
+reflect_setting()
+// mini-buttons
 document.getElementById("add-doc").addEventListener('change', function () {
 	const fileReader = new FileReader()
 	fileReader.addEventListener('load', function () {
@@ -208,6 +217,16 @@ document.getElementById("add-doc").addEventListener('change', function () {
 		update_img_view()
 	})
 	fileReader.readAsDataURL(this.files[0])
+})
+document.getElementById("settings").addEventListener('click', () => {
+	nurunu_open("/settings/?p=svg_editor", '_blank', 'top=100,left=200,height=500,width=400,popup')
+})
+document.getElementById("compress-xml").addEventListener('click', function () {
+	const xml_editor = document.getElementById("main-xml-textarea")
+	const line_numbers = document.getElementById("main-xml-line-numbers")
+	xml_editor.value = comp_xml(xml_editor.value)
+	update_line_numbers(xml_editor.value, line_numbers)
+	clicked(this)
 })
 document.getElementById("svg-download").addEventListener('click', function () {
 	const download = document.createElement("a")
@@ -222,11 +241,6 @@ document.getElementById("img-home").addEventListener('click', function () {
 	update_img_view()
 	clicked(this)
 })
-document.getElementById("sub-xml-copy").addEventListener('click', function () {
-	const target = document.getElementById("xml-sub-view")
-	navigator.clipboard.writeText(target.textContent)
-	clicked(this)
-})
 document.getElementById("inline").addEventListener('click', function () {
 	inline = !inline
 	if (inline) {
@@ -234,7 +248,12 @@ document.getElementById("inline").addEventListener('click', function () {
 	} else {
 		this.classList.remove("inline")
 	}
-	update_sub_view()
+	change_gui()
+})
+document.getElementById("sub-xml-copy").addEventListener('click', function () {
+	const target = document.getElementById("xml-sub-view")
+	navigator.clipboard.writeText(target.textContent)
+	clicked(this)
 })
 // img_view
 img_view.addEventListener('mousedown', (e) => {
@@ -303,53 +322,36 @@ function reflect_setting() {
 	}
 }
 function set_views(view_type) {
-	// const
-	const main_editor = document.getElementById("main-content")
+	const xml_editor = document.getElementById("main-xml")
+	const gui_editor = document.getElementById("main-gui")
 	const sub_view = document.getElementById("sub-view")
-	const img_content = document.getElementById("img-content")
-	// reset
-	main_editor.innerHTML = ""
+	xml_editor.classList.add("hide")
+	gui_editor.classList.add("hide")
+	sub_view.classList.add("hide")
 	if (view_type == "xml") {
-		sub_view.className = "hide"
-		const line_numbers = document.createElement('div')
-		const textarea = document.createElement('textarea')
-		line_numbers.className = "line-numbers"
-		textarea.id = "xml-textarea"
-		textarea.className = "xml"
-		textarea.spellcheck = false
-		textarea.textContent = default_xml_value
-		textarea.addEventListener('input', function () {
-			if (this.value == "") { this.value = default_xml_value }
-			line_numbers.innerHTML = ""
-			let line_count = this.value.match(/\n/g)
-			if (line_count) { line_count = line_count.length + 1 } else { line_count = 1 }
-			for (let i = 0; i < line_count; i++) { line_numbers.insertAdjacentElement('beforeend', document.createElement('span')) }
-			img_content.innerHTML = this.value
-			update_img_view()
-		})
-		textarea.dispatchEvent(new Event('input', { bubbles: true }))
-		main_editor.appendChild(line_numbers)
-		main_editor.appendChild(textarea)
+		xml_editor.classList.remove("hide")
+		document.getElementById("img-content").innerHTML = xml_editor.value
 	} else if (view_type == "gui") {
-		sub_view.className = ""
-		structure.set("main-content", "svg", () => {
-			update_sub_view()
-		})
-		update_sub_view()
+		gui_editor.classList.remove("hide")
+		sub_view.classList.remove("hide")
+		change_gui()
 	}
 }
-function update_sub_view() {
+function change_gui() {
 	const img_content = document.getElementById("img-content")
 	const textarea = document.getElementById("xml-sub-view")
 	const line_numbers = document.getElementById("line-numbers-sub-view")
-	let xml = object_to_svg(structure.get("main-content"))
+	let xml = object_to_svg(structure.get("main-gui"))
 	if (inline) { xml = comp_xml(xml) }
 	img_content.innerHTML = xml
 	textarea.textContent = xml
-	line_numbers.innerHTML = ""
-	let line_count = xml.match(/\n/g)
+	update_line_numbers(xml, line_numbers)
+}
+function update_line_numbers(value, target) {
+	target.innerHTML = ""
+	let line_count = value.match(/\n/g)
 	if (line_count) { line_count = line_count.length + 1 } else { line_count = 1 }
-	for (let i = 0; i < line_count; i++) { line_numbers.insertAdjacentElement('beforeend', document.createElement('span')) }
+	for (let i = 0; i < line_count; i++) { target.insertAdjacentElement('beforeend', document.createElement('span')) }
 }
 function object_to_svg(obj) {
 	const shape_options = svg_struct.element.children.children.shape.option
@@ -427,7 +429,6 @@ function add_xml(types, obj) {
 	return result
 }
 function comp_xml(xml) {
-	xml = xml.replace(/\n *|(?<=[0-9]) *(?=[a-zA-Z])|[, ](?=-)/g, "")
-	return xml
+	return xml.replace(/\n\s*|(?<=[0-9])\s*(?=[a-zA-Z])|[,\s](?=-)/g, "")
 }
 /* --------------------------------------------------------------------------------------------- */

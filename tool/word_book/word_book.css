@@ -463,13 +463,21 @@
 	user-select: none;
 }
 
+#export-cancel-button,
 #export-execute-button {
 	position: absolute;
-	margin: 0px 160px 10px;
 	width: 180px;
-	bottom: 0px;
+	bottom: 10px;
 	font-size: 17px;
 	line-height: 40px;
 	background-color: var(--grey-green-color);
 	border-radius: 10px;
+}
+
+#export-cancel-button {
+	left: 57px;
+}
+
+#export-execute-button {
+	right: 57px;
 }

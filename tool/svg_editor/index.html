@@ -56,8 +56,20 @@
 				</div>
 			</div>
 		</div>
-		<div id="main-editor">
-			<div id="main-content" class="relative overflow"></div>
+		<div id="main-editor" class="overflow relative">
+			<div id="main-xml" class="noeffect">
+				<div class="mini-btn-box">
+					<div id="compress-xml" class="mini-btn" title="圧縮">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M4,9q8,1 16,0v6q-8-1-16-0V9M12,2v5l-2-2l2,2l2-2m-2,17v-5l2,2l-2-2l-2,2" />
+						</svg>
+					</div>
+				</div>
+				<div id="main-xml-line-numbers" class="line-numbers"></div>
+				<textarea id="main-xml-textarea" class="xml" spellcheck="false"></textarea>
+			</div>
+			<div id="main-gui" class="noeffect"></div>
 		</div>
 		<div id="img-view">
 			<div class="relative">
@@ -82,7 +94,7 @@
 			</div>
 		</div>
 		<div id="sub-view" class="hide">
-			<div id="sub-content">
+			<div id="sub-content" class="noeffect">
 				<div id="line-numbers-sub-view" class="line-numbers"></div>
 				<div id="xml-sub-view" class="xml"></div>
 			</div>

@@ -54,6 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.querySelector("h1").insertAdjacentElement("afterend", tag_container)
 
 	document.querySelectorAll('pre').forEach((target, i) => {
+		if (Array.from(target.classList).includes("no-copy")) {
+			const pre_box = document.createElement('div')
+			pre_box.className = "pre-box"
+			target.insertAdjacentElement('afterend', pre_box)
+			pre_box.appendChild(target)
+			return
+		}
 		target.id = "code" + i
 		const pre_box = document.createElement('div')
 		pre_box.className = "pre-box"
@@ -63,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		copy_button.className = "copy-btn"
 		const copy_button_icon = document.createElement('div')
 		copy_button_icon.className = "copy-btn-icon"
-		fetch("https://hatuna-827.github.io/icons/xml/copy.xml").then(r => r.text()).then(svg => { copy_button_icon.innerHTML = svg })
+		copy_button_icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><path d="M8,8v-2a3,3 0 0 1 3-3h7a3,3 0 0 1 3,3v7a3,3 0 0 1-3,3h-2v2a3,3 0 0 1-3,3h-7a3,3 0 0 1-3-3v-7a3,3 0 0 1 3-3h7a3,3 0 0 1 3,3v5" /></svg>'
 		const copy_button_text = document.createElement('div')
 		copy_button_text.className = "copy-btn-text"
 		copy_button_text.textContent = "コードをコピー"

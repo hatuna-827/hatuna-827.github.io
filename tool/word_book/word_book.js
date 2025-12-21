@@ -43,6 +43,8 @@ display_title()
 
 /* - add eventListener ------------------------------------------------------------------------- */
 
+document.getElementById("export-cancel-button").addEventListener('click', hide_export)
+
 document.getElementById("export-execute-button").addEventListener('click', function () {
 	const remove = document.getElementById("export-remove-checkbox").checked
 	let result = []
@@ -59,8 +61,7 @@ document.getElementById("export-execute-button").addEventListener('click', funct
 	download.setAttribute('href', URL.createObjectURL(new Blob([result], { type: "text/plain" })))
 	download.setAttribute('download', "download.json")
 	download.click()
-	document.getElementById("export").style.display = "none"
-	display_title()
+	hide_export()
 })
 
 document.getElementById("export-all-checkbox").addEventListener('change', function () {
@@ -151,6 +152,11 @@ function getDragAfterElement(container, y) {
 			return closest
 		}
 	}, { offset: Number.NEGATIVE_INFINITY, index: wordbook_data.length })
+}
+
+function hide_export() {
+	document.getElementById("export").style.display = "none"
+	display_title()
 }
 
 function update_card() {
@@ -333,7 +339,7 @@ function edit_words(index) {
 			save_wordbook_data()
 			edit_words(index)
 		})
-		fetch("https://hatuna-827.github.io/icons/xml/plus.xml").then(r => r.text()).then(svg => { word_add.innerHTML = svg })
+		word_add.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="1.5"><path d="M3,12h18M12,3v18" /></svg>'
 		const word_remove = document.createElement('div')
 		word_remove.className = "word-remove"
 		word_remove.addEventListener('click', function () {
@@ -341,7 +347,7 @@ function edit_words(index) {
 			save_wordbook_data()
 			edit_words(index)
 		})
-		fetch("https://hatuna-827.github.io/icons/xml/trash_can.xml").then(r => r.text()).then(svg => { word_remove.innerHTML = svg })
+		word_remove.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><pathd="M6,7h2q2,0,2-1q0-1,1-1h2q1,0,1,1q0,1,2,1h2zM7,10l1,9q0,1 1,1h6q1,0,1-1l1-9zM9,13a1,1 0 0 1 3,0v4a1,1 0 0 1-3,0zM12,13a1,1 0 0 1 3,0v4a1,1 0 0 1-3,0z" /></svg>'
 		word.appendChild(input_word)
 		description.appendChild(input_description)
 		line.appendChild(word_add)
@@ -354,7 +360,7 @@ function edit_words(index) {
 	generate_box.appendChild(words_list_table)
 	const add_new_word = document.createElement('button')
 	add_new_word.id = "add-new-word"
-	fetch("https://hatuna-827.github.io/icons/xml/plus.xml").then(r => r.text()).then(svg => { add_new_word.innerHTML = svg })
+	add_new_word.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="1.5"><path d="M3,12h18M12,3v18" /></svg>'
 	add_new_word.addEventListener('click', () => {
 		wordbook_data[index].words.push({ word: "", description: "" })
 		save_wordbook_data()
