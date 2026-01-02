@@ -163,6 +163,15 @@
 			"image": ""
 		},
 		{
+			"url": "/tool/brainfuck/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "Brainfuck実行",
+			"sub_title": "",
+			"description": "Brainfuckをブラウザ上で実行・デバックできます。",
+			"image": ""
+		},
+		{
 			"url": "/tool/json_formatter/index.html",
 			"name": "",
 			"title": "",

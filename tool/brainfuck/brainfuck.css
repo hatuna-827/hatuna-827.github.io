@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+#main-content {
+  padding: 50px;
+  font-size: 14px;
+}
+
+#output,
+#control,
+#input,
+#notes {
+  padding: 10px;
+}
+
+hr {
+  margin: 0px;
+}
+
+.active {
+  background-color: var(--grey-green-color);
+}
+
+/* output */
+#output-input,
+#output-result,
+#output-memory,
+#output-code,
+#output-setting {
+  padding: 3px 10px;
+  min-height: 30px;
+}
+
+/* control */
+#runspeed-select {
+  width: 80px;
+  font-size: 12px;
+}
+
+/* input */
+#code-input {
+  margin: 10px 20px;
+  height: 200px;
+  width: calc(100% - 40px);
+  resize: vertical;
+}
+
+/* notes */

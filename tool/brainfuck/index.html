@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<!-- Auto insert head -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="hatuna-827">
+	<meta name="description" content="Brainfuckをブラウザ上で実行・デバックできます。">
+	<meta property="og:url" content="https://hatuna-827.github.io/tool/brainfuck/index.html">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Brainfuck実行">
+	<meta property="og:description" content="Brainfuckをブラウザ上で実行・デバックできます。">
+	<meta property="og:site_name" content="Brainfuck実行 | hatuna-827">
+	<meta property="og:image" content="/640_640.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:domain" content="hatuna-827.github.io">
+	<meta name="twitter:title" content="Brainfuck実行">
+	<meta name="twitter:description" content="Brainfuckをブラウザ上で実行・デバックできます。">
+	<meta name="twitter:image" content="/640_640.png">
+	<meta name="theme-color" content="#709170">
+	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+	<link rel="apple-touch-icon" href="/hatuna-827.ico">
+	<link rel="stylesheet" href="/tool/brainfuck/brainfuck.css">
+	<link rel="stylesheet" href="/hatuna-827.css">
+	<script src="/hatuna-827.js" type="module" crossorigin="use-credentials"></script>
+	<title>Brainfuck実行 | hatuna-827</title>
+	<!-- Auto insert head end -->
+</head>
+
+<body>
+	<!-- Auto insert body -->
+	<div id="homebar"></div>
+	<noscript>
+		<style>
+			body {
+				overflow: hidden;
+			}
+		</style>You need to enable JavaScript to view this site.
+	</noscript>
+	<!-- Auto insert body end -->
+	<div id="main">
+		<div id="main-content">
+			<div id="output">
+				<span>入力 &gt;</span>
+				<div id="output-input"></div>
+				<span>出力 &gt;</span>
+				<div id="output-result"></div>
+				<span>メモリー &gt;</span>
+				<div id="output-memory"></div>
+				<span>コード &gt;</span>
+				<div id="output-code"></div>
+				<span>実行設定 &gt;</span>
+				<div id="output-setting">
+					<span>実行速度：</span><span id="output-runspeed"></span>
+				</div>
+			</div>
+			<hr>
+			<div id="control">
+				<div id="runspeed">
+					<span>実行速度：</span><select id="runspeed-select">
+						<option value="-1">No Step</option>
+						<option value="0">0 ms</option>
+						<option value="10">10 ms</option>
+						<option value="20">20 ms</option>
+						<option value="30">30 ms</option>
+						<option value="40">40 ms</option>
+						<option value="50">50 ms</option>
+						<option value="60">60 ms</option>
+						<option value="70">70 ms</option>
+						<option value="80">80 ms</option>
+						<option value="90">90 ms</option>
+						<option value="100">100 ms</option>
+						<option value="200">200 ms</option>
+						<option value="300">300 ms</option>
+						<option value="400">400 ms</option>
+						<option value="500">500 ms</option>
+						<option value="600">600 ms</option>
+						<option value="700">700 ms</option>
+						<option value="800">800 ms</option>
+						<option value="900">900 ms</option>
+						<option value="1000">1000 ms</option>
+					</select>
+				</div>
+				<div id="start-stop"></div>
+				<div id="step-out"></div>
+				<div id="step-in"></div>
+			</div>
+			<hr>
+			<div id="input">
+				<span>コード入力</span>
+				<textarea id="code-input"></textarea>
+			</div>
+			<hr>
+			<div id="notes"></div>
+		</div>
+	</div>
+	<script src="./brainfuck.js"></script>
+</body>
+
+</html>
