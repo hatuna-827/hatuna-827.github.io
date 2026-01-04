@@ -43,23 +43,19 @@
 		<div id="main-content">
 			<div id="output">
 				<span>入力 &gt;</span>
-				<div id="output-input"></div>
+				<textarea id="run-input" class="textarea"></textarea>
 				<span>出力 &gt;</span>
-				<div id="output-result"></div>
+				<div id="output-result" class="code-font"></div>
 				<span>メモリー &gt;</span>
-				<div id="output-memory"></div>
+				<div id="output-memory" class="code-font"></div>
 				<span>コード &gt;</span>
-				<div id="output-code"></div>
-				<span>実行設定 &gt;</span>
-				<div id="output-setting">
-					<span>実行速度：</span><span id="output-runspeed"></span>
-				</div>
+				<div id="output-code" class="code-font"></div>
 			</div>
 			<hr>
 			<div id="control">
 				<div id="runspeed">
 					<span>実行速度：</span><select id="runspeed-select">
-						<option value="-1">No Step</option>
+						<option value="-1" selected>No Step</option>
 						<option value="0">0 ms</option>
 						<option value="10">10 ms</option>
 						<option value="20">20 ms</option>
@@ -82,20 +78,64 @@
 						<option value="1000">1000 ms</option>
 					</select>
 				</div>
-				<div id="start-stop"></div>
-				<div id="step-out"></div>
-				<div id="step-in"></div>
+				<div id="control-buttons">
+					<div id="run" class="control-button">実行</div>
+					<div id="pause-resume" class="control-button"><span id="pause">一時停止</span><span id="resume">続行</span></div>
+					<div id="step-re" class="control-button">戻る</div>
+					<div id="step-in" class="control-button">進む</div>
+				</div>
 			</div>
 			<hr>
 			<div id="input">
 				<span>コード入力</span>
-				<textarea id="code-input"></textarea>
+				<textarea id="code-input" class="textarea"></textarea>
 			</div>
 			<hr>
-			<div id="notes"></div>
+			<div id="notes">
+				<table>
+					<tbody>
+						<tr>
+							<th>&gt;</th>
+							<td>ポインタを右に1つ移動する</td>
+						</tr>
+						<tr>
+							<th>&lt;</th>
+							<td>ポインタを左に1つ移動する</td>
+						</tr>
+						<tr>
+							<th>+</th>
+							<td>ポインタが指すメモリの値を+1する</td>
+						</tr>
+						<tr>
+							<th>-</th>
+							<td>ポインタが指すメモリの値を-1する</td>
+						</tr>
+						<tr>
+							<th>,</th>
+							<td>入力から1バイト読み込んで指しているポインタが指すメモリに代入する</td>
+						</tr>
+						<tr>
+							<th>.</th>
+							<td>ポインタが指すメモリの値をASCIIコードとして出力する</td>
+						</tr>
+						<tr>
+							<th>[</th>
+							<td>ポインタが指す値が0なら対応する<code>]</code>までジャンプする</td>
+						</tr>
+						<tr>
+							<th>]</th>
+							<td>ポインタが指す値が0でないなら対応する<code>[</code>までジャンプする</td>
+						</tr>
+						<tr>
+							<th>#</th>
+							<td>(オリジナル)一時停止する(RESUMEボタンで再開)</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-	<script src="./brainfuck.js"></script>
+	<script src="./brainfuck.js" type="module"></script>
 </body>
 
 </html>

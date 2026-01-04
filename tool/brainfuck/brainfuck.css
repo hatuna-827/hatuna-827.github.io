@@ -1,5 +1,7 @@
 * {
+  outline: none;
   box-sizing: border-box;
+  color: var(--main-text-color);
 }
 
 #main-content {
@@ -22,8 +24,18 @@ hr {
   background-color: var(--grey-green-color);
 }
 
+.textarea {
+  padding: 5px 7px;
+  width: calc(100% - 40px);
+  font-family: var(--code-font);
+  resize: vertical;
+}
+
+.code-font {
+  font-family: var(--code-font);
+}
+
 /* output */
-#output-input,
 #output-result,
 #output-memory,
 #output-code,
@@ -32,18 +44,40 @@ hr {
   min-height: 30px;
 }
 
+#run-input {
+  margin: 3px 20px;
+  height: 60px;
+}
+
 /* control */
 #runspeed-select {
   width: 80px;
   font-size: 12px;
 }
 
+#control-buttons {
+  padding-top: 5px;
+}
+
+#run {
+  background-color: var(--light-green-color);
+}
+
+.control-button {
+  display: inline-block;
+  margin: 0px 3px;
+  padding: 5px 10px;
+  min-width: 100px;
+  text-align: center;
+  background-color: var(--grey-green-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* input */
 #code-input {
   margin: 10px 20px;
   height: 200px;
-  width: calc(100% - 40px);
-  resize: vertical;
 }
 
 /* notes */
