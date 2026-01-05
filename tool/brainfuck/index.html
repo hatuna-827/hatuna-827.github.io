@@ -43,13 +43,13 @@
 		<div id="main-content">
 			<div id="output">
 				<span>入力 &gt;</span>
-				<textarea id="run-input" class="textarea"></textarea>
+				<div id="output-stdin" class="output"></div>
 				<span>出力 &gt;</span>
-				<div id="output-result" class="code-font"></div>
+				<div id="output-stdout" class="output"></div>
 				<span>メモリー &gt;</span>
-				<div id="output-memory" class="code-font"></div>
+				<div id="output-memory" class="output"></div>
 				<span>コード &gt;</span>
-				<div id="output-code" class="code-font"></div>
+				<div id="output-code" class="output"></div>
 			</div>
 			<hr>
 			<div id="control">
@@ -80,19 +80,22 @@
 				</div>
 				<div id="control-buttons">
 					<div id="run" class="control-button">実行</div>
-					<div id="pause-resume" class="control-button"><span id="pause">一時停止</span><span id="resume">続行</span></div>
+					<div id="pause" class="control-button">一時停止</div>
+					<div id="resume" class="control-button">再開</div>
 					<div id="step-re" class="control-button">戻る</div>
 					<div id="step-in" class="control-button">進む</div>
 				</div>
 			</div>
 			<hr>
 			<div id="input">
-				<span>コード入力</span>
-				<textarea id="code-input" class="textarea"></textarea>
+				<span>コード入力 &gt;</span>
+				<textarea id="input-code" class="textarea"></textarea>
+				<span>標準入力 &gt;</span>
+				<textarea id="input-stdin" class="textarea"></textarea>
 			</div>
 			<hr>
 			<div id="notes">
-				<table>
+				<table class="table">
 					<tbody>
 						<tr>
 							<th>&gt;</th>
@@ -128,7 +131,7 @@
 						</tr>
 						<tr>
 							<th>#</th>
-							<td>(オリジナル)一時停止する(RESUMEボタンで再開)</td>
+							<td>一時停止する（オリジナル・デバッグ用）</td>
 						</tr>
 					</tbody>
 				</table>
