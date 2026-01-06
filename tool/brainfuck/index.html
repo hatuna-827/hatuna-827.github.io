@@ -42,20 +42,20 @@
 	<div id="main">
 		<div id="main-content">
 			<div id="output">
-				<span>入力 &gt;</span>
+				<span class="label">入力 &gt;</span>
 				<div id="output-stdin" class="output"></div>
-				<span>出力 &gt;</span>
+				<span class="label">出力 &gt;</span>
 				<div id="output-stdout" class="output"></div>
-				<span>メモリー &gt;</span>
+				<span class="label">メモリー &gt;</span>
 				<div id="output-memory" class="output"></div>
-				<span>コード &gt;</span>
+				<span class="label">コード &gt;</span>
 				<div id="output-code" class="output"></div>
 			</div>
 			<hr>
 			<div id="control">
 				<div id="runspeed">
-					<span>実行速度：</span><select id="runspeed-select">
-						<option value="-1" selected>No Step</option>
+					<span class="label">実行速度：</span><select id="runspeed-select">
+						<option value="-1">No Step</option>
 						<option value="0">0 ms</option>
 						<option value="10">10 ms</option>
 						<option value="20">20 ms</option>
@@ -75,7 +75,7 @@
 						<option value="700">700 ms</option>
 						<option value="800">800 ms</option>
 						<option value="900">900 ms</option>
-						<option value="1000">1000 ms</option>
+						<option value="1000" selected>1000 ms</option>
 					</select>
 				</div>
 				<div id="control-buttons">
@@ -88,10 +88,10 @@
 			</div>
 			<hr>
 			<div id="input">
-				<span>コード入力 &gt;</span>
-				<textarea id="input-code" class="textarea"></textarea>
-				<span>標準入力 &gt;</span>
-				<textarea id="input-stdin" class="textarea"></textarea>
+				<span class="label">コード入力 &gt;</span>
+				<textarea id="input-code" class="textarea">,+[-.[-],+]</textarea>
+				<span class="label">標準入力 &gt;</span>
+				<textarea id="input-stdin" class="textarea">hoge</textarea>
 			</div>
 			<hr>
 			<div id="notes">
@@ -135,6 +135,7 @@
 						</tr>
 					</tbody>
 				</table>
+				<p><a href="/blog/brainfuck/about">詳しいbrainfuckの書き方はこちら</a></p>
 			</div>
 		</div>
 	</div>

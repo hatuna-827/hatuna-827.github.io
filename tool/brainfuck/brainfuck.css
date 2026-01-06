@@ -21,7 +21,7 @@ hr {
 }
 
 .active {
-  background-color: var(--grey-green-color);
+  background-color: var(--light-green-color);
 }
 
 .textarea {
@@ -36,7 +36,21 @@ hr {
 .output {
   padding: 3px 10px;
   min-height: 30px;
+  max-height: 500px;
+  overflow: auto;
   font-family: var(--code-font);
+}
+
+.error-log {
+  color: var(--red-color);
+}
+
+.memory {
+  display: inline-block;
+  padding: 2px;
+  min-width: 35px;
+  line-height: 13px;
+  text-align: center;
 }
 
 /* control */
@@ -62,6 +76,11 @@ hr {
   background-color: var(--grey-green-color);
   border-radius: 5px;
   cursor: pointer;
+  user-select: none;
+}
+
+.label {
+  user-select: none;
 }
 
 /* input */
@@ -90,4 +109,16 @@ hr {
   padding: 7px;
   line-height: 15px;
   border: 1px solid var(--grey-5-color);
+}
+
+#notes p {
+  margin: 10px 0px;
+  padding-left: 30px;
+  font-size: 15px;
+}
+
+#notes a {
+  margin: 0px;
+  color: var(--main-dark-color);
+  text-decoration: none;
 }
