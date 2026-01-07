@@ -53,6 +53,10 @@ hr {
   text-align: center;
 }
 
+#output-code {
+  white-space: pre;
+}
+
 /* control */
 #runspeed-select {
   width: 80px;
@@ -60,7 +64,7 @@ hr {
 }
 
 #control-buttons {
-  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 #run {
@@ -77,6 +81,11 @@ hr {
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
+}
+
+label {
+  display: block;
+  padding: 2px 0px;
 }
 
 .label {

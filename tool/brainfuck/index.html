@@ -31,13 +31,7 @@
 <body>
 	<!-- Auto insert body -->
 	<div id="homebar"></div>
-	<noscript>
-		<style>
-			body {
-				overflow: hidden;
-			}
-		</style>You need to enable JavaScript to view this site.
-	</noscript>
+	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
 	<!-- Auto insert body end -->
 	<div id="main">
 		<div id="main-content">
@@ -53,9 +47,16 @@
 			</div>
 			<hr>
 			<div id="control">
-				<div id="runspeed">
+				<div id="control-buttons">
+					<div id="run" class="control-button">実行</div>
+					<div id="pause" class="control-button">一時停止</div>
+					<div id="resume" class="control-button">再開</div>
+					<div id="step-re" class="control-button">戻る</div>
+					<div id="step-in" class="control-button">進む</div>
+				</div>
+				<label id="runspeed">
 					<span class="label">実行速度：</span><select id="runspeed-select">
-						<option value="-1">No Step</option>
+						<option value="-1" selected>No Step</option>
 						<option value="0">0 ms</option>
 						<option value="10">10 ms</option>
 						<option value="20">20 ms</option>
@@ -75,23 +76,30 @@
 						<option value="700">700 ms</option>
 						<option value="800">800 ms</option>
 						<option value="900">900 ms</option>
-						<option value="1000" selected>1000 ms</option>
+						<option value="1000">1000 ms</option>
 					</select>
-				</div>
-				<div id="control-buttons">
-					<div id="run" class="control-button">実行</div>
-					<div id="pause" class="control-button">一時停止</div>
-					<div id="resume" class="control-button">再開</div>
-					<div id="step-re" class="control-button">戻る</div>
-					<div id="step-in" class="control-button">進む</div>
-				</div>
+				</label>
+				<label id="memory-type">
+					<span class="label">メモリーの表示方法：</span><select id="memory-type-select">
+						<option value="10" selected>10進数</option>
+						<option value="16">16進数</option>
+					</select>
+				</label>
+				<label id="code-type">
+					<span class="label">コメントの表示方法：</span><select id="code-type-select">
+						<option value="raw" selected>そのまま</option>
+						<option value="s">空白文字だけ</option>
+						<option value="n">改行だけ</option>
+						<option value="none">なし(コメント全削除)</option>
+					</select>
+				</label>
 			</div>
 			<hr>
 			<div id="input">
 				<span class="label">コード入力 &gt;</span>
-				<textarea id="input-code" class="textarea">,+[-.[-],+]</textarea>
+				<textarea id="input-code" class="textarea"></textarea>
 				<span class="label">標準入力 &gt;</span>
-				<textarea id="input-stdin" class="textarea">hoge</textarea>
+				<textarea id="input-stdin" class="textarea"></textarea>
 			</div>
 			<hr>
 			<div id="notes">
@@ -115,7 +123,7 @@
 						</tr>
 						<tr>
 							<th>,</th>
-							<td>入力から1バイト読み込んで指しているポインタが指すメモリに代入する</td>
+							<td>入力から1バイト読み込んでポインタが指すメモリに代入する</td>
 						</tr>
 						<tr>
 							<th>.</th>
