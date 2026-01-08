@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<!-- Auto insert head -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="hatuna-827">
+	<meta name="description" content="Brainfuckの入力・出力の解説です。">
+	<meta property="og:url" content="https://hatuna-827.github.io/blog/brainfuck/input_output/index.html">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Brainfuck~入力・出力編~">
+	<meta property="og:description" content="Brainfuckの入力・出力の解説です。">
+	<meta property="og:site_name" content="Brainfuck~入力・出力編~ | hatuna-827">
+	<meta property="og:image" content="/640_640.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:domain" content="hatuna-827.github.io">
+	<meta name="twitter:title" content="Brainfuck~入力・出力編~">
+	<meta name="twitter:description" content="Brainfuckの入力・出力の解説です。">
+	<meta name="twitter:image" content="/640_640.png">
+	<meta name="theme-color" content="#709170">
+	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+	<link rel="apple-touch-icon" href="/hatuna-827.ico">
+	<link rel="stylesheet" href="/blog/blog.css">
+	<link rel="stylesheet" href="/hatuna-827.css">
+	<script src="/hatuna-827.js" type="module" crossorigin="use-credentials"></script>
+	<title>Brainfuck~入力・出力編~ | hatuna-827</title>
+	<!-- Auto insert head end -->
+</head>
+
+<body>
+	<!-- Auto insert body -->
+	<div id="homebar"></div>
+	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+	<!-- Auto insert body end -->
+	<div id="main">
+		<h1>Let’s enjoy brainfuck. ~入力・出力編~</h1>
+		<h2>はじめに、</h2>
+		<p><a href="/blog/brainfuck/about/">brainfuckの基本をまだ知らない方はこちら</a>も読むことをおすすめします。</p>
+		<p>今回は、brainfuckの入力<code>,</code>と出力<code>.</code>について詳しく解説しようと思います。</p>
+		<h2>入力</h2>
+		<p><code>,</code>は入力から1バイト読み込んで、ポインタが指しているメモリーに代入します。</p>
+		<p>このとき、元々あった値は上書きされてしまいます。</p>
+		<p>1バイト読み込むというのも注意が必要です。</p>
+		<p>半角英数字などは1バイトなので問題ありませんが、<code>あ</code>などの文字は2バイト以上使うことがあります。</p>
+		<p>例えば<code>あ</code>は<code>E3 81 82</code>で、3バイトです。</p>
+		<p>このバイト列はURLのエンコードにも使われています。</p>
+		<p>URLをコピペすると、<code>%E3%81%82 (あ)</code>のようになってしまうことがありますが、これは<code>%</code>とバイト列でできています。</p>
+		<h2>出力</h2>
+		<p><code>.</code>も同様に、ポインタが指しているメモリーの1バイトを出力します。</p>
+		<p>このとき、メモリーの値は変更されません。</p>
+		<p>1バイトずつの出力なので、<code>あ</code>と出力したいときは、<code>E3 81 82</code>を順番に3回に分けて出力する必要があります。</p>
+		<h2>最後に、</h2>
+		<p>Brainfuckを実行・デバッグできるものを作成したので紹介します。</p>
+		<p><a href="/tool/brainfuck/">Brainfuckの実行 (デバッグ機能付き)</a></p>
+		<p>↓このコードで入力されたバイト列を確認できます。</p>
+		<pre>+[,>+]</pre>
+	</div>
+	<script src="/blog/blog.js"></script>
+</body>
+
+</html>

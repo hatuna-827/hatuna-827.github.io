@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<!-- Auto insert head -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="hatuna-827">
+	<meta name="description" content="Brainfuckでメモリーの値を10進数で出力するコードの紹介です。">
+	<meta property="og:url" content="https://hatuna-827.github.io/blog/brainfuck/memory_output/index.html">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Brainfuck~メモリー出力編~">
+	<meta property="og:description" content="Brainfuckでメモリーの値を10進数で出力するコードの紹介です。">
+	<meta property="og:site_name" content="Brainfuck~メモリー出力編~ | hatuna-827">
+	<meta property="og:image" content="/640_640.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:domain" content="hatuna-827.github.io">
+	<meta name="twitter:title" content="Brainfuck~メモリー出力編~">
+	<meta name="twitter:description" content="Brainfuckでメモリーの値を10進数で出力するコードの紹介です。">
+	<meta name="twitter:image" content="/640_640.png">
+	<meta name="theme-color" content="#709170">
+	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+	<link rel="apple-touch-icon" href="/hatuna-827.ico">
+	<link rel="stylesheet" href="/blog/blog.css">
+	<link rel="stylesheet" href="/hatuna-827.css">
+	<script src="/hatuna-827.js" type="module" crossorigin="use-credentials"></script>
+	<title>Brainfuck~メモリー出力編~ | hatuna-827</title>
+	<!-- Auto insert head end -->
+</head>
+
+<body>
+	<!-- Auto insert body -->
+	<div id="homebar"></div>
+	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+	<!-- Auto insert body end -->
+	<div id="main">
+		<h1>Let’s enjoy brainfuck. ~メモリー出力編~</h1>
+		<h2>コード紹介</h2>
+		<p>今回はメモリーの値を10進数で出力するプログラムの紹介をしたいと思います。</p>
+		<p>↓コード</p>
+		<pre>[->+<]>[[>>+>[-]>++++++++++[-<<<<[->>>+<<]>[<]>>->]<<<<]+>>>>>+<<[++++++++++<->>]>[<]<[-<<<+>>>]<[-<+>]>>>-<<<<]>>++++++++[<++++++>-]<-<<[[->+<]>>[<+<+>>-]<.[->+<]<[->+>-<<]>>>[-<++++++++++>]<-<<<]>>[-]>[-<<<+>>>]<<<</pre>
+		<p>メモリは右に最大で9使います。もちろん、初期状態はすべて0である必要があります。</p>
+		<p>メモリはきれいに戻されるのでご安心を。</p>
+		<h2>コメント付き</h2>
+		<pre>値 0 商 余 10
+[->+<]>
+[ 値で始まる 商が0になるまで繰り返す
+[ 値で始まる うまく引けた回数が10でなくなるまで繰り返す
+>>+>[-]>++++++++++
+[-<<<<[->>>+<<]>[<]>>->]
+<<<<
+] 値で終わる 00??01
++>>>>>+<<[++++++++++<->>]>[<]<[-<<<+>>>]<[-<+>]>>>-<<<<
+] 商で終わる
+>>++++++++[<++++++>-]<-<<
+[
+[->+<]>>[<+<+>>-]<.[->+<]<[->+>-<<]>>>[-<++++++++++>]<-<<<
+]
+>>[-]>[-<<<+>>>]<<<</pre>
+		<h2>実行してみよう</h2>
+		<p><a href="/tool/brainfuck/">Brainfuckを実行・デバッグできるもの</a>を作りました。</p>
+		<p>↓入力された文字の1バイト分を10進数で出力</p>
+		<pre>,
+[->+<]>[[>>+>[-]>++++++++++[-<<<<[->>>+<<]>[<]>>->]<<<<]+>>>>>+<<[++++++++++<->>]>[<]<[-<<<+>>>]<[-<+>]>>>-<<<<]>>++++++++[<++++++>-]<-<<[[->+<]>>[<+<+>>-]<.[->+<]<[->+>-<<]>>>[-<++++++++++>]<-<<<]>>[-]>[-<<<+>>>]<<<</pre>
+		<p>↓0のときに<code>-</code>をして(255)10進数で出力</p>
+		<pre>-
+[->+<]>[[>>+>[-]>++++++++++[-<<<<[->>>+<<]>[<]>>->]<<<<]+>>>>>+<<[++++++++++<->>]>[<]<[-<<<+>>>]<[-<+>]>>>-<<<<]>>++++++++[<++++++>-]<-<<[[->+<]>>[<+<+>>-]<.[->+<]<[->+>-<<]>>>[-<++++++++++>]<-<<<]>>[-]>[-<<<+>>>]<<<</pre>
+	</div>
+	<script src="/blog/blog.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 /* - import ------------------------------------------------------------------------------------ */
 /* - const ------------------------------------------------------------------------------------- */
-let code = "", input = ""
+let code = "", input = [], output = []
 let code_index, input_index, p, memory, old_log, loop_log, interval, memory_type, code_type, running, reset_flag, loop_counter, stopID, loop_pair
 let code_children = []
 /* - init -------------------------------------------------------------------------------------- */
@@ -14,12 +14,13 @@ document.getElementById("resume").addEventListener('click', function () { set_ru
 document.getElementById("step-re").addEventListener('click', step_re)
 document.getElementById("step-in").addEventListener('click', step)
 document.getElementById("run").addEventListener('click', function () {
-  set_running(false)
+  clearTimeout(stopID)
   memory_type = Number(document.getElementById("memory-type-select").value)
   code_type = document.getElementById("code-type-select").value
   // input
-  input = document.getElementById("input-stdin").value
-  document.getElementById("output-stdin").textContent = input
+  const input_str = document.getElementById("input-stdin").value
+  document.getElementById("output-stdin").textContent = input_str
+  input = new TextEncoder().encode(input_str)
   // code
   let input_code = document.getElementById("input-code").value
   code = input_code.replace(/[^+\-<>.,[\]#]/g, "")
@@ -82,6 +83,7 @@ function reset() {
   old_log = []
   loop_log = []
   loop_counter = 0
+  output = []
   document.getElementById("output-stdout").textContent = ""
   const output_memory = document.getElementById("output-memory")
   output_memory.innerHTML = ""
@@ -155,18 +157,18 @@ function step() {
     case "+":
       ++memory[p]
       if (memory[p] == 256) { memory[p] = 0 }
-      output_memory.children[p].textContent = memory[p].toString(memory_type)
+      output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
       break
     case "-":
       --memory[p]
       if (memory[p] == -1) { memory[p] = 255 }
-      output_memory.children[p].textContent = memory[p].toString(memory_type)
+      output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
       break
     case ",":
       if (input[input_index] != undefined) {
         old_log.push(memory[p])
-        memory[p] = input[input_index].charCodeAt(0)
-        output_memory.children[p].textContent = memory[p].toString(memory_type)
+        memory[p] = input[input_index]
+        output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
       } else {
         reset_flag = true
         set_running(false)
@@ -175,7 +177,8 @@ function step() {
       ++input_index
       break
     case ".":
-      document.getElementById("output-stdout").textContent += String.fromCharCode(memory[p])
+      output.push(memory[p])
+      document.getElementById("output-stdout").textContent = new TextDecoder("utf-8").decode(new Uint8Array(output))
       break
     case "[":
       if (memory[p] == 0) {
@@ -231,21 +234,21 @@ function step_re() {
     case "+":
       --memory[p]
       if (memory[p] == -1) { memory[p] = 255 }
-      output_memory.children[p].textContent = memory[p].toString(memory_type)
+      output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
       break
     case "-":
       ++memory[p]
       if (memory[p] == 256) { memory[p] = 0 }
-      output_memory.children[p].textContent = memory[p].toString(memory_type)
+      output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
       break
     case ",":
       memory[p] = old_log.pop()
-      output_memory.children[p].textContent = memory[p].toString(memory_type)
+      output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
       --input_index
       break
     case ".":
-      const stdout = document.getElementById("output-stdout")
-      stdout.textContent = stdout.textContent.slice(0, -1)
+      output.pop()
+      document.getElementById("output-stdout").textContent = new TextDecoder("utf-8").decode(new Uint8Array(output))
       break
     case "[":
       if (loop_log[loop_log.length - 1] == code_index) {
