@@ -91,6 +91,24 @@
 			"image": ""
 		},
 		{
+			"url": "/blog/brainfuck/input_output/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "Brainfuck",
+			"sub_title": "~入力・出力編~",
+			"description": "Brainfuckの入力・出力の解説です。",
+			"image": ""
+		},
+		{
+			"url": "/blog/brainfuck/memory_output/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "Brainfuck",
+			"sub_title": "~メモリー出力編~",
+			"description": "Brainfuckでメモリーの値を10進数で出力するコードの紹介です。",
+			"image": ""
+		},
+		{
 			"url": "/blog/youtube_playlist_sumtime/index.html",
 			"name": "",
 			"title": "API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法",
@@ -139,7 +157,7 @@
 			"url": "/blog/brainfuck/about/index.html",
 			"name": "",
 			"title": "",
-			"main_title": "brainfuck",
+			"main_title": "Brainfuck",
 			"sub_title": "~概要編~",
 			"description": "難解プログラミング言語Brainfuckの基礎を解説します。",
 			"image": ""
@@ -148,7 +166,7 @@
 			"url": "/blog/brainfuck/warizann/index.html",
 			"name": "",
 			"title": "",
-			"main_title": "brainfuck",
+			"main_title": "Brainfuck",
 			"sub_title": "~割り算編~",
 			"description": "Brainfuckで割り算をするコードの紹介です。",
 			"image": ""
@@ -157,9 +175,18 @@
 			"url": "/blog/brainfuck/soinnsuubunnkai/index.html",
 			"name": "",
 			"title": "",
-			"main_title": "brainfuck",
+			"main_title": "Brainfuck",
 			"sub_title": "~素因数分解編~",
 			"description": "Brainfuckで素因数分解をするコードの紹介です。",
+			"image": ""
+		},
+		{
+			"url": "/tool/brainfuck/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "Brainfuck実行",
+			"sub_title": "",
+			"description": "Brainfuckをブラウザ上で実行・デバックできます。",
 			"image": ""
 		},
 		{

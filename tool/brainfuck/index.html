@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<!-- Auto insert head -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="hatuna-827">
+	<meta name="description" content="Brainfuckをブラウザ上で実行・デバックできます。">
+	<meta property="og:url" content="https://hatuna-827.github.io/tool/brainfuck/index.html">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Brainfuck実行">
+	<meta property="og:description" content="Brainfuckをブラウザ上で実行・デバックできます。">
+	<meta property="og:site_name" content="Brainfuck実行 | hatuna-827">
+	<meta property="og:image" content="/640_640.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:domain" content="hatuna-827.github.io">
+	<meta name="twitter:title" content="Brainfuck実行">
+	<meta name="twitter:description" content="Brainfuckをブラウザ上で実行・デバックできます。">
+	<meta name="twitter:image" content="/640_640.png">
+	<meta name="theme-color" content="#709170">
+	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+	<link rel="apple-touch-icon" href="/hatuna-827.ico">
+	<link rel="stylesheet" href="/tool/brainfuck/brainfuck.css">
+	<link rel="stylesheet" href="/hatuna-827.css">
+	<script src="/hatuna-827.js" type="module" crossorigin="use-credentials"></script>
+	<title>Brainfuck実行 | hatuna-827</title>
+	<!-- Auto insert head end -->
+</head>
+
+<body>
+	<!-- Auto insert body -->
+	<div id="homebar"></div>
+	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+	<!-- Auto insert body end -->
+	<div id="main">
+		<div id="main-content">
+			<div id="output">
+				<span class="label">入力 &gt;</span>
+				<div id="output-stdin" class="output"></div>
+				<span class="label">出力 &gt;</span>
+				<div id="output-stdout" class="output"></div>
+				<span class="label">メモリー &gt;</span>
+				<div id="output-memory" class="output"></div>
+				<span class="label">コード &gt;</span>
+				<div id="output-code" class="output"></div>
+			</div>
+			<hr>
+			<div id="control">
+				<div id="control-buttons">
+					<div id="run" class="control-button">実行</div>
+					<div id="pause" class="control-button">一時停止</div>
+					<div id="resume" class="control-button">再開</div>
+					<div id="step-re" class="control-button">戻る</div>
+					<div id="step-in" class="control-button">進む</div>
+				</div>
+				<label id="runspeed">
+					<span class="label">実行速度：</span><select id="runspeed-select">
+						<option value="-1" selected>No Step</option>
+						<option value="0">0 ms</option>
+						<option value="10">10 ms</option>
+						<option value="20">20 ms</option>
+						<option value="30">30 ms</option>
+						<option value="40">40 ms</option>
+						<option value="50">50 ms</option>
+						<option value="60">60 ms</option>
+						<option value="70">70 ms</option>
+						<option value="80">80 ms</option>
+						<option value="90">90 ms</option>
+						<option value="100">100 ms</option>
+						<option value="200">200 ms</option>
+						<option value="300">300 ms</option>
+						<option value="400">400 ms</option>
+						<option value="500">500 ms</option>
+						<option value="600">600 ms</option>
+						<option value="700">700 ms</option>
+						<option value="800">800 ms</option>
+						<option value="900">900 ms</option>
+						<option value="1000">1000 ms</option>
+					</select>
+				</label>
+				<label id="memory-type">
+					<span class="label">メモリーの表示方法：</span><select id="memory-type-select">
+						<option value="10" selected>10進数</option>
+						<option value="16">16進数</option>
+					</select>
+				</label>
+				<label id="code-type">
+					<span class="label">コメントの表示方法：</span><select id="code-type-select">
+						<option value="raw" selected>そのまま</option>
+						<option value="s">空白文字だけ</option>
+						<option value="n">改行だけ</option>
+						<option value="none">なし(コメント全削除)</option>
+					</select>
+				</label>
+			</div>
+			<hr>
+			<div id="input">
+				<span class="label">コード入力 &gt;</span>
+				<textarea id="input-code" class="textarea"></textarea>
+				<span class="label">標準入力 &gt;</span>
+				<textarea id="input-stdin" class="textarea"></textarea>
+			</div>
+			<hr>
+			<div id="notes">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>&gt;</th>
+							<td>ポインタを右に1つ移動する</td>
+						</tr>
+						<tr>
+							<th>&lt;</th>
+							<td>ポインタを左に1つ移動する</td>
+						</tr>
+						<tr>
+							<th>+</th>
+							<td>ポインタが指すメモリの値を+1する</td>
+						</tr>
+						<tr>
+							<th>-</th>
+							<td>ポインタが指すメモリの値を-1する</td>
+						</tr>
+						<tr>
+							<th>,</th>
+							<td>入力から1バイト読み込んでポインタが指すメモリに代入する</td>
+						</tr>
+						<tr>
+							<th>.</th>
+							<td>ポインタが指すメモリの値をASCIIコードとして出力する</td>
+						</tr>
+						<tr>
+							<th>[</th>
+							<td>ポインタが指す値が0なら対応する<code>]</code>までジャンプする</td>
+						</tr>
+						<tr>
+							<th>]</th>
+							<td>ポインタが指す値が0でないなら対応する<code>[</code>までジャンプする</td>
+						</tr>
+						<tr>
+							<th>#</th>
+							<td>一時停止する（オリジナル・デバッグ用）</td>
+						</tr>
+					</tbody>
+				</table>
+				<p><a href="/blog/brainfuck/about">詳しいbrainfuckの書き方はこちら</a></p>
+			</div>
+		</div>
+	</div>
+	<script src="./brainfuck.js" type="module"></script>
+</body>
+
+</html>

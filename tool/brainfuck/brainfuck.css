@@ -1,0 +1,133 @@
+* {
+  outline: none;
+  box-sizing: border-box;
+  color: var(--main-text-color);
+}
+
+#main-content {
+  padding: 30px 50px;
+  font-size: 14px;
+}
+
+#output,
+#control,
+#input,
+#notes {
+  padding: 10px;
+}
+
+hr {
+  margin: 0px;
+}
+
+.active {
+  background-color: var(--light-green-color);
+}
+
+.textarea {
+  margin: 3px 20px;
+  padding: 5px 7px;
+  width: calc(100% - 40px);
+  font-family: var(--code-font);
+  resize: vertical;
+}
+
+/* output */
+.output {
+  padding: 3px 10px;
+  min-height: 30px;
+  max-height: 500px;
+  overflow: auto;
+  font-family: var(--code-font);
+}
+
+.error-log {
+  color: var(--red-color);
+}
+
+.memory {
+  display: inline-block;
+  padding: 2px;
+  min-width: 35px;
+  line-height: 13px;
+  text-align: center;
+}
+
+#output-code {
+  white-space: pre;
+}
+
+/* control */
+#runspeed-select {
+  width: 80px;
+  font-size: 12px;
+}
+
+#control-buttons {
+  padding-bottom: 5px;
+}
+
+#run {
+  background-color: var(--light-green-color);
+}
+
+.control-button {
+  display: inline-block;
+  margin: 0px 3px;
+  padding: 5px 10px;
+  min-width: 100px;
+  text-align: center;
+  background-color: var(--grey-green-color);
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+label {
+  display: block;
+  padding: 2px 0px;
+}
+
+.label {
+  user-select: none;
+}
+
+/* input */
+#input-code {
+  height: 200px;
+}
+
+#input-stdin {
+  height: 60px;
+}
+
+/* notes */
+.table {
+  padding: 5px 15px;
+  font-family: var(--code-font);
+}
+
+.table th {
+  font-size: 17px;
+  font-weight: 400;
+  background-color: var(--grey-e5-color);
+}
+
+.table th,
+.table td {
+  padding: 7px;
+  line-height: 15px;
+  border: 1px solid var(--grey-5-color);
+}
+
+#notes p {
+  margin: 10px 0px;
+  padding-left: 30px;
+  font-size: 15px;
+}
+
+#notes a {
+  margin: 0px;
+  color: var(--main-dark-color);
+  text-decoration: none;
+}
