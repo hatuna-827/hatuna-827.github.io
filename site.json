@@ -13,6 +13,7 @@
 		"grey-d-color",
 		"grey-c-color",
 		"grey-a-color",
+		"grey-8-color",
 		"grey-5-color",
 		"contrast-color",
 		"light-side-color",
@@ -259,6 +260,15 @@
 			"main_title": "カウンター",
 			"sub_title": "",
 			"description": "シンプルなカウンター",
+			"image": ""
+		},
+		{
+			"url": "/game/tower_of_hanoi/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "ハノイの塔",
+			"sub_title": "",
+			"description": "ハノイの塔 段数指定可能",
 			"image": ""
 		},
 		{

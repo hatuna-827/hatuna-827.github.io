@@ -16,6 +16,7 @@
 	--dark-mode-grey-d-color: #555;
 	--dark-mode-grey-c-color: #444;
 	--dark-mode-grey-a-color: #333;
+	--dark-mode-grey-8-color: #777;
 	--dark-mode-grey-5-color: #aaa;
 	--dark-mode-contrast-color: #303030;
 	--dark-mode-light-side-color: #4f4f4f;
@@ -42,6 +43,7 @@
 	--light-mode-grey-d-color: #ddd;
 	--light-mode-grey-c-color: #ccc;
 	--light-mode-grey-a-color: #aaa;
+	--light-mode-grey-8-color: #888;
 	--light-mode-grey-5-color: #555;
 	--light-mode-contrast-color: #fff;
 	--light-mode-light-side-color: #fff;
@@ -70,6 +72,7 @@
 		--grey-d-color: var(--dark-mode-grey-d-color);
 		--grey-c-color: var(--dark-mode-grey-c-color);
 		--grey-a-color: var(--dark-mode-grey-a-color);
+		--grey-8-color: var(--dark-mode-grey-8-color);
 		--grey-5-color: var(--dark-mode-grey-5-color);
 		--contrast-color: var(--dark-mode-contrast-color);
 		--light-side-color: var(--dark-mode-light-side-color);
@@ -96,6 +99,7 @@
 		--grey-d-color: var(--light-mode-grey-d-color);
 		--grey-c-color: var(--light-mode-grey-c-color);
 		--grey-a-color: var(--light-mode-grey-a-color);
+		--grey-8-color: var(--light-mode-grey-8-color);
 		--grey-5-color: var(--light-mode-grey-5-color);
 		--contrast-color: var(--light-mode-contrast-color);
 		--light-side-color: var(--light-mode-light-side-color);
@@ -121,6 +125,7 @@ body[data-theme='dark'] {
 	--grey-d-color: var(--dark-mode-grey-d-color);
 	--grey-c-color: var(--dark-mode-grey-c-color);
 	--grey-a-color: var(--dark-mode-grey-a-color);
+	--grey-8-color: var(--dark-mode-grey-8-color);
 	--grey-5-color: var(--dark-mode-grey-5-color);
 	--contrast-color: var(--dark-mode-contrast-color);
 	--light-side-color: var(--dark-mode-light-side-color);
@@ -145,6 +150,7 @@ body[data-theme='light'] {
 	--grey-d-color: var(--light-mode-grey-d-color);
 	--grey-c-color: var(--light-mode-grey-c-color);
 	--grey-a-color: var(--light-mode-grey-a-color);
+	--grey-8-color: var(--light-mode-grey-8-color);
 	--grey-5-color: var(--light-mode-grey-5-color);
 	--contrast-color: var(--light-mode-contrast-color);
 	--light-side-color: var(--light-mode-light-side-color);
