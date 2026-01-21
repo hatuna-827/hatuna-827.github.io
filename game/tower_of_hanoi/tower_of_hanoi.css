@@ -42,6 +42,7 @@ h1 {
 	justify-content: center;
 	gap: 15px;
 	height: 57px;
+	user-select: none;
 }
 
 #how-to-play div {
@@ -151,12 +152,36 @@ h1 {
 	background-color: var(--dialog-main-color);
 }
 
+/* content */
+#content {
+	margin: 10px auto;
+	max-width: 1000px;
+}
+
+/* out */
+#out {
+	text-align: left;
+}
+
+#out>span {
+	margin: 2px 5px;
+	font-size: 15px;
+}
+
+#out>span>span,
+#out #clear {
+	margin: 0px 3px;
+	font-weight: 600;
+}
+
+#out #clear {
+	color: var(--red-color);
+}
+
 /* box */
 #boxs {
 	display: flex;
 	justify-content: center;
-	margin: 10px auto;
-	max-width: 1000px;
 	gap: 1.5%;
 	user-select: none;
 }
@@ -193,4 +218,16 @@ h1 {
 
 .disk.even {
 	background-color: var(--grey-8-color);
+}
+
+/* reset */
+#reset {
+	margin: 20px auto;
+	height: 40px;
+	width: 130px;
+	font-size: 17px;
+	line-height: 40px;
+	background-color: var(--light-green-color);
+	border-radius: 5px;
+	user-select: none;
 }

@@ -10,22 +10,27 @@ const setting_structure = {
 let step_count = 5
 let select_index = null
 const box_list = [0, 1, 2].map((i) => { return document.getElementById(`box${i}`) })
-let disk_data = [[], [], []]
+let disk_data
+let move_count
+let start_time
+let time
+let timerID
 /* - init -------------------------------------------------------------------------------------- */
 structure.def_struct("setting_structure", setting_structure)
 structure.set("setting-structure", "setting_structure")
 reset_disks()
 /* - add eventListener ------------------------------------------------------------------------- */
 document.addEventListener('keydown', event => {
-	if (event.key === "f") {
+	if (["f", "a", "v"].includes(event.key)) {
 		push(0)
-	} else if (event.key === "g" || event.key === "h") {
+	} else if (["g", "h", "w", "s", "b"].includes(event.key)) {
 		push(1)
-	} else if (event.key === "j") {
+	} else if (["j", "d", "n"].includes(event.key)) {
 		push(2)
 	}
 })
 box_list.forEach((box, i) => { box.addEventListener('pointerdown', function () { push(i) }) })
+document.getElementById("reset").addEventListener('click', reset_disks)
 document.getElementById("rule").addEventListener('click', function () {
 	dialog({
 		title: "ルール",
@@ -42,7 +47,7 @@ document.getElementById("guide").addEventListener('click', function () {
 		content: `動かしたい円盤のあるマスをクリックし、移動先のマスをクリックします。
 		段数を指定することができます。\n
 		キーボード操作も可能です。
-		"F"は左、"G","H"は中央、"J"は右のマスのクリックに相当します。`,
+		左:AFV  中央:WSGHB  右:DJN`,
 		button: ["閉じる"]
 	})
 })
@@ -81,6 +86,13 @@ function reset_disks() {
 		box.style.height = 24 * step_count - 4 + "px"
 	})
 	disk_data = [[...Array(step_count)].map((_, i) => i + 1), [], []]
+	select_index = null
+	move_count = 0
+	clearInterval(timerID)
+	document.getElementById("step").textContent = step_count
+	document.getElementById("move").textContent = 0
+	document.getElementById("time").textContent = 0
+	document.getElementById("clear").textContent = ""
 	render_disks()
 }
 function render_disks() {
@@ -97,6 +109,14 @@ function render_disks() {
 	})
 }
 function push(index) {
+	if (disk_data[index].length !== 0 && move_count === 0) {
+		start_time = new Date().getTime()
+		time = 0
+		timerID = setInterval(() => {
+			++time
+			document.getElementById("time").textContent = `${Math.floor(time / 10)}.${time % 10}`
+		}, 100)
+	}
 	if (select_index === null) {
 		if (disk_data[index].length !== 0) {
 			box_list[index].classList.add("selected")
@@ -110,6 +130,15 @@ function push(index) {
 			box_list[select_index].classList.remove("selected")
 			disk_data[index].unshift(disk_data[select_index].shift())
 			select_index = null
+			++move_count
+			document.getElementById("move").textContent = move_count
+			if ((index === 1 && disk_data[1].length === step_count) ||
+				(index === 2 && disk_data[2].length === step_count)) {
+				clearInterval(timerID)
+				time = new Date().getTime() - start_time
+				document.getElementById("time").textContent = `${Math.floor(time / 1000)}.${("00" + time % 1000).slice(-3)}`
+				document.getElementById("clear").textContent = move_count === 2 ** step_count - 1 ? "ゲームクリア 最短！" : "ゲームクリア"
+			}
 			render_disks()
 		}
 	}
