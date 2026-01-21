@@ -82,6 +82,7 @@ function reflect_setting() {
 }
 function reset_disks() {
 	box_list.forEach((box) => {
+		box.classList.remove("selected")
 		box.innerHTML = ""
 		box.style.height = 24 * step_count - 4 + "px"
 	})
