@@ -4,17 +4,20 @@ import structure from "/module/structure.js"
 /* - const ------------------------------------------------------------------------------------- */
 const setting_structure = {
 	step_count: { type: "number", display_name: "段数", min: 1, step: 1, default: 5, placeholder: " 1 ~" },
+	pole_count: { type: "number", display_name: "杭の数", min: 3, step: 1, default: 3, placeholder: " 3 ~" },
 	display_index: { type: "boolean", display_name: "インデックスの表示" }
 }
 
 let step_count = 5
+let pole_count = 3
 let select_index = null
-const box_list = [0, 1, 2].map((i) => { return document.getElementById(`box${i}`) })
+let box_list
 let disk_data
 let move_count
 let start_time
 let time
 let timerID
+let reset_flag = true
 /* - init -------------------------------------------------------------------------------------- */
 structure.def_struct("setting_structure", setting_structure)
 structure.set("setting-structure", "setting_structure")
@@ -27,9 +30,10 @@ document.addEventListener('keydown', event => {
 		push(1)
 	} else if (["j", "d", "n"].includes(event.key)) {
 		push(2)
+	} else if (["r", "c"].includes(event.key)) {
+		reset_disks()
 	}
 })
-box_list.forEach((box, i) => { box.addEventListener('pointerdown', function () { push(i) }) })
 document.getElementById("reset").addEventListener('click', reset_disks)
 document.getElementById("rule").addEventListener('click', function () {
 	dialog({
@@ -47,7 +51,7 @@ document.getElementById("guide").addEventListener('click', function () {
 		content: `動かしたい円盤のあるマスをクリックし、移動先のマスをクリックします。
 		段数を指定することができます。\n
 		キーボード操作も可能です。
-		左:AFV  中央:WSGHB  右:DJN`,
+		左:AFV  中央:WSGHB  右:DJN  リセット:RC`,
 		button: ["閉じる"]
 	})
 })
@@ -71,8 +75,10 @@ document.getElementById("setting-close").addEventListener('click', function () {
 function reflect_setting() {
 	const setting = structure.get("setting-structure").setting_structure
 	setting.step_count = setting.step_count < 1 ? 5 : Math.floor(setting.step_count)
-	if (setting.step_count !== step_count) {
+	setting.pole_count = setting.pole_count < 3 ? 3 : Math.floor(setting.pole_count)
+	if (setting.step_count !== step_count || setting.pole_count !== pole_count) {
 		step_count = setting.step_count
+		pole_count = setting.pole_count
 		reset_disks()
 	}
 	if (setting.display_index)
@@ -81,12 +87,21 @@ function reflect_setting() {
 		document.getElementById("boxs").classList.remove("display-index")
 }
 function reset_disks() {
-	box_list.forEach((box) => {
-		box.classList.remove("selected")
-		box.innerHTML = ""
+	const boxs = document.getElementById("boxs")
+	boxs.innerHTML = ""
+	box_list = []
+	for (let i = 0; i < pole_count; ++i) {
+		const box = document.createElement('div')
+		box.className = "box"
+		box.id = `box${i}`
 		box.style.height = 24 * step_count - 4 + "px"
-	})
-	disk_data = [[...Array(step_count)].map((_, i) => i + 1), [], []]
+		box_list.push(box)
+		boxs.appendChild(box)
+	}
+	box_list.forEach((box, i) => { box.addEventListener('pointerdown', function () { push(i) }) })
+	disk_data = [...Array(pole_count)].map(_ => [])
+	disk_data[0] = [...Array(step_count)].map((_, i) => i + 1)
+	reset_flag = true
 	select_index = null
 	move_count = 0
 	clearInterval(timerID)
@@ -110,7 +125,8 @@ function render_disks() {
 	})
 }
 function push(index) {
-	if (disk_data[index].length !== 0 && move_count === 0) {
+	if (reset_flag && disk_data[index].length !== 0) {
+		reset_flag = false
 		start_time = new Date().getTime()
 		time = 0
 		timerID = setInterval(() => {
@@ -133,12 +149,11 @@ function push(index) {
 			select_index = null
 			++move_count
 			document.getElementById("move").textContent = move_count
-			if ((index === 1 && disk_data[1].length === step_count) ||
-				(index === 2 && disk_data[2].length === step_count)) {
+			if (index !== 0 && disk_data[index].length === step_count) {
 				clearInterval(timerID)
 				time = new Date().getTime() - start_time
 				document.getElementById("time").textContent = `${Math.floor(time / 1000)}.${("00" + time % 1000).slice(-3)}`
-				document.getElementById("clear").textContent = move_count === 2 ** step_count - 1 ? "ゲームクリア 最短！" : "ゲームクリア"
+				document.getElementById("clear").textContent = pole_count === 3 && move_count === 2 ** step_count - 1 ? "ゲームクリア 最短！" : "ゲームクリア"
 			}
 			render_disks()
 		}
