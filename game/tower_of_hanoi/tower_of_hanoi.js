@@ -151,9 +151,10 @@ function push(index) {
 			select_index = null
 			++move_count
 			document.getElementById("move").textContent = move_count
-			if (index !== 0 && disk_data[index].length === step_count) {
+			if (index !== 0 && disk_data[index].length === step_count && start_time !== null) {
 				clearInterval(timerID)
 				time = new Date().getTime() - start_time
+				start_time = null
 				document.getElementById("time").textContent = `${Math.floor(time / 1000)}.${("00" + time % 1000).slice(-3)}`
 				document.getElementById("clear").textContent = pole_count === 3 && move_count === 2 ** step_count - 1 ? "ゲームクリア 最短！" : "ゲームクリア"
 			}
