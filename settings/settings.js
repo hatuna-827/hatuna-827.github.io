@@ -1,57 +1,26 @@
-// window.open("/settings/?p=***", '_blank', 'top=100,left=200,height=500,width=400,popup')
+// window.open("/settings/", '_blank', 'top=100,left=200,height=500,width=400,popup')
 "use strict"
+/* - import ------------------------------------------------------------------------------------ */
 import { reflect_setting } from "/hatuna-827.js"
-import query from "/module/query.js"
 import storage from "/module/storage.js"
-const page = query("p")
-if (!window.opener) {
-	window.close()
-	window.open("/link")
-}
-if (page && page == "svg_editor") {
-	/* - const ------------------------------------------------------------------------------------- */
-	const storage_key = "svg-editor-setting"
-	const setting = document.getElementById("setting")
-	const default_settings = { hide_homebar: false, views: "easy" }
-	let settings = { ...default_settings, ...storage.get(storage_key) }
-	/* - init -------------------------------------------------------------------------------------- */
-	storage.set(storage_key, settings)
-	document.querySelector('title').textContent = "設定 - SVGエディター | hatuna-827"
-	setting.innerHTML = "<label><span class='reco'>ホームバーを非表示</span><input type='checkbox' id='hide-homebar'></label><br><label><span>編集ウィンドウ</span><select id='views'><option value='easy'>簡単編集</option><option value='xml'>xml編集</option></select></label><hr><br><button class='center' id='all-reset'>全てリセット</button>"
-	document.getElementById("hide-homebar").checked = settings.hide_homebar
-	document.getElementById("views").selectedIndex = settings.views === "easy" ? 0 : 1
-	/* - add eventListener ------------------------------------------------------------------------- */
-	document.getElementById("hide-homebar").addEventListener('click', function () {
-		storage.modify(storage_key, "hide_homebar", this.checked)
-	})
-	document.getElementById("views").addEventListener('change', function () {
-		storage.modify(storage_key, "views", this.value)
-	})
-	document.getElementById("all-reset").addEventListener('click', () => {
-		storage.set(storage_key, default_settings)
-		window.location.reload()
-	})
-	/* --------------------------------------------------------------------------------------------- */
-} else {
-	/* - const ------------------------------------------------------------------------------------- */
-	const storage_key = "site-setting"
-	const default_settings = { theme: "device" }
-	let settings = { ...default_settings, ...storage.get(storage_key) }
-	/* - init -------------------------------------------------------------------------------------- */
-	reflect_setting()
-	storage.set(storage_key, settings)
-	document.getElementById("theme-" + settings.theme).checked = true
-	/* - add eventListener ------------------------------------------------------------------------- */
-	document.querySelectorAll("[name=theme]").forEach(radio => {
-		radio.addEventListener('click', function () {
-			storage.modify(storage_key, "theme", this.dataset.value)
-			reflect_setting()
-		})
-	})
-	document.getElementById("all-reset").addEventListener('click', () => {
-		storage.set(storage_key, default_settings)
+/* - const ------------------------------------------------------------------------------------- */
+const storage_key = "site-setting"
+const default_settings = { theme: "device" }
+let settings = { ...default_settings, ...storage.get(storage_key) }
+/* - init -------------------------------------------------------------------------------------- */
+reflect_setting()
+storage.set(storage_key, settings)
+document.getElementById("theme-" + settings.theme).checked = true
+/* - add eventListener ------------------------------------------------------------------------- */
+document.querySelectorAll("[name=theme]").forEach(radio => {
+	radio.addEventListener('click', function () {
+		storage.modify(storage_key, "theme", this.dataset.value)
 		reflect_setting()
-		window.location.reload()
 	})
-	/* --------------------------------------------------------------------------------------------- */
-}
+})
+document.getElementById("all-reset").addEventListener('click', () => {
+	storage.set(storage_key, default_settings)
+	reflect_setting()
+	window.location.reload()
+})
+/* --------------------------------------------------------------------------------------------- */

@@ -35,7 +35,7 @@
 			"main_title": "hatuna-827",
 			"sub_title": "",
 			"description": "こんにちは、hatuna-827です。ブログなどを少しずつ更新していきます。",
-			"image": ""
+			"homebar-ignore": true
 		},
 		{
 			"url": "/link/index.html",
@@ -43,8 +43,7 @@
 			"title": "LINK すべてのサイト一覧",
 			"main_title": "←もどる",
 			"sub_title": "すべてのサイト一覧",
-			"description": "すべてのサイトへのリンク一覧",
-			"image": ""
+			"description": "すべてのサイトへのリンク一覧"
 		},
 		{
 			"url": "/link/blog/index.html",
@@ -52,8 +51,7 @@
 			"title": "Blog ブログ一覧",
 			"main_title": "ブログ",
 			"sub_title": "Blog",
-			"description": "プログラミングの話。Esperanto語・Brainfuckの布教をしています。\n人気記事：Youtubeプレイリストの合計時間の計算方法",
-			"image": ""
+			"description": "プログラミングの話。Esperanto語・Brainfuckの布教をしています。\n人気記事：Youtubeプレイリストの合計時間の計算方法"
 		},
 		{
 			"url": "/link/game/index.html",
@@ -61,8 +59,7 @@
 			"title": "Game ゲーム一覧",
 			"main_title": "ゲーム",
 			"sub_title": "Game",
-			"description": "今のところ、OXゲーム・ライツアウト・オセロしかありません。\nおすすめ：ライツアウト",
-			"image": ""
+			"description": "今のところ、OXゲーム・ライツアウト・オセロしかありません。\nおすすめ：ライツアウト"
 		},
 		{
 			"url": "/link/tool/index.html",
@@ -70,8 +67,7 @@
 			"title": "Tool ツール一覧",
 			"main_title": "ツール",
 			"sub_title": "Tool",
-			"description": "ちょっと便利なツール達です。\nおすすめ：SVGエディター・ごきげんななめ作問ツール",
-			"image": ""
+			"description": "ちょっと便利なツール達です。\nおすすめ：SVGエディター・ごきげんななめ作問ツール"
 		},
 		{
 			"url": "/home/index.html",
@@ -79,8 +75,7 @@
 			"title": "HOME 自己紹介",
 			"main_title": "HOME",
 			"sub_title": "自己紹介",
-			"description": "こんにちは、hatuna-827です。ブログなどを少しずつ更新していきます。",
-			"image": ""
+			"description": "こんにちは、hatuna-827です。ブログなどを少しずつ更新していきます。"
 		},
 		{
 			"url": "/404.html",
@@ -88,8 +83,7 @@
 			"title": "404 Not found",
 			"main_title": "404",
 			"sub_title": "Not found",
-			"description": "404 Page Not Found",
-			"image": ""
+			"description": "404 Page Not Found"
 		},
 		{
 			"url": "/blog/brainfuck/input_output/index.html",
@@ -97,8 +91,7 @@
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~入力・出力編~",
-			"description": "Brainfuckの入力・出力の解説です。",
-			"image": ""
+			"description": "Brainfuckの入力・出力の解説です。"
 		},
 		{
 			"url": "/blog/brainfuck/memory_output/index.html",
@@ -106,8 +99,7 @@
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~メモリー出力編~",
-			"description": "Brainfuckでメモリーの値を10進数で出力するコードの紹介です。",
-			"image": ""
+			"description": "Brainfuckでメモリーの値を10進数で出力するコードの紹介です。"
 		},
 		{
 			"url": "/blog/youtube_playlist_sumtime/index.html",
@@ -115,8 +107,7 @@
 			"title": "API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法",
 			"main_title": "Youtubeプレイリスト",
 			"sub_title": "の合計時間の計算方法",
-			"description": "API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。",
-			"image": ""
+			"description": "API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。"
 		},
 		{
 			"url": "/blog/graphing_art/index.html",
@@ -124,8 +115,7 @@
 			"title": "グラフアート、はじめました。",
 			"main_title": "グラフアート",
 			"sub_title": "グラフアート、はじめました。",
-			"description": "desmosを用い、一緒にグラフアートを始めましょう！",
-			"image": ""
+			"description": "desmosを用い、一緒にグラフアートを始めましょう！"
 		},
 		{
 			"url": "/blog/regex/index.html",
@@ -133,8 +123,7 @@
 			"title": "",
 			"main_title": "はじめての正規表現",
 			"sub_title": "~概要編~",
-			"description": "VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。",
-			"image": ""
+			"description": "VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。"
 		},
 		{
 			"url": "/blog/vscode/change_design/index.html",
@@ -142,8 +131,7 @@
 			"title": "",
 			"main_title": "VScodeをデザイン",
 			"sub_title": "デザインを変更しよう！",
-			"description": "VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。",
-			"image": ""
+			"description": "VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。"
 		},
 		{
 			"url": "/blog/esperanto/about/index.html",
@@ -151,8 +139,7 @@
 			"title": "",
 			"main_title": "エスペラント語",
 			"sub_title": "~概要編~",
-			"description": "Simpla klarigo pri Esperanto.",
-			"image": ""
+			"description": "Simpla klarigo pri Esperanto."
 		},
 		{
 			"url": "/blog/brainfuck/about/index.html",
@@ -160,8 +147,7 @@
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~概要編~",
-			"description": "難解プログラミング言語Brainfuckの基礎を解説します。",
-			"image": ""
+			"description": "難解プログラミング言語Brainfuckの基礎を解説します。"
 		},
 		{
 			"url": "/blog/brainfuck/warizann/index.html",
@@ -169,8 +155,7 @@
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~割り算編~",
-			"description": "Brainfuckで割り算をするコードの紹介です。",
-			"image": ""
+			"description": "Brainfuckで割り算をするコードの紹介です。"
 		},
 		{
 			"url": "/blog/brainfuck/soinnsuubunnkai/index.html",
@@ -178,8 +163,15 @@
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~素因数分解編~",
-			"description": "Brainfuckで素因数分解をするコードの紹介です。",
-			"image": ""
+			"description": "Brainfuckで素因数分解をするコードの紹介です。"
+		},
+		{
+			"url": "/tool/morse/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "モールス信号入力",
+			"sub_title": "",
+			"description": "英語と日本語に対応したモールス入力ができます。"
 		},
 		{
 			"url": "/tool/brainfuck/index.html",
@@ -187,8 +179,7 @@
 			"title": "",
 			"main_title": "Brainfuck実行",
 			"sub_title": "",
-			"description": "Brainfuckをブラウザ上で実行・デバックできます。",
-			"image": ""
+			"description": "Brainfuckをブラウザ上で実行・デバックできます。"
 		},
 		{
 			"url": "/tool/json_formatter/index.html",
@@ -196,8 +187,7 @@
 			"title": "",
 			"main_title": "JSONフォーマッタ",
 			"sub_title": "",
-			"description": "jsonファイルをあなたの望む形にフォーマットできます。",
-			"image": ""
+			"description": "jsonファイルをあなたの望む形にフォーマットできます。"
 		},
 		{
 			"url": "/tool/word_book/index.html",
@@ -205,8 +195,7 @@
 			"title": "デジタル単語帳",
 			"main_title": "単語帳",
 			"sub_title": "デジタル単語帳",
-			"description": "ローカルストレージを使用したデジタル単語帳です。",
-			"image": ""
+			"description": "ローカルストレージを使用したデジタル単語帳です。"
 		},
 		{
 			"url": "/tool/svg_editor/index.html",
@@ -214,8 +203,7 @@
 			"title": "",
 			"main_title": "SVGエディター",
 			"sub_title": "",
-			"description": "プレビュー付き・シンプルなSVGエディター",
-			"image": ""
+			"description": "プレビュー付き・シンプルなSVGエディター"
 		},
 		{
 			"url": "/tool/slant_creator/index.html",
@@ -223,8 +211,7 @@
 			"title": "",
 			"main_title": "ごきげんななめ",
 			"sub_title": "作問ツール",
-			"description": "ごきげんななめの作問を補助します。",
-			"image": ""
+			"description": "ごきげんななめの作問を補助します。"
 		},
 		{
 			"url": "/tool/clock/index.html",
@@ -232,8 +219,7 @@
 			"title": "",
 			"main_title": "時計",
 			"sub_title": "",
-			"description": "デジタルのアナログ時計、わざと数秒ずれてたり、、",
-			"image": ""
+			"description": "デジタルのアナログ時計、わざと数秒ずれてたり、、"
 		},
 		{
 			"url": "/tool/word_counter/index.html",
@@ -241,8 +227,7 @@
 			"title": "",
 			"main_title": "単語カウンター",
 			"sub_title": "",
-			"description": "単語カウンター※エスペラント語・英語のみ対応",
-			"image": ""
+			"description": "単語カウンター※エスペラント語・英語のみ対応"
 		},
 		{
 			"url": "/tool/input_esperanto/index.html",
@@ -250,8 +235,7 @@
 			"title": "",
 			"main_title": "エスペラント語入力",
 			"sub_title": "",
-			"description": "エスペラント語の入力を補助します。",
-			"image": ""
+			"description": "エスペラント語の入力を補助します。"
 		},
 		{
 			"url": "/tool/counter/index.html",
@@ -259,8 +243,7 @@
 			"title": "",
 			"main_title": "カウンター",
 			"sub_title": "",
-			"description": "シンプルなカウンター",
-			"image": ""
+			"description": "シンプルなカウンター"
 		},
 		{
 			"url": "/game/tower_of_hanoi/index.html",
@@ -268,8 +251,7 @@
 			"title": "",
 			"main_title": "ハノイの塔",
 			"sub_title": "",
-			"description": "ハノイの塔 段数指定可能",
-			"image": ""
+			"description": "ハノイの塔 段数指定可能"
 		},
 		{
 			"url": "/game/OXgame/index.html",
@@ -277,8 +259,7 @@
 			"title": "",
 			"main_title": "〇×ゲーム",
 			"sub_title": "",
-			"description": "〇×ゲーム 自動勝負判定機能付き",
-			"image": ""
+			"description": "〇×ゲーム 自動勝負判定機能付き"
 		},
 		{
 			"url": "/game/lights_out/index.html",
@@ -286,8 +267,7 @@
 			"title": "",
 			"main_title": "ライツアウト",
 			"sub_title": "",
-			"description": "3×3 ライツアウトの問題を自動生成など、トレーニングができます。",
-			"image": ""
+			"description": "3×3 ライツアウトの問題を自動生成など、トレーニングができます。"
 		},
 		{
 			"url": "/game/othello/index.html",
@@ -295,8 +275,7 @@
 			"title": "",
 			"main_title": "オセロ・リバーシ",
 			"sub_title": "",
-			"description": "オセロ・リバーシ",
-			"image": ""
+			"description": "オセロ・リバーシ"
 		},
 		{
 			"url": "/settings/index.html",
@@ -305,7 +284,16 @@
 			"main_title": "設定",
 			"sub_title": "",
 			"description": "サイトのテーマなど、設定を変更できます。",
-			"image": ""
+			"homebar-ignore": true
+		},
+		{
+			"url": "/tool/svg_editor/settings.html",
+			"name": "",
+			"title": "",
+			"main_title": "SVGエディター設定",
+			"sub_title": "",
+			"description": "エディターモードの選択ができます。",
+			"homebar-ignore": true
 		}
 	]
 }

@@ -219,7 +219,7 @@ document.getElementById("add-doc").addEventListener('change', function () {
 	fileReader.readAsDataURL(this.files[0])
 })
 document.getElementById("settings").addEventListener('click', () => {
-	nurunu_open("/settings/?p=svg_editor", '_blank', 'top=100,left=200,height=500,width=400,popup')
+	open_setting()
 })
 document.getElementById("compress-xml").addEventListener('click', function () {
 	const xml_editor = document.getElementById("main-xml-textarea")
@@ -298,9 +298,9 @@ function clicked(target) {
 		target.classList.remove("clicked")
 	}, 0)
 }
-function nurunu_open(url, target, features) {
+function open_setting() {
 	if (opening_window) { opening_window.close() }
-	opening_window = window.open(url, target, features)
+	opening_window = window.open('./settings.html', '_blank', 'top=100,left=200,height=500,width=400,popup')
 	opening_window.addEventListener('beforeunload', () => {
 		opening_window.close()
 		opening_window = null
