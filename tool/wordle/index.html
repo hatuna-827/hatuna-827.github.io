@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<!-- Auto insert head -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="hatuna-827">
+	<meta name="description" content="5文字・英語のWordleのアシスタントツールです。">
+	<meta property="og:url" content="https://hatuna-827.github.io/tool/wordle/index.html">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Wordle アシスタント">
+	<meta property="og:description" content="5文字・英語のWordleのアシスタントツールです。">
+	<meta property="og:site_name" content="Wordle アシスタント | hatuna-827">
+	<meta property="og:image" content="/640_640.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:domain" content="hatuna-827.github.io">
+	<meta name="twitter:title" content="Wordle アシスタント">
+	<meta name="twitter:description" content="5文字・英語のWordleのアシスタントツールです。">
+	<meta name="twitter:image" content="/640_640.png">
+	<meta name="theme-color" content="#709170">
+	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+	<link rel="apple-touch-icon" href="/hatuna-827.ico">
+	<link rel="stylesheet" href="/tool/wordle/wordle.css">
+	<link rel="stylesheet" href="/hatuna-827.css">
+	<script src="/hatuna-827.js" type="module"></script>
+	<title>Wordle アシスタント | hatuna-827</title>
+	<!-- Auto insert head end -->
+</head>
+
+<body>
+	<!-- Auto insert body -->
+	<div id="homebar"></div>
+	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+	<!-- Auto insert body end -->
+	<div id="main">
+		<div id="content">
+			<h1>Wordle アシスタント</h1>
+			<div id="hints"></div>
+			<div id="add-hint"></div>
+			<div id="list-count"></div>
+			<div id="list">
+				<div id="list-content"></div>
+			</div>
+		</div>
+	</div>
+	<div id="input-hint-wrapper">
+		<div id="input-hint">
+			<div id="input-text-wrapper" class="center">
+				<input id="input-text" type="text" maxlength="5" placeholder="- - - - -">
+				<div id="input-text-comment">半角アルファベット5文字</div>
+			</div>
+			<div id="display-input" class="word">
+				<div id="input-char-0" class="char"></div>
+				<div id="input-char-1" class="char"></div>
+				<div id="input-char-2" class="char"></div>
+				<div id="input-char-3" class="char"></div>
+				<div id="input-char-4" class="char"></div>
+			</div>
+			<div class="center">
+				<div id="input-cancel">キャンセル</div>
+				<div id="input-submit">追加</div>
+			</div>
+		</div>
+	</div>
+	<script src="./wordle.js" type="module"></script>
+</body>
+
+</html>
