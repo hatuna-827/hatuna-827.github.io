@@ -4,7 +4,6 @@ import import_data from "./wordle.json" with {type: "json"}
 import snackbar from "/module/snackbar.js"
 /* - const ------------------------------------------------------------------------------------- */
 let word_list = new Set(import_data)
-let all_condition = { include: new Set(), not_include: new Set(), spot: ['', '', '', '', ''], not_spot: [[], [], [], [], []] }
 let input_condition
 /* - init -------------------------------------------------------------------------------------- */
 [...Array(5)].map((_, i) => i).forEach(i => document.getElementById(`input-char-${i}`).addEventListener('click', function () { update_char_status(i) }))
@@ -71,18 +70,19 @@ function filter_word_list(filter_condition) {
     const char = filter_condition.word[i]
     switch (filter_condition.status[i]) {
       case "green":
-        all_condition.include.add(char)
-        all_condition.spot[i] = char
         condition.spot.push({ index: i, char })
         break
       case "yellow":
-        all_condition.include.add(char)
-        all_condition.not_spot[i].push(char)
         condition.include.add(char)
         condition.not_spot.push({ index: i, char })
         break
       case "gray":
-        all_condition.not_include.add(char)
+        console.log(char)
+        if (filter_condition.word.includes(char)) {
+          condition.include.add(char)
+          condition.not_spot.push({ index: i, char })
+          break
+        }
         condition.not_include.add(char)
         break
     }
