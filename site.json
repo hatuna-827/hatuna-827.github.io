@@ -174,14 +174,6 @@
 			"description": "5文字・英語のWordleのアシスタントツールです。"
 		},
 		{
-			"url": "/tool/morse/index.html",
-			"name": "",
-			"title": "",
-			"main_title": "モールス変換",
-			"sub_title": "",
-			"description": "英語と日本語に対応したモールス入力・出力ができます。"
-		},
-		{
 			"url": "/tool/brainfuck/index.html",
 			"name": "",
 			"title": "",

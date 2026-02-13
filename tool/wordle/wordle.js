@@ -9,7 +9,7 @@ let input_condition
 [...Array(5)].map((_, i) => i).forEach(i => document.getElementById(`input-char-${i}`).addEventListener('click', function () { update_char_status(i) }))
 /* - add eventListener ------------------------------------------------------------------------- */
 document.getElementById("add-hint").addEventListener('click', function () {
-  input_condition = { word: ["", "", "", "", ""], status: ["gray", "gray", "gray", "gray", "gray"] }
+  input_condition = [...Array(5)].map(_ => ({ char: "", status: "gray" }))
   document.getElementById("input-text").value = ""
   update_display_input()
   document.getElementById("input-hint-wrapper").style.display = "flex"
@@ -20,7 +20,9 @@ document.getElementById("input-text").addEventListener('input', function () {
   if (/^[a-zA-Z]{0,5}$/.test(text)) {
     document.getElementById("input-text-comment").style.display = "none"
     text = text.split("")
-    input_condition.word = [...Array(5)].map((_, i) => (text[i] || "").toLowerCase())
+    for (let i = 0; i < 5; ++i) {
+      input_condition[i].char = (text[i] || "").toUpperCase()
+    }
     update_display_input()
   } else {
     document.getElementById("input-text-comment").style.display = "block"
@@ -31,7 +33,7 @@ document.getElementById("input-cancel").addEventListener('click', function () {
 })
 document.getElementById("input-submit").addEventListener('click', function () {
   document.getElementById("input-hint-wrapper").style.display = "none"
-  if (input_condition.word.join("").length !== 5) {
+  if (input_condition[4].char === "") {
     snackbar({ type: "Err", context: "文字数が足りません。" })
     return
   }
@@ -39,8 +41,8 @@ document.getElementById("input-submit").addEventListener('click', function () {
   word.className = "word hint"
   for (let i = 0; i < 5; ++i) {
     const char = document.createElement('div')
-    char.className = `char ${input_condition.status[i]}`
-    char.textContent = input_condition.word[i].toUpperCase()
+    char.className = `char ${input_condition[i].status}`
+    char.textContent = input_condition[i].char
     word.appendChild(char)
   }
   document.getElementById("hints").appendChild(word)
@@ -50,25 +52,25 @@ document.getElementById("input-submit").addEventListener('click', function () {
 function update_display_input() {
   for (let i = 0; i < 5; ++i) {
     const input_char = document.getElementById(`input-char-${i}`)
-    input_char.textContent = input_condition.word[i].toUpperCase()
-    input_char.className = `char ${input_condition.status[i]}`
+    input_char.textContent = input_condition[i].char
+    input_char.className = `char ${input_condition[i].status}`
   }
 }
 function update_char_status(index) {
-  const old_status = input_condition.status[index]
+  const old_status = input_condition[index].status
   const convert = {
     gray: "yellow",
     yellow: "green",
     green: "gray"
   }
-  input_condition.status[index] = convert[old_status]
+  input_condition[index].status = convert[old_status]
   update_display_input()
 }
 function filter_word_list(filter_condition) {
+  filter_condition = filter_condition.map(obj => ({ ...obj, char: obj.char.toLowerCase() }))
   let condition = { include: new Set(), not_include: new Set(), spot: [], not_spot: [] }
-  for (let i = 0; i < 5; ++i) {
-    const char = filter_condition.word[i]
-    switch (filter_condition.status[i]) {
+  filter_condition.forEach(({ char, status }, i) => {
+    switch (status) {
       case "green":
         condition.spot.push({ index: i, char })
         break
@@ -77,8 +79,7 @@ function filter_word_list(filter_condition) {
         condition.not_spot.push({ index: i, char })
         break
       case "gray":
-        console.log(char)
-        if (filter_condition.word.includes(char)) {
+        if (filter_condition.some(obj => obj.char === char && obj.status !== "gray")) {
           condition.include.add(char)
           condition.not_spot.push({ index: i, char })
           break
@@ -86,7 +87,7 @@ function filter_word_list(filter_condition) {
         condition.not_include.add(char)
         break
     }
-  }
+  })
   word_list.forEach((word) => {
     // spot
     for (const spot of condition.spot) {
