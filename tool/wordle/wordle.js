@@ -1,12 +1,15 @@
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
-import import_data from "./wordle.json" with {type: "json"}
 import snackbar from "/module/snackbar.js"
 /* - const ------------------------------------------------------------------------------------- */
-let word_list = new Set(import_data)
+let word_list
 let input_condition
 /* - init -------------------------------------------------------------------------------------- */
-[...Array(5)].map((_, i) => i).forEach(i => document.getElementById(`input-char-${i}`).addEventListener('click', function () { update_char_status(i) }))
+[0, 1, 2, 3, 4].forEach(i => document.getElementById(`input-char-${i}`).addEventListener('click', function () { update_char_status(i) }))
+fetch("./wordle.json")
+  .then(response => response.json())
+  .then(data => { word_list = new Set(data) })
+  .catch(error => console.error('Error:', error))
 /* - add eventListener ------------------------------------------------------------------------- */
 document.getElementById("add-hint").addEventListener('click', function () {
   input_condition = [...Array(5)].map(_ => ({ char: "", status: "gray" }))
