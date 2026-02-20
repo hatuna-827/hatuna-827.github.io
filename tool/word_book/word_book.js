@@ -2,10 +2,10 @@
 
 /* - import ------------------------------------------------------------------------------------ */
 
-import storage from "/module/storage.js"
-import obj_manip from "/module/obj_manip.js"
-import dialog from "/module/dialog.js"
-import snackbar from "/module/snackbar.js"
+import { storage } from "/module/storage.js"
+import { obj_manip } from "/module/obj_manip.js"
+import { dialog } from "/module/dialog.js"
+import { snackbar } from "/module/snackbar.js"
 
 /* - const ------------------------------------------------------------------------------------- */
 

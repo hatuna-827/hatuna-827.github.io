@@ -1,6 +1,6 @@
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
-import snackbar from "/module/snackbar.js"
+import { snackbar } from "/module/snackbar.js"
 /* - const ------------------------------------------------------------------------------------- */
 let word_list
 let input_condition

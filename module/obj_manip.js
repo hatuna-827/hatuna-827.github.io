@@ -119,5 +119,5 @@ function cut(base, startX, startY, height, width) {
 }
 
 export const array_2d = { overwrite, create, replace, cut }
-export default { get, modify, remove, set, array_2d }
+export const obj_manip = { get, modify, remove, set, array_2d }
 

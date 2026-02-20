@@ -1,6 +1,6 @@
 /* - import ------------------------------------------------------------------------------------ */
-import dialog from "/module/dialog.js"
-import structure from "/module/structure.js"
+import { dialog } from "/module/dialog.js"
+import { structure } from "/module/structure.js"
 /* - const ------------------------------------------------------------------------------------- */
 const setting_structure = {
 	step_count: { type: "number", display_name: "段数", min: 1, step: 1, default: 5, placeholder: " 1 ~" },

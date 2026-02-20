@@ -1,6 +1,6 @@
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
-import dialog from "/module/dialog.js"
+import { dialog } from "/module/dialog.js"
 import { array_2d } from "/module/obj_manip.js"
 /* - const ------------------------------------------------------------------------------------- */
 let settings_display = "none"
@@ -488,7 +488,7 @@ function auto_fill_box() {
 	const rule = document.getElementById("rule")
 	const start = Date.now()
 	now_data.box = auto_fill_data(now_data.size, now_data.maru)
-	console.log(Date.now() - start)
+	console.log(`auto solve time: ${Date.now() - start}ms`)
 	create_box()
 	if (gray_out.checked) { all_check_gray() }
 	if (rule.checked) { all_check_maru() }

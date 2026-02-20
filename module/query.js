@@ -1,5 +1,5 @@
 "use strict"
-export default function query(name) {
+export function query(name) {
 	const src = location.href
 	const result = new Object()
 	if (!src.includes('?')) {

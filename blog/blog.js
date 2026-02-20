@@ -1,3 +1,4 @@
+"use strict"
 document.addEventListener('DOMContentLoaded', function () {
 	const content = document.createElement('div')
 	content.id = "main-content"

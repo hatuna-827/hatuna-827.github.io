@@ -1,8 +1,9 @@
 "use strict"
-import obj_manip from "/module/obj_manip.js"
+import { load_module_css } from "./load_module_css.js"
+import { obj_manip } from "/module/obj_manip.js"
 let structs = {}
 let structs_UUID = {}
-document.head.insertAdjacentHTML('afterbegin', `<link rel="stylesheet" href="${URL.parse("./structure.css", import.meta.url)}">`)
+load_module_css("./structure.css")
 function def_struct(name, struct) {
 	if (name === undefined) { error(`|Structure module| Not enough arguments (def_struct > name)`) }
 	if (struct === undefined) { error(`|Structure module| Not enough arguments (def_struct > struct name:${name})`) }
@@ -332,7 +333,7 @@ function error(...message) {
 	console.error(...message)
 	throw new Error()
 }
-export default { set, def_struct, get }
+export const structure = { set, def_struct, get }
 
 // const struct = [
 // 	{ type: "string", display_name: "", min: 0, max: 0, default: "", pattern: "", placeholder: "" },

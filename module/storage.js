@@ -1,5 +1,5 @@
 "use strict"
-import obj_manip from "/module/obj_manip.js"
+import { obj_manip } from "/module/obj_manip.js"
 export function get(key) {
 	try {
 		return JSON.parse(localStorage.getItem(key))
@@ -33,4 +33,4 @@ export function remove(key, path) {
 	return
 }
 
-export default { get, set, modify, remove }
+export const storage = { get, set, modify, remove }

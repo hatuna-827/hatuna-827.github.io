@@ -1,12 +1,12 @@
 "use strict"
+import { load_module_css } from "./load_module_css.js"
 if (!document.getElementById("snackbar_box")) {
 	const snackbar_box = document.createElement('div')
 	snackbar_box.id = "snackbar_box"
-	const css_url = URL.parse("./snackbar.css", import.meta.url).toString()
-	snackbar_box.innerHTML = '<link rel="stylesheet" href="' + css_url + '">'
+	load_module_css("./snackbar.css", 'afterbegin', snackbar_box)
 	document.body.appendChild(snackbar_box)
 }
-export default function snackbar({
+export function snackbar({
 	type = "SUC",
 	context,
 	color,

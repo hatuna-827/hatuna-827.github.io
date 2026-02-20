@@ -2,7 +2,7 @@
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
 import { reflect_setting } from "/hatuna-827.js"
-import storage from "/module/storage.js"
+import { storage } from "/module/storage.js"
 /* - const ------------------------------------------------------------------------------------- */
 const storage_key = "site-setting"
 const default_settings = { theme: "device" }

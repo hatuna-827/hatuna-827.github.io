@@ -1,7 +1,7 @@
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
-import storage from "/module/storage.js"
-import structure from "/module/structure.js"
+import { storage } from "/module/storage.js"
+import { structure } from "/module/structure.js"
 /* - const ------------------------------------------------------------------------------------- */
 let inline = false
 // img drag

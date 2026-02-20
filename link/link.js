@@ -11,6 +11,7 @@ fetch("/site.json")
 
 function auto_links(pos, sites) {
 	const filter = pos.dataset.filter
+	sites = sites.filter((site) => /index.html$/.test(site.url))
 	if (filter == "all") {
 		sites = sites.filter((site) => /^\/(home|blog|game|tool|404)/.test(site.url))
 	} else if (filter == "topic") {

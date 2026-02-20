@@ -1,5 +1,5 @@
 "use strict"
-import storage from "/module/storage.js"
+import { storage } from "/module/storage.js"
 reflect_setting()
 window.addEventListener('DOMContentLoaded', () => {
 	try {

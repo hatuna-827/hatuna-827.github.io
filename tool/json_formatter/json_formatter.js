@@ -1,5 +1,5 @@
 /* - import ------------------------------------------------------------------------------------ */
-import structure from "/module/structure.js"
+import { structure } from "/module/structure.js"
 /* - const ------------------------------------------------------------------------------------- */
 const format_structure = {
 	indent_type: {

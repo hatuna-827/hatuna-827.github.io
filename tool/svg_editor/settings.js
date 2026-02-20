@@ -1,7 +1,7 @@
 // window.open("/settings/", '_blank', 'top=100,left=200,height=500,width=400,popup')
 "use strict"
 /* - import ------------------------------------------------------------------------------------ */
-import storage from "/module/storage.js"
+import { storage } from "/module/storage.js"
 /* - const ------------------------------------------------------------------------------------- */
 const storage_key = "svg-editor-setting"
 const default_settings = { hide_homebar: false, views: "easy" }
