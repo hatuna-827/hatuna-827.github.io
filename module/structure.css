@@ -29,6 +29,10 @@
 	align-items: center;
 }
 
+.structure .structure-field:empty {
+	display: none !important;
+}
+
 .structure .structure-field.structure-toggle:has(.structure-nest),
 .structure .structure-field.structure-object,
 .structure .structure-field.structure-list,

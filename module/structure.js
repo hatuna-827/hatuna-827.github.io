@@ -181,7 +181,7 @@ function add_input(pos, value, path, change_func) {
 					change_func()
 				})
 				remove_field.appendChild(remove_btn)
-				if (data.class === "begin") { obj_manip.get(structs_UUID, field_UUID).splice(0, 0, "") }
+				if (data.class === "begin") { obj_manip.get(structs_UUID, field_UUID).splice(0, 0, {}) }
 				add_input(remove_field, children, [field_UUID, data.class === "begin" ? 0 : nest.childElementCount], change_func)
 				nest.insertAdjacentElement(data.where, remove_field)
 				change_func()
@@ -210,6 +210,7 @@ function add_input(pos, value, path, change_func) {
 		if (option_keys.length === 0) { error(`|Structure module| No option found in select`, value) }
 		const field = document.createElement('div')
 		field.className = "structure-select structure-field"
+		console.log(path)
 		obj_manip.set(structs_UUID, [...path, "children"], {})
 		if (option_keys.length === 1) {
 			const children = options[option_keys[0]].children
@@ -226,10 +227,10 @@ function add_input(pos, value, path, change_func) {
 				input.checked = !input.checked
 				obj_manip.set(structs_UUID, [...path, "children"], {})
 				field.innerHTML = ""
-				if (input.checked === true) { add_field(field, children.children, [...path, "children"], change_func) }
+				if (input.checked === true) { add_field(field, children, [...path, "children"], change_func) }
 				change_func()
 			})
-			if (default_value === true) { add_field(field, children.children, [...path, "children"], change_func) }
+			if (default_value === true) { add_field(field, children, [...path, "children"], change_func) }
 			pos.appendChild(input)
 			pos.appendChild(btn)
 		} else {
