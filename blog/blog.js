@@ -77,8 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		copy_button_text.textContent = "コードをコピー"
 		copy_button.addEventListener('click', function () {
 			navigator.clipboard.writeText(target.textContent)
+			copy_button_icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4,13 10,19 21,7" /></svg>'
 			copy_button_text.textContent = "コピーしました"
 			setTimeout(() => {
+				copy_button_icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><path d="M8,8v-2a3,3 0 0 1 3-3h7a3,3 0 0 1 3,3v7a3,3 0 0 1-3,3h-2v2a3,3 0 0 1-3,3h-7a3,3 0 0 1-3-3v-7a3,3 0 0 1 3-3h7a3,3 0 0 1 3,3v5" /></svg>'
 				copy_button_text.textContent = "コードをコピー"
 			}, 1000)
 		})
