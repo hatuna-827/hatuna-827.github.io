@@ -1,0 +1,202 @@
+* {
+	box-sizing: border-box;
+}
+
+#main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 30px 30px 60px;
+}
+
+#content {
+	position: relative;
+	width: 100%;
+	max-width: 800px;
+}
+
+h1 {
+	margin: 0px;
+	font-size: 30px;
+	text-align: center;
+}
+
+#editor {
+	display: flex;
+	padding: 20px 0px;
+}
+
+#graph {
+	position: relative;
+}
+
+#canvas {
+	height: 100%;
+	width: 100%;
+	border: 1px solid var(--grey-c-color);
+}
+
+.pointer {
+	position: absolute;
+	height: 10px;
+	width: 10px;
+	background-color: var(--main-dark-color);
+	border-radius: 100%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+}
+
+#code {
+	position: relative;
+	margin: 0px 5px 10px;
+	padding: 5px 10px;
+	min-height: 37px;
+	background-color: var(--contrast-color);
+	border: 1px solid var(--grey-a-color);
+	border-radius: 3px;
+}
+
+#code-content {
+	white-space: pre;
+	line-height: 25px;
+}
+
+#code-copy {
+	position: absolute;
+	padding: 0px 3px;
+	top: 6px;
+	right: 10px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: var(--grey-e5-color);
+	cursor: pointer;
+	user-select: none;
+}
+
+#code-copy svg {
+	padding: 3px;
+	height: 25px;
+	width: 25px;
+}
+
+.clicked {
+	animation: clicked 0.5s;
+}
+
+@keyframes clicked {
+	from {
+		background-color: var(--grey-a-color);
+	}
+
+	to {
+		background-color: var(--grey-e5-color);
+	}
+}
+
+#input {
+	padding: 10px 0px 0px 20px;
+	flex: 1;
+	min-height: 0px;
+	max-height: 300px;
+	font-size: 15px;
+	overflow: auto;
+}
+
+#input label {
+	padding: 3px 0px;
+	display: block;
+	user-select: none;
+}
+
+#input input[type="number"] {
+	padding: 1px 5px;
+	border: 1px solid var(--grey-8-color);
+	background-color: var(--contrast-color);
+	border-radius: 3px;
+}
+
+#input input[type="checkbox"] {
+	position: relative;
+}
+
+#input input[type="checkbox"]::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 17px;
+	width: 17px;
+	background-color: var(--white-color);
+	border: 1px solid var(--black-color);
+	border-radius: 3px;
+	transform: translate(-50%, -50%);
+}
+
+#input input[type="checkbox"]:checked::after {
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: 1px;
+	width: 4px;
+	height: 11px;
+	border-right: 1.5px solid var(--black-color);
+	border-bottom: 1.5px solid var(--black-color);
+	transform: rotate(50deg) translate(-50%, -50%);
+}
+
+#play-animation {
+	position: relative;
+	margin: 0px 0px 40px;
+	height: 0px;
+}
+
+#play-animation::before {
+	content: "アニメーションを再生";
+}
+
+#play-animation:checked::before {
+	content: "アニメーションを停止";
+}
+
+#play-animation::before {
+	position: absolute;
+	top: 0px;
+	height: 30px;
+	width: 190px;
+	font-size: 15px;
+	line-height: 30px;
+	background-color: var(--grey-green-color);
+	border-radius: 3px;
+	text-align: center;
+}
+
+#slid {
+	position: relative;
+	padding: 7px;
+	height: 50px;
+	width: 500px;
+	background-color: var(--light-side-color);
+	border-radius: 3px;
+	border: 1px solid var(--grey-a-color);
+}
+
+#slid-box {
+	position: absolute;
+	height: 35px;
+	width: 35px;
+	background-color: var(--leaf-green-color);
+	border-radius: 3px;
+}
+
+@keyframes slid {
+
+	0%,
+	10% {
+		left: 7px;
+	}
+
+	90%,
+	100% {
+		left: calc(100% - 42px);
+	}
+}

@@ -166,6 +166,14 @@
 			"description": "Brainfuckで素因数分解をするコードの紹介です。"
 		},
 		{
+			"url": "/tool/easing/index.html",
+			"name": "",
+			"title": "",
+			"main_title": "Easingエディター",
+			"sub_title": "",
+			"description": "animationのeasingを編集できます。"
+		},
+		{
 			"url": "/tool/wordle/index.html",
 			"name": "",
 			"title": "",
