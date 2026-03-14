@@ -1,109 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
+	<head>
+		<!-- Auto insert head -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="hatuna-827">
+		<meta name="description" content="ごきげんななめの作問を補助します。">
+		<meta property="og:url" content="https://hatuna-827.github.io/tool/slant_creator/index.html">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="ごきげんななめ作問ツール">
+		<meta property="og:description" content="ごきげんななめの作問を補助します。">
+		<meta property="og:site_name" content="ごきげんななめ作問ツール | hatuna-827">
+		<meta property="og:image" content="/640_640.png">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:domain" content="hatuna-827.github.io">
+		<meta name="twitter:title" content="ごきげんななめ作問ツール">
+		<meta name="twitter:description" content="ごきげんななめの作問を補助します。">
+		<meta name="twitter:image" content="/640_640.png">
+		<meta name="theme-color" content="#709170">
+		<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+		<link rel="apple-touch-icon" href="/hatuna-827.ico">
+		<link rel="stylesheet" href="/tool/slant_creator/slant_creator.css">
+		<link rel="stylesheet" href="/hatuna-827.css">
+		<script src="/hatuna-827.js" type="module"></script>
+		<title>ごきげんななめ作問ツール | hatuna-827</title>
+		<!-- Auto insert head end -->
+	</head>
 
-<head>
-	<!-- Auto insert head -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="hatuna-827">
-	<meta name="description" content="ごきげんななめの作問を補助します。">
-	<meta property="og:url" content="https://hatuna-827.github.io/tool/slant_creator/index.html">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="ごきげんななめ作問ツール">
-	<meta property="og:description" content="ごきげんななめの作問を補助します。">
-	<meta property="og:site_name" content="ごきげんななめ作問ツール | hatuna-827">
-	<meta property="og:image" content="/640_640.png">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:domain" content="hatuna-827.github.io">
-	<meta name="twitter:title" content="ごきげんななめ作問ツール">
-	<meta name="twitter:description" content="ごきげんななめの作問を補助します。">
-	<meta name="twitter:image" content="/640_640.png">
-	<meta name="theme-color" content="#709170">
-	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
-	<link rel="apple-touch-icon" href="/hatuna-827.ico">
-	<link rel="stylesheet" href="/tool/slant_creator/slant_creator.css">
-	<link rel="stylesheet" href="/hatuna-827.css">
-	<script src="/hatuna-827.js" type="module"></script>
-	<title>ごきげんななめ作問ツール | hatuna-827</title>
-	<!-- Auto insert head end -->
-</head>
-
-<body>
-	<!-- Auto insert body -->
-	<div id="homebar"></div>
-	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
-	<!-- Auto insert body end -->
-	<div id="main">
-		<div id="menu-space">
-			<button id="add-button" class="menu-button">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="size-6">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-				</svg>
-			</button>
-			<button id="setting-button" class="menu-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-					viewBox="0 0 24 24" stroke="currentColor" class="size-6">
-					<path stroke-linecap="round" stroke-linejoin="round"
-						d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button id="list-button" class="menu-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-					viewBox="0 0 24 24" stroke="currentColor" class="size-6">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-				</svg>
-			</button>
-			<div id="add" class="menu">
-				正方形:<input id="square" type="checkbox" checked="checked"><br>
-				サイズ:<input id="height" type="number" placeholder="縦" value="5" min="1" step="1">✕
-				<input id="width" type="number" placeholder="横" value="5" min="1" step="1" disabled>
-				<button id="create-new">新規作成</button>
-			</div>
-			<div id="settings" class="menu">
-				<!-- 自動保存: --><input id="auto-save" type="checkbox" checked="checked"><!-- <br> -->
-				自動回答:<input id="auto-fill" type="checkbox"><br>
-				達成した数字をグレーアウト:<input id="gray-out" type="checkbox"><br>
-				ルール違反を警告:<input id="rule" type="checkbox" checked="checked"><br>
-				プレイモード:<input id="play-mode" type="checkbox"><br>
-			</div>
-			<div id="list" class="menu">
-				<div id="list-null">保存されているデータはありません</div>
-			</div>
-		</div>
-		<div id="work-space">
-			<div id="work-buttons">
-				<button id="popup-button" class="work-button">
-					<svg id="popup-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-						stroke="currentColor" class="size-6">
-						<path stroke-linecap="round" stroke-linejoin="round"
-							d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM13.5 10.5h-6" />
-					</svg>
-					<svg id="popup-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-						stroke="currentColor" class="size-6">
-						<path stroke-linecap="round" stroke-linejoin="round"
-							d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
+	<body>
+		<!-- Auto insert body -->
+		<div id="homebar"></div>
+		<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+		<!-- Auto insert body end -->
+		<div id="main">
+			<div id="menu-space">
+				<button id="add-button" class="menu-button">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						class="size-6"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 					</svg>
 				</button>
-				<button id="save-button" class="work-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-						viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-						<path stroke-linecap="round" stroke-linejoin="round"
-							d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+				<button id="setting-button" class="menu-button">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						class="size-6"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
+						/>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+						/>
 					</svg>
 				</button>
-				<button id="close-button" class="work-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-						viewBox="0 0 24 24" stroke="currentColor" class="size-6">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+				<button id="list-button" class="menu-button">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						class="size-6"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+						/>
 					</svg>
 				</button>
+				<div id="add" class="menu">
+					正方形:
+					<input id="square" type="checkbox" checked="checked" />
+					<br />
+					サイズ:
+					<input id="height" type="number" placeholder="縦" value="5" min="1" step="1" />
+					✕
+					<input id="width" type="number" placeholder="横" value="5" min="1" step="1" disabled />
+					<button id="create-new">新規作成</button>
+				</div>
+				<div id="settings" class="menu">
+					<!-- 自動保存: -->
+					<input id="auto-save" type="checkbox" checked="checked" />
+					<!-- <br> -->
+					自動回答:
+					<input id="auto-fill" type="checkbox" />
+					<br />
+					達成した数字をグレーアウト:
+					<input id="gray-out" type="checkbox" />
+					<br />
+					ルール違反を警告:
+					<input id="rule" type="checkbox" checked="checked" />
+					<br />
+					プレイモード:
+					<input id="play-mode" type="checkbox" />
+					<br />
+				</div>
+				<div id="list" class="menu">
+					<div id="list-null">保存されているデータはありません</div>
+				</div>
 			</div>
-			<div id="create-space">
-				<div id="pan-and-zoom">
-					<div id="big-box"></div>
-					<div id="big-maru"></div>
+			<div id="work-space">
+				<div id="work-buttons">
+					<button id="popup-button" class="work-button">
+						<svg
+							id="popup-close"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="size-6"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM13.5 10.5h-6"
+							/>
+						</svg>
+						<svg
+							id="popup-open"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="size-6"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6"
+							/>
+						</svg>
+					</button>
+					<button id="save-button" class="work-button">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="size-6"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+							/>
+						</svg>
+					</button>
+					<button id="close-button" class="work-button">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							class="size-6"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div id="create-space">
+					<div id="pan-and-zoom">
+						<div id="big-box"></div>
+						<div id="big-maru"></div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script src="./slant_creator.js" type="module"></script>
-</body>
-
+		<script src="./slant_creator.js" type="module"></script>
+	</body>
 </html>

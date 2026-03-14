@@ -49,7 +49,7 @@
 }
 
 .link {
-	text-decoration: underline .5px;
+	text-decoration: underline 0.5px;
 	text-underline-offset: 3px;
 	color: var(--main-dark-color);
 }
@@ -109,7 +109,7 @@
 
 /* log */
 .result-empty:empty::before {
-	content: "-";
+	content: '-';
 }
 
 #log-field {
@@ -163,8 +163,7 @@
 	line-height: 24px;
 }
 
-
-.button+.button,
+.button + .button,
 #generate-format-text-button {
 	margin-left: 10px;
 }
@@ -187,7 +186,7 @@
 }
 
 .button:not(.clicked) {
-	transition: background-color .3s linear;
+	transition: background-color 0.3s linear;
 }
 
 .button.clicked {
@@ -205,6 +204,6 @@
 
 .bold {
 	font-weight: 600;
-	text-decoration: underline .5px;
+	text-decoration: underline 0.5px;
 	text-underline-offset: 3px;
 }

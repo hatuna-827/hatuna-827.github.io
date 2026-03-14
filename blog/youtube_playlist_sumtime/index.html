@@ -1,42 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
+	<head>
+		<!-- Auto insert head -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="hatuna-827">
+		<meta name="description" content="API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。">
+		<meta property="og:url" content="https://hatuna-827.github.io/blog/youtube_playlist_sumtime/index.html">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法">
+		<meta property="og:description" content="API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。">
+		<meta property="og:site_name" content="API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法 | hatuna-827">
+		<meta property="og:image" content="/640_640.png">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:domain" content="hatuna-827.github.io">
+		<meta name="twitter:title" content="API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法">
+		<meta name="twitter:description" content="API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。">
+		<meta name="twitter:image" content="/640_640.png">
+		<meta name="theme-color" content="#709170">
+		<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+		<link rel="apple-touch-icon" href="/hatuna-827.ico">
+		<link rel="stylesheet" href="/blog/blog.css">
+		<link rel="stylesheet" href="/hatuna-827.css">
+		<script src="/hatuna-827.js" type="module"></script>
+		<title>API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法 | hatuna-827</title>
+		<!-- Auto insert head end -->
+	</head>
 
-<head>
-	<!-- Auto insert head -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="hatuna-827">
-	<meta name="description" content="API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。">
-	<meta property="og:url" content="https://hatuna-827.github.io/blog/youtube_playlist_sumtime/index.html">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法">
-	<meta property="og:description" content="API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。">
-	<meta property="og:site_name" content="API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法 | hatuna-827">
-	<meta property="og:image" content="/640_640.png">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:domain" content="hatuna-827.github.io">
-	<meta name="twitter:title" content="API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法">
-	<meta name="twitter:description" content="API不使用！非公開のプレイリストでも使えるYoutubeプレイリストの合計時間を計算する方法を紹介します。">
-	<meta name="twitter:image" content="/640_640.png">
-	<meta name="theme-color" content="#709170">
-	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
-	<link rel="apple-touch-icon" href="/hatuna-827.ico">
-	<link rel="stylesheet" href="/blog/blog.css">
-	<link rel="stylesheet" href="/hatuna-827.css">
-	<script src="/hatuna-827.js" type="module"></script>
-	<title>API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法 | hatuna-827</title>
-	<!-- Auto insert head end -->
-</head>
-
-<body>
-	<!-- Auto insert body -->
-	<div id="homebar"></div>
-	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
-	<!-- Auto insert body end -->
-	<div id="main">
-		<h1>Youtubeプレイリストの合計時間を計算する</h1>
-		<h2>コード紹介</h2>
-		<pre>
+	<body>
+		<!-- Auto insert body -->
+		<div id="homebar"></div>
+		<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+		<!-- Auto insert body end -->
+		<div id="main">
+			<h1>Youtubeプレイリストの合計時間を計算する</h1>
+			<h2>コード紹介</h2>
+			<pre>
 let sumtime = [0, 0, 0];
 document.querySelectorAll('.playlist-items .yt-badge-shape__text').forEach(shape => {
 	let time = shape.innerText;
@@ -49,17 +48,33 @@ sumtime[1] %= 60;
 sumtime[2] += Math.floor(sumtime[0] / 60);
 sumtime[0] %= 60;
 console.log(`${sumtime[2]}時間${sumtime[0]}分${sumtime[1]}秒`);
-</pre>
-		<h2>使い方</h2>
-		<p>Youtubeの再生リストを開き、コンソール画面で実行することでその再生リストの合計時間を計算できます。</p>
-		<p>コンソール画面は、
-		<ul>
-			<li><code>Ctrl</code> + <code>Shift</code> + <code>J</code>(Windows・Linux)</li>
-			<li><code>Command</code> + <code>Option</code> + <code>J</code>(macOS)</li>
-		</ul>
-		<p>を同時に押すことで開くことができます。</p>
-	</div>
-	<script src="/blog/blog.js"></script>
-</body>
-
+</pre
+			>
+			<h2>使い方</h2>
+			<p>
+				Youtubeの再生リストを開き、コンソール画面で実行することでその再生リストの合計時間を計算できます。
+			</p>
+			<p>コンソール画面は、</p>
+			<ul>
+				<li>
+					<code>Ctrl</code>
+					+
+					<code>Shift</code>
+					+
+					<code>J</code>
+					(Windows・Linux)
+				</li>
+				<li>
+					<code>Command</code>
+					+
+					<code>Option</code>
+					+
+					<code>J</code>
+					(macOS)
+				</li>
+			</ul>
+			<p>を同時に押すことで開くことができます。</p>
+		</div>
+		<script src="/blog/blog.js"></script>
+	</body>
 </html>

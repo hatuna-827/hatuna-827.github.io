@@ -19,7 +19,7 @@
 	pointer-events: all;
 }
 
-.snackbar>.snackbar-color-bar {
+.snackbar > .snackbar-color-bar {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -27,7 +27,7 @@
 	width: 5px;
 }
 
-.snackbar>.snackbar-icon {
+.snackbar > .snackbar-icon {
 	position: absolute;
 	top: 22.5px;
 	left: 27.5px;
@@ -36,7 +36,7 @@
 	animation: icon 0.4s forwards;
 }
 
-.snackbar>.snackbar-content {
+.snackbar > .snackbar-content {
 	position: absolute;
 	top: 0px;
 	left: 50px;
@@ -44,7 +44,7 @@
 	line-height: 45px;
 }
 
-.snackbar>.snackbar-close {
+.snackbar > .snackbar-close {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -53,8 +53,8 @@
 	border-radius: 2px;
 }
 
-.snackbar>.snackbar-close::before,
-.snackbar>.snackbar-close::after {
+.snackbar > .snackbar-close::before,
+.snackbar > .snackbar-close::after {
 	content: '';
 	position: absolute;
 	top: 15px;
@@ -65,11 +65,11 @@
 	background-color: #888;
 }
 
-.snackbar>.snackbar-close::before {
+.snackbar > .snackbar-close::before {
 	transform: rotate(45deg);
 }
 
-.snackbar>.snackbar-close::after {
+.snackbar > .snackbar-close::after {
 	transform: rotate(-45deg);
 }
 

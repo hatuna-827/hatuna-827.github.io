@@ -74,7 +74,7 @@ p {
 	line-height: 50px;
 }
 
-@media screen and (max-width:900px) {
+@media screen and (max-width: 900px) {
 	button {
 		width: 30vw;
 		height: 30vw;

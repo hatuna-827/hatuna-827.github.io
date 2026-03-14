@@ -1,52 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
+	<head>
+		<!-- Auto insert head -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="hatuna-827">
+		<meta name="description" content="VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。">
+		<meta property="og:url" content="https://hatuna-827.github.io/blog/vscode/change_design/index.html">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="VScodeをデザインデザインを変更しよう！">
+		<meta property="og:description" content="VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。">
+		<meta property="og:site_name" content="VScodeのデザインを変更しよう | hatuna-827">
+		<meta property="og:image" content="/640_640.png">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:domain" content="hatuna-827.github.io">
+		<meta name="twitter:title" content="VScodeをデザインデザインを変更しよう！">
+		<meta name="twitter:description" content="VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。">
+		<meta name="twitter:image" content="/640_640.png">
+		<meta name="theme-color" content="#709170">
+		<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+		<link rel="apple-touch-icon" href="/hatuna-827.ico">
+		<link rel="stylesheet" href="/blog/blog.css">
+		<link rel="stylesheet" href="/hatuna-827.css">
+		<script src="/hatuna-827.js" type="module"></script>
+		<title>VScodeのデザインを変更しよう | hatuna-827</title>
+		<!-- Auto insert head end -->
+	</head>
 
-<head>
-	<!-- Auto insert head -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="hatuna-827">
-	<meta name="description" content="VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。">
-	<meta property="og:url" content="https://hatuna-827.github.io/blog/vscode/change_design/index.html">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="VScodeをデザインデザインを変更しよう！">
-	<meta property="og:description" content="VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。">
-	<meta property="og:site_name" content="VScodeのデザインを変更しよう | hatuna-827">
-	<meta property="og:image" content="/640_640.png">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:domain" content="hatuna-827.github.io">
-	<meta name="twitter:title" content="VScodeをデザインデザインを変更しよう！">
-	<meta name="twitter:description" content="VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。">
-	<meta name="twitter:image" content="/640_640.png">
-	<meta name="theme-color" content="#709170">
-	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
-	<link rel="apple-touch-icon" href="/hatuna-827.ico">
-	<link rel="stylesheet" href="/blog/blog.css">
-	<link rel="stylesheet" href="/hatuna-827.css">
-	<script src="/hatuna-827.js" type="module"></script>
-	<title>VScodeのデザインを変更しよう | hatuna-827</title>
-	<!-- Auto insert head end -->
-</head>
-
-<body>
-	<!-- Auto insert body -->
-	<div id="homebar"></div>
-	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
-	<!-- Auto insert body end -->
-	<div id="main">
-		<h1>VScodeのデザインを変更しよう！</h1>
-		<h2>はじめに、</h2>
-		<p>これは普通のVScodeですよね。</p>
-		<img src="./img/img2.png">
-		<p>これだと何だか物足りない、、</p>
-		<p>ということで今回はVScodeのデザインをカスタマイズしたいと思います。</p>
-		<h2>"setting"を開こう。</h2>
-		<p>デザインを変更すためにまず、<code>setting</code>を開きます。</p>
-		<p><code>Ctrl</code> + <code>Shift</code> + <code>P</code> を押し、<code>setting</code>と入力します。</p>
-		<p><code>基本設定:ユーザー設定を開く(JSON)</code>をクリックし、出てきた画面に記述していきます。</p>
-		<h2>デザインをしよう。</h2>
-		<p>今回は、私の好きな緑をメインに作りました。</p>
-		<pre>{
+	<body>
+		<!-- Auto insert body -->
+		<div id="homebar"></div>
+		<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+		<!-- Auto insert body end -->
+		<div id="main">
+			<h1>VScodeのデザインを変更しよう！</h1>
+			<h2>はじめに、</h2>
+			<p>これは普通のVScodeですよね。</p>
+			<img src="./img/img2.png" />
+			<p>これだと何だか物足りない、、</p>
+			<p>ということで今回はVScodeのデザインをカスタマイズしたいと思います。</p>
+			<h2>"setting"を開こう。</h2>
+			<p>
+				デザインを変更すためにまず、
+				<code>setting</code>
+				を開きます。
+			</p>
+			<p>
+				<code>Ctrl</code>
+				+
+				<code>Shift</code>
+				+
+				<code>P</code>
+				を押し、
+				<code>setting</code>
+				と入力します。
+			</p>
+			<p>
+				<code>基本設定:ユーザー設定を開く(JSON)</code>
+				をクリックし、出てきた画面に記述していきます。
+			</p>
+			<h2>デザインをしよう。</h2>
+			<p>今回は、私の好きな緑をメインに作りました。</p>
+			<pre>
+{
 	"workbench.colorTheme": "Default Light Modern",
 	"editor.fontSize": 13,
 	"workbench.colorCustomizations": {
@@ -133,14 +149,14 @@
 		"types": "#0083c6",
 		"variables": "#2980af",
 	}
-}</pre>
-		<p>長いですね、</p>
-		<p>これを入力して、保存すると画面が次のように変わります。</p>
-		<img class="border" src="./img/img1.png">
-		<p>カラーコードを変えることで、自由にデザインできます。</p>
-		<p>ぜひ、やってみてください。</p>
-	</div>
-	<script src="/blog/blog.js"></script>
-</body>
-
+}</pre
+			>
+			<p>長いですね、</p>
+			<p>これを入力して、保存すると画面が次のように変わります。</p>
+			<img class="border" src="./img/img1.png" />
+			<p>カラーコードを変えることで、自由にデザインできます。</p>
+			<p>ぜひ、やってみてください。</p>
+		</div>
+		<script src="/blog/blog.js"></script>
+	</body>
 </html>

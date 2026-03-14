@@ -27,7 +27,7 @@
 	user-select: none;
 }
 
-#title-bar>p {
+#title-bar > p {
 	margin: 0px;
 	font-size: 30px;
 	line-height: 50px;
@@ -57,7 +57,7 @@
 	cursor: grab;
 }
 
-#main:has(#sub-view.hide)>#img-view {
+#main:has(#sub-view.hide) > #img-view {
 	height: 100%;
 }
 
@@ -70,7 +70,7 @@
 	justify-content: center;
 }
 
-#img-content>svg {
+#img-content > svg {
 	border: 1px solid var(--grey-a-color);
 }
 
@@ -118,7 +118,9 @@
 }
 
 .mini-btn:not(.clicked) {
-	transition: color 0.5s, background-color 0.5s;
+	transition:
+		color 0.5s,
+		background-color 0.5s;
 }
 
 .mini-btn.clicked {
@@ -135,7 +137,7 @@
 	margin-right: 10px;
 }
 
-input[type="file"] {
+input[type='file'] {
 	display: none;
 }
 

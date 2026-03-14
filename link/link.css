@@ -1,4 +1,4 @@
-@media screen and (min-width:840px) {
+@media screen and (min-width: 840px) {
 	#main {
 		margin: 50px;
 		text-align: center;
@@ -62,7 +62,7 @@
 	}
 }
 
-@media screen and (max-width:839px) and (min-width:481px) {
+@media screen and (max-width: 839px) and (min-width: 481px) {
 	#main {
 		margin: 20px;
 	}
@@ -106,7 +106,7 @@
 	}
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
 	#main {
 		margin: 20px;
 	}
@@ -142,7 +142,7 @@
 	}
 
 	.display-box::before {
-		content: "";
+		content: '';
 		position: absolute;
 		display: block;
 		top: 9px;

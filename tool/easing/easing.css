@@ -108,19 +108,19 @@ h1 {
 	user-select: none;
 }
 
-#input input[type="number"] {
+#input input[type='number'] {
 	padding: 1px 5px;
 	border: 1px solid var(--grey-8-color);
 	background-color: var(--contrast-color);
 	border-radius: 3px;
 }
 
-#input input[type="checkbox"] {
+#input input[type='checkbox'] {
 	position: relative;
 }
 
-#input input[type="checkbox"]::before {
-	content: "";
+#input input[type='checkbox']::before {
+	content: '';
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -132,8 +132,8 @@ h1 {
 	transform: translate(-50%, -50%);
 }
 
-#input input[type="checkbox"]:checked::after {
-	content: "";
+#input input[type='checkbox']:checked::after {
+	content: '';
 	position: absolute;
 	top: 5px;
 	left: 1px;
@@ -151,11 +151,11 @@ h1 {
 }
 
 #play-animation::before {
-	content: "アニメーションを再生";
+	content: 'アニメーションを再生';
 }
 
 #play-animation:checked::before {
-	content: "アニメーションを停止";
+	content: 'アニメーションを停止';
 }
 
 #play-animation::before {
@@ -189,7 +189,6 @@ h1 {
 }
 
 @keyframes slid {
-
 	0%,
 	10% {
 		left: 7px;

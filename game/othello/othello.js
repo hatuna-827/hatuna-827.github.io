@@ -12,17 +12,23 @@ function reset() {
 		[0, 0, 0, 1, -1, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0]
+		[0, 0, 0, 0, 0, 0, 0, 0],
 	]
 	turn = 1
-	main.innerHTML = ""
+	main.innerHTML = ''
 	for (y = 0; y < 8; y++) {
 		for (x = 0; x < 8; x++) {
-			main.insertAdjacentHTML('beforeend', '<button id="' + (y * 8 + x) + '" onclick="push(' + y + ',' + x + ')">●</button>')
+			main.insertAdjacentHTML(
+				'beforeend',
+				'<button id="' + (y * 8 + x) + '" onclick="push(' + y + ',' + x + ')">●</button>'
+			)
 		}
 		main.insertAdjacentHTML('beforeend', '<br>')
 	}
-	main.insertAdjacentHTML('beforeend', '<button class="but" onclick="turn*=-1">パス</button><button class="but" onclick="reset()">リセット</button>')
+	main.insertAdjacentHTML(
+		'beforeend',
+		'<button class="but" onclick="turn*=-1">パス</button><button class="but" onclick="reset()">リセット</button>'
+	)
 	out()
 }
 
@@ -40,7 +46,7 @@ function line(y, x, py, px) {
 	let loop = 0
 	y += py
 	x += px
-	while (0 <= y & y <= 7 & 0 <= x & x <= 7) {
+	while ((0 <= y) & (y <= 7) & (0 <= x) & (x <= 7)) {
 		if (data[y][x] == 0) {
 			return 0
 		}
@@ -59,14 +65,17 @@ function line(y, x, py, px) {
 
 function push(y, x) {
 	if (data[y][x] == 0) {
-		if (line(y, x, -1, 0)
-			+ line(y, x, -1, 1)
-			+ line(y, x, 0, 1)
-			+ line(y, x, 1, 1)
-			+ line(y, x, 1, 0)
-			+ line(y, x, 1, -1)
-			+ line(y, x, 0, -1)
-			+ line(y, x, -1, -1) != 0) {
+		if (
+			line(y, x, -1, 0) +
+				line(y, x, -1, 1) +
+				line(y, x, 0, 1) +
+				line(y, x, 1, 1) +
+				line(y, x, 1, 0) +
+				line(y, x, 1, -1) +
+				line(y, x, 0, -1) +
+				line(y, x, -1, -1) !=
+			0
+		) {
 			data[y][x] = turn
 			turn *= -1
 			out()
@@ -78,10 +87,10 @@ function out() {
 	for (y = 0; y < 8; y++) {
 		for (x = 0; x < 8; x++) {
 			if (data[y][x] == -1) {
-				document.getElementById(y * 8 + x).style.color = "#fff"
+				document.getElementById(y * 8 + x).style.color = '#fff'
 			}
 			if (data[y][x] == 1) {
-				document.getElementById(y * 8 + x).style.color = "#000"
+				document.getElementById(y * 8 + x).style.color = '#000'
 			}
 		}
 	}
@@ -101,22 +110,28 @@ function out() {
 		}
 	}
 	if (siro == 0 || kuro == 0) {
-		if (siro == 0) { popmain.style.color = "#000" }
-		if (kuro == 0) { popmain.style.color = "#fff" }
-		pop.style.display = "flex"
+		if (siro == 0) {
+			popmain.style.color = '#000'
+		}
+		if (kuro == 0) {
+			popmain.style.color = '#fff'
+		}
+		pop.style.display = 'flex'
 	}
 	if (siro + kuro == 64) {
-		popmain.style.color = "#000"
-		if (kuro < siro) { popmain.style.color = "#fff" }
-		if (kuro == siro) {
-			popmain.textContent = "-"
-			mini.textContent = "draw!"
+		popmain.style.color = '#000'
+		if (kuro < siro) {
+			popmain.style.color = '#fff'
 		}
-		pop.style.display = "flex"
+		if (kuro == siro) {
+			popmain.textContent = '-'
+			mini.textContent = 'draw!'
+		}
+		pop.style.display = 'flex'
 	}
 }
 function hidepop() {
-	document.getElementById('pop').style.display = "none"
-	document.getElementById('popmain').textContent = "●"
-	document.getElementById('mini').textContent = "winner!"
+	document.getElementById('pop').style.display = 'none'
+	document.getElementById('popmain').textContent = '●'
+	document.getElementById('mini').textContent = 'winner!'
 }

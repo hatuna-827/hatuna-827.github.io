@@ -14,7 +14,7 @@ a {
 }
 
 a:hover {
-	text-decoration: underline .5px;
+	text-decoration: underline 0.5px;
 	text-underline-offset: 5px;
 }
 
@@ -28,7 +28,7 @@ hr {
 	margin: 20px 0px;
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
 	#main {
 		margin: 20px;
 	}

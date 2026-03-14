@@ -163,12 +163,12 @@ h1 {
 	text-align: left;
 }
 
-#out>span {
+#out > span {
 	margin: 2px 5px;
 	font-size: 15px;
 }
 
-#out>span>span,
+#out > span > span,
 #out #clear {
 	margin: 0px 3px;
 	font-weight: 600;

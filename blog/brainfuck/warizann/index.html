@@ -1,55 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
+	<head>
+		<!-- Auto insert head -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="hatuna-827">
+		<meta name="description" content="Brainfuckで割り算をするコードの紹介です。">
+		<meta property="og:url" content="https://hatuna-827.github.io/blog/brainfuck/warizann/index.html">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="Brainfuck~割り算編~">
+		<meta property="og:description" content="Brainfuckで割り算をするコードの紹介です。">
+		<meta property="og:site_name" content="Brainfuck~割り算編~ | hatuna-827">
+		<meta property="og:image" content="/640_640.png">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:domain" content="hatuna-827.github.io">
+		<meta name="twitter:title" content="Brainfuck~割り算編~">
+		<meta name="twitter:description" content="Brainfuckで割り算をするコードの紹介です。">
+		<meta name="twitter:image" content="/640_640.png">
+		<meta name="theme-color" content="#709170">
+		<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+		<link rel="apple-touch-icon" href="/hatuna-827.ico">
+		<link rel="stylesheet" href="/blog/blog.css">
+		<link rel="stylesheet" href="/hatuna-827.css">
+		<script src="/hatuna-827.js" type="module"></script>
+		<title>Brainfuck~割り算編~ | hatuna-827</title>
+		<!-- Auto insert head end -->
+	</head>
 
-<head>
-	<!-- Auto insert head -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="hatuna-827">
-	<meta name="description" content="Brainfuckで割り算をするコードの紹介です。">
-	<meta property="og:url" content="https://hatuna-827.github.io/blog/brainfuck/warizann/index.html">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="Brainfuck~割り算編~">
-	<meta property="og:description" content="Brainfuckで割り算をするコードの紹介です。">
-	<meta property="og:site_name" content="Brainfuck~割り算編~ | hatuna-827">
-	<meta property="og:image" content="/640_640.png">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:domain" content="hatuna-827.github.io">
-	<meta name="twitter:title" content="Brainfuck~割り算編~">
-	<meta name="twitter:description" content="Brainfuckで割り算をするコードの紹介です。">
-	<meta name="twitter:image" content="/640_640.png">
-	<meta name="theme-color" content="#709170">
-	<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
-	<link rel="apple-touch-icon" href="/hatuna-827.ico">
-	<link rel="stylesheet" href="/blog/blog.css">
-	<link rel="stylesheet" href="/hatuna-827.css">
-	<script src="/hatuna-827.js" type="module"></script>
-	<title>Brainfuck~割り算編~ | hatuna-827</title>
-	<!-- Auto insert head end -->
-</head>
-
-<body>
-	<!-- Auto insert body -->
-	<div id="homebar"></div>
-	<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
-	<!-- Auto insert body end -->
-	<div id="main">
-		<h1>Let’s enjoy brainfuck. ~割り算編~</h1>
-		<h2>コード紹介</h2>
-		<p>今回はbrainfuckで割り算をするプログラムの紹介をしたいと思います。</p>
-		<p>↓割り算をするコード</p>
-		<pre
-			class="nobr">,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]<[<[-]<<<<<[>>>>[<<<+>->+>-]<[>+<-]>>+<<<<[<[->>+>]>>>[<<<]<<-]<]>>[>>[<<+>+>-]<[>+<-]>>-<<]>[<]<[<<++++++++++>>-]>>>>>++++++[<<++++++++>>-]<<.>-]</pre>
-		<p>入力は、</p>
-		<ul>
-			<li>割られる数</li>
-			<li>割る数</li>
-			<li>出力する桁数</li>
-		</ul>
-		<p>です。</p>
-		<p>私は、実行環境を作るのが面倒なため、<a href="https://kachikachi.net/brainfuck">こちら</a>のサイトを使っています。</p>
-		<h2>やっていること</h2>
-		<pre>,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]
+	<body>
+		<!-- Auto insert body -->
+		<div id="homebar"></div>
+		<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
+		<!-- Auto insert body end -->
+		<div id="main">
+			<h1>Let’s enjoy brainfuck. ~割り算編~</h1>
+			<h2>コード紹介</h2>
+			<p>今回はbrainfuckで割り算をするプログラムの紹介をしたいと思います。</p>
+			<p>↓割り算をするコード</p>
+			<pre class="nobr">
+,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]<[<[-]<<<<<[>>>>[<<<+>->+>-]<[>+<-]>>+<<<<[<[->>+>]>>>[<<<]<<-]<]>>[>>[<<+>+>-]<[>+<-]>>-<<]>[<]<[<<++++++++++>>-]>>>>>++++++[<<++++++++>>-]<<.>-]</pre
+			>
+			<p>入力は、</p>
+			<ul>
+				<li>割られる数</li>
+				<li>割る数</li>
+				<li>出力する桁数</li>
+			</ul>
+			<p>です。</p>
+			<p>
+				私は、実行環境を作るのが面倒なため、
+				<a href="https://kachikachi.net/brainfuck">こちら</a>
+				のサイトを使っています。
+			</p>
+			<h2>やっていること</h2>
+			<pre>
+,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]
 <[
 	<[-]
 	<<<<<[
@@ -63,9 +68,11 @@
 	<[<<++++++++++>>-]
 	>>>>>++++++[<<++++++++>>-]<<.
 	>-
-]</pre>
-		<p>ポインタの左から順に ABCDEFG としています。</p>
-		<pre>input
+]</pre
+			>
+			<p>ポインタの左から順に ABCDEFG としています。</p>
+			<pre>
+input
 G[
 	Fのリセット
 	A[
@@ -81,11 +88,11 @@ G[
 	Fのprint
 	G-=1
 ]
-</pre>
-		<p>参考・リンクなど</p>
-		<p><a href="https://kachikachi.net/brainfuck">kachikachi.net/brainfuck</a></p>
-	</div>
-	<script src="/blog/blog.js"></script>
-</body>
-
+</pre
+			>
+			<p>参考・リンクなど</p>
+			<p><a href="https://kachikachi.net/brainfuck">kachikachi.net/brainfuck</a></p>
+		</div>
+		<script src="/blog/blog.js"></script>
+	</body>
 </html>

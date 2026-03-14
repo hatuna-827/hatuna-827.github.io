@@ -40,29 +40,29 @@ for site in site_data:
         flags=re.DOTALL,
     )
     head = f"""<!-- Auto insert head -->
-\t<meta charset="UTF-8">
-\t<meta name="viewport" content="width=device-width, initial-scale=1">
-\t<meta name="author" content="hatuna-827">
-\t<meta name="description" content="{description}">
-\t<meta property="og:url" content="https://hatuna-827.github.io{url}">
-\t<meta property="og:type" content="{type}">
-\t<meta property="og:title" content="{title}">
-\t<meta property="og:description" content="{description}">
-\t<meta property="og:site_name" content="{name}">
-\t<meta property="og:image" content="/640_640.png">
-\t<meta name="twitter:card" content="summary">
-\t<meta name="twitter:domain" content="hatuna-827.github.io">
-\t<meta name="twitter:title" content="{title}">
-\t<meta name="twitter:description" content="{description}">
-\t<meta name="twitter:image" content="/640_640.png">
-\t<meta name="theme-color" content="#709170">
-\t<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
-\t<link rel="apple-touch-icon" href="/hatuna-827.ico">
-\t<link rel="stylesheet" href="{css_path}">
-\t<link rel="stylesheet" href="/hatuna-827.css">
-\t<script src="/hatuna-827.js" type="module"></script>
-\t<title>{name}</title>
-\t<!-- Auto insert head end -->"""
+\t\t<meta charset="UTF-8">
+\t\t<meta name="viewport" content="width=device-width, initial-scale=1">
+\t\t<meta name="author" content="hatuna-827">
+\t\t<meta name="description" content="{description}">
+\t\t<meta property="og:url" content="https://hatuna-827.github.io{url}">
+\t\t<meta property="og:type" content="{type}">
+\t\t<meta property="og:title" content="{title}">
+\t\t<meta property="og:description" content="{description}">
+\t\t<meta property="og:site_name" content="{name}">
+\t\t<meta property="og:image" content="/640_640.png">
+\t\t<meta name="twitter:card" content="summary">
+\t\t<meta name="twitter:domain" content="hatuna-827.github.io">
+\t\t<meta name="twitter:title" content="{title}">
+\t\t<meta name="twitter:description" content="{description}">
+\t\t<meta name="twitter:image" content="/640_640.png">
+\t\t<meta name="theme-color" content="#709170">
+\t\t<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
+\t\t<link rel="apple-touch-icon" href="/hatuna-827.ico">
+\t\t<link rel="stylesheet" href="{css_path}">
+\t\t<link rel="stylesheet" href="/hatuna-827.css">
+\t\t<script src="/hatuna-827.js" type="module"></script>
+\t\t<title>{name}</title>
+\t\t<!-- Auto insert head end -->"""
     html = html.replace("<!-- Auto insert head --><!-- Auto insert head end -->", head)
     # body
     html = re.sub(
@@ -71,9 +71,9 @@ for site in site_data:
         html,
         flags=re.DOTALL,
     )
-    body = f'''<!-- Auto insert body -->{'' if "homebar-ignore" in site and site["homebar-ignore"]==True else '\n\t<div id="homebar"></div>'}
-\t<noscript><style>body {{overflow: hidden;}}</style>You need to enable JavaScript to view this site.</noscript>
-\t<!-- Auto insert body end -->'''
+    body = f'''<!-- Auto insert body -->{'' if "homebar-ignore" in site and site["homebar-ignore"]==True else '\n\t\t<div id="homebar"></div>'}
+\t\t<noscript><style>body {{overflow: hidden;}}</style>You need to enable JavaScript to view this site.</noscript>
+\t\t<!-- Auto insert body end -->'''
     html = html.replace("<!-- Auto insert body --><!-- Auto insert body end -->", body)
     with open(path, "w", encoding="utf-8") as f:
         f.write(html)

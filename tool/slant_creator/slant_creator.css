@@ -48,7 +48,7 @@ input {
 	text-align: left;
 }
 
-.menu input[type=checkbox] {
+.menu input[type='checkbox'] {
 	margin: 0px 10px;
 	box-sizing: border-box;
 	border: 1px solid var(--black-color);
@@ -64,7 +64,7 @@ input {
 	appearance: none;
 }
 
-.menu input[type=checkbox]:checked:before {
+.menu input[type='checkbox']:checked:before {
 	position: absolute;
 	top: 2px;
 	left: 9.5px;
@@ -76,7 +76,7 @@ input {
 	content: '';
 }
 
-.menu input[type=number] {
+.menu input[type='number'] {
 	margin: 0px 10px;
 	height: 30px;
 	width: 100px;
@@ -88,11 +88,11 @@ input {
 	vertical-align: 1px;
 }
 
-.menu input[type=number]:disabled {
+.menu input[type='number']:disabled {
 	border: 1px solid var(--grey-d-color);
 }
 
-.menu input[type=number]:invalid {
+.menu input[type='number']:invalid {
 	border: 1px solid var(--red-color);
 }
 
@@ -164,14 +164,14 @@ input {
 }
 
 #create-space #big-box {
-	border: .5px solid var(--black-color);
+	border: 0.5px solid var(--black-color);
 	white-space: nowrap;
 }
 
 #create-space .box {
 	height: 30px;
 	width: 30px;
-	border: .5px solid var(--black-color);
+	border: 0.5px solid var(--black-color);
 	display: inline-block;
 	position: relative;
 }
@@ -189,12 +189,12 @@ input {
 
 #create-space .box.b::before {
 	left: 0;
-	transform: rotate(-45deg) translateX(-.5px);
+	transform: rotate(-45deg) translateX(-0.5px);
 }
 
 #create-space .box.f::before {
 	right: 0;
-	transform: rotate(45deg) translateY(-1px) translateX(.5px);
+	transform: rotate(45deg) translateY(-1px) translateX(0.5px);
 }
 
 #create-space .box.green::before {
@@ -227,7 +227,7 @@ input {
 	margin: 5px;
 	height: 20px;
 	width: 20px;
-	border: .5px solid var(--black-color);
+	border: 0.5px solid var(--black-color);
 	border-radius: 20px;
 	background-color: var(--contrast-color);
 	color: var(--black-color);

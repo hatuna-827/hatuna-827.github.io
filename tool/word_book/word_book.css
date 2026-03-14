@@ -45,7 +45,7 @@
 	transition: all 0.1s;
 }
 
-#back:hover>#back-text {
+#back:hover > #back-text {
 	opacity: 1;
 	transition: all 0.1s;
 }
@@ -84,7 +84,6 @@
 }
 
 @keyframes title-name-animation {
-
 	from,
 	10% {
 		transform: translateX(max(0px, calc(50% - 150px)));
@@ -101,7 +100,7 @@
 }
 
 #add-button::before {
-	content: "追加";
+	content: '追加';
 	font-size: 23px;
 }
 
@@ -116,14 +115,14 @@
 	cursor: grab;
 }
 
-#generate-box:has(.dragging)>.dragging>.title-move,
-#generate-box:not(:has(.dragging))>.title-block:hover>.title-move {
+#generate-box:has(.dragging) > .dragging > .title-move,
+#generate-box:not(:has(.dragging)) > .title-block:hover > .title-move {
 	opacity: 0.3;
 	transition: all 0.1s;
 }
 
 .title-move::before {
-	content: "\21C5";
+	content: '\21C5';
 }
 
 .dragging {
@@ -139,7 +138,7 @@
 }
 
 .dots::before {
-	content: "…";
+	content: '…';
 }
 
 /* dots manu */
@@ -163,19 +162,19 @@
 }
 
 #words-list::before {
-	content: "一覧を表示";
+	content: '一覧を表示';
 }
 
 #title-edit::before {
-	content: "名前の変更";
+	content: '名前の変更';
 }
 
 #words-edit::before {
-	content: "編集";
+	content: '編集';
 }
 
 #title-remove::before {
-	content: "削除";
+	content: '削除';
 	color: var(--red-color);
 }
 
@@ -312,15 +311,15 @@
 }
 
 #words-edit-field .line.title .no::before {
-	content: "No.";
+	content: 'No.';
 }
 
 #words-edit-field .line.title .word::before {
-	content: "単語";
+	content: '単語';
 }
 
 #words-edit-field .line.title .description::before {
-	content: "説明";
+	content: '説明';
 }
 
 /* card */
@@ -337,7 +336,7 @@
 	user-select: none;
 }
 
-#card>#front-word {
+#card > #front-word {
 	position: absolute;
 	top: 5px;
 	width: 500px;
@@ -345,8 +344,8 @@
 	color: var(--grey-5-color);
 }
 
-#card>#front-word,
-#card>#card-main-text {
+#card > #front-word,
+#card > #card-main-text {
 	width: 100%;
 	overflow-wrap: break-word;
 }
@@ -368,7 +367,6 @@
 	background-color: var(--main-color);
 	border-radius: 5px;
 }
-
 
 #export {
 	position: fixed;

@@ -109,8 +109,8 @@
 	border-radius: 0px var(--structure-border-radius) var(--structure-border-radius) 0px;
 }
 
-.structure .structure-input:has(.structure-checkbox:checked)>.structure-true-btn,
-.structure .structure-input:not(:has(.structure-checkbox:checked))>.structure-false-btn {
+.structure .structure-input:has(.structure-checkbox:checked) > .structure-true-btn,
+.structure .structure-input:not(:has(.structure-checkbox:checked)) > .structure-false-btn {
 	color: var(--structure-title-text);
 	background-color: var(--structure-input-true);
 }
@@ -155,9 +155,9 @@
 .structure .structure-select-btn::before,
 .structure .structure-add-btn::before,
 .structure .structure-remove-btn::before {
-	content: "";
-	height: calc(var(--structure-font-size)/7.5);
-	width: calc(var(--structure-font-size)/1.5);
+	content: '';
+	height: calc(var(--structure-font-size) / 7.5);
+	width: calc(var(--structure-font-size) / 1.5);
 }
 
 .structure .structure-toggle-btn::before,
@@ -173,19 +173,25 @@
 	background-color: var(--structure-title-text);
 }
 
-.structure .structure-field.structure-toggle:not(:has(.structure-checkbox:checked))>.structure-toggle-btn::after,
-.structure .structure-field.structure-select:not(:has(.structure-checkbox:checked))>.structure-select-btn::after,
+.structure
+	.structure-field.structure-toggle:not(:has(.structure-checkbox:checked))
+	> .structure-toggle-btn::after,
+.structure
+	.structure-field.structure-select:not(:has(.structure-checkbox:checked))
+	> .structure-select-btn::after,
 .structure .structure-add-btn::after {
-	content: "";
-	height: calc(var(--structure-font-size)/1.5);
-	width: calc(var(--structure-font-size)/7.5);
+	content: '';
+	height: calc(var(--structure-font-size) / 1.5);
+	width: calc(var(--structure-font-size) / 7.5);
 }
 
-.structure .structure-field.structure-toggle:has(.structure-checkbox:checked):not(:has(.structure-nest))>.structure-toggle-btn {
+.structure
+	.structure-field.structure-toggle:has(.structure-checkbox:checked):not(:has(.structure-nest))
+	> .structure-toggle-btn {
 	border-radius: 0px;
 }
 
-.structure .structure-list.structure-nest:empty+.structure-add-end {
+.structure .structure-list.structure-nest:empty + .structure-add-end {
 	display: none;
 }
 

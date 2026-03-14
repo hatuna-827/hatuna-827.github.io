@@ -39,7 +39,7 @@ button {
 }
 
 .button-display {
-	animation: .2s button-on;
+	animation: 0.2s button-on;
 	animation-fill-mode: forwards;
 }
 
@@ -69,7 +69,7 @@ button {
 }
 
 .pop-display {
-	animation: .5s pop-on;
+	animation: 0.5s pop-on;
 }
 
 #poptext {
@@ -94,7 +94,7 @@ p {
 	line-height: 150px;
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
 	button {
 		width: 30vw;
 		height: 30vw;
