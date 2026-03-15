@@ -27,9 +27,8 @@ for site in site_data:
     main_title = site["main_title"]
     sub_title = site["sub_title"]
     description = site["description"].replace("\n", "")
-    name = site["name"]
     title = main_title + sub_title if title == "" else title
-    name = title + " | hatuna-827" if name == "" else name + " | hatuna-827"
+    name = "hatuna-827"
     with open(path, "r", encoding="utf-8") as f:
         html = f.read()
     # head
@@ -61,7 +60,7 @@ for site in site_data:
 \t\t<link rel="stylesheet" href="{css_path}">
 \t\t<link rel="stylesheet" href="/hatuna-827.css">
 \t\t<script src="/hatuna-827.js" type="module"></script>
-\t\t<title>{name}</title>
+\t\t<title>{title} | hatuna-827</title>
 \t\t<!-- Auto insert head end -->"""
     html = html.replace("<!-- Auto insert head --><!-- Auto insert head end -->", head)
     # body

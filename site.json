@@ -1,8 +1,5 @@
 {
-	"themes": [
-		"dark",
-		"light"
-	],
+	"themes": ["dark", "light"],
 	"colors": [
 		"main-color",
 		"main-light-color",
@@ -30,8 +27,7 @@
 	"site": [
 		{
 			"url": "/index.html",
-			"name": "ホームページ",
-			"title": "",
+			"title": "ホームページ",
 			"main_title": "hatuna-827",
 			"sub_title": "",
 			"description": "こんにちは、hatuna-827です。ブログなどを少しずつ更新していきます。",
@@ -39,39 +35,34 @@
 		},
 		{
 			"url": "/link/index.html",
-			"name": "すべてのサイト一覧",
-			"title": "LINK すべてのサイト一覧",
+			"title": "すべてのサイト一覧",
 			"main_title": "←もどる",
 			"sub_title": "すべてのサイト一覧",
 			"description": "すべてのサイトへのリンク一覧"
 		},
 		{
 			"url": "/link/blog/index.html",
-			"name": "ブログ一覧",
-			"title": "Blog ブログ一覧",
+			"title": "ブログ一覧",
 			"main_title": "ブログ",
 			"sub_title": "Blog",
 			"description": "プログラミングの話。Esperanto語・Brainfuckの布教をしています。\n人気記事：Youtubeプレイリストの合計時間の計算方法"
 		},
 		{
 			"url": "/link/game/index.html",
-			"name": "ゲーム一覧",
-			"title": "Game ゲーム一覧",
+			"title": "ゲーム一覧",
 			"main_title": "ゲーム",
 			"sub_title": "Game",
 			"description": "今のところ、OXゲーム・ライツアウト・オセロしかありません。\nおすすめ：ライツアウト"
 		},
 		{
 			"url": "/link/tool/index.html",
-			"name": "ツール一覧",
-			"title": "Tool ツール一覧",
+			"title": "ツール一覧",
 			"main_title": "ツール",
 			"sub_title": "Tool",
 			"description": "ちょっと便利なツール達です。\nおすすめ：SVGエディター・ごきげんななめ作問ツール"
 		},
 		{
 			"url": "/home/index.html",
-			"name": "",
 			"title": "HOME 自己紹介",
 			"main_title": "HOME",
 			"sub_title": "自己紹介",
@@ -79,7 +70,6 @@
 		},
 		{
 			"url": "/404.html",
-			"name": "",
 			"title": "404 Not found",
 			"main_title": "404",
 			"sub_title": "Not found",
@@ -87,7 +77,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/input_output/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~入力・出力編~",
@@ -95,7 +84,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/memory_output/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~メモリー出力編~",
@@ -103,7 +91,6 @@
 		},
 		{
 			"url": "/blog/youtube_playlist_sumtime/index.html",
-			"name": "",
 			"title": "API不使用！非公開のプレイリスト対応！Youtubeプレイリストの合計時間の計算方法",
 			"main_title": "Youtubeプレイリスト",
 			"sub_title": "の合計時間の計算方法",
@@ -111,7 +98,6 @@
 		},
 		{
 			"url": "/blog/graphing_art/index.html",
-			"name": "グラフアート",
 			"title": "グラフアート、はじめました。",
 			"main_title": "グラフアート",
 			"sub_title": "グラフアート、はじめました。",
@@ -119,23 +105,20 @@
 		},
 		{
 			"url": "/blog/regex/index.html",
-			"name": "はじめての正規表現 - VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方",
-			"title": "",
+			"title": "はじめての正規表現 - VScodeでも使える、正規表現の書き方・仕様・置換の便利な使い方",
 			"main_title": "はじめての正規表現",
 			"sub_title": "~概要編~",
 			"description": "VScodeでも使える、正規表現の書き方や仕様、置換の便利な使い方などを紹介します。"
 		},
 		{
 			"url": "/blog/vscode/change_design/index.html",
-			"name": "VScodeのデザインを変更しよう",
-			"title": "",
+			"title": "VScodeのデザインを変更しよう",
 			"main_title": "VScodeをデザイン",
 			"sub_title": "デザインを変更しよう！",
 			"description": "VScodeのデザインを自作・変更する方法を解説します。世界に一つだけのVScodeにしましょう。"
 		},
 		{
 			"url": "/blog/esperanto/about/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "エスペラント語",
 			"sub_title": "~概要編~",
@@ -143,7 +126,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/about/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~概要編~",
@@ -151,7 +133,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/warizann/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~割り算編~",
@@ -159,7 +140,6 @@
 		},
 		{
 			"url": "/blog/brainfuck/soinnsuubunnkai/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Brainfuck",
 			"sub_title": "~素因数分解編~",
@@ -167,7 +147,6 @@
 		},
 		{
 			"url": "/tool/easing/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Easingエディター",
 			"sub_title": "",
@@ -175,7 +154,6 @@
 		},
 		{
 			"url": "/tool/wordle/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Wordle アシスタント",
 			"sub_title": "",
@@ -183,7 +161,6 @@
 		},
 		{
 			"url": "/tool/brainfuck/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "Brainfuck実行",
 			"sub_title": "",
@@ -191,7 +168,6 @@
 		},
 		{
 			"url": "/tool/json_formatter/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "JSONフォーマッタ",
 			"sub_title": "",
@@ -199,7 +175,6 @@
 		},
 		{
 			"url": "/tool/word_book/index.html",
-			"name": "",
 			"title": "デジタル単語帳",
 			"main_title": "単語帳",
 			"sub_title": "デジタル単語帳",
@@ -207,7 +182,6 @@
 		},
 		{
 			"url": "/tool/svg_editor/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "SVGエディター",
 			"sub_title": "",
@@ -215,7 +189,6 @@
 		},
 		{
 			"url": "/tool/slant_creator/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "ごきげんななめ",
 			"sub_title": "作問ツール",
@@ -223,7 +196,6 @@
 		},
 		{
 			"url": "/tool/clock/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "時計",
 			"sub_title": "",
@@ -231,7 +203,6 @@
 		},
 		{
 			"url": "/tool/word_counter/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "単語カウンター",
 			"sub_title": "",
@@ -239,7 +210,6 @@
 		},
 		{
 			"url": "/tool/input_esperanto/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "エスペラント語入力",
 			"sub_title": "",
@@ -247,7 +217,6 @@
 		},
 		{
 			"url": "/tool/counter/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "カウンター",
 			"sub_title": "",
@@ -255,7 +224,6 @@
 		},
 		{
 			"url": "/game/tower_of_hanoi/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "ハノイの塔",
 			"sub_title": "",
@@ -263,7 +231,6 @@
 		},
 		{
 			"url": "/game/OXgame/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "〇×ゲーム",
 			"sub_title": "",
@@ -271,7 +238,6 @@
 		},
 		{
 			"url": "/game/lights_out/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "ライツアウト",
 			"sub_title": "",
@@ -279,7 +245,6 @@
 		},
 		{
 			"url": "/game/othello/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "オセロ・リバーシ",
 			"sub_title": "",
@@ -287,7 +252,6 @@
 		},
 		{
 			"url": "/settings/index.html",
-			"name": "",
 			"title": "",
 			"main_title": "設定",
 			"sub_title": "",
@@ -296,7 +260,6 @@
 		},
 		{
 			"url": "/tool/svg_editor/settings.html",
-			"name": "",
 			"title": "",
 			"main_title": "SVGエディター設定",
 			"sub_title": "",
