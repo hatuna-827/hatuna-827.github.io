@@ -265,6 +265,13 @@
 			"sub_title": "",
 			"description": "エディターモードの選択ができます。",
 			"homebar-ignore": true
+		},
+		{
+			"url": "/color_sample/index.html",
+			"title": "",
+			"main_title": "CSS変数一覧",
+			"sub_title": "",
+			"description": "このサイトで使われている色の一覧を見ることができます。"
 		}
 	]
 }

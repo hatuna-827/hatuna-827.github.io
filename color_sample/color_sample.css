@@ -1,0 +1,22 @@
+#main {
+	margin: 150px 200px;
+}
+
+.color {
+	position: relative;
+	margin: 20px 0px;
+	height: 80px;
+	width: 80px;
+	border-radius: 40px;
+	border: 1px var(--black-color) solid;
+}
+
+.name {
+	position: absolute;
+	top: 0px;
+	left: 120px;
+	font-size: 40px;
+	line-height: 80px;
+	vertical-align: top;
+	white-space: pre;
+}
