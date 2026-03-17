@@ -244,11 +244,11 @@
 			"description": "3×3 ライツアウトの問題を自動生成など、トレーニングができます。"
 		},
 		{
-			"url": "/game/othello/index.html",
+			"url": "/game/reversi/index.html",
 			"title": "",
-			"main_title": "オセロ・リバーシ",
+			"main_title": "リバーシ",
 			"sub_title": "",
-			"description": "オセロ・リバーシ"
+			"description": "リバーシ 勝敗判定・パス機能付き"
 		},
 		{
 			"url": "/settings/index.html",
