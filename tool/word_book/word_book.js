@@ -29,7 +29,7 @@ const generate_box = document.getElementById('generate-box')
 
 let hover_index = -1
 let dragEl = null
-let card_data = { book: { index: 0, name: '', length: 0 }, card_index: 0, is_front: true }
+let card_data
 let wordbook_data
 
 /* - init -------------------------------------------------------------------------------------- */
@@ -168,13 +168,13 @@ function hide_export() {
 }
 
 function update_card() {
-	if (card_data.book.length <= card_data.card_index) {
+	if (card_data.book.length === 0) {
 		display_title()
 		return
 	}
 	const main_text = document.getElementById('card-main-text')
 	const front_word = document.getElementById('front-word')
-	let card = wordbook_data[card_data.book.index].words[card_data.card_index]
+	let card = card_data.book[card_data.index]
 	let text,
 		sub_text = ''
 	if (card_data.is_front) {
@@ -192,7 +192,9 @@ function next_card() {
 		card_data.is_front = false
 	} else {
 		card_data.is_front = true
-		++card_data.card_index
+		card_data.book.splice(card_data.index, 1)
+		const random_index = Math.floor(Math.random() * card_data.book.length)
+		card_data.index = random_index
 	}
 	update_card()
 }
@@ -203,8 +205,8 @@ function open_wordbook(index) {
 	set_back_button('title')
 	generate_box.innerHTML = ''
 	card_data = {
-		book: { index: index, name: book.name, length: book.words.length },
-		card_index: 0,
+		book: JSON.parse(JSON.stringify(wordbook_data[index].words)),
+		index: Math.floor(Math.random() * wordbook_data[index].words.length),
 		is_front: true,
 	}
 	const card = document.createElement('div')

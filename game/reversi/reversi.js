@@ -11,8 +11,9 @@ const dir = [
 	{ dx: 1, dy: 0 },
 	{ dx: 1, dy: 1 },
 ]
-var data
-var turn
+let data
+let turn
+let in_game
 
 /* - init -------------------------------------------------------------------------------------- */
 {
@@ -60,10 +61,14 @@ function reset() {
 		[0, 0, 0, 0, 0, 0, 0, 0],
 	]
 	turn = 1
+	in_game = true
 	show()
 }
 
 function pass() {
+	const popup = document.getElementById('popup-content')
+	popup.className = 'pass'
+	show_popup()
 	turn *= -1
 	show_valid()
 }
@@ -117,9 +122,9 @@ function show_valid() {
 			el.classList.add('valid')
 		}
 	})
-	// if (valid_count === 0) {
-	// 	pass()
-	// }
+	if (in_game && valid_count === 0) {
+		pass()
+	}
 }
 
 function push(x, y) {
@@ -182,6 +187,7 @@ function check_end() {
 		} else if (black === 0) {
 			popup.className = 'white'
 		}
+		in_game = false
 		show_popup()
 	}
 	if (white + black === 64) {
@@ -191,6 +197,7 @@ function check_end() {
 		} else if (black === white) {
 			popup.className = 'draw'
 		}
+		in_game = false
 		show_popup()
 	}
 }

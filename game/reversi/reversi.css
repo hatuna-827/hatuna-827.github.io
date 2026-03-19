@@ -63,6 +63,11 @@
 	background-color: var(--main-text-color);
 }
 
+#popup-content.pass::before{
+	content: '\21CC';
+	font-size: 90px;
+}
+
 #popup-content::after {
 	font-size: 30px;
 	top: 210px;
@@ -75,6 +80,10 @@
 
 #popup-content.draw::after {
 	content: 'Draw!';
+}
+
+#popup-content.pass::after {
+	content: 'Pass!';
 }
 
 #board {
@@ -107,8 +116,8 @@
 	border-radius: 100%;
 	top: 50%;
 	left: 50%;
-	height: 70px;
-	width: 70px;
+	height: 60px;
+	width: 60px;
 	transform: translate(-50%, -50%);
 }
 
@@ -122,8 +131,8 @@
 
 .disc.valid::before {
 	background-color: var(--grey-green-color);
-	height: 15px;
-	width: 15px;
+	height: 12px;
+	width: 12px;
 }
 
 .but {
