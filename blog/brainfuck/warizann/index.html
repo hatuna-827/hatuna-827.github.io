@@ -33,7 +33,7 @@
 		<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
 		<!-- Auto insert body end -->
 		<div id="main">
-			<h1>Let’s enjoy brainfuck. ~割り算編~</h1>
+			<h1>Let's enjoy brainfuck. ~割り算編~</h1>
 			<h2>コード紹介</h2>
 			<p>今回はbrainfuckで割り算をするプログラムの紹介をしたいと思います。</p>
 			<p>↓割り算をするコード</p>
@@ -48,11 +48,39 @@
 			</ul>
 			<p>です。</p>
 			<p>
-				私は、実行環境を作るのが面倒なため、
-				<a href="https://kachikachi.net/brainfuck">こちら</a>
-				のサイトを使っています。
+				実行は
+				<a href="/tool/brainfuck">こちらのサイト</a>
+				がおすすめです。
 			</p>
-			<h2>やっていること</h2>
+			<h2>実行例</h2>
+			<p>
+				入力が
+				<code>176</code>
+				の場合、
+				<code>1</code>
+				を
+				<code>7</code>
+				で割った結果を
+				<code>6</code>
+				桁出力します。
+			</p>
+			<p>
+				<code>1/7</code>
+				は
+				<code>0.142856...</code>
+				なので、
+				<code>014285</code>
+				と出力されます。
+			</p>
+			<p>
+				<a
+					href="/tool/brainfuck/?c=,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]<[<[-]<<<<<[>>>>[<<<+>->+>-]<[>+<-]>>+<<<<[<[->>+>]>>>[<<<]<<-]<]>>[>>[<<+>+>-]<[>+<-]>>-<<]>[<]<[<<++++++++++>>-]>>>>>++++++[<<++++++++>>-]<<.>-]&i=176"
+				>
+					こちら
+				</a>
+				で動作を確認できます。
+			</p>
+			<h2>解説 (?)</h2>
 			<pre>
 ,>++++++[<-------->-]>>>,>++++++[<-------->-]>,>++++++[<-------->-]
 <[
@@ -91,7 +119,7 @@ G[
 </pre
 			>
 			<p>参考・リンクなど</p>
-			<p><a href="https://kachikachi.net/brainfuck">kachikachi.net/brainfuck</a></p>
+			<p><a href="/tool/brainfuck">brainfuck実行</a></p>
 		</div>
 		<script src="/blog/blog.js"></script>
 	</body>

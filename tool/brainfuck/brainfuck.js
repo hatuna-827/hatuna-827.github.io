@@ -1,4 +1,5 @@
 /* - import ------------------------------------------------------------------------------------ */
+import { query } from '/module/query.js'
 /* - const ------------------------------------------------------------------------------------- */
 let code = '',
 	input = [],
@@ -22,6 +23,8 @@ let code_children = []
 get_interval()
 reset()
 set_running(false)
+document.getElementById('input-code').value = query('c') ?? ''
+document.getElementById('input-stdin').value = query('i') ?? ''
 /* - add eventListener ------------------------------------------------------------------------- */
 document.getElementById('runspeed-select').addEventListener('change', get_interval)
 document.getElementById('pause').addEventListener('click', function () {
@@ -195,15 +198,9 @@ function step() {
 			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
 			break
 		case ',':
-			if (input[input_index] != undefined) {
-				old_log.push(memory[p])
-				memory[p] = input[input_index]
-				output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
-			} else {
-				reset_flag = true
-				set_running(false)
-				return
-			}
+			old_log.push(memory[p])
+			memory[p] = input[input_index] ?? 255
+			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
 			++input_index
 			break
 		case '.':

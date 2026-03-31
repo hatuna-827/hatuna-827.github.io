@@ -491,7 +491,7 @@ $   …  行末に一致
 					<code>\n</code>
 					に置換すると分かりやすくなります。
 				</p>
-				<li><code>^(?=foo)bar</code></li>
+				<li><code>(?&lt;^(?=.*foo).*)bar</code></li>
 				<p>fooを含む行のbarに一致します。</p>
 				<li><code>(?&lt;=foo).*?(?=foo)</code></li>
 				<p>fooに挟まれている文字列に一致します。</p>
