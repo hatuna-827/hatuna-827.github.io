@@ -20,22 +20,24 @@ let code_index,
 	loop_pair
 let code_children = []
 /* - init -------------------------------------------------------------------------------------- */
-get_interval()
 reset()
+get_interval()
+get_memory_type()
 set_running(false)
 document.getElementById('input-code').value = query('c') ?? ''
 document.getElementById('input-stdin').value = query('i') ?? ''
 /* - add eventListener ------------------------------------------------------------------------- */
 document.getElementById('share').addEventListener('click', function () {
-	navigator.clipboard.writeText(
-		`${location.protocol}//${location.host}${location.pathname}?c=${document.getElementById('input-code').value}&i=${document.getElementById('input-stdin').value}`
-	)
+	const url = `${location.protocol}//${location.host}${location.pathname}?c=${document.getElementById('input-code').value}&i=${document.getElementById('input-stdin').value}`
+	const esc_url = encodeURI(url)
+	navigator.share({ url: esc_url })
 	this.classList.add('clicked')
 	setTimeout(() => {
 		this.classList.remove('clicked')
 	}, 0)
 })
 document.getElementById('runspeed-select').addEventListener('change', get_interval)
+document.getElementById('memory-type-select').addEventListener('change', get_memory_type)
 document.getElementById('pause').addEventListener('click', function () {
 	set_running(false)
 })
@@ -46,7 +48,6 @@ document.getElementById('step-re').addEventListener('click', step_re)
 document.getElementById('step-in').addEventListener('click', step)
 document.getElementById('run').addEventListener('click', function () {
 	clearTimeout(stopID)
-	memory_type = Number(document.getElementById('memory-type-select').value)
 	code_type = document.getElementById('code-type-select').value
 	// input
 	const input_str = document.getElementById('input-stdin').value
@@ -107,6 +108,23 @@ document.getElementById('run').addEventListener('click', function () {
 function get_interval() {
 	interval = Number(document.getElementById('runspeed-select').value)
 }
+function get_memory_type() {
+	memory_type = Number(document.getElementById('memory-type-select').value)
+	for (let i = 0; i < memory.length; i++) {
+		update_memory(i)
+	}
+}
+function update_memory(p) {
+	const str = to_string(memory[p])
+	document.getElementById('output-memory').children[p].textContent = str
+}
+function to_string(num) {
+	if (memory_type === 10) {
+		return String(num)
+	} else {
+		return ('0' + num.toString(memory_type)).slice(-2).toUpperCase()
+	}
+}
 function reset() {
 	reset_flag = false
 	code_index = 0
@@ -122,13 +140,10 @@ function reset() {
 	output_memory.innerHTML = ''
 	const n = document.createElement('span')
 	n.className = 'memory active'
-	n.textContent = '0'
 	output_memory.appendChild(n)
+	update_memory(0)
 	code_children.forEach((element, i) => {
-		element.className = ''
-		if (i == 0) {
-			element.className = 'active'
-		}
+		element.className = i === 0 ? 'active' : ''
 	})
 }
 function resume() {
@@ -197,19 +212,19 @@ function step() {
 			if (memory[p] == 256) {
 				memory[p] = 0
 			}
-			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
+			update_memory(p)
 			break
 		case '-':
 			--memory[p]
 			if (memory[p] == -1) {
 				memory[p] = 255
 			}
-			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
+			update_memory(p)
 			break
 		case ',':
 			old_log.push(memory[p])
 			memory[p] = input[input_index] ?? 255
-			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
+			update_memory(p)
 			++input_index
 			break
 		case '.':
@@ -278,18 +293,18 @@ function step_re() {
 			if (memory[p] == -1) {
 				memory[p] = 255
 			}
-			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
+			update_memory(p)
 			break
 		case '-':
 			++memory[p]
 			if (memory[p] == 256) {
 				memory[p] = 0
 			}
-			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
+			update_memory(p)
 			break
 		case ',':
 			memory[p] = old_log.pop()
-			output_memory.children[p].textContent = memory[p].toString(memory_type).toUpperCase()
+			update_memory(p)
 			--input_index
 			break
 		case '.':
