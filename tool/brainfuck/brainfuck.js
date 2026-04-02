@@ -26,6 +26,15 @@ set_running(false)
 document.getElementById('input-code').value = query('c') ?? ''
 document.getElementById('input-stdin').value = query('i') ?? ''
 /* - add eventListener ------------------------------------------------------------------------- */
+document.getElementById('share').addEventListener('click', function () {
+	navigator.clipboard.writeText(
+		`${location.protocol}//${location.host}${location.pathname}?c=${document.getElementById('input-code').value}&i=${document.getElementById('input-stdin').value}`
+	)
+	this.classList.add('clicked')
+	setTimeout(() => {
+		this.classList.remove('clicked')
+	}, 0)
+})
 document.getElementById('runspeed-select').addEventListener('change', get_interval)
 document.getElementById('pause').addEventListener('click', function () {
 	set_running(false)
