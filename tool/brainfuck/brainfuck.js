@@ -3,22 +3,21 @@ import { query } from '/module/query.js'
 /* - const ------------------------------------------------------------------------------------- */
 let code = '',
 	input = [],
-	output = []
-let code_index,
+	code_children = [],
+	loop_pair,
+	code_type
+let reset_flag,
+	code_index,
 	input_index,
 	p,
 	memory,
 	old_log,
 	loop_log,
-	interval,
-	memory_type,
-	code_type,
-	running,
-	reset_flag,
 	loop_counter,
-	stopID,
-	loop_pair
-let code_children = []
+	output,
+	step_count
+let running, stopID
+let interval, memory_type
 /* - init -------------------------------------------------------------------------------------- */
 reset()
 get_interval()
@@ -125,6 +124,9 @@ function to_string(num) {
 		return ('0' + num.toString(memory_type)).slice(-2).toUpperCase()
 	}
 }
+function update_step_count() {
+	document.getElementById('step-count').textContent = `${step_count}ステップ`
+}
 function reset() {
 	reset_flag = false
 	code_index = 0
@@ -135,6 +137,8 @@ function reset() {
 	loop_log = []
 	loop_counter = 0
 	output = []
+	step_count = 0
+	update_step_count()
 	document.getElementById('output-stdout').textContent = ''
 	const output_memory = document.getElementById('output-memory')
 	output_memory.innerHTML = ''
@@ -176,6 +180,8 @@ function step() {
 		reset_flag = true
 		return
 	}
+	++step_count
+	update_step_count()
 	const output_memory = document.getElementById('output-memory')
 	switch (code[code_index]) {
 		case '>':
@@ -265,6 +271,8 @@ function step_re() {
 	}
 	--code_index
 	code_children[code_index].classList.add('active')
+	--step_count
+	update_step_count()
 	const output_memory = document.getElementById('output-memory')
 	switch (code[code_index]) {
 		case '>':
