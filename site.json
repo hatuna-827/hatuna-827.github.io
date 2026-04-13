@@ -146,6 +146,13 @@
 			"description": "Brainfuckで素因数分解をするコードの紹介です。"
 		},
 		{
+			"url": "/tool/color_palette/index.html",
+			"title": "",
+			"main_title": "カラーパレット",
+			"sub_title": "",
+			"description": "オリジナルのカラーパレットを作成、簡単にコピーできます。"
+		},
+		{
 			"url": "/tool/easing/index.html",
 			"title": "",
 			"main_title": "Easingエディター",

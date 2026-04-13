@@ -215,7 +215,8 @@ body {
 }
 
 input,
-select {
+select,
+button {
 	color: var(--black-color);
 	background-color: var(--light-side-color);
 }
