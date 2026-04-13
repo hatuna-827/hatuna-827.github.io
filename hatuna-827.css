@@ -214,6 +214,22 @@ body {
 	transform: translate(0, -50%);
 }
 
+input,
+select {
+	color: var(--black-color);
+	background-color: var(--light-side-color);
+}
+
+textarea {
+	color: var(--black-color);
+	font-family: var(--code-font);
+	white-space: pre;
+	background-color: var(--light-side-color);
+	border-radius: 3px;
+	border: 1px solid var(--grey-a-color);
+	tab-size: 2;
+}
+
 noscript {
 	background-color: var(--grey-green-color);
 	position: fixed;
