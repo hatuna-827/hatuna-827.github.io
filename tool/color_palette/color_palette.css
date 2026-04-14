@@ -46,6 +46,7 @@ textarea {
 
 #palette {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 	gap: 30px;
 	margin: 30px 0px;
@@ -56,6 +57,7 @@ textarea {
 }
 
 .color {
+	display: inline-block;
 	height: 50px;
 	width: 50px;
 	border-radius: 10px;
