@@ -40,7 +40,7 @@ export function HSL_to_RGB({ H, S, L }) {
 	const MAX = 2.55 * (L + tL * (S / 100))
 	const MIN = 2.55 * (L - tL * (S / 100))
 	let dH
-	if (0 < H && H <= 60) {
+	if (0 <= H && H <= 60) {
 		dH = 0
 	} else if (60 < H && H <= 180) {
 		dH = 120
