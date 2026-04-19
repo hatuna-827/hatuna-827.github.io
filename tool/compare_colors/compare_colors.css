@@ -29,6 +29,16 @@ input {
 	width: 80px;
 }
 
+#hex {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+#slider {
+	display: flex;
+	gap: 10px;
+}
+
 #compare {
 	display: flex;
 	justify-content: center;
@@ -44,9 +54,4 @@ input {
 #color {
 	height: 100px;
 	width: 100px;
-}
-
-#slider {
-	display: flex;
-	gap: 10px;
 }
