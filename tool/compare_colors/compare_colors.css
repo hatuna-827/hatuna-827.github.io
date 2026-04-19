@@ -12,6 +12,8 @@
 	position: relative;
 	width: 100%;
 	max-width: 800px;
+	font-size: 15px;
+	vertical-align: bottom;
 }
 
 h1 {
@@ -25,39 +27,26 @@ input {
 	margin: 5px 0px;
 	height: 30px;
 	width: 80px;
-	vertical-align: bottom;
 }
 
-button {
-	margin: 5px 10px;
-	height: 30px;
-	width: 100px;
-	font-size: 12px;
-}
-
-textarea {
-	padding: 5px;
-	min-height: 100px;
-	width: 100%;
-	font-size: 14px;
-	resize: vertical;
-}
-
-#palette {
+#compare {
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
-	gap: 30px;
-	margin: 30px 0px;
-	padding: 30px;
-	min-height: 50px;
+	align-items: center;
+	margin: 15px 10px;
+	height: 140px;
+	width: 100%;
 	border: 1px solid var(--grey-5-color);
-	border-radius: 5px;
+	border-radius: 6px;
 }
 
-.color {
-	display: inline-block;
-	height: 50px;
-	width: 50px;
-	border-radius: 10px;
+#base,
+#color {
+	height: 100px;
+	width: 100px;
+}
+
+#slider {
+	display: flex;
+	gap: 10px;
 }

@@ -146,6 +146,13 @@
 			"description": "Brainfuckで素因数分解をするコードの紹介です。"
 		},
 		{
+			"url": "/tool/compare_colors/index.html",
+			"title": "",
+			"main_title": "色の比較",
+			"sub_title": "",
+			"description": "2つの色を比較・調節できます。"
+		},
+		{
 			"url": "/tool/color_palette/index.html",
 			"title": "",
 			"main_title": "カラーパレット",
