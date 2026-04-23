@@ -2,8 +2,13 @@
 
 :root {
 	/* ------------ fonts ------------ */
-	--main-font: '游明朝', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', serif;
-	--code-font: 'Ubuntu mono', monospace;
+	--main-font: var(--serif-font);
+	--serif-font: 'Yu Mincho', 'YuMincho', 'Times New Roman', serif;
+	--gothic-font:
+		'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'YuGothic', 'Noto Sans JP', 'Meiryo',
+		Arial, sans-serif, 'Segoe UI Emoji';
+	--code-font:
+		'Ubuntu mono', 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 	/* ---------- dark mode ---------- */
 	/* main */
 	--dark-mode-main-color: #709170;
