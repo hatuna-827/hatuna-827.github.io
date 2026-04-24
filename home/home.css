@@ -68,7 +68,7 @@
 @media screen and (max-width: 630px) {
 	#main {
 		flex-flow: column;
-		padding: 20px 20px 40px;
+		padding: 40px 20px;
 	}
 }
 
@@ -89,6 +89,15 @@
 	#social a {
 		font-size: 17px;
 		height: 35px;
+	}
+
+	#social a::before {
+		top: 30px;
+		height: 2px;
+	}
+
+	#social a:hover::before {
+		width: 100px;
 	}
 
 	#social svg {
