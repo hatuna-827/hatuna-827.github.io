@@ -1,42 +1,91 @@
-@media screen and (min-width: 840px) {
+* {
+	box-sizing: border-box;
+	margin: 0px;
+}
+
+#main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+#topics {
+	display: flex;
+	height: 35px;
+	width: 100%;
+	max-width: 600px;
+	border-left: 1px solid var(--main-dark-color);
+	border-right: 1px solid var(--main-dark-color);
+	user-select: none;
+}
+
+.topic {
+	flex: 1;
+	text-align: center;
+	font-size: 17px;
+	line-height: 35px;
+	border-left: 1px solid var(--main-dark-color);
+	border-right: 1px solid var(--main-dark-color);
+	text-decoration: none;
+}
+
+.topic.selected {
+	border: solid var(--main-dark-color);
+	border-width: 2px 1px;
+	line-height: 31px;
+}
+
+.count {
+	padding-left: 10px;
+	font-size: 12px;
+}
+
+.link {
+	text-decoration: none;
+}
+
+@media screen and (min-width: 1090px) {
 	#main {
-		margin: 50px;
-		text-align: center;
+		padding: 20px 40px 100px;
 	}
 
 	h1 {
-		margin: 30px 0px;
-		font-size: 45px;
-		line-height: 50px;
+		font-size: 35px;
+		line-height: 45px;
+	}
+
+	#auto_links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 35px;
+		padding: 20px;
 	}
 
 	.link {
-		margin: 0px;
-	}
-
-	.display-box {
-		display: inline-block;
-		margin: 20px;
-		padding: 70px 0px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		box-sizing: border-box;
-		height: 200px;
-		width: 330px;
+		height: 180px;
+		width: 300px;
 		background-color: var(--grey-c-color);
-		border-radius: 30px;
+		border-radius: 20px;
 		transition: all 0.2s;
-		vertical-align: bottom;
 	}
 
 	.title {
 		display: inline-block;
 		margin: 0px;
-		font-size: 30px;
+		font-size: 27px;
 		line-height: 60px;
 	}
 
 	.sub-title {
 		display: block;
-		font-size: 20px;
+		font-size: 16px;
 		line-height: 0px;
 	}
 
@@ -44,15 +93,19 @@
 		display: none;
 	}
 
-	.display-box:hover {
+	.link:hover {
 		background-color: var(--grey-green-color);
 		box-shadow: 5px 5px 5px var(--grey-a-color);
 		transition: all 0.2s;
 	}
 
+	#topic {
+		display: flex;
+	}
+
 	#topic .display-box {
 		padding: 75px 0px;
-		width: calc((100% - 220px) / 3);
+		flex: 1;
 		max-width: 330px;
 	}
 
@@ -85,7 +138,7 @@
 		padding: 5px 10px;
 		height: 80px;
 		width: 480px;
-		border: 1px solid var(--grey-a-color);
+		border: 1px solid var(--grey-5-color);
 		box-sizing: border-box;
 	}
 

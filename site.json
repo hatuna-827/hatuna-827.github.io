@@ -27,18 +27,25 @@
 	"site": [
 		{
 			"url": "/index.html",
-			"title": "ホームページ",
-			"main_title": "hatuna-827",
-			"sub_title": "",
+			"title": "トップ",
+			"main_title": "トップ",
+			"sub_title": "Top",
 			"description": "",
 			"homebar-ignore": true
 		},
 		{
+			"url": "/home/index.html",
+			"title": "ホーム",
+			"main_title": "ホーム",
+			"sub_title": "Home",
+			"description": ""
+		},
+		{
 			"url": "/link/index.html",
-			"title": "すべてのサイト一覧",
-			"main_title": "←もどる",
-			"sub_title": "すべてのサイト一覧",
-			"description": "すべてのサイトへのリンク一覧"
+			"title": "リンクトップ",
+			"main_title": "リンク",
+			"sub_title": "Link",
+			"description": "ここから始まるすべてのページ"
 		},
 		{
 			"url": "/link/blog/index.html",
@@ -52,21 +59,14 @@
 			"title": "ゲーム一覧",
 			"main_title": "ゲーム",
 			"sub_title": "Game",
-			"description": "今のところ、OXゲーム・ライツアウト・オセロしかありません。\nおすすめ：ライツアウト"
+			"description": "とっても面白いゲーム達です。\nおすすめ：ハノイの塔・ライツアウト"
 		},
 		{
 			"url": "/link/tool/index.html",
 			"title": "ツール一覧",
 			"main_title": "ツール",
 			"sub_title": "Tool",
-			"description": "ちょっと便利なツール達です。\nおすすめ：SVGエディター・ごきげんななめ作問ツール"
-		},
-		{
-			"url": "/home/index.html",
-			"title": "",
-			"main_title": "HOME",
-			"sub_title": "",
-			"description": ""
+			"description": "ちょっと便利なツール達です。\nおすすめ：Brainfuck実行・JSONフォーマッタ"
 		},
 		{
 			"url": "/home/pgp/index.html",
@@ -272,12 +272,25 @@
 			"description": "リバーシ 勝敗判定・パス機能付き"
 		},
 		{
-			"url": "/settings/index.html",
+			"url": "/color_sample/index.html",
 			"title": "",
-			"main_title": "設定",
+			"main_title": "CSS変数一覧",
 			"sub_title": "",
-			"description": "サイトのテーマなど、設定を変更できます。",
-			"homebar-ignore": true
+			"description": "このサイトで使われている色の一覧を見ることができます。"
+		},
+		{
+			"url": "/link/all/index.html",
+			"title": "すべてのサイト一覧",
+			"main_title": "すべて見る",
+			"sub_title": "サイト一覧",
+			"description": "すべてのサイトへのリンク一覧"
+		},
+		{
+			"url": "/settings/index.html",
+			"title": "設定",
+			"main_title": "テーマ変更",
+			"sub_title": "",
+			"description": ""
 		},
 		{
 			"url": "/tool/svg_editor/settings.html",
@@ -286,13 +299,6 @@
 			"sub_title": "",
 			"description": "エディターモードの選択ができます。",
 			"homebar-ignore": true
-		},
-		{
-			"url": "/color_sample/index.html",
-			"title": "",
-			"main_title": "CSS変数一覧",
-			"sub_title": "",
-			"description": "このサイトで使われている色の一覧を見ることができます。"
 		}
 	]
 }

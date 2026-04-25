@@ -5,17 +5,17 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="hatuna-827">
-		<meta name="description" content="すべてのサイトへのリンク一覧">
+		<meta name="description" content="ここから始まるすべてのページ">
 		<meta property="og:url" content="https://hatuna-827.github.io/link/index.html">
 		<meta property="og:type" content="website">
-		<meta property="og:title" content="すべてのサイト一覧">
-		<meta property="og:description" content="すべてのサイトへのリンク一覧">
+		<meta property="og:title" content="リンクトップ">
+		<meta property="og:description" content="ここから始まるすべてのページ">
 		<meta property="og:site_name" content="hatuna-827">
 		<meta property="og:image" content="/640_640.png">
 		<meta name="twitter:card" content="summary">
 		<meta name="twitter:domain" content="hatuna-827.github.io">
-		<meta name="twitter:title" content="すべてのサイト一覧">
-		<meta name="twitter:description" content="すべてのサイトへのリンク一覧">
+		<meta name="twitter:title" content="リンクトップ">
+		<meta name="twitter:description" content="ここから始まるすべてのページ">
 		<meta name="twitter:image" content="/640_640.png">
 		<meta name="theme-color" content="#709170">
 		<link rel="shortcut icon" type="image/x-icon" href="/hatuna-827.ico">
@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="/link/link.css">
 		<link rel="stylesheet" href="/hatuna-827.css">
 		<script src="/hatuna-827.js" type="module"></script>
-		<title>すべてのサイト一覧 | hatuna-827</title>
+		<title>リンクトップ | hatuna-827</title>
 		<!-- Auto insert head end -->
 		<meta name="description" content="hatuna-827 | すべてのサイト一覧" />
 	</head>
@@ -33,15 +33,9 @@
 		<div id="homebar"></div>
 		<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
 		<!-- Auto insert body end -->
-		<div id="main">
-			<!--
-		<h1>イベント</h1>
-		<a href="/event">Merry Christmas(期間限定:12/25まで)</a>
-		-->
-			<h1>トピック</h1>
-			<div id="topic" data-filter="topic"></div>
-			<h1>すべてのサイト一覧</h1>
-			<div id="auto_links" data-filter="all"></div>
+		<div id="main" data-filter="link">
+			<div id="topics"></div>
+			<div id="auto_links"></div>
 		</div>
 		<script src="./link.js" type="module"></script>
 	</body>

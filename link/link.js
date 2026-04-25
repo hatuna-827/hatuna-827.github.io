@@ -2,30 +2,50 @@
 fetch('/site.json')
 	.then(response => response.json())
 	.then(data => {
-		const links = document.getElementById('auto_links')
-		if (links) {
-			auto_links(links, data.site)
-		}
-		const topic = document.getElementById('topic')
-		if (topic) {
-			auto_links(topic, data.site)
-		}
+		add_topics(data.site)
+		auto_links(data.site)
 	})
 	.catch(error => console.error(`Error: ${error}`))
 
-function auto_links(pos, sites) {
-	const filter = pos.dataset.filter
-	sites = sites.filter(site => /index.html$/.test(site.url))
+function add_topics(sites) {
+	const filter = document.getElementById('main').dataset.filter
+	const topics = document.getElementById('topics')
+	const topics_list = ['Blog', 'Game', 'Tool']
+	topics_list.forEach((topic_name, i) => {
+		if (i !== 0) {
+			const partition = document.createElement('div')
+			partition.className = 'topic-partition'
+		}
+		const topic = document.createElement('a')
+		topic.className = 'topic'
+		topic.href = `/link/${topic_name.toLowerCase()}`
+		topic.textContent = topic_name
+		if (topic_name.toLowerCase() === filter) {
+			topic.className = 'topic selected'
+		}
+		const count = document.createElement('span')
+		count.className = 'count'
+		count.textContent = sites.filter(({ url }) => {
+			return url.startsWith(`/${topic_name.toLowerCase()}`)
+		}).length
+		topic.appendChild(count)
+		topics.appendChild(topic)
+	})
+}
+
+function auto_links(sites) {
+	const filter = document.getElementById('main').dataset.filter
+	const pos = document.getElementById('auto_links')
 	if (filter == 'all') {
-		sites = sites.filter(site => /^\/(home|blog|game|tool|404)/.test(site.url))
-	} else if (filter == 'topic') {
-		sites = sites.filter(site => /^\/link\/(?!index)/.test(site.url))
+		sites = sites.filter(site => /(index|404).html$/.test(site.url))
+	} else if (filter == 'link') {
+		sites = sites.filter(site => /^\/(index|home\/index|404|link\/all)/.test(site.url))
 	} else if (filter == 'blog') {
-		sites = sites.filter(site => /^\/(blog|link\/index)/.test(site.url))
+		sites = sites.filter(site => /^\/blog/.test(site.url))
 	} else if (filter == 'game') {
-		sites = sites.filter(site => /^\/(game|link\/index)/.test(site.url))
+		sites = sites.filter(site => /^\/game/.test(site.url))
 	} else if (filter == 'tool') {
-		sites = sites.filter(site => /^\/(tool|link\/index)/.test(site.url))
+		sites = sites.filter(site => /^\/tool/.test(site.url))
 	} else {
 		return
 	}
@@ -33,8 +53,6 @@ function auto_links(pos, sites) {
 		const link = document.createElement('a')
 		link.className = 'link'
 		link.setAttribute('href', site.url.replace('index.html', ''))
-		const display_box = document.createElement('div')
-		display_box.className = 'display-box'
 		const title = document.createElement('div')
 		title.className = 'title'
 		title.textContent = site.main_title
@@ -44,10 +62,9 @@ function auto_links(pos, sites) {
 		const description = document.createElement('div')
 		description.className = 'description'
 		description.innerText = site.description
-		display_box.appendChild(title)
-		display_box.appendChild(sub_title)
-		display_box.appendChild(description)
-		link.appendChild(display_box)
+		link.appendChild(title)
+		link.appendChild(sub_title)
+		link.appendChild(description)
 		pos.appendChild(link)
 	})
 }
