@@ -30,7 +30,7 @@
 			"title": "トップ",
 			"main_title": "トップ",
 			"sub_title": "Top",
-			"description": "",
+			"description": "hatuna-827's Web Site\nHosted by github.io",
 			"homebar-ignore": true
 		},
 		{
@@ -38,7 +38,7 @@
 			"title": "ホーム",
 			"main_title": "ホーム",
 			"sub_title": "Home",
-			"description": ""
+			"description": "Web Site / Github / Discord / PGP Public Key"
 		},
 		{
 			"url": "/link/index.html",
@@ -73,7 +73,7 @@
 			"title": "PGP Public Key",
 			"main_title": "PGP",
 			"sub_title": "Public Key",
-			"description": ""
+			"description": "PGP: 9846 0602 420A 1311 AF86 8F6D E7AC CB0F D44F 103B (Ed25519)"
 		},
 		{
 			"url": "/404.html",
@@ -290,7 +290,7 @@
 			"title": "設定",
 			"main_title": "テーマ変更",
 			"sub_title": "",
-			"description": ""
+			"description": "デバイス / ライト / ダーク"
 		},
 		{
 			"url": "/tool/svg_editor/settings.html",

@@ -26,7 +26,7 @@ for site in site_data:
     title = site["title"]
     main_title = site["main_title"]
     sub_title = site["sub_title"]
-    description = site["description"].replace("\n", "")
+    description = site["description"].replace("\n", " ")
     title = main_title + sub_title if title == "" else title
     name = "hatuna-827"
     with open(path, "r", encoding="utf-8") as f:
