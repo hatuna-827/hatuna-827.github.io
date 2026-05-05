@@ -38,11 +38,29 @@ structure.set('setting-structure', 'setting_structure')
 reset_disks()
 /* - add eventListener ------------------------------------------------------------------------- */
 document.addEventListener('keydown', event => {
-	if (['f', 'a', 'v'].includes(event.key)) {
+	if (['v'].includes(event.key)) {
 		push(0)
-	} else if (['g', 'h', 'w', 's', 'b'].includes(event.key)) {
+	} else if (['b'].includes(event.key)) {
 		push(1)
-	} else if (['j', 'd', 'n'].includes(event.key)) {
+	} else if (['n'].includes(event.key)) {
+		push(2)
+	} else if (['s'].includes(event.key)) {
+		push(1)
+		push(0)
+	} else if (['d'].includes(event.key)) {
+		push(0)
+		push(1)
+	} else if (['f'].includes(event.key)) {
+		push(2)
+		push(0)
+	} else if (['j'].includes(event.key)) {
+		push(0)
+		push(2)
+	} else if (['k'].includes(event.key)) {
+		push(2)
+		push(1)
+	} else if (['l'].includes(event.key)) {
+		push(1)
 		push(2)
 	} else if (['r', 'c'].includes(event.key)) {
 		reset_disks()
@@ -65,7 +83,10 @@ document.getElementById('guide').addEventListener('click', function () {
 		content: `動かしたい円盤のあるマスをクリックし、移動先のマスをクリックします。
 		段数を指定することができます。\n
 		キーボード操作も可能です。
-		左:AFV  中央:WSGHB  右:DJN  リセット:RC`,
+		1:V 2:B 3:N Reset:RC
+		1→2:D , 2→1:S
+		3→1:F , 1→3:J
+		3→2:K , 2→3:L`,
 		button: ['閉じる'],
 	})
 })
