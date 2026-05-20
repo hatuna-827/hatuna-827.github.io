@@ -1,14 +1,10 @@
-@keyframes button-on {
-	0% {
-		color: var(--main-bg-color);
-	}
-
-	100% {
-		color: var(--black-color);
-	}
+#main *,
+#pop * {
+	box-sizing: border-box;
+	user-select: none;
 }
 
-@keyframes pop-on {
+@keyframes fade-in {
 	0% {
 		opacity: 0;
 	}
@@ -19,91 +15,151 @@
 }
 
 #main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	margin: 70px 0px 50px 0px;
-	text-align: center;
 }
 
-button {
-	font-family: var(--main-font);
-	width: 100px;
-	height: 100px;
-	margin: 0px;
-	padding: 0px;
-	line-height: 0px;
-	color: var(--main-bg-color);
-	font-size: 80px;
-	text-align: center;
-	border: 1px solid var(--black-color);
+#board {
+	padding: 1px;
+	height: 300px;
+	width: 300px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 1px;
+	background-color: var(--black-color);
+}
+
+.tile {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: var(--main-bg-color);
-	user-select: none;
 }
 
-.button-display {
-	animation: 0.2s button-on;
+.tile.O::before,
+.tile.X::before,
+.tile.X::after {
+	content: '';
+	position: absolute;
+	display: block;
+	animation: 0.2s fade-in;
 	animation-fill-mode: forwards;
+}
+
+.tile.O::before {
+	height: 60px;
+	width: 60px;
+	border-radius: 100%;
+	border: 3px solid var(--black-color);
+}
+
+.tile.X::before,
+.tile.X::after {
+	height: 70px;
+	width: 3px;
+	background-color: var(--black-color);
+	transform: rotate(45deg);
+}
+
+.tile.X::after {
+	transform: rotate(-45deg);
 }
 
 #reset {
 	margin-top: 40px;
-	width: 200px;
-	height: auto;
-	color: var(--black-color);
-	font-size: 30px;
-	line-height: 20px;
+	width: 170px;
+	text-align: center;
+	font-size: 25px;
+	line-height: 60px;
 	background-color: var(--main-light-color);
-	border: 0px;
 	border-radius: 10px;
-	padding: 25px 0px;
 }
 
 #pop {
 	display: none;
 	position: fixed;
-	margin: 0px;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.5);
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-color: #0008;
 	justify-content: center;
 	align-items: center;
 	z-index: 1001;
 }
 
-.pop-display {
-	animation: 0.5s pop-on;
+#pop.display {
+	display: flex;
+	animation: 0.5s fade-in;
 }
 
-#poptext {
-	width: 400px;
+#popcontent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 80px 0px;
+	gap: 20px;
 	height: 400px;
+	width: 400px;
 	background-color: var(--main-bg-color);
 	margin: 0px;
 	text-align: center;
-	border-radius: 30px;
-}
-
-p {
-	font-size: 50px;
-	color: var(--main-dark-color);
-	margin: 20px 0px 0px 0px;
-	line-height: 50px;
+	border-radius: 20px;
 }
 
 #winner {
-	font-size: 150px;
-	margin: 90px 0px 0px 0px;
-	line-height: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 170px;
+	width: 170px;
+}
+
+#winner::before,
+#winner::after {
+	content: '';
+	position: absolute;
+	display: block;
+}
+
+#winner.O::before {
+	height: 120px;
+	width: 120px;
+	border-radius: 100%;
+	border: 5px solid var(--black-color);
+}
+
+#winner.X::before,
+#winner.X::after {
+	height: 140px;
+	width: 5px;
+	background-color: var(--black-color);
+	transform: rotate(45deg);
+}
+
+#winner.X::after {
+	transform: rotate(-45deg);
+}
+
+#winner.draw::before {
+	height: 5px;
+	width: 100px;
+	background-color: var(--black-color);
+}
+
+#ifdraw {
+	font-size: 50px;
+	line-height: 50px;
 }
 
 @media screen and (max-width: 480px) {
-	button {
-		width: 30vw;
-		height: 30vw;
-		padding: calc(6vw + 1px) 0px;
-		font-size: 24vw;
-	}
-
 	#main {
 		margin: 40px 0px;
+		zoom: 0.9;
 	}
 
 	#reset {
@@ -111,21 +167,21 @@ p {
 		max-width: 200px;
 	}
 
-	#poptext {
+	#popcontent {
+		padding: 20px;
 		width: 50vw;
 		height: 50vw;
 		border-radius: 4vw;
-	}
-
-	p {
-		font-size: 7vw;
-		margin: 2vw 0px 0px 0px;
-		line-height: 7vw;
+		gap: 0px;
 	}
 
 	#winner {
-		font-size: 21vw;
-		margin: 10vw 0px 0px 0px;
-		line-height: 21vw;
+		zoom: 0.6;
+	}
+
+	#ifdraw {
+		font-size: 7vw;
+		margin: 2vw 0px 0px 0px;
+		line-height: 7vw;
 	}
 }

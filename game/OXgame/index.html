@@ -28,31 +28,20 @@
 	</head>
 
 	<body>
-		<div id="pop" onclick="hidepop()">
-			<div id="poptext" onclick="hidepop()">
-				<p id="winner"></p>
-				<p id="ifdraw">winner!</p>
-			</div>
-		</div>
 		<!-- Auto insert body -->
 		<div id="homebar"></div>
 		<noscript><style>body {overflow: hidden;}</style>You need to enable JavaScript to view this site.</noscript>
 		<!-- Auto insert body end -->
-		<div id="main">
-			<button id="1" onclick="push(1)"></button>
-			<button id="2" onclick="push(2)"></button>
-			<button id="3" onclick="push(3)"></button>
-			<br />
-			<button id="4" onclick="push(4)"></button>
-			<button id="5" onclick="push(5)"></button>
-			<button id="6" onclick="push(6)"></button>
-			<br />
-			<button id="7" onclick="push(7)"></button>
-			<button id="8" onclick="push(8)"></button>
-			<button id="9" onclick="push(9)"></button>
-			<br />
-			<button id="reset" onclick="reset()">リセット</button>
+		<div id="pop">
+			<div id="popcontent">
+				<div id="winner"></div>
+				<div id="ifdraw"></div>
+			</div>
 		</div>
-		<script src="./OXgame.js"></script>
+		<div id="main">
+			<div id="board"></div>
+			<div id="reset">リセット</div>
+		</div>
+		<script src="./OXgame.js" type="module"></script>
 	</body>
 </html>
