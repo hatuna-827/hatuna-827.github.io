@@ -1,0 +1,45 @@
+* {
+	box-sizing: border-box;
+}
+
+#main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 30px 30px 60px;
+}
+
+#content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 800px;
+}
+
+h1 {
+	margin: 0px;
+	font-size: 30px;
+	text-align: center;
+}
+
+#graph {
+	position: relative;
+}
+
+#canvas {
+	height: 100%;
+	width: 100%;
+	border: 1px solid var(--grey-c-color);
+}
+
+.pointer {
+	position: absolute;
+	height: 5px;
+	width: 5px;
+	background-color: var(--main-dark-color);
+	border-radius: 100%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+}
