@@ -1,5 +1,5 @@
 /* - import ------------------------------------------------------------------------------------ */
-import { query } from '/module/query.js'
+import { query, share } from '/module/param.js'
 /* - const ------------------------------------------------------------------------------------- */
 let code = '',
 	input = [],
@@ -27,9 +27,10 @@ document.getElementById('input-code').value = query('c') ?? ''
 document.getElementById('input-stdin').value = query('i') ?? ''
 /* - add eventListener ------------------------------------------------------------------------- */
 document.getElementById('share').addEventListener('click', function () {
-	const url = `${location.protocol}//${location.host}${location.pathname}?c=${document.getElementById('input-code').value}&i=${document.getElementById('input-stdin').value}`
-	const esc_url = encodeURI(url)
-	navigator.share({ url: esc_url })
+	share(`${location.origin}${location.pathname}`, {
+		c: document.getElementById('input-code').value,
+		i: document.getElementById('input-stdin').value,
+	})
 	this.classList.add('clicked')
 	setTimeout(() => {
 		this.classList.remove('clicked')

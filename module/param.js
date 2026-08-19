@@ -22,3 +22,11 @@ export function query(name) {
 	return result
 }
 // Object.fromEntries(new URLSearchParams(window.location.search).entries())
+
+export function share(path, params) {
+	const url = `${path}?${Object.entries(params)
+		.map(([k, v]) => `${k}=${v}`)
+		.join('&')}`
+	const esc_url = encodeURI(url)
+	navigator.share({ url: esc_url })
+}
