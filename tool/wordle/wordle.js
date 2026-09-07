@@ -83,8 +83,8 @@ function create_word(condition) {
 	}
 	return word
 }
-async function update_best_solution() {
-	const best_solution = await search_best_solution()
+function update_best_solution() {
+	const best_solution = search_best_solution()
 	document.getElementById('best-solution').textContent =
 		`次の最善手:${best_solution.word} , エントロピー:${best_solution.entropy}`
 }
@@ -193,23 +193,52 @@ function evaluation(guess, answer) {
 	}
 	return colors
 }
-async function search_best_solution() {
+function evaluation_num(guess, answer) {
+	guess = guess.toLowerCase()
+	answer = answer.toLowerCase()
+	const colors = Array(5).fill(0)
+	const remaining = {}
+	for (let i = 0; i < 5; i++) {
+		if (guess[i] === answer[i]) {
+			colors[i] = 2
+		} else {
+			remaining[answer[i]] = (remaining[answer[i]] || 0) + 1
+		}
+	}
+	for (let i = 0; i < 5; i++) {
+		if (colors[i] !== 0) continue
+		const c = guess[i]
+		if (remaining[c] > 0) {
+			colors[i] = 1
+			remaining[c]--
+		}
+	}
+	let status = 0
+	for (let i = 0; i < 5; i++) {
+		status = status * 3 + colors[i]
+	}
+	return status
+}
+function search_best_solution() {
 	if (word_list.size === filtered_word_list.size) {
 		return { word: 'tares', entropy: 6.19405254437545 }
 	}
 	let best_solution = { word: '無し', entropy: 0 }
+	const sum = filtered_word_list.size
+	const log_sum = Math.log2(sum)
 	word_list.forEach(guess => {
-		const status_count = {}
+		const status_count = Array(243).fill(0)
 		filtered_word_list.forEach(answer => {
-			const status = evaluation(guess, answer).join()
-			status_count[status] = (status_count[status] ?? 0) + 1
+			status_count[evaluation_num(guess, answer)] += 1
 		})
-		let entropy = 0
-		const sum = filtered_word_list.size
-		Object.values(status_count).forEach(count => {
-			const p = count / sum
-			entropy -= p * Math.log2(p)
+		let clogc = 0
+		status_count.forEach(count => {
+			if (count === 0) {
+				return
+			}
+			clogc -= count * Math.log2(count)
 		})
+		const entropy = log_sum + clogc / sum
 		if (best_solution.entropy < entropy) {
 			best_solution = { word: guess, entropy }
 		}
